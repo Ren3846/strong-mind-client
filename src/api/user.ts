@@ -1,74 +1,94 @@
-import API from './index'
+import API from './index';
 
-interface SignInResponse {
-  userId: string;
-  token: string;
+export interface UserData {
+  
 }
 
-/**
- * Отправляет запрос на аутентификацию пользователя.
- * @param {Object} body - Данные для аутентификации.
- * @returns {Promise} - Обещание, которое разрешается с данными ответа.
- */
-const userSignInAPI = (body: { username: string, password: string }): Promise<SignInResponse> => API.post('/auth/signin', body);
+interface SignInBody {
+  username: string;
+  password: string;
+}
 
-/**
- * Отправляет запрос на регистрацию нового пользователя.
- * @param {Object} body - Данные для регистрации.
- * @returns {Promise} - Обещание, которое разрешается с данными ответа.
- */
-// const userSignUpAPI = (body) => API.post('/auth/signup', body);
+interface SignUpBody {
+  username: string;
+  email: string;
+  password: string;
+}
 
-// /**
-//  * Получает данные вошедшего в систему пользователя с сервера.
-//  * @returns {Promise} - Обещание, которое разрешается данными пользователя.
-//  */
+interface CourseDetails {
+  id: string;
+  title: string;
+  description: string;
+}
+
+
+interface UserDetails {
+  id: string;
+  name: string;
+  email: string;
+}
+
+interface OrderData {
+  orderId: string;
+  courseId: string;
+}
+
+interface PaymentData {
+  paymentId: string;
+  amount: number;
+}
+
+// Функция для входа пользователя
+const userSignInAPI = (body: SignInBody) => API.post('/auth/signin', body);
+
+// Функция для регистрации пользователя
+const userSignUpAPI = (body: SignUpBody) => API.post('/auth/signup', body);
+
+// Функция для получения данных залогиненного пользователя
 const getSignedInUserAPI = () => API.get('/auth/user/restore');
 
-// /**
-//  * Получает данные о курсе из API.
-//  * @param {string} id - Идентификатор курса.
-//  * @param {string} [route='/user/courses/enroll/'] - Маршрут API для получения данных о курсе. По умолчанию '/user/courses/enroll/'.
-//  * @returns {Promise} - Обещание, которое разрешается данными о курсе, полученными с сервера.
-//  */
-// const getCourseDetailsAPI = (id, route = '/user/courses/enroll/') => API.get(route + id);
+// Функция для получения данных о курсе
+const getCourseDetailsAPI = (id: string, route = '/user/courses/enroll/') => API.get<CourseDetails>(route + id);
 
-// /**
-//  * Отправляет запрос на запись пользователя на курс.
-//  * @param {Object} body - Данные для записи на курс.
-//  * @returns {Promise} - Обещание, которое разрешается данными ответа.
-//  */
-// const enrollCourseAPI = (body) => API.post('/user/courses/enroll', body);
+// Функция для записи на курс
+const enrollCourseAPI = (body: any) => API.post('/user/courses/enroll', body);
 
+// Функция для получения данных пользователя
+const getUserDetailsAPI = () => API.get<UserDetails>('/user/details');
 
-// const getUserDetailsAPI = () => API.get('/user/details')
+// Функция для обновления данных пользователя
+const updateUserDetailsAPI = (body: UserDetails) => API.post('/user/details', body);
 
-// const updateUserDetailsAPI = (body) => API.post('/user/details', body)
+// Функция для создания заказа
+const createOrderAPI = (courseId: string) => API.post<OrderData>('/user/orders/create', { courseId });
 
-// const createOrderAPI = (courseId) => API.post('/user/orders/create', { courseId })
+// Функция для верификации платежа
+const verifyPaymentAPI = (data: PaymentData) => API.post('/user/orders/payment/verify', data);
 
-// const verifyPaymentAPI = (data) => API.post('/user/orders/payment/verify', data)
+// Функция для проверки записи на курс
+const isEnrolledInCourseAPI = (courseId: string) => API.get<boolean>(`/user/details/enrolled/${courseId}/check`);
 
-// const isEnrolledInCourseAPI = (courseId) => API.get(`/user/details/enrolled/${courseId}/check`)
+// Функция для получения всех заказов пользователя
+const getAllOrdersByUserAPI = () => API.get<OrderData[]>('/user/orders');
 
-const getAllOrdersByUserAPI = () => API.get(`/user/orders`)
+// Функция для получения курсов, на которые записан пользователь
+const getUserEnrolledCoursesAPI = () => API.get<CourseDetails[]>('/user/courses/enroll');
 
-const getUserEnrolledCoursesAPI = () => API.get('/user/courses/enroll')
-
-const handleLogOutAPI = () => API.delete('/auth/logout')
+// Функция для выхода из системы
+const handleLogOutAPI = () => API.delete('/auth/logout');
 
 export {
-  // getCourseDetailsAPI,
+  getCourseDetailsAPI,
   getUserEnrolledCoursesAPI,
-  // isEnrolledInCourseAPI,
-  // enrollCourseAPI,
+  isEnrolledInCourseAPI,
+  enrollCourseAPI,
   handleLogOutAPI,
-  // createOrderAPI,
-  // verifyPaymentAPI,
-  // getUserDetailsAPI,
-  // updateUserDetailsAPI,
+  createOrderAPI,
+  verifyPaymentAPI,
+  getUserDetailsAPI,
+  updateUserDetailsAPI,
   getAllOrdersByUserAPI,
   userSignInAPI,
-  // userSignUpAPI,
+  userSignUpAPI,
   getSignedInUserAPI,
 };

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import styles from '../../styles'
-import { staggerContainer, fadeIn } from '../../utils/motions'
-import imageAbout from '../assets/Wavy_Tech1.jpg'
+import { staggerContainer, fadeIn, tutorVariants } from '../../utils/motions'
+import imageAbout from '../../assets/Wavy_Edu1.jpg'
 import { TitleText, TypingText } from './Typography'
 
 
@@ -27,6 +27,9 @@ const GetStartedStudent = () => (
       viewport={{ once: false, amount: 0.25 }}
       className={`${styles.innerWidth} mx-auto flex lg:flex-row flex-col gap-8`}
     >
+       <motion.div variants={tutorVariants('left')} className={`flex-1 ${styles.flexCenter}`}>
+        <img src={imageAbout} alt='get-started' className='w-[90%] h-[90%] object-contain' />
+      </motion.div>
       <motion.div variants={fadeIn('left', 'tween', 0.2, 1)} className='flex-[0.75] flex justify-center flex-col'>
         <TypingText title='| Want to become a student?' />
         <TitleText title={'Get started with just a few clicks'} />

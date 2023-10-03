@@ -4,6 +4,7 @@ import Logo from '../components/common/Logo';
 import GetStartedStudent from '../components/landing/GetStartedStudent.tsx';
 import GetStartedTutor from '../components/landing/GetStartedTutor';
 import styles from '../styles'
+import Footer from '../components/landing/Footer';
 
 const navigation = [
   { name: 'Home', href: '/user' },
@@ -196,7 +197,7 @@ export default function Hero() {
       </div>
       <GetStartedStudent />
       <GetStartedTutor />
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

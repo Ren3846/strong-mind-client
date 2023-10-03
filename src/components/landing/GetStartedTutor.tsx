@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import styles from '../../styles'
 import { TitleText, TypingText } from './Typography'
 import { tutorVariants, staggerContainer, fadeIn } from '../../utils/motions'
-import imageTutor from '../assets/Wavy_Tech2.jpg'
+import imageTutor from '../../assets/Wavy_Edu3.jpg'
 import knowledgeIcon from '../../assets/knowledge.png'
 import sharingIcon from '../../assets/sharing.png'
 
@@ -48,6 +48,10 @@ const GetStartedTutor = () => (
             <NewFeatures key={feature.title} {...feature} />
           ))}
         </div>
+      </motion.div>
+
+      <motion.div variants={tutorVariants('right')} className={`flex-1 ${styles.flexCenter}`}>
+        <img src={imageTutor} alt='get-started' className='w-[90%] h-[90%] object-contain' />
       </motion.div>
 
    
