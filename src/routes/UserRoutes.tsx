@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 import Navbar from '../components/user/Navbar'
-import UserPrivate from '../components/auth/userPrivate'
+import UserPrivate from '../components/auth/UserPrivate'
 
 import SignIn from '../pages/user/SignIn'
 import SignUp from '../pages/user/SignUp'

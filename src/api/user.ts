@@ -5,15 +5,17 @@ export interface UserData {
 }
 
 interface SignInBody {
-  username: string;
+  email: string;
   password: string;
 }
 
 interface SignUpBody {
   username: string;
+  phone: string;
   email: string;
   password: string;
 }
+
 
 interface CourseDetails {
   id: string;
@@ -39,10 +41,10 @@ interface PaymentData {
 }
 
 // Функция для входа пользователя
-const userSignInAPI = (body: SignInBody) => API.post('/auth/signin', body);
+const userSignInAPI = (body: SignInBody) => API.post('/auth/login', body);
 
 // Функция для регистрации пользователя
-const userSignUpAPI = (body: SignUpBody) => API.post('/auth/signup', body);
+const userSignUpAPI = (body: SignUpBody) => API.post('/auth/register', body);
 
 // Функция для получения данных залогиненного пользователя
 const getSignedInUserAPI = () => API.get('/auth/user/restore');

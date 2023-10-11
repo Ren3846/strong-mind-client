@@ -1,56 +1,48 @@
-import axios from 'axios';
-import { message } from 'antd'; 
+import axios from 'axios'
+// import { BASE_URL } from "../utils/constants";
+import { toast } from 'react-hot-toast'
 
-// Создаем экземпляр Axios с базовым URL и настройками
 const API = axios.create({
-  baseURL: 'http://localhost:3000/api/',
-  withCredentials: true, // Отправлять куки с запросами для аутентификации
-});
+  // baseURL: BASE_URL,
+  baseURL: 'http://localhost:5173/api/',
 
-// Перехватчик запросов перед отправкой на сервер
+  withCredentials: true,
+})
+
 API.interceptors.request.use((req) => {
-  // Настроить запрос здесь, если необходимо
-  return req;
-});
+  // configure request
+  return req
+})
 
-// Функция для удаления аутентификации на клиенте
 const removeLocalAuth = () => {
-  localStorage.removeItem('isAuth');
-  console.log('removed');
-};
+  localStorage.removeItem('isAuth')
+  console.log('removed')
+}
 
-// Перехватчик ответов от сервера
 API.interceptors.response.use(
   (response) => {
-    // Обработка успешного ответа
-    return response;
+    // Do something with the response data
+    return response
   },
   (error) => {
-    // Обработка ошибок ответа от сервера
-    console.log(error);
-    // toast.dismiss();
-
-    // Обработка сетевых ошибок
+    // Do something with the response error
+    console.log(error)
+    toast.dismiss()
     if (error?.code === 'ERR_NETWORK' || error?.code === 'ERR_BAD_RESPONSE') {
-      message.error('Oops! Сервер не подключен');
+      toast.error('Oops! it seems that the server is not connected')
     }
-
-    // Обработка ошибки отсутствия токена
     if (error?.response?.data?.err?.name === 'TokenMissingError') {
-      console.log('Токен отсутствует');
-      removeLocalAuth();
-      window.location.href = '/signin';
+      console.log('Token Missing')
+      removeLocalAuth()
+      window.location.href = '/signin'
     }
-
-    // Обработка истекшего токена
     if (error?.response?.data?.err?.name === 'TokenExpiredError') {
-      console.log('Токен истек');
-      removeLocalAuth();
-      window.location.href = '/signin?expired=true';
+      console.log('token expired')
+      removeLocalAuth()
+      window.location.href = '/signin?expired=true'
     }
+    return Promise.reject(error)
+  },
+)
 
-    return Promise.reject(error);
-  }
-);
-
-export default API;
+export default API

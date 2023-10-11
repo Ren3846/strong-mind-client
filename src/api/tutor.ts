@@ -1,5 +1,10 @@
 import API from './index'
 
+export interface TutorData {
+  
+}
+
+
 const createCourseAPI = (body : any, route = `/tutor/courses/create`) => {
   return API.post(route, body, { headers: { 'Content-Type': 'multipart/form-data' } })
 }
