@@ -1,91 +1,85 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 
-import Logo from '../../components/common/Logo';
-import { Toaster, toast } from 'react-hot-toast';
-import { useDispatch, useSelector } from 'react-redux';
-import { setUser } from '../../redux/features/userSlice';
-import { userSignInAPI } from '../../api/user';
+import Logo from '../../components/common/Logo'
+import { Toaster, toast } from 'react-hot-toast'
+import { useDispatch, useSelector } from 'react-redux'
+import { setUser } from '../../redux/features/userSlice'
+import { userSignInAPI } from '../../api/user'
 // import GoogleSignIn from '../../components/user/GoogleSignIn';
 // import { Form, Input, Button, Typography, message } from 'antd';
-// import { RootState } from "../../redux/store"; 
+// import { RootState } from "../../redux/store";
 // const { Title } = Typography;
 
-
-
 function SignIn() {
-  const user = useSelector((state: any) => state.user); // Уточните тип state при необходимости
-  const dispatch = useDispatch();
+  const user = useSelector((state: any) => state.user) // Уточните тип state при необходимости
+  const dispatch = useDispatch()
 
-  const [searchParams] = useSearchParams();
-  const accessedPrivate = searchParams.get('private');
-  const fromLocation = searchParams.get('from');
-  const sessionExpired = searchParams.get('expired');
-  const newUser = searchParams.get('new');
-  const logout = searchParams.get('logout');
-
-  
+  const [searchParams] = useSearchParams()
+  const accessedPrivate = searchParams.get('private')
+  const fromLocation = searchParams.get('from')
+  const sessionExpired = searchParams.get('expired')
+  const newUser = searchParams.get('new')
+  const logout = searchParams.get('logout')
 
   useEffect(() => {
     if (user.loggedIn) {
-      navigate('/user');
+      navigate('/user')
     }
     if (newUser) {
-      toast.dismiss();
+      toast.dismiss()
       toast.success('Welcome to StrongMind! Please login', {
         duration: 2000,
-      });
+      })
     }
     if (logout) {
-      toast.dismiss();
+      toast.dismiss()
       toast.success('Missing You Already, Come Back Soon!', {
         icon: '😪',
         duration: 4000,
-      });
+      })
     }
     if (accessedPrivate) {
-      console.log(accessedPrivate);
-      toast.dismiss();
-      toast.error('Please login to continue');
+      console.log(accessedPrivate)
+      toast.dismiss()
+      toast.error('Please login to continue')
     }
 
     if (sessionExpired) {
-      toast.dismiss();
-      toast.error('Session timeout! Please login again');
+      toast.dismiss()
+      toast.error('Session timeout! Please login again')
     }
-  }, []);
+  }, [])
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState<string | null>(null)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleSignIn = (e: React.FormEvent) => {
-
-    e.preventDefault();
+    e.preventDefault()
     userSignInAPI({ email: email, password: password }) // Specify property names
       .then((response: any) => {
-        handleSignInSuccess(response.data.user);
+        handleSignInSuccess(response.data.user)
       })
       .catch((err) => {
-        console.log(err);
-        setError(err?.response?.data?.errors?.message || 'An error occurred.');
-      });
-  };
-  
+        console.log(err)
+        setError(err?.response?.data?.errors?.message || 'An error occurred.')
+      })
+  }
 
   const handleSignInSuccess = (user: any) => {
-    localStorage.setItem('isAuth', 'true'); // Установите строку в localStorage
+    localStorage.setItem('isAuth', 'true') // Установите строку в localStorage
     toast.success(`Hey ${user.name}, Welcome back to StrongMind!`, {
       duration: 6000,
-    });
+    })
 
-    dispatch(setUser({ ...user, userId: user._id }));
+    dispatch(setUser({ ...user, userId: user._id }))
     if (fromLocation) {
-      return navigate(fromLocation);
+      return navigate(fromLocation)
     }
-    return navigate('/user');
+    return navigate('/user')
   }
 
   return (
@@ -116,8 +110,8 @@ function SignIn() {
                   type='email'
                   autoComplete='email'
                   onChange={(e) => {
-                    setEmail(e.target.value);
-                    setError('');
+                    setEmail(e.target.value)
+                    setError('')
                   }}
                   required
                   className='block w-full nexa-font rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
@@ -138,8 +132,8 @@ function SignIn() {
                   type='password'
                   autoComplete='current-password'
                   onChange={(e) => {
-                    setPassword(e.target.value);
-                    setError('');
+                    setPassword(e.target.value)
+                    setError('')
                   }}
                   required
                   className='block nexa-font w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
@@ -174,7 +168,7 @@ function SignIn() {
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export default SignIn;
+export default SignIn
