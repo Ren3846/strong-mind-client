@@ -18,35 +18,6 @@ export default function Hero() {
 
   const el = useRef(null);
 
-//   useEffect(() => {
-//     const typed = new Typed(el.current, {
-//       strings: [
-//         'Where knowledge blooms and wisdom flourishes. ',
-//         'Where learning becomes an adventure, StrongMind leads the way.',
-//         'Unlock the secrets of the universe with StrongMind. ',
-//         'Unleash the power of knowledge with StrongMind.',
-//         'Experience the joy of discovery with StrongMind.',
-//         'StrongMind: Empowering minds to reach new heights.',
-//         'StrongMind: Where ideas come to life and minds thrive.',
-//         'StrongMind: Nurturing minds to create a brighter tomorrow.',
-//         'StrongMind: Unlocking the potential of every mind.',
-//         "Enlighten your mind with StrongMind's limitless knowledge.",
-//         'Explore the wonders of the world with StrongMind.',
-//       ],
-//       typeSpeed: 70,
-//       backDelay: 700,
-//       smartBackspace: true,
-//       backSpeed: 20,
-//       loop: true,
-//       loopCount: Infinity,
-//     });
-
-//     return () => {
-//       // Destroy Typed instance during cleanup to stop animation
-//       typed.destroy();
-//     }
-//   }, []);
-
   return (
     <div className='bg-white background-animation'>
       <header className='absolute inset-x-0 top-0 z-50'>
