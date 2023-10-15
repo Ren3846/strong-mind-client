@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import { Route, Routes } from 'react-router-dom'
 import UserRoutes from './routes/UserRoutes'
 import TutorRoutes from './routes/TutorRoutes'
