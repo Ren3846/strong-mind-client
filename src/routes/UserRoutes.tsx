@@ -21,15 +21,25 @@ import { setUser } from '../redux/features/userSlice'
 import { getSignedInUserAPI } from '../api/user'
 import { useDispatch } from 'react-redux'
 
-import { USER, EXPLORE, SIGNIN, SIGNUP, COURSES, USER_PROFILE, USER_COURSES, USER_TRANSACTIONS, COURSES_ENROLLED, COURSES_ENROLLED_ID} from '../paths';
-
+import {
+  USER,
+  EXPLORE,
+  SIGNIN,
+  SIGNUP,
+  COURSES,
+  USER_PROFILE,
+  USER_COURSES,
+  USER_TRANSACTIONS,
+  COURSES_ENROLLED,
+  COURSES_ENROLLED_ID,
+} from '../paths'
 
 function UserRoutes() {
   const dispatch = useDispatch()
 
   useEffect(() => {
     getSignedInUserAPI()
-      .then((response: any) => { 
+      .then((response: any) => {
         let userData = response.data?.userData || null
         if (!userData) {
           console.log('user not logged in')
@@ -40,7 +50,6 @@ function UserRoutes() {
         console.log('error', err)
       })
   }, [dispatch])
-  
 
   return (
     <div>

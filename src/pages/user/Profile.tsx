@@ -29,7 +29,7 @@ function Profile() {
     watch,
     formState: { errors },
   } = useForm<UserDetails>({
-    resolver: yupResolver(profileSchema),
+    // resolver: yupResolver(profileSchema),
   })
 
   useEffect(() => {
