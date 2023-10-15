@@ -145,7 +145,7 @@ function Profile() {
                   )}
                 />
               </div>
-              <p className='text-red-600 nexa-font text-xs mt-2 ml-1'>{errors.name?.message}</p>
+              <p className='text-red-600 nexa-font text-xs mt-2 ml-1'>{String(errors.name?.message)}</p>
             </div>
             <div>
               <label htmlFor='full-name' className='block text-sm font-semibold leading-6 text-gray-900'>
@@ -165,7 +165,7 @@ function Profile() {
                   )}
                 />
               </div>
-              <p className='text-red-600 nexa-font text-xs mt-2 ml-1'>{errors.fullName?.message}</p>
+              <p className='text-red-600 nexa-font text-xs mt-2 ml-1'>{String(errors.fullName?.message)}</p>
             </div>
             <div className='sm:col-span-2'>
               <label htmlFor='email' className='block text-sm font-semibold leading-6 text-gray-900'>
@@ -183,7 +183,7 @@ function Profile() {
                   )}
                 />
               </div>
-              <p className='text-red-600 nexa-font text-xs mt-2 ml-1'>{errors.email?.message}</p>
+              <p className='text-red-600 nexa-font text-xs mt-2 ml-1'>{String(errors.email?.message)}</p>
             </div>
             <div className='sm:col-span-2'>
               <label htmlFor='phone-number' className='block text-sm font-semibold leading-6 text-gray-900'>
@@ -201,7 +201,7 @@ function Profile() {
                   )}
                 />
               </div>
-              <p className='text-red-600 nexa-font text-xs mt-2 ml-1'>{errors.phone?.message}</p>
+              <p className='text-red-600 nexa-font text-xs mt-2 ml-1'>{String(errors.phone?.message)}</p>
             </div>
             {/* <div className='sm:col-span-2'>
               <label htmlFor='website' className='block text-sm font-semibold leading-6 text-gray-900'>
