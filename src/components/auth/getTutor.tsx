@@ -10,9 +10,7 @@
 import React from 'react'
 
 const getTutor = () => {
-  return (
-    <div>getTutor</div>
-  )
+  return <div>getTutor</div>
 }
 
 export default getTutor

@@ -13,9 +13,7 @@
 import React from 'react'
 
 const TutorPrivate = () => {
-  return (
-    <div>TutorPrivate</div>
-  )
+  return <div>TutorPrivate</div>
 }
 
 export default TutorPrivate
