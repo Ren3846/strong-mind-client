@@ -1,20 +1,41 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import store from './redux/store'
+import {
+  Provider,
+  useDispatch,
+} from 'react-redux'
+import store from './redux/store/index'
 
-import './styles/globals.css';
-import App from './App';
-import "./styles/style.sass"
+import Router from './pages'
+import './styles/style.sass'
+import { getSignedInUserAPI } from './api/user'
+import { authLoaded } from './redux/actions/auth'
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+const ApiInit: React.FC<{}> = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    getSignedInUserAPI()
+      .then(({ data }) => {
+        dispatch(authLoaded(data))
+      })
+      .catch((err) => {
+        dispatch(authLoaded(null))
+      })
+  }, [dispatch])
+
+  return null
+}
+
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement,
+)
 root.render(
-<!--   <React.StrictMode> -->
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </BrowserRouter>
-//   </React.StrictMode>,
+  <BrowserRouter>
+    <Provider store={store}>
+      <ApiInit />
+      <Router />
+    </Provider>
+  </BrowserRouter>,
 )

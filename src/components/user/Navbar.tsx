@@ -1,55 +1,104 @@
 import React from 'react'
-import { Menu, Button } from 'antd'
-import { Link, useLocation } from 'react-router-dom'
+import { Menu, Button, Space } from 'antd'
+import {
+  Link,
+  useLocation,
+} from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import MenuDropDown from './MenuDropDown'
 import Logo from '../common/Logo'
+import { SettingOutlined } from '@ant-design/icons'
 
 function Navbar() {
   const { pathname } = useLocation()
-  const user = useSelector((state: any) => state.user)
+  const isAuthLoaded = useSelector(
+    (state: any) => state.auth.loaded,
+  )
+  const user = useSelector(
+    (state: any) => state.auth.user,
+  )
 
-  return (
-    <Menu mode='horizontal' style={{ backgroundColor: 'rgb(243 244 246)', marginTop: '10px' }}>
-      <Menu.Item>
-        <Logo to={'/'} size={1.3} />
-      </Menu.Item>
-
-      <Menu.Item>
+  const menuItems = [
+    {
+      key: 'home',
+      label: <Logo to={'/'} size={1.3} />,
+    },
+    {
+      key: 'user',
+      label: (
         <Button>
           <Link to={`/user`}>Home</Link>
         </Button>
-      </Menu.Item>
-      <Menu.Item>
+      ),
+    },
+    {
+      key: 'explore',
+      label: (
         <Button>
           <Link to={`/explore`}>Explore</Link>
         </Button>
-      </Menu.Item>
-      <Menu.Item>
+      ),
+    },
+    {
+      key: 'enrolled',
+      label: (
         <Button>
-          <Link to={`/courses/enrolled`}>Enrolled</Link>
+          <Link to={`/enrolled`}>Enrolled</Link>
         </Button>
-      </Menu.Item>
-      <Menu.Item>
+      ),
+    },
+    {
+      key: 'profile',
+      label: (
         <Button>
-          <Link to={`/user/profile`}>Profile</Link>
+          <Link to={`/profile`}>Profile</Link>
         </Button>
-      </Menu.Item>
+      ),
+    },
+    {
+      key: 'dropdown',
+      label: (
+        <div
+          style={{
+            display: 'flex',
+            float: 'right',
+            padding: '5px',
+          }}
+        >
+          {isAuthLoaded ? (
+            user ? (
+              <MenuDropDown user={user} />
+            ) : (
+              <Button>
+                <Link
+                  to={`signin?from=${pathname}`}
+                >
+                  Sign In
+                </Link>
+              </Button>
+            )
+          ) : (
+            'Loading...'
+          )}
+        </div>
+      ),
+    },
+  ]
 
-      <div className=''>
-        {user?.loggedIn ? (
-          <div className='w-3'>
-            <MenuDropDown user={user} />
-          </div>
-        ) : (
-          pathname !== '/signin' && (
-            <Button>
-              <Link to={`signin?from=${pathname}`}>Sign In</Link>
-            </Button>
-          )
-        )}
-      </div>
-    </Menu>
+  return (
+    <div
+      style={{
+        marginTop: '10px',
+      }}
+    >
+      <Menu
+        mode='horizontal'
+        style={{
+          backgroundColor: 'rgb(243 244 246)',
+        }}
+        items={menuItems}
+      ></Menu>
+    </div>
   )
 }
 
