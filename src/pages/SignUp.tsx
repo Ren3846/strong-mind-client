@@ -152,9 +152,7 @@ function SignUp() {
               htmlType='submit'
               loading={isLoading}
               block
-            >
-              {isLoading ? <Spin /> : 'Sign up'}
-            </Button>
+            ></Button>
           </Form.Item>
         </Form>
       </Row>

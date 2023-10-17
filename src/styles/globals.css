@@ -97,13 +97,13 @@ body {
   background: #e6e8ec;
 }
 
-*::-webkit-scrollbar-thumb {
+/* *::-webkit-scrollbar-thumb {
   background-color: #5850ec;
   border-radius: 16px;
-  /* border: 1px solid #ffffff; */
-}
+  border: 1px solid #ffffff;
+} */
 
-.hide-scroll-bar::-webkit-scrollbar {
+/* .hide-scroll-bar::-webkit-scrollbar {
   width: 1em;
   height: 5px;
 }
@@ -117,8 +117,8 @@ body {
   height: 10px;
   background-color: #5850ec;
   border-radius: 16px;
-  /* border: 1px solid #ffffff; */
-}
+  border: 1px solid #ffffff;
+} */
 
 * {
   margin: 0;
