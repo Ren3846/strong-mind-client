@@ -32,6 +32,7 @@ import {
   COURSES_ENROLLED,
   COURSES_ENROLLED_ID,
 } from '../paths'
+import { USER_ROLE, User } from '../redux/store/types'
 
 interface IProtectedRoute {
   condition: boolean
@@ -68,10 +69,13 @@ const Router: React.FC<{}> = () => {
     StoreType,
     boolean
   >((state: any) => state.auth.loaded)
-  const isLoggedIn = useSelector<
+  
+  const currentUser = useSelector<
     StoreType,
-    boolean
-  >((state: any) => !!state.auth.user)
+    User | null
+  >((state: any) => state.auth.user)
+
+  const isAuthenticated = !!currentUser;
 
   return isLoaded ? (
     <ScrollToTop>
@@ -83,7 +87,7 @@ const Router: React.FC<{}> = () => {
             path='/signin'
             element={
               <ProtectedRoute
-                condition={!isLoggedIn}
+                condition={!isAuthenticated}
                 redirect='/profile'
                 children={<SignIn />}
               />
@@ -93,7 +97,7 @@ const Router: React.FC<{}> = () => {
             path='/signup'
             element={
               <ProtectedRoute
-                condition={!isLoggedIn}
+                condition={!isAuthenticated}
                 redirect='/profile'
                 children={<SignUp />}
               />
@@ -109,8 +113,18 @@ const Router: React.FC<{}> = () => {
             path='/profile'
             element={
               <ProtectedRoute
-                condition={isLoggedIn}
+                condition={isAuthenticated}
                 redirect='/signin'
+                children={<Profile />}
+              />
+            }
+          />
+          <Route
+            path='/tutor-test'
+            element={
+              <ProtectedRoute
+                condition={isAuthenticated && currentUser.role === USER_ROLE.TEACHER}
+                redirect='/profile'
                 children={<Profile />}
               />
             }
