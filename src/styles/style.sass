@@ -25,3 +25,40 @@
                 border-radius: 100px
                 background-color: grey
                 
+
+.header-navbar
+    display: flex
+    align-items: center
+    background-color: rgba(0,0,0,.1)
+    border-bottom: 1px solid rgba(0,0,0,.2)
+    padding: 2px 20px 0
+    .navbar-logo
+        font-size: 24px
+        color: blue
+        text-decoration: none
+        font-weight: 600
+    .nav-wrapper
+        margin-left: 50px
+        display: flex
+        align-items: center
+        flex-grow: 1
+        height: 100%
+        .navbar-link
+            display: flex
+            align-items: center
+            margin-right: 30px
+            height: 54px
+            text-decoration: none
+            font-weight: 500
+            font-size: 16px
+            line-height: 16px
+            color: rgb(40,40,40)
+            transition: .2s ease
+            border-bottom: 2px solid transparent
+            &:hover
+                color: rgb(80,80,80)
+            &:last-of-type
+                margin-right: 0px
+            &.active
+                color: red
+                border-bottom-color: red

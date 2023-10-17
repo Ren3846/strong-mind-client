@@ -1,8 +1,9 @@
 import React from 'react'
-import { Menu, Button, Space } from 'antd'
+import { Button, Space } from 'antd'
 import {
   Link,
-  useLocation,
+  NavLink,
+  useNavigate,
 } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import MenuDropDown from './MenuDropDown'
@@ -10,7 +11,8 @@ import Logo from '../common/Logo'
 import { SettingOutlined } from '@ant-design/icons'
 
 function Navbar() {
-  const { pathname } = useLocation()
+  const navigate = useNavigate();
+  
   const isAuthLoaded = useSelector(
     (state: any) => state.auth.loaded,
   )
@@ -18,47 +20,38 @@ function Navbar() {
     (state: any) => state.auth.user,
   )
 
-  const menuItems = [
-    {
-      key: 'home',
-      label: <Logo to={'/'} size={1.3} />,
-    },
-    {
-      key: 'user',
-      label: (
-        <Button>
-          <Link to={`/user`}>Home</Link>
-        </Button>
-      ),
-    },
-    {
-      key: 'explore',
-      label: (
-        <Button>
-          <Link to={`/explore`}>Explore</Link>
-        </Button>
-      ),
-    },
-    {
-      key: 'enrolled',
-      label: (
-        <Button>
-          <Link to={`/enrolled`}>Enrolled</Link>
-        </Button>
-      ),
-    },
-    {
-      key: 'profile',
-      label: (
-        <Button>
-          <Link to={`/profile`}>Profile</Link>
-        </Button>
-      ),
-    },
-    {
-      key: 'dropdown',
-      label: (
-        <div
+  return (
+    <div
+      className='header-navbar'
+    >
+      <Link
+        to="/"
+        className='navbar-logo'
+        children="StrongMind"
+      />
+      <nav className='nav-wrapper'>
+        <NavLink
+          to="/user"
+          className={({isActive}) => `navbar-link ${isActive ? "active" : ""}`}
+          children="Home"
+        />
+        <NavLink
+          to="/explore"
+          className={({isActive}) => `navbar-link ${isActive ? "active" : ""}`}
+          children="Explore"
+        />
+        <NavLink
+          to="/enrolled"
+          className={({isActive}) => `navbar-link ${isActive ? "active" : ""}`}
+          children="Enrolled"
+        />
+        <NavLink
+          to="/profile"
+          className={({isActive}) => `navbar-link ${isActive ? "active" : ""}`}
+          children="Profile"
+        />
+      </nav>
+      <div
           style={{
             display: 'flex',
             float: 'right',
@@ -69,35 +62,22 @@ function Navbar() {
             user ? (
               <MenuDropDown user={user} />
             ) : (
-              <Button>
-                <Link
-                  to={`signin?from=${pathname}`}
-                >
-                  Sign In
-                </Link>
-              </Button>
+              <Space>
+                <Button
+                  children="Log in"
+                  onClick={() => navigate("/signin")}
+                ></Button>
+                <Button
+                  type="default"
+                  children="Register"
+                  onClick={() => navigate("/signup")}
+                />
+              </Space>
             )
           ) : (
             'Loading...'
           )}
         </div>
-      ),
-    },
-  ]
-
-  return (
-    <div
-      style={{
-        marginTop: '10px',
-      }}
-    >
-      <Menu
-        mode='horizontal'
-        style={{
-          backgroundColor: 'rgb(243 244 246)',
-        }}
-        items={menuItems}
-      ></Menu>
     </div>
   )
 }

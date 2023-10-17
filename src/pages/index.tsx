@@ -102,11 +102,7 @@ const Router: React.FC<{}> = () => {
           <Route
             path='/explore'
             element={
-              <ProtectedRoute
-                condition={!!isLoggedIn}
-                redirect='/signin'
-                children={<Explore />}
-              />
+              <Explore />
             }
           />
           <Route
