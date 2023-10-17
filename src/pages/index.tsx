@@ -1,9 +1,4 @@
-import {
-  Routes,
-  Route,
-  useLocation,
-  Navigate,
-} from 'react-router-dom'
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
 import React, { useLayoutEffect } from 'react'
 
 import Preloader from '../components/common/Preloader'
@@ -33,6 +28,9 @@ import {
   COURSES_ENROLLED_ID,
 } from '../paths'
 import { USER_ROLE, User } from '../redux/store/types'
+import Dashboard from './user/Dashboard'
+import Enrolled from './user/Enrolled'
+import Meetings from './user/Meetings'
 
 interface IProtectedRoute {
   condition: boolean
@@ -50,32 +48,24 @@ const ScrollToTop: React.FC<{
   return children
 }
 
-const ProtectedRoute: React.FC<
-  IProtectedRoute
-> = ({ condition, redirect, children }) => {
-  return (
-    <>
-      {condition ? (
-        children
-      ) : (
-        <Navigate to={redirect} replace />
-      )}
-    </>
-  )
+const ProtectedRoute: React.FC<IProtectedRoute> = ({
+  condition,
+  redirect,
+  children,
+}) => {
+  return <>{condition ? children : <Navigate to={redirect} replace />}</>
 }
 
 const Router: React.FC<{}> = () => {
-  const isLoaded = useSelector<
-    StoreType,
-    boolean
-  >((state: any) => state.auth.loaded)
-  
-  const currentUser = useSelector<
-    StoreType,
-    User | null
-  >((state: any) => state.auth.user)
+  const isLoaded = useSelector<StoreType, boolean>(
+    (state: any) => state.auth.loaded,
+  )
 
-  const isAuthenticated = !!currentUser;
+  const currentUser = useSelector<StoreType, User | null>(
+    (state: any) => state.auth.user,
+  )
+
+  const isAuthenticated = !!currentUser
 
   return isLoaded ? (
     <ScrollToTop>
@@ -103,12 +93,31 @@ const Router: React.FC<{}> = () => {
               />
             }
           />
+          <Route path='/dashboard' element={<Dashboard />} />
+
           <Route
-            path='/explore'
+            path='/meetings'
             element={
-              <Explore />
+              <ProtectedRoute
+                condition={isAuthenticated}
+                redirect='/signin'
+                children={<Meetings />}
+              />
             }
           />
+
+          <Route
+            path='/enrolled'
+            element={
+              <ProtectedRoute
+                condition={isAuthenticated}
+                redirect='/signin'
+                children={<Enrolled />}
+              />
+            }
+          />
+
+          <Route path='/explore' element={<Explore />} />
           <Route
             path='/profile'
             element={
@@ -123,16 +132,15 @@ const Router: React.FC<{}> = () => {
             path='/tutor-test'
             element={
               <ProtectedRoute
-                condition={isAuthenticated && currentUser.role === USER_ROLE.TEACHER}
+                condition={
+                  isAuthenticated && currentUser.role === USER_ROLE.TEACHER
+                }
                 redirect='/profile'
                 children={<Profile />}
               />
             }
           />
-          <Route
-            path='*'
-            element={<NotFound />}
-          />
+          <Route path='*' element={<NotFound />} />
         </Routes>
       </>
     </ScrollToTop>

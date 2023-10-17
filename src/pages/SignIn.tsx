@@ -1,43 +1,28 @@
 import React, { useState } from 'react'
-import {
-  Link,
-  useNavigate,
-  useSearchParams,
-} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   Input,
   Button,
   Typography,
   Form,
   message,
+  Row,
+  Space,
+  Card,
 } from 'antd'
-import {
-  useDispatch,
-  useSelector,
-} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { userSignInAPI } from '../api/user'
 import { authLogin } from '../redux/actions/auth'
-import Logo from '../components/common/Logo'
+import Layout from '../components/layout'
 
 const { Text } = Typography
 
 function SignIn() {
   const [form] = Form.useForm()
-  const user = useSelector(
-    (state: any) => state.user,
-  )
+  const user = useSelector((state: any) => state.user)
   const dispatch = useDispatch()
-  // const [searchParams] = useSearchParams()
-  // const accessedPrivate =
-  //   searchParams.get('private')
-  // const fromLocation = searchParams.get('from')
-  // const sessionExpired =
-  //   searchParams.get('expired')
-  // const newUser = searchParams.get('new')
-  // const logout = searchParams.get('logout')
-  const [error, setError] = useState<
-    string | null
-  >(null)
+
+  const [error, setError] = useState<string | null>(null)
 
   const navigate = useNavigate()
 
@@ -52,29 +37,20 @@ function SignIn() {
         })
         .catch((err) => {
           console.log(err)
-          setError(
-            err?.response?.data?.errors
-              ?.message || 'An error occurred.',
-          )
+          setError(err?.response?.data?.errors?.message || 'An error occurred.')
           showErrorNotification(error)
         })
     })
   }
 
   const handleSignInSuccess = (user: any) => {
-    showSuccessNotification(
-      `Hey ${user.name}, Welcome back to StrongMind!`,
-    )
+    showSuccessNotification(`Hey ${user.email}, Welcome back to StrongMind!`)
     dispatch(authLogin(user))
-    // if (fromLocation) {
-    //   return navigate(fromLocation)
-    // }
-    return navigate('/user')
+
+    return navigate('/dashboard')
   }
 
-  const showErrorNotification = (
-    errorMessage: string | null,
-  ) => {
+  const showErrorNotification = (errorMessage: string | null) => {
     if (errorMessage) {
       message.error(errorMessage)
       setTimeout(() => {
@@ -83,9 +59,7 @@ function SignIn() {
     }
   }
 
-  const showSuccessNotification = (
-    messageText: string,
-  ) => {
+  const showSuccessNotification = (messageText: string) => {
     message.success(messageText)
     setTimeout(() => {
       message.destroy()
@@ -93,95 +67,67 @@ function SignIn() {
   }
 
   return (
-    <>
-      <div>
-        <div className='flex nexa-font min-h-full flex-1 flex-col justify-center px-6 lg:px-8 h-screen'>
-          <div className='sm:mx-auto sm:w-full sm:max-w-sm'>
-            <div className='flex justify-center'>
-              <Logo size={1.7} />
-            </div>
-            <h2 className='mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900'>
-              Sign in and explore
-            </h2>
-          </div>
-
-          <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
-            <Form
-              form={form}
-              name='signInForm'
-              onFinish={handleSignIn}
-              className='space-y-6'
-              action='#'
-              method='POST'
+    <Layout>
+      <Row align='middle' justify='center'>
+        <Card title='Sign in and explore' style={{ width: '30rem' }}>
+          <Form
+            form={form}
+            name='signInForm'
+            onFinish={handleSignIn}
+            className='space-y-6'
+            action='#'
+            method='POST'
+          >
+            <Form.Item
+              label='Email address'
+              name='email'
+              rules={[
+                {
+                  required: true,
+                  message: 'Please enter your email!',
+                },
+              ]}
             >
-              <Form.Item
-                label='Email address'
-                name='email'
-                rules={[
-                  {
-                    required: true,
-                    message:
-                      'Please enter your email!',
-                  },
-                ]}
-              >
-                <Input
-                  type='email'
-                  autoComplete='email'
-                  placeholder='Email'
-                />
-              </Form.Item>
+              <Input type='email' autoComplete='email' placeholder='Email' />
+            </Form.Item>
 
-              <Form.Item
-                label='Password'
-                name='password'
-                rules={[
-                  {
-                    required: true,
-                    message:
-                      'Please enter your password!',
-                  },
-                ]}
-              >
-                <Input
-                  type='password'
-                  autoComplete='current-password'
-                  placeholder='Password'
-                />
-              </Form.Item>
+            <Form.Item
+              label='Password'
+              name='password'
+              rules={[
+                {
+                  required: true,
+                  message: 'Please enter your password!',
+                },
+              ]}
+            >
+              <Input
+                type='password'
+                autoComplete='current-password'
+                placeholder='Password'
+              />
+            </Form.Item>
 
-              <Form.Item
-                shouldUpdate
-                className='flex justify-center'
-              >
-                <Text type='danger'>{error}</Text>
-              </Form.Item>
+            <Form.Item shouldUpdate className='flex justify-center'>
+              <Text type='danger'>{error}</Text>
+            </Form.Item>
 
-              <Form.Item>
-                <Button
-                  type='primary'
-                  htmlType='submit'
-                  className='w-full'
-                >
-                  Sign In
-                </Button>
-              </Form.Item>
-            </Form>
+            <Form.Item>
+              <Button type='primary' htmlType='submit' className='w-full'>
+                Sign In
+              </Button>
+            </Form.Item>
+          </Form>
 
-            <p className='mt-10 text-center text-xs text-gray-500'>
-              Ready to start exploring new
-              perspectives?{' '}
-              <Link
-                to='/signup'
-                className='font-semibold leading-6 text-indigo-600 hover:text-indigo-500'
-              >
-                Create an account!
-              </Link>
-            </p>
-          </div>
-        </div>
-      </div>
-    </>
+          <Space direction='vertical' size='large'>
+            <Typography.Text>
+              Ready to start exploring new perspectives?{' '}
+              <Link to='/signup'>Create an account!</Link>
+            </Typography.Text>
+          </Space>
+        </Card>
+      </Row>
+    </Layout>
   )
 }
 

@@ -3,7 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { StoreType } from '../../redux/store'
 import Preloader from '../../components/common/Preloader'
+import { Typography, Row, Col, Card, List, Space, Avatar } from 'antd'
+import CourseFilter from '../../components/user/CourseFilter'
+import { UserOutlined } from '@ant-design/icons'
 
+const { Title, Paragraph } = Typography
 interface ICourse {
   _id: string
   title: string
@@ -23,10 +27,9 @@ interface IUser {
 const CourseStudentItem: React.FC<{
   userId: string
 }> = ({ userId }) => {
-  const [user, setUser] = useState<IUser | null>(
-    null,
-  )
+  const [user, setUser] = useState<IUser | null>(null)
   const [loaded, setLoaded] = useState(false)
+  const [filter, setFilter] = useState('all')
 
   useEffect(() => {
     axios({
@@ -41,42 +44,37 @@ const CourseStudentItem: React.FC<{
       })
   }, [userId])
 
-  return (
-    <div
-      className='course-user'
-      title={user?.email}
-    ></div>
-  )
+  return <div className='course-user' title={user?.email}></div>
 }
 
-const CourseItem: React.FC<ICourse> = (
-  course,
-) => {
+const CourseItem: React.FC<ICourse> = (course) => {
   return (
-    <div className='course-item'>
-      <h3>{course.title}</h3>
-      <p>{course.about}</p>
-      <div className='course-users'>
-        {course.students.length ? (
-          course.students.map((user) => (
-            <CourseStudentItem
-              userId={user}
-              key={course._id + user}
-            />
-          ))
-        ) : (
-          <p>Пока никого :(</p>
+    <Card
+      title={course.title}
+      extra={<span>Price: {course.price} $</span>}
+      style={{ width: 370, margin: '16px' }}
+    >
+      <Paragraph>{course.about}</Paragraph>
+      <List
+        header={<div>Students</div>}
+        dataSource={course.students}
+        renderItem={(user) => (
+          <List.Item>
+            <Space>
+              <Avatar icon={<UserOutlined />} />
+              {course.students[0]}
+            </Space>
+          </List.Item>
         )}
-      </div>
-    </div>
+      />
+    </Card>
   )
 }
 
 const Course = () => {
-  const [courses, setCourses] = useState<
-    ICourse[]
-  >([])
+  const [courses, setCourses] = useState<ICourse[]>([])
   const [loaded, setLoaded] = useState(false)
+  const [filter, setFilter] = useState('all')
 
   useEffect(() => {
     axios({
@@ -95,27 +93,33 @@ const Course = () => {
       })
   }, [])
 
+  const handleFilterChange = (value: string) => {
+    setFilter(value)
+  }
+
   return (
-    <div>
-      {loaded ? (
-        <div className='courses-wrapper'>
-          {courses.length ? (
-            courses.map((course) => (
-              <CourseItem
-                {...course}
-                key={course._id}
-              />
-            ))
+    <Row gutter={[16, 16]}>
+      <Col xs={24} sm={24} md={6} lg={4} xl={4}>
+        <CourseFilter onFilterChange={handleFilterChange} />
+      </Col>
+      <Col xs={24} sm={24} md={18} lg={18} xl={18}>
+        <div>
+          {loaded ? (
+            <div className='courses-wrapper'>
+              {courses.length ? (
+                courses.map((course) => (
+                  <CourseItem {...course} key={course._id} />
+                ))
+              ) : (
+                <p>Нет курсов :(</p>
+              )}
+            </div>
           ) : (
-            <p>Нет курсов :(</p>
+            <Preloader />
           )}
         </div>
-      ) : (
-        <div className='preloader'>
-          <Preloader />
-        </div>
-      )}
-    </div>
+      </Col>
+    </Row>
   )
 }
 

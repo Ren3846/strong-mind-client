@@ -13,3 +13,14 @@ export interface User {
   phone: string
   country: string | null
 }
+
+export interface AdminUser {
+  username: string
+  role: 'admin'
+}
+
+export interface Partner {
+  _id: string
+  username: string
+  interest: number
+}
