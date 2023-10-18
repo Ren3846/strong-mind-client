@@ -32,6 +32,7 @@ import { USER_ROLE, User } from '../redux/store/types'
 import Dashboard from './user/Dashboard'
 import Enrolled from './user/Enrolled'
 import Meetings from './user/Meetings'
+import Course from './user/Course'
 
 interface IProtectedRoute {
   condition: boolean
@@ -119,6 +120,7 @@ const Router: React.FC<{}> = () => {
           />
 
           <Route path='/explore' element={<Explore />} />
+          <Route path='/course/:id' element={<Course />} />
           <Route
             path='/profile'
             element={

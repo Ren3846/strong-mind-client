@@ -91,7 +91,7 @@ const CourseItem: React.FC<ICourse> = (course) => {
   )
 }
 
-const Course = () => {
+const Explore = () => {
   const [courses, setCourses] = useState<ICourse[]>([])
   const [loaded, setLoaded] = useState(false)
   const [filter, setFilter] = useState('all')
@@ -156,4 +156,4 @@ const Course = () => {
   )
 }
 
-export default Course
+export default Explore
