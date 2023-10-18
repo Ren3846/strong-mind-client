@@ -77,7 +77,7 @@ const CourseItem: React.FC<ICourse> = (course) => {
     <div className='course-item'>
       <h3>{course.title}</h3>
       <p>{course.about}</p>
-      {/* <div className='course-users'>
+      <div className='course-users'>
         {course.students.length ? (
           course.students.map((user) => (
             <CourseStudentItem userId={user} key={course._id + user} />
@@ -85,13 +85,13 @@ const CourseItem: React.FC<ICourse> = (course) => {
         ) : (
           <p>Пока никого :(</p>
         )}
-      </div> */}
+      </div>
       <p>{course.price}</p>
     </div>
   )
 }
 
-const Explore = () => {
+const Courses = () => {
   const [courses, setCourses] = useState<ICourse[]>([])
   const [loaded, setLoaded] = useState(false)
   const [filter, setFilter] = useState('all')
@@ -156,4 +156,4 @@ const Explore = () => {
   )
 }
 
-export default Explore
+export default Courses

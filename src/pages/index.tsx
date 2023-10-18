@@ -7,7 +7,7 @@ import Landing from './Landing'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 import Profile from './user/Profile'
-import Explore from './user/Explore'
+import Courses from './user/Courses'
 
 import NotFound from './NotFound'
 
@@ -33,6 +33,7 @@ import Dashboard from './user/Dashboard'
 import Enrolled from './user/Enrolled'
 import Meetings from './user/Meetings'
 import Course from './user/Course'
+import Teachers from './user/Teachers'
 
 interface IProtectedRoute {
   condition: boolean
@@ -119,7 +120,9 @@ const Router: React.FC<{}> = () => {
             }
           />
 
-          <Route path='/explore' element={<Explore />} />
+          <Route path='/courses' element={<Courses />} />
+          <Route path='/teachers' element={<Teachers />} />
+
           <Route path='/course/:id' element={<Course />} />
           <Route
             path='/profile'
