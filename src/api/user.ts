@@ -58,8 +58,7 @@ const enrollCourseAPI = (body: any) => API.post('/user/courses/enroll', body)
 const getUserDetailsAPI = () => API.get<UserDetails>('/user')
 
 // Функция для обновления данных пользователя
-const updateUserDetailsAPI = (body: UserDetails) =>
-  API.post('/user/profile', body)
+const updateUserDetailsAPI = (body: UserDetails) => API.patch('/users', body)
 
 //
 //

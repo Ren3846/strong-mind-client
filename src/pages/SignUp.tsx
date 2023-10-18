@@ -20,7 +20,7 @@ import {
   LockOutlined,
 } from '@ant-design/icons'
 import { userSignUpAPI } from '../api/user'
-import Layout from '../components/common/Layout'
+import Layout from '../components/common/layout'
 
 const { Option } = Select
 const { Text } = Typography

@@ -37,14 +37,6 @@ function Navbar() {
           }
           children='Enrolled'
         />
-
-        <NavLink
-          to='/meetings'
-          className={({ isActive }) =>
-            `navbar-link ${isActive ? 'active' : ''}`
-          }
-          children='Meetings'
-        />
         <NavLink
           to='/profile'
           className={({ isActive }) =>

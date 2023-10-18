@@ -6,13 +6,11 @@ import Layout from '../../components/common/layout'
 import Preloader from '../../components/common/Preloader'
 
 import { UserOutlined } from '@ant-design/icons'
-import Breadcrumb from '../../components/user/Breadcrumb'
-import { updateUser } from '../../redux/actions/user'
 
 const { Item } = Form
 const { Dragger } = Upload
 
-function Profile() {
+function TutorProfile() {
   const user = useSelector((state: any) => state.auth.user)
   const dispatch = useDispatch()
 
@@ -23,12 +21,12 @@ function Profile() {
     setEditedUser({ ...editedUser, [name]: value })
   }
 
-  const saveProfile = () => {
+  const saveTutorProfile = () => {
     updateUserDetailsAPI(editedUser)
       .then((response) => {
         console.log(response)
-        message.success('Profile updated successfully', 3)
-        dispatch(updateUser(response.data._id, response.data))
+        message.success('TutorProfile updated successfully', 3)
+        dispatch({ type: 'UPDATE_USER', payload: editedUser })
       })
       .catch((err) => {
         console.error(err)
@@ -45,7 +43,7 @@ function Profile() {
   return (
     <Layout>
       <Row align='middle' justify='center'>
-        <Card title='Profile' style={{ width: '60rem' }}>
+        <Card title='TutorProfile' style={{ width: '60rem' }}>
           {loaded ? (
             <>
               <Row justify='center'>
@@ -98,7 +96,7 @@ function Profile() {
                   </Dragger>
                 </Item>
                 <Item>
-                  <Button type='primary' onClick={saveProfile}>
+                  <Button type='primary' onClick={saveTutorProfile}>
                     Save
                   </Button>
                 </Item>
@@ -113,4 +111,4 @@ function Profile() {
   )
 }
 
-export default Profile
+export default TutorProfile
