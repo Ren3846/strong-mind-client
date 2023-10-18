@@ -13,7 +13,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { userSignInAPI } from '../api/user'
 import { authLogin } from '../redux/actions/auth'
-import Layout from '../components/layout'
+import Layout from '../components/common/Layout'
 
 const { Text } = Typography
 

@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { StoreType } from '../../redux/store'
 import Preloader from '../../components/common/Preloader'
-import { Typography, Row, Col, Card, List, Space, Avatar } from 'antd'
+import { Typography, Row, Col, Card, List, Space, Avatar, Button } from 'antd'
 import CourseFilter from '../../components/user/CourseFilter'
 import { UserOutlined } from '@ant-design/icons'
+import CustomButton from '../../components/common/Button'
 
 const { Title, Paragraph } = Typography
 interface ICourse {
@@ -29,7 +30,6 @@ const CourseStudentItem: React.FC<{
 }> = ({ userId }) => {
   const [user, setUser] = useState<IUser | null>(null)
   const [loaded, setLoaded] = useState(false)
-  const [filter, setFilter] = useState('all')
 
   useEffect(() => {
     axios({
@@ -51,7 +51,7 @@ const CourseItem: React.FC<ICourse> = (course) => {
   return (
     <Card
       title={course.title}
-      extra={<span>Price: {course.price} $</span>}
+      extra={<span style={{ color: 'blue' }}>Price: {course.price} $</span>}
       style={{ width: 370, margin: '16px' }}
     >
       <Paragraph>{course.about}</Paragraph>
@@ -67,9 +67,29 @@ const CourseItem: React.FC<ICourse> = (course) => {
           </List.Item>
         )}
       />
+      <Button type='primary'>View</Button>
     </Card>
   )
 }
+
+// const CourseItem: React.FC<ICourse> = (course) => {
+//   return (
+//     <div className='course-item'>
+//       <h3>{course.title}</h3>
+//       <p>{course.about}</p>
+//       {/* <div className='course-users'>
+//         {course.students.length ? (
+//           course.students.map((user) => (
+//             <CourseStudentItem userId={user} key={course._id + user} />
+//           ))
+//         ) : (
+//           <p>Пока никого :(</p>
+//         )}
+//       </div> */}
+//       <p>{course.price}</p>
+//     </div>
+//   )
+// }
 
 const Course = () => {
   const [courses, setCourses] = useState<ICourse[]>([])
@@ -98,7 +118,7 @@ const Course = () => {
   }
 
   return (
-    <Row gutter={[16, 16]}>
+    <Row>
       <Col xs={24} sm={24} md={6} lg={4} xl={4}>
         <CourseFilter onFilterChange={handleFilterChange} />
       </Col>

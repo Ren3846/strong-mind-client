@@ -59,8 +59,12 @@ const getUserDetailsAPI = () => API.get<UserDetails>('/user')
 
 // Функция для обновления данных пользователя
 const updateUserDetailsAPI = (body: UserDetails) =>
-  API.post('/user/details', body)
+  API.post('/user/profile', body)
 
+//
+//
+//
+//
 // Функция для создания заказа
 const createOrderAPI = (courseId: string) =>
   API.post<OrderData>('/user/orders/create', {

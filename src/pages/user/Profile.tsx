@@ -1,11 +1,15 @@
 import React, { useState, ChangeEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { message, Form, Input, Button, Row, Card } from 'antd'
-import { updateUserDetailsAPI } from '../../api/user' // Подключите функцию для обновления данных пользователя
-import Layout from '../../components/layout'
+import { message, Form, Input, Button, Row, Card, Avatar, Upload } from 'antd'
+import { updateUserDetailsAPI } from '../../api/user'
+import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
 
+import { UserOutlined } from '@ant-design/icons'
+import Breadcrumb from '../../components/user/Breadcrumb'
+
 const { Item } = Form
+const { Dragger } = Upload
 
 function Profile() {
   const user = useSelector((state: any) => state.auth.user)
@@ -43,6 +47,10 @@ function Profile() {
         <Card title='Profile' style={{ width: '60rem' }}>
           {loaded ? (
             <>
+              <Row justify='center'>
+                <Avatar size={120} icon={<UserOutlined />} />
+              </Row>
+
               <h3 style={{ color: 'red' }}>Role: {user.role}</h3>
 
               <Form layout='vertical'>
@@ -69,6 +77,24 @@ function Profile() {
                     value={editedUser.phone}
                     onChange={handleFieldChange}
                   />
+                </Item>
+                <Item label='Bio'>
+                  <Input.TextArea
+                    rows={4}
+                    name='description'
+                    value={editedUser.description}
+                    // onChange={handleFieldChange}
+                  />
+                </Item>
+                <Item label='Avatar'>
+                  <Dragger>
+                    <p className='ant-upload-drag-icon'>
+                      <UserOutlined />
+                    </p>
+                    <p className='ant-upload-text'>
+                      Click or drag file to this area to upload
+                    </p>
+                  </Dragger>
                 </Item>
                 <Item>
                   <Button type='primary' onClick={saveProfile}>
