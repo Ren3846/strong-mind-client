@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import Layout from '../../components/common/layout'
+import Layout from '../../components/common/Layout'
 import { Row, Card, Space } from 'antd'
 import Preloader from '../../components/common/Preloader'
 

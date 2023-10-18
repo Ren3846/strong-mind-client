@@ -1,4 +1,4 @@
-import Layout from '../../components/common/layout'
+import Layout from '../../components/common/Layout'
 import { Row } from 'antd'
 
 const Dashboard = () => {

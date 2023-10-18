@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Button, Row, Card, Space } from 'antd'
-import Layout from '../../components/common/layout'
+import Layout from '../../components/common/Layout'
 
 interface ITeacher {
   userId: string

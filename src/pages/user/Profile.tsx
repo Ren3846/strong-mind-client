@@ -2,7 +2,7 @@ import { useState, ChangeEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { message, Form, Input, Button, Row, Card, Avatar, Upload } from 'antd'
 import { updateUserDetailsAPI } from '../../api/user'
-import Layout from '../../components/common/layout'
+import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
 
 import { UserOutlined } from '@ant-design/icons'

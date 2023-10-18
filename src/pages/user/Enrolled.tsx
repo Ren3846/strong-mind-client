@@ -1,5 +1,5 @@
 import React from 'react'
-import Layout from '../../components/common/layout'
+import Layout from '../../components/common/Layout'
 import { Row } from 'antd'
 
 const Enrolled = () => {
