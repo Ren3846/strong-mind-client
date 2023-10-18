@@ -17,7 +17,9 @@ function Profile() {
 
   const [editedUser, setEditedUser] = useState({ ...user })
 
-  const handleFieldChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleFieldChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target
     setEditedUser({ ...editedUser, [name]: value })
   }
@@ -90,9 +92,9 @@ function Profile() {
                 <Item label='Bio'>
                   <Input.TextArea
                     rows={4}
-                    name='description'
+                    name='bio'
                     value={editedUser.bio}
-                    // onChange={handleFieldChange}
+                    onChange={handleFieldChange}
                   />
                 </Item>
                 <Item label='Gender'>
