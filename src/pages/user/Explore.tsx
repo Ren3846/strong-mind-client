@@ -47,51 +47,51 @@ const CourseStudentItem: React.FC<{
   return <div className='course-user' title={user?.email}></div>
 }
 
-const CourseItem: React.FC<ICourse> = (course) => {
-  return (
-    <Card
-      title={course.title}
-      extra={<span style={{ color: 'blue' }}>Price: {course.price} $</span>}
-      style={{ width: 370, margin: '16px' }}
-    >
-      <Paragraph>{course.about}</Paragraph>
-      <List
-        header={<div>Students</div>}
-        dataSource={course.students}
-        renderItem={(user) => (
-          <List.Item>
-            <Space>
-              <Avatar icon={<UserOutlined />} />
-              {course.students[0]}
-            </Space>
-          </List.Item>
-        )}
-      />
-      <Button type='primary'>View</Button>
-    </Card>
-  )
-}
-
 // const CourseItem: React.FC<ICourse> = (course) => {
 //   return (
-//     <div className='course-item'>
-//       <h3>{course.title}</h3>
-//       <p>{course.about}</p>
-//       {/* <div className='course-users'>
-//         {course.students.length ? (
-//           course.students.map((user) => (
-//             <CourseStudentItem userId={user} key={course._id + user} />
-//           ))
-//         ) : (
-//           <p>Пока никого :(</p>
+//     <Card
+//       title={course.title}
+//       extra={<span style={{ color: 'blue' }}>Price: {course.price} $</span>}
+//       style={{ width: 370, margin: '16px' }}
+//     >
+//       <Paragraph>{course.about}</Paragraph>
+//       <List
+//         header={<div>Students</div>}
+//         dataSource={course.students}
+//         renderItem={(user) => (
+//           <List.Item>
+//             <Space>
+//               <Avatar icon={<UserOutlined />} />
+//               {course.students[0]}
+//             </Space>
+//           </List.Item>
 //         )}
-//       </div> */}
-//       <p>{course.price}</p>
-//     </div>
+//       />
+//       <Button type='primary'>View</Button>
+//     </Card>
 //   )
 // }
 
-const Course = () => {
+const CourseItem: React.FC<ICourse> = (course) => {
+  return (
+    <div className='course-item'>
+      <h3>{course.title}</h3>
+      <p>{course.about}</p>
+      {/* <div className='course-users'>
+        {course.students.length ? (
+          course.students.map((user) => (
+            <CourseStudentItem userId={user} key={course._id + user} />
+          ))
+        ) : (
+          <p>Пока никого :(</p>
+        )}
+      </div> */}
+      <p>{course.price}</p>
+    </div>
+  )
+}
+
+const Explore = () => {
   const [courses, setCourses] = useState<ICourse[]>([])
   const [loaded, setLoaded] = useState(false)
   const [filter, setFilter] = useState('all')
@@ -156,4 +156,4 @@ const Course = () => {
   )
 }
 
-export default Course
+export default Explore
