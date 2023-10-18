@@ -1,6 +1,16 @@
 import { useState, ChangeEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { message, Form, Input, Button, Row, Card, Avatar, Upload } from 'antd'
+import {
+  message,
+  Form,
+  Input,
+  Button,
+  Row,
+  Card,
+  Avatar,
+  Upload,
+  Typography,
+} from 'antd'
 import { updateUserDetailsAPI } from '../../api/user'
 import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
@@ -10,6 +20,7 @@ import { updateUser } from '../../redux/actions/user'
 
 const { Item } = Form
 const { Dragger } = Upload
+const { Title } = Typography
 
 function Profile() {
   const user = useSelector((state: any) => state.auth.user)
@@ -53,15 +64,19 @@ function Profile() {
                 <Avatar size={120} icon={<UserOutlined />} />
               </Row>
 
-              <h3 style={{ color: 'red' }}>Role: {user.role}</h3>
-              <h3 style={{ color: 'red' }}>Balance: {user.balance}</h3>
+              <Title level={3} type='success'>
+                Role: {user.role}
+              </Title>
+              <Title level={3} type='warning'>
+                Balance: {user.balance}
+              </Title>
 
               <Form layout='vertical'>
                 <Item label='Full Name'>
                   <Input
                     type='text'
-                    name='username'
-                    value={editedUser.username}
+                    name='fullName'
+                    value={editedUser.fullName}
                     onChange={handleFieldChange}
                   />
                 </Item>
