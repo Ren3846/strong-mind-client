@@ -24,7 +24,7 @@ function Navbar() {
           children='Home'
         />
         <NavLink
-          to='/courses'
+          to='/explore'
           className={({ isActive }) =>
             `navbar-link ${isActive ? 'active' : ''}`
           }
@@ -36,14 +36,6 @@ function Navbar() {
             `navbar-link ${isActive ? 'active' : ''}`
           }
           children='Enrolled'
-        />
-
-        <NavLink
-          to='/meetings'
-          className={({ isActive }) =>
-            `navbar-link ${isActive ? 'active' : ''}`
-          }
-          children='Meetings'
         />
         <NavLink
           to='/profile'

@@ -72,24 +72,24 @@ const CourseStudentItem: React.FC<{
 //   )
 // }
 
-// const CourseItem: React.FC<ICourse> = (course) => {
-//   return (
-//     <div className='course-item'>
-//       <h3>{course.title}</h3>
-//       <p>{course.about}</p>
-//       {/* <div className='course-users'>
-//         {course.students.length ? (
-//           course.students.map((user) => (
-//             <CourseStudentItem userId={user} key={course._id + user} />
-//           ))
-//         ) : (
-//           <p>Пока никого :(</p>
-//         )}
-//       </div> */}
-//       <p>{course.price}</p>
-//     </div>
-//   )
-// }
+const CourseItem: React.FC<ICourse> = (course) => {
+  return (
+    <div className='course-item'>
+      <h3>{course.title}</h3>
+      <p>{course.about}</p>
+      {/* <div className='course-users'>
+        {course.students.length ? (
+          course.students.map((user) => (
+            <CourseStudentItem userId={user} key={course._id + user} />
+          ))
+        ) : (
+          <p>Пока никого :(</p>
+        )}
+      </div> */}
+      <p>{course.price}</p>
+    </div>
+  )
+}
 
 const Course = () => {
   const [courses, setCourses] = useState<ICourse[]>([])
