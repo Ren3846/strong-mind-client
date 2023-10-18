@@ -24,8 +24,12 @@ export interface UserDetails {
   id: string
   name: string
   email: string
-  phone?: string | undefined
-  fullName?: string | null | undefined
+  phone: string
+  fullName: string
+  bio: string
+  country: string
+  gender: string
+  balance: number
 }
 
 interface OrderData {
@@ -58,7 +62,8 @@ const enrollCourseAPI = (body: any) => API.post('/user/courses/enroll', body)
 const getUserDetailsAPI = () => API.get<UserDetails>('/user')
 
 // Функция для обновления данных пользователя
-const updateUserDetailsAPI = (body: UserDetails) => API.patch('/users', body)
+const updateUserDetailsAPI = (body: UserDetails) =>
+  API.patch('/users/profile', body)
 
 //
 //

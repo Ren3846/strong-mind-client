@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { message, Form, Input, Button, Row, Card, Avatar, Upload } from 'antd'
 import { updateUserDetailsAPI } from '../../api/user'
@@ -6,7 +6,6 @@ import Layout from '../../components/common/layout'
 import Preloader from '../../components/common/Preloader'
 
 import { UserOutlined } from '@ant-design/icons'
-import Breadcrumb from '../../components/user/Breadcrumb'
 import { updateUser } from '../../redux/actions/user'
 
 const { Item } = Form
@@ -31,6 +30,7 @@ function Profile() {
         dispatch(updateUser(response.data._id, response.data))
       })
       .catch((err) => {
+        message.error('Error Request', 3)
         console.error(err)
       })
       .finally(() => {
