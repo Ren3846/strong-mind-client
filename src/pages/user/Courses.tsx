@@ -40,6 +40,9 @@ const CourseStudentItem: React.FC<{
       .then(({ data }) => {
         setUser(data)
       })
+      .catch((error) => {
+        console.error(error)
+      })
       .finally(() => {
         setLoaded(true)
       })
@@ -94,9 +97,9 @@ const CourseItem: React.FC<ICourse> = (course) => {
           )}
         </div>
         <span>Price: {course.price} $</span>
-        <button key={course._id}>
+        <Button type='primary' key={course._id}>
           <Link to={course._id}>Explore</Link>
-        </button>
+        </Button>
       </Space>
     </div>
   )

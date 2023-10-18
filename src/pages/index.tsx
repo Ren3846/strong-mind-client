@@ -16,24 +16,26 @@ import { StoreType } from '../redux/store'
 import Navbar from '../components/user/Navbar'
 import TutorProfile from './tutor/TutorProfile'
 
-import {
-  USER,
-  EXPLORE,
-  SIGNIN,
-  SIGNUP,
-  COURSES,
-  USER_PROFILE,
-  USER_COURSES,
-  USER_TRANSACTIONS,
-  COURSES_ENROLLED,
-  COURSES_ENROLLED_ID,
-} from '../paths'
+// import {
+//   USER,
+//   EXPLORE,
+//   SIGNIN,
+//   SIGNUP,
+//   COURSES,
+//   USER_PROFILE,
+//   USER_COURSES,
+//   USER_TRANSACTIONS,
+//   COURSES_ENROLLED,
+//   COURSES_ENROLLED_ID,
+// } from '../paths'
+
 import { USER_ROLE, User } from '../redux/store/types'
 import Dashboard from './user/Dashboard'
 import Enrolled from './user/Enrolled'
 import Meetings from './user/Meetings'
 import Course from './user/Course'
 import Teachers from './user/Teachers'
+import TeacherProfile from './user/Teacher'
 
 interface IProtectedRoute {
   condition: boolean
@@ -121,9 +123,10 @@ const Router: React.FC<{}> = () => {
           />
 
           <Route path='/courses' element={<Courses />} />
-          <Route path='/teachers' element={<Teachers />} />
-
           <Route path='/courses/:id' element={<Course />} />
+
+          <Route path='/teachers' element={<Teachers />} />
+          <Route path='/teacher/:id' element={<TeacherProfile />} />
 
           <Route
             path='/profile'

@@ -1,7 +1,7 @@
-import { Card, Layout, Spin, Row, Button, Space } from 'antd'
+import { Card, Layout, Row, Space, Button } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Preloader from '../../components/common/Preloader'
 
 interface ICourse {
@@ -9,7 +9,6 @@ interface ICourse {
   title: string
   about: string
   price: number
-  students: string[]
   category: string
   difficulty: string
   tagline: string
@@ -25,38 +24,17 @@ const Course: React.FC<{}> = () => {
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    axios({
-      url: `/api/courses/${id}`,
-      method: 'get',
-    })
+    axios
+      .get(`/api/courses/${id}`)
       .then(({ data }) => {
         setCourse(data)
+        setLoaded(true)
       })
       .catch((error) => {
         console.error(error)
-      })
-      .finally(() => {
         setLoaded(true)
       })
   }, [id])
-
-  console.log(course)
-
-  useEffect(() => {
-    axios({
-      url: `/api/users/${id}`,
-      method: 'get',
-    })
-      .then(({ data }) => {
-        setCourse(data)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-      .finally(() => {
-        setLoaded(true)
-      })
-  }, [])
 
   return (
     <Layout>
@@ -66,11 +44,7 @@ const Course: React.FC<{}> = () => {
             <div>
               {course ? (
                 <>
-                  <Space
-                    direction='vertical'
-                    size='middle'
-                    style={{ display: 'flex' }}
-                  >
+                  <Space direction='vertical'>
                     <h2>{course.title}</h2>
                     <p>{course.about}</p>
                     <p>Price: {course.price} $</p>
@@ -87,7 +61,7 @@ const Course: React.FC<{}> = () => {
                     <Button type='primary' onClick={() => {}}>
                       Enroll
                     </Button>
-                    <a>{course.teacher}</a>
+                    <GetTeacherInfo userId={course.teacher} />
                   </Space>
                 </>
               ) : (
@@ -103,4 +77,29 @@ const Course: React.FC<{}> = () => {
   )
 }
 
+interface ITeacher {
+  userId: string
+  email: string
+}
+
+const GetTeacherInfo: React.FC<{ userId: string }> = ({ userId }) => {
+  const [teacher, setTeacher] = useState<ITeacher | null>(null)
+
+  useEffect(() => {
+    axios
+      .get(`/api/users/${userId}`)
+      .then(({ data }) => {
+        setTeacher(data)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }, [userId])
+
+  return (
+    <Link to={`/teacher/${userId}`}>
+      <Button>Teacher: {teacher?.email}</Button>
+    </Link>
+  )
+}
 export default Course
