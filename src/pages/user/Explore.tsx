@@ -113,10 +113,23 @@ const Course = () => {
       })
   }, [])
 
-  const handleFilterChange = (value: string) => {
-    setFilter(value)
-  }
+  const handleFilterChange = (filters: Record<string, string>) => {
+    setFilter(filter)
 
+    const filteredCourses = courses.filter((course) => {
+      if (filters.price !== 'all' && filters.price === 'free') {
+        return course.price === 0
+      }
+      if (filters.price !== 'all' && filters.price === 'paid') {
+        return course.price > 0
+      }
+      if (filters.category !== 'all') {
+        return false
+      }
+    })
+
+    setCourses(filteredCourses)
+  }
   return (
     <Row>
       <Col xs={24} sm={24} md={6} lg={4} xl={4}>

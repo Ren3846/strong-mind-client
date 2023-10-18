@@ -1,7 +1,12 @@
-import React from 'react'
+import Layout from '../../components/common/Layout'
+import { Row } from 'antd'
 
 const Dashboard = () => {
-  return <div>Dashboard</div>
+  return (
+    <Layout>
+      <Row>Dashboard</Row>
+    </Layout>
+  )
 }
 
 export default Dashboard

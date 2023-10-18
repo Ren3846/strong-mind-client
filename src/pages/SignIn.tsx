@@ -10,6 +10,7 @@ import {
   Space,
   Card,
 } from 'antd'
+import { MailOutlined, LockOutlined } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { userSignInAPI } from '../api/user'
 import { authLogin } from '../redux/actions/auth'
@@ -69,12 +70,13 @@ function SignIn() {
   return (
     <Layout>
       <Row align='middle' justify='center'>
-        <Card title='Sign in and explore' style={{ width: '30rem' }}>
+        <Card title='Sign in and explore' style={{ width: '35rem' }}>
           <Form
             form={form}
             name='signInForm'
             onFinish={handleSignIn}
-            className='space-y-6'
+            layout='vertical'
+            style={{ width: '30rem' }}
             action='#'
             method='POST'
           >
@@ -84,11 +86,20 @@ function SignIn() {
               rules={[
                 {
                   required: true,
-                  message: 'Please enter your email!',
+                  message: 'Please enter your email address',
+                },
+                {
+                  type: 'email',
+                  message: 'Please enter a valid email address',
                 },
               ]}
             >
-              <Input type='email' autoComplete='email' placeholder='Email' />
+              <Input
+                prefix={<MailOutlined />}
+                type='email'
+                autoComplete='email'
+                placeholder='Email'
+              />
             </Form.Item>
 
             <Form.Item
@@ -102,6 +113,7 @@ function SignIn() {
               ]}
             >
               <Input
+                prefix={<LockOutlined />}
                 type='password'
                 autoComplete='current-password'
                 placeholder='Password'
