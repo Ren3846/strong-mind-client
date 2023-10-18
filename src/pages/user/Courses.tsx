@@ -7,9 +7,10 @@ import { Typography, Row, Col, Card, List, Space, Avatar, Button } from 'antd'
 import CourseFilter from '../../components/user/CourseFilter'
 import { UserOutlined } from '@ant-design/icons'
 import CustomButton from '../../components/common/Button'
+import { Link } from 'react-router-dom'
 
 const { Title, Paragraph } = Typography
-interface ICourse {
+export interface ICourse {
   _id: string
   title: string
   about: string
@@ -44,7 +45,11 @@ const CourseStudentItem: React.FC<{
       })
   }, [userId])
 
-  return <div className='course-user' title={user?.email}></div>
+  return (
+    <div className='course-user' title={user?.email}>
+      <Avatar icon={<UserOutlined />} />
+    </div>
+  )
 }
 
 // const CourseItem: React.FC<ICourse> = (course) => {
@@ -73,20 +78,26 @@ const CourseStudentItem: React.FC<{
 // }
 
 const CourseItem: React.FC<ICourse> = (course) => {
+  console.log(course)
   return (
     <div className='course-item'>
-      <h3>{course.title}</h3>
-      <p>{course.about}</p>
-      <div className='course-users'>
-        {course.students.length ? (
-          course.students.map((user) => (
-            <CourseStudentItem userId={user} key={course._id + user} />
-          ))
-        ) : (
-          <p>Пока никого :(</p>
-        )}
-      </div>
-      <p>{course.price}</p>
+      <Space direction='vertical' size='middle' style={{ display: 'flex' }}>
+        <h3>{course.title}</h3>
+        <p>{course.about}</p>
+        <div className='course-users'>
+          {course.students.length ? (
+            course.students.map((user) => (
+              <CourseStudentItem userId={user} key={course._id + user} />
+            ))
+          ) : (
+            <p>Пока никого :(</p>
+          )}
+        </div>
+        <span>Price: {course.price} $</span>
+        <button key={course._id}>
+          <Link to={course._id}>Explore</Link>
+        </button>
+      </Space>
     </div>
   )
 }

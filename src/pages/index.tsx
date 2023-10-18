@@ -123,7 +123,8 @@ const Router: React.FC<{}> = () => {
           <Route path='/courses' element={<Courses />} />
           <Route path='/teachers' element={<Teachers />} />
 
-          <Route path='/course/:id' element={<Course />} />
+          <Route path='/courses/:id' element={<Course />} />
+
           <Route
             path='/profile'
             element={
