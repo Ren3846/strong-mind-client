@@ -12,6 +12,8 @@ export interface User {
   username: string
   phone: string
   country: string | null
+  bio: string
+  gender: string
 }
 
 export interface AdminUser {

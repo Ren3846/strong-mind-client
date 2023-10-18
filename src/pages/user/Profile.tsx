@@ -32,7 +32,6 @@ function Profile() {
       })
       .catch((err) => {
         console.error(err)
-        // message.error(err?.response.errors.message)
       })
       .finally(() => {
         setLoaded(true)
@@ -53,9 +52,10 @@ function Profile() {
               </Row>
 
               <h3 style={{ color: 'red' }}>Role: {user.role}</h3>
+              <h3 style={{ color: 'red' }}>Balance: {user.balance}</h3>
 
               <Form layout='vertical'>
-                <Item label='Username'>
+                <Item label='Full Name'>
                   <Input
                     type='text'
                     name='username'
@@ -79,12 +79,28 @@ function Profile() {
                     onChange={handleFieldChange}
                   />
                 </Item>
+                <Item label='Country'>
+                  <Input
+                    type='text'
+                    name='country'
+                    value={editedUser.country}
+                    onChange={handleFieldChange}
+                  />
+                </Item>
                 <Item label='Bio'>
                   <Input.TextArea
                     rows={4}
                     name='description'
-                    value={editedUser.description}
+                    value={editedUser.bio}
                     // onChange={handleFieldChange}
+                  />
+                </Item>
+                <Item label='Gender'>
+                  <Input
+                    type='text'
+                    name='gender'
+                    value={editedUser.gender}
+                    onChange={handleFieldChange}
                   />
                 </Item>
                 <Item label='Avatar'>
