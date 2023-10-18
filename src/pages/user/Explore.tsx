@@ -47,30 +47,30 @@ const CourseStudentItem: React.FC<{
   return <div className='course-user' title={user?.email}></div>
 }
 
-const CourseItem: React.FC<ICourse> = (course) => {
-  return (
-    <Card
-      title={course.title}
-      extra={<span style={{ color: 'blue' }}>Price: {course.price} $</span>}
-      style={{ width: 370, margin: '16px' }}
-    >
-      <Paragraph>{course.about}</Paragraph>
-      <List
-        header={<div>Students</div>}
-        dataSource={course.students}
-        renderItem={(user) => (
-          <List.Item>
-            <Space>
-              <Avatar icon={<UserOutlined />} />
-              {course.students[0]}
-            </Space>
-          </List.Item>
-        )}
-      />
-      <Button type='primary'>View</Button>
-    </Card>
-  )
-}
+// const CourseItem: React.FC<ICourse> = (course) => {
+//   return (
+//     <Card
+//       title={course.title}
+//       extra={<span style={{ color: 'blue' }}>Price: {course.price} $</span>}
+//       style={{ width: 370, margin: '16px' }}
+//     >
+//       <Paragraph>{course.about}</Paragraph>
+//       <List
+//         header={<div>Students</div>}
+//         dataSource={course.students}
+//         renderItem={(user) => (
+//           <List.Item>
+//             <Space>
+//               <Avatar icon={<UserOutlined />} />
+//               {course.students[0]}
+//             </Space>
+//           </List.Item>
+//         )}
+//       />
+//       <Button type='primary'>View</Button>
+//     </Card>
+//   )
+// }
 
 // const CourseItem: React.FC<ICourse> = (course) => {
 //   return (

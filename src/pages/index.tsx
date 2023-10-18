@@ -14,6 +14,7 @@ import NotFound from './NotFound'
 import { useSelector } from 'react-redux'
 import { StoreType } from '../redux/store'
 import Navbar from '../components/user/Navbar'
+import TutorProfile from './tutor/TutorProfile'
 
 import {
   USER,
@@ -136,7 +137,7 @@ const Router: React.FC<{}> = () => {
                   isAuthenticated && currentUser.role === USER_ROLE.TEACHER
                 }
                 redirect='/profile'
-                children={<Profile />}
+                children={<TutorProfile />}
               />
             }
           />

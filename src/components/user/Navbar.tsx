@@ -24,7 +24,7 @@ function Navbar() {
           children='Home'
         />
         <NavLink
-          to='/explore'
+          to='/courses'
           className={({ isActive }) =>
             `navbar-link ${isActive ? 'active' : ''}`
           }
