@@ -3,8 +3,6 @@ import { Card, Layout, Row, Typography } from 'antd'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
-const { Title, Paragraph, Text } = Typography
-
 const CourseDetails: React.FC = () => {
   const { id } = useParams()
 
@@ -27,11 +25,11 @@ const CourseDetails: React.FC = () => {
       <Row align='middle' justify='center'>
         <h4>{id}</h4>
         <div>
-          <h1>{course.title}</h1>
+          {/* <h1>{course.title}</h1>
           <p>{course.about}</p>
           <p>Category: {course.category}</p>
           <p>Difficulty: {course.difficulty}</p>
-          <p>Price: ${course.price}</p>
+          <p>Price: ${course.price}</p> */}
         </div>
       </Row>
     </Layout>
