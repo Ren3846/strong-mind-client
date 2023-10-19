@@ -51,13 +51,13 @@ function Navbar() {
           }
           children='Meetings'
         />
-        <NavLink
+        {/* <NavLink
           to='/profile'
           className={({ isActive }) =>
             `navbar-link ${isActive ? 'active' : ''}`
           }
           children='Profile'
-        />
+        /> */}
       </nav>
       <div
         style={{
