@@ -3,20 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { StoreType } from '../../redux/store'
 import Preloader from '../../components/common/Preloader'
-import {
-  Typography,
-  Row,
-  Col,
-  Card,
-  List,
-  Space,
-  Avatar,
-  Button,
-  Divider,
-} from 'antd'
+import { Typography, Row, Col, Space, Avatar, Button, Divider } from 'antd'
 import CourseFilter from '../../components/user/CourseFilter'
 import { UserOutlined } from '@ant-design/icons'
-import CustomButton from '../../components/common/Button'
 import { Link } from 'react-router-dom'
 
 const { Title, Paragraph } = Typography

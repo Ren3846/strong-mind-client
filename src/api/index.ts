@@ -21,30 +21,18 @@ API.interceptors.response.use(
   },
   (error) => {
     console.log(error)
-    if (
-      error?.code === 'ERR_NETWORK' ||
-      error?.code === 'ERR_BAD_RESPONSE'
-    ) {
-      message.error(
-        'Oops! It seems that the server is not connected',
-      )
+    if (error?.code === 'ERR_NETWORK' || error?.code === 'ERR_BAD_RESPONSE') {
+      message.error('Oops! It seems that the server is not connected')
     }
-    if (
-      error?.response?.data?.err?.name ===
-      'TokenMissingError'
-    ) {
+    if (error?.response?.data?.err?.name === 'TokenMissingError') {
       console.log('Token Missing')
       removeLocalAuth()
       window.location.href = '/signin'
     }
-    if (
-      error?.response?.data?.err?.name ===
-      'TokenExpiredError'
-    ) {
+    if (error?.response?.data?.err?.name === 'TokenExpiredError') {
       console.log('Token expired')
       removeLocalAuth()
-      window.location.href =
-        '/signin?expired=true'
+      window.location.href = '/signin?expired=true'
     }
     return Promise.reject(error)
   },

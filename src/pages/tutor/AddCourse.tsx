@@ -18,7 +18,7 @@ const CreateCourse: React.FC = () => {
 
   const handleCreate = (values: any) => {
     axios
-      .post('/api/courses/', values)
+      .post('/api/courses', values)
       .then((response) => {
         message.success('Course created successfully')
         form.resetFields()
@@ -55,9 +55,9 @@ const CreateCourse: React.FC = () => {
             rules={[{ required: true, message: 'Select a category' }]}
           >
             <Select>
-              <Option value='Literature'>Literature</Option>
-              <Option value='Mathematics'>Mathematics</Option>
-              <Option value='Science'>Science</Option>
+              <Option value='English'>English</Option>
+              <Option value='Russian'>russian</Option>
+              <Option value='Armenian'>Armenian</Option>
             </Select>
           </Form.Item>
           <Form.Item
@@ -66,9 +66,12 @@ const CreateCourse: React.FC = () => {
             rules={[{ required: true, message: 'Select a difficulty level' }]}
           >
             <Select>
+              <Option value='A1'>A1</Option>
+              <Option value='A2'>A2</Option>
+              <Option value='B1'>B1</Option>
+              <Option value='B2'>B2</Option>
               <Option value='C1'>C1</Option>
               <Option value='C2'>C2</Option>
-              <Option value='Advanced'>Advanced</Option>
             </Select>
           </Form.Item>
           <Form.Item

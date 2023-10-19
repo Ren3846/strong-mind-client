@@ -22,4 +22,10 @@ const verifyFirebaseSignIn = (token: any) => {
   })
 }
 
-export { getAllCoursesAPI, getLessonDetailsAPI, getAllCourseByQuery, getAllCategoriesAPI, verifyFirebaseSignIn }
+export {
+  getAllCoursesAPI,
+  getLessonDetailsAPI,
+  getAllCourseByQuery,
+  getAllCategoriesAPI,
+  verifyFirebaseSignIn,
+}
