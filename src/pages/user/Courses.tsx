@@ -3,7 +3,17 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { StoreType } from '../../redux/store'
 import Preloader from '../../components/common/Preloader'
-import { Typography, Row, Col, Card, List, Space, Avatar, Button } from 'antd'
+import {
+  Typography,
+  Row,
+  Col,
+  Card,
+  List,
+  Space,
+  Avatar,
+  Button,
+  Divider,
+} from 'antd'
 import CourseFilter from '../../components/user/CourseFilter'
 import { UserOutlined } from '@ant-design/icons'
 import CustomButton from '../../components/common/Button'
@@ -21,7 +31,7 @@ export interface ICourse {
 interface IUser {
   _id: string
   email: string
-  username: string
+  fullName: string
   role: 'user' | 'teacher' | 'admin'
   balance: number
 }
@@ -49,36 +59,11 @@ const CourseStudentItem: React.FC<{
   }, [userId])
 
   return (
-    <div className='course-user' title={user?.email}>
+    <div className='course-user' title={user?.email} style={{ margin: '5px' }}>
       <Avatar icon={<UserOutlined />} />
     </div>
   )
 }
-
-// const CourseItem: React.FC<ICourse> = (course) => {
-//   return (
-//     <Card
-//       title={course.title}
-//       extra={<span style={{ color: 'blue' }}>Price: {course.price} $</span>}
-//       style={{ width: 370, margin: '16px' }}
-//     >
-//       <Paragraph>{course.about}</Paragraph>
-//       <List
-//         header={<div>Students</div>}
-//         dataSource={course.students}
-//         renderItem={(user) => (
-//           <List.Item>
-//             <Space>
-//               <Avatar icon={<UserOutlined />} />
-//               {course.students[0]}
-//             </Space>
-//           </List.Item>
-//         )}
-//       />
-//       <Button type='primary'>View</Button>
-//     </Card>
-//   )
-// }
 
 const CourseItem: React.FC<ICourse> = (course) => {
   console.log(course)

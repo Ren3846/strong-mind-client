@@ -53,11 +53,11 @@ function TutorProfile() {
               <h3 style={{ color: 'red' }}>Role: {user.role}</h3>
 
               <Form layout='vertical'>
-                <Item label='Username'>
+                <Item label='fullName'>
                   <Input
                     type='text'
-                    name='username'
-                    value={editedUser.username}
+                    name='fullName'
+                    value={editedUser.fullName}
                     onChange={handleFieldChange}
                   />
                 </Item>

@@ -9,21 +9,15 @@ export interface User {
   email: string
   balance: number
   role: USER_ROLE
-  username: string
-  phone: string
-  country: string | null
-  bio: string
-  gender: string
   fullName: string
+  phone: string
+  country: string
+  bio: string | null
+  gender: string | null
+  timezone: string | null
 }
 
 export interface AdminUser {
-  username: string
+  fullName: string
   role: 'admin'
-}
-
-export interface Partner {
-  _id: string
-  username: string
-  interest: number
 }

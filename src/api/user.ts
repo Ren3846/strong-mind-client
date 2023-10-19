@@ -1,4 +1,6 @@
 import API from './index'
+import { USER_ROLE } from '../redux/store/types'
+import { User } from '../redux/store/types'
 
 export interface UserData {}
 
@@ -8,28 +10,18 @@ interface SignInBody {
 }
 
 interface SignUpBody {
-  username: string
+  fullName: string
   phone: string
   email: string
   password: string
+  country: string
+  role: USER_ROLE
 }
 
 interface CourseDetails {
   id: string
   title: string
   description: string
-}
-
-export interface UserDetails {
-  id: string
-  name: string
-  email: string
-  phone: string
-  fullName: string
-  bio: string
-  country: string
-  gender: string
-  balance: number
 }
 
 interface OrderData {
@@ -59,11 +51,10 @@ const getCourseDetailsAPI = (id: string, route = '/user/courses/enroll/') =>
 const enrollCourseAPI = (body: any) => API.post('/user/courses/enroll', body)
 
 // Функция для получения данных пользователя
-const getUserDetailsAPI = () => API.get<UserDetails>('/user')
+const getUserDetailsAPI = () => API.get<User>('/user')
 
 // Функция для обновления данных пользователя
-const updateUserDetailsAPI = (body: UserDetails) =>
-  API.patch('/users/profile', body)
+const updateUserDetailsAPI = (body: User) => API.patch('/users/profile', body)
 
 //
 //

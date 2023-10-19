@@ -3,12 +3,13 @@ import axios from 'axios'
 import Layout from '../../components/common/Layout'
 import { Row, Card, Space } from 'antd'
 import Preloader from '../../components/common/Preloader'
+import { Link } from 'react-router-dom'
 
 interface ITeacher {
   _id: string
   email: string
   password: string
-  username: string
+  fullName: string
   phone: string
   isBlocked: boolean
   students: string[]
@@ -27,7 +28,7 @@ const Teachers: React.FC = () => {
     axios
       .get<ITeacher[]>('/api/users/top')
       .then((response) => {
-        console.log(response)
+        console.log(response.data)
         setTopTeachers(response.data)
       })
       .catch((error) => {
@@ -43,16 +44,20 @@ const Teachers: React.FC = () => {
       <Row align='middle' justify='center'>
         <Card
           title={`Top 5 tutors`}
-          style={{ width: '60rem', padding: '20px' }}
+          style={{ width: '80rem', padding: '20px' }}
         >
           {loaded ? (
-            <ul>
+            <Space direction='horizontal'>
               {topTeachers.map((teacher, index) => (
-                <li key={teacher._id}>
-                  {index + 1}. {teacher.username}
-                </li>
+                <Card key={teacher._id} title={teacher.fullName}>
+                  <p>Email: {teacher.email}</p>
+                  {/* <p>Phone: {teacher.phone}</p>
+                  <p>Balance: {teacher.balance}</p> */}
+                  <p>Students: {teacher.students.length}</p>
+                  <Link to={`/teacher/${teacher._id}`}>View Details</Link>
+                </Card>
               ))}
-            </ul>
+            </Space>
           ) : (
             <Preloader />
           )}

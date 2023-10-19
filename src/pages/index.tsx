@@ -36,6 +36,8 @@ import Meetings from './user/Meetings'
 import Course from './user/Course'
 import Teachers from './user/Teachers'
 import TeacherProfile from './user/Teacher'
+import MyCourses from './tutor/MyCourses'
+import CreateCourse from './tutor/AddCourse'
 
 interface IProtectedRoute {
   condition: boolean
@@ -123,6 +125,7 @@ const Router: React.FC<{}> = () => {
           />
 
           <Route path='/courses' element={<Courses />} />
+
           <Route path='/courses/:id' element={<Course />} />
 
           <Route path='/teachers' element={<Teachers />} />
@@ -139,17 +142,30 @@ const Router: React.FC<{}> = () => {
             }
           />
           <Route
-            path='/tutor-test'
+            path='/mycourses'
             element={
               <ProtectedRoute
                 condition={
                   isAuthenticated && currentUser.role === USER_ROLE.TEACHER
                 }
                 redirect='/profile'
-                children={<TutorProfile />}
+                children={<MyCourses />}
               />
             }
           />
+          <Route
+            path='/mycourses/addcourse'
+            element={
+              <ProtectedRoute
+                condition={
+                  isAuthenticated && currentUser.role === USER_ROLE.TEACHER
+                }
+                redirect='/profile'
+                children={<CreateCourse />}
+              />
+            }
+          />
+
           <Route path='*' element={<NotFound />} />
         </Routes>
       </>

@@ -1,5 +1,6 @@
 import { useState, ChangeEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+
 import {
   message,
   Form,
@@ -10,6 +11,10 @@ import {
   Avatar,
   Upload,
   Typography,
+  Statistic,
+  Col,
+  Space,
+  Divider,
 } from 'antd'
 import { updateUserDetailsAPI } from '../../api/user'
 import Layout from '../../components/common/Layout'
@@ -26,6 +31,7 @@ function Profile() {
   const user = useSelector((state: any) => state.auth.user)
   const dispatch = useDispatch()
 
+  const [loaded, setLoaded] = useState(true)
   const [editedUser, setEditedUser] = useState({ ...user })
 
   const handleFieldChange = (
@@ -50,7 +56,6 @@ function Profile() {
         setLoaded(true)
       })
   }
-  const [loaded, setLoaded] = useState(true)
 
   console.log(user)
 
@@ -64,27 +69,38 @@ function Profile() {
                 <Avatar size={120} icon={<UserOutlined />} />
               </Row>
 
-              <Title level={3} type='success'>
-                Role: {user.role}
-              </Title>
-              <Title level={3} type='warning'>
-                Balance: {user.balance}
-              </Title>
+              <Divider />
+              <Row gutter={16}>
+                <Col span={12}>
+                  <Statistic title='User Role' value={user.role} />
+                </Col>
+                <Col span={12}>
+                  <Statistic
+                    title='Account Balance ($)'
+                    value={user.balance}
+                    precision={2}
+                  />
+                </Col>
+              </Row>
+              <Divider />
 
               <Form layout='vertical'>
+                <Item label='Email'>
+                  <Input
+                    disabled
+                    type='text'
+                    name='email'
+                    value={editedUser.email}
+                    onChange={handleFieldChange}
+                  />
+                </Item>
+                <Divider />
+
                 <Item label='Full Name'>
                   <Input
                     type='text'
                     name='fullName'
                     value={editedUser.fullName}
-                    onChange={handleFieldChange}
-                  />
-                </Item>
-                <Item label='Email'>
-                  <Input
-                    type='text'
-                    name='email'
-                    value={editedUser.email}
                     onChange={handleFieldChange}
                   />
                 </Item>
@@ -120,6 +136,16 @@ function Profile() {
                     onChange={handleFieldChange}
                   />
                 </Item>
+                <Item label='Timezone'>
+                  <Input
+                    type='text'
+                    name='timezone'
+                    value={editedUser.timezone}
+                    onChange={handleFieldChange}
+                  />
+                </Item>
+                <Divider />
+
                 <Item label='Avatar'>
                   <Dragger>
                     <p className='ant-upload-drag-icon'>

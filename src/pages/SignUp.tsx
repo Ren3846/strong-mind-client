@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { USER_ROLE } from '../redux/store/types'
 import {
   Row,
   Form,
@@ -21,6 +22,8 @@ import {
 } from '@ant-design/icons'
 import { userSignUpAPI } from '../api/user'
 import Layout from '../components/common/Layout'
+import { authLogin } from '../redux/actions/auth'
+import { useDispatch } from 'react-redux'
 
 const { Option } = Select
 const { Text } = Typography
@@ -43,20 +46,23 @@ function SignUp() {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const dispatch = useDispatch()
 
   const handleSignUp = (values: any) => {
     setIsLoading(true)
     const userData = {
-      username: values.username,
+      fullName: values.fullName,
       email: values.email,
       password: values.password,
       phone: values.phone,
+      country: values.country,
+      role: values.role,
     }
 
     userSignUpAPI(userData)
-      .then(() => {
+      .then((res) => {
         setIsLoading(false)
-        navigate('../signin?new=true')
+        dispatch(authLogin(res.data.user))
       })
       .catch((err) => {
         setIsLoading(false)
@@ -78,7 +84,7 @@ function SignUp() {
             style={{ width: '30rem' }}
           >
             <Form.Item
-              name='username'
+              name='fullName'
               label='Full name'
               rules={[
                 {
@@ -118,6 +124,19 @@ function SignUp() {
               ]}
             >
               <Input prefix={<MailOutlined />} type='email' />
+            </Form.Item>
+
+            <Form.Item
+              name='country'
+              label='Country'
+              rules={[
+                {
+                  required: true,
+                  message: 'Please enter your country',
+                },
+              ]}
+            >
+              <Input />
             </Form.Item>
 
             {/* <Form.Item
@@ -183,8 +202,8 @@ function SignUp() {
               rules={[{ required: true, message: 'Please select role!' }]}
             >
               <Select placeholder='Select your role'>
-                <Option value='tutor'>Tutor</Option>
-                <Option value='student'>Student</Option>
+                <Option value={USER_ROLE.TEACHER}>Tutor</Option>
+                <Option value={USER_ROLE.USER}>Student</Option>
               </Select>
             </Form.Item>
             <Form.Item

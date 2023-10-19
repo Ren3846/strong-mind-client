@@ -38,6 +38,7 @@ const CourseFilter: React.FC<{
             </Select>
           </Panel>
         </Collapse>
+
         <Collapse ghost>
           <Panel header='Category Filter' key='2'>
             <Select
