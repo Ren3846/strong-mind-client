@@ -11,7 +11,7 @@ type Props = {
 const Layout = ({ children }: Props) => {
   return (
     <div className='layout-custom '>
-      <AntLayout.Content style={{ height: '100vh', padding: '25px' }}>
+      <AntLayout.Content style={{ height: '100%', padding: '25px' }}>
         {children}
       </AntLayout.Content>
 
