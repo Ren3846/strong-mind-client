@@ -35,7 +35,6 @@ const CourseDetails: React.FC = () => {
           <p>Category: {course.category}</p>
           <p>Difficulty: {course.difficulty}</p>
           <p>Price: ${course.price}</p>
-          {/* Добавьте остальную информацию о курсе по вашему усмотрению */}
         </div>
       </Card>
     </Row>
