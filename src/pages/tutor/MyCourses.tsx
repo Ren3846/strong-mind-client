@@ -27,6 +27,7 @@ const MyCourses: React.FC = () => {
   const [data, setData] = useState<ICourse[]>([])
   const [loaded, setLoaded] = useState(false)
   const dispatch = useDispatch()
+  const courses = useSelector((state: any) => state.courses)
 
   useEffect(() => {
     axios
@@ -63,28 +64,28 @@ const MyCourses: React.FC = () => {
       <Card title='My courses' style={{ width: '60rem' }}>
         {loaded ? (
           <ul>
-            {data.map((item) => (
-              <Card style={{ margin: '20px' }}>
-                <Space>
-                  <Link to={item._id}>
-                    <li key={item._id}>{item.title}</li>
-                  </Link>
-                  <Divider type='vertical' />
-                  <Button
-                    type='primary'
-                    danger
-                    icon={<DeleteOutlined />}
-                    onClick={() => handleDeleteCourse(item._id)}
-                  />
-
-                  <Link to={item._id}>
-                    <Button type='primary' icon={<SearchOutlined />} />
-                  </Link>
-
-                  <Button type='default' icon={<EditOutlined />} />
-                </Space>
-              </Card>
-            ))}
+            {data.map((item) =>
+              item ? (
+                <Card style={{ margin: '20px' }}>
+                  <Space>
+                    <Link to={item._id}>
+                      <li key={item._id}>{item.title}</li>
+                    </Link>
+                    <Divider type='vertical' />
+                    <Button
+                      type='primary'
+                      danger
+                      icon={<DeleteOutlined />}
+                      onClick={() => handleDeleteCourse(item._id)}
+                    />
+                    <Link to={item._id}>
+                      <Button type='primary' icon={<SearchOutlined />} />
+                    </Link>
+                    <Button type='default' icon={<EditOutlined />} />
+                  </Space>
+                </Card>
+              ) : null,
+            )}
           </ul>
         ) : (
           <Preloader />
