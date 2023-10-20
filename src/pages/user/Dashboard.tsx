@@ -59,7 +59,7 @@ const Dashboard = () => {
           </Card>
         </Col>
         <Col span={12}>
-          <Card title='Top Teachers'></Card>
+          <Card title='Top Teachers'>
             {loadingTeachers ? (
               <p>Loading...</p>
             ) : (
