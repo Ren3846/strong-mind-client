@@ -7,6 +7,7 @@ import { Typography, Row, Col, Space, Avatar, Button, Divider } from 'antd'
 import CourseFilter from '../../components/user/CourseFilter'
 import { UserOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
+import Layout from '../../components/common/Layout'
 
 const { Title, Paragraph } = Typography
 export interface ICourse {
@@ -57,7 +58,7 @@ const CourseStudentItem: React.FC<{
 const CourseItem: React.FC<ICourse> = (course) => {
   console.log(course)
   return (
-    <div className='course-item'>
+    <div className='course-item course-card'>
       <Space direction='vertical' size='middle' style={{ display: 'flex' }}>
         <h3>{course.title}</h3>
         <p>{course.about}</p>
@@ -119,28 +120,30 @@ const Courses = () => {
     setCourses(filteredCourses)
   }
   return (
-    <Row>
-      <Col xs={24} sm={24} md={6} lg={4} xl={4}>
-        <CourseFilter onFilterChange={handleFilterChange} />
-      </Col>
-      <Col xs={24} sm={24} md={18} lg={18} xl={18}>
-        <div>
-          {loaded ? (
-            <div className='courses-wrapper'>
-              {courses.length ? (
-                courses.map((course) => (
-                  <CourseItem {...course} key={course._id} />
-                ))
-              ) : (
-                <p>Нет курсов :(</p>
-              )}
-            </div>
-          ) : (
-            <Preloader />
-          )}
-        </div>
-      </Col>
-    </Row>
+    <Layout>
+      <Row>
+        <Col xs={24} sm={24} md={6} lg={4} xl={4}>
+          <CourseFilter onFilterChange={handleFilterChange} />
+        </Col>
+        <Col xs={24} sm={24} md={18} lg={18} xl={18}>
+          <div>
+            {loaded ? (
+              <div className='courses-wrapper'>
+                {courses.length ? (
+                  courses.map((course) => (
+                    <CourseItem {...course} key={course._id} />
+                  ))
+                ) : (
+                  <p>Нет курсов :(</p>
+                )}
+              </div>
+            ) : (
+              <Preloader />
+            )}
+          </div>
+        </Col>
+      </Row>
+    </Layout>
   )
 }
 

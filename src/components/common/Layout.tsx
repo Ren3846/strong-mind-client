@@ -2,6 +2,7 @@ import { Layout as AntLayout } from 'antd'
 
 import { QuestionCircleOutlined } from '@ant-design/icons'
 import { FloatButton } from 'antd'
+import Footer from '../landing/Footer'
 
 type Props = {
   children: React.ReactNode
@@ -19,6 +20,7 @@ const Layout = ({ children }: Props) => {
         type='primary'
         style={{ right: 24 }}
       />
+      <Footer />
     </div>
   )
 }
