@@ -15,6 +15,7 @@ import {
   Col,
   Space,
   Divider,
+  Select,
 } from 'antd'
 import { updateUserDetailsAPI } from '../../api/user'
 import Layout from '../../components/common/Layout'
@@ -26,6 +27,23 @@ import { updateUser } from '../../redux/actions/user'
 const { Item } = Form
 const { Dragger } = Upload
 const { Title } = Typography
+
+const genderOptions = [
+  'Male',
+  'Female',
+  'Non-binary',
+  'Other',
+  'Transgender Male',
+  'Transgender Female',
+  'Genderfluid',
+  'Agender',
+  'Bigender',
+  'Demiboy',
+  'Demigirl',
+  'Intersex',
+  'Polygender',
+  'Not Specified',
+]
 
 function Profile() {
   const user = useSelector((state: any) => state.auth.user)
@@ -128,6 +146,7 @@ function Profile() {
                     onChange={handleFieldChange}
                   />
                 </Item>
+
                 <Item label='Gender'>
                   <Input
                     type='text'
@@ -136,6 +155,21 @@ function Profile() {
                     onChange={handleFieldChange}
                   />
                 </Item>
+
+                {/* <Item label='Gender' name='gender'>
+                  <Select
+                    style={{ width: 200 }}
+                    onChange={handleFieldChange}
+                    placeholder='Select a gender'
+                  >
+                    {genderOptions.map((gender, index) => (
+                      <Select.Option key={index} value={gender}>
+                        {gender}
+                      </Select.Option>
+                    ))}
+                  </Select>
+                </Item> */}
+
                 <Item label='Timezone'>
                   <Input
                     type='text'

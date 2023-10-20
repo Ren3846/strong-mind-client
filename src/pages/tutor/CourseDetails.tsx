@@ -3,6 +3,7 @@ import { Card, Row, Typography } from 'antd'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import Layout from 'antd/es/layout/layout'
+import Preloader from '../../components/common/Preloader'
 
 const { Title, Paragraph, Text } = Typography
 
@@ -24,7 +25,7 @@ const CourseDetails: React.FC = () => {
   }, [id])
 
   if (!course) {
-    return <div>Loading...</div>
+    return <Preloader />
   }
 
   return (

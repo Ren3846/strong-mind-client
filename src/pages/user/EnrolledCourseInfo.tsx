@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Layout from 'antd/es/layout/layout'
-import { Card, Row, Descriptions } from 'antd'
+import { Card, Row, Descriptions, Avatar } from 'antd'
 import { useParams } from 'react-router-dom'
 import Shedule from '../../components/user/Shedule'
+import Preloader from '../../components/common/Preloader'
+import { UserOutlined } from '@ant-design/icons'
 
 interface ICourseInfo {
   _id: string
@@ -20,9 +22,24 @@ interface ICourseInfo {
   lessons: string[]
   __v: number
 }
+interface ITeacher {
+  _id: string
+  email: string
+  fullName: string
+  phone: string
+  isBlocked: boolean
+  students: string[]
+  liveLessonSchedule: any[]
+  balance: number
+  history: any[]
+  courses: string[]
+  meetings: any[]
+}
 
 const CourseInfo: React.FC = () => {
   const [courseInfo, setCourseInfo] = useState<ICourseInfo | null>(null)
+  const [teacher, setTeacher] = useState<ITeacher | null>(null)
+
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const { id } = useParams()
@@ -47,7 +64,7 @@ const CourseInfo: React.FC = () => {
   }, [])
 
   if (loading) {
-    return <div>Loading...</div>
+    return <Preloader />
   }
 
   return (
@@ -78,7 +95,7 @@ const CourseInfo: React.FC = () => {
                 {courseInfo.isVisible ? 'Yes' : 'No'}
               </Descriptions.Item>
               <Descriptions.Item label='Teacher'>
-                {courseInfo.teacher}
+                <GetTeacher userId={courseInfo.teacher} />
               </Descriptions.Item>
             </Descriptions>
           ) : (
@@ -94,6 +111,31 @@ const CourseInfo: React.FC = () => {
       </Card>
     </Row>
   )
+}
+
+const GetTeacher: React.FC<{
+  userId: string
+}> = ({ userId }) => {
+  const [user, setUser] = useState<ITeacher | null>(null)
+  const [loaded, setLoaded] = useState(false)
+
+  useEffect(() => {
+    axios({
+      url: `/api/users/${userId}`,
+      method: 'get',
+    })
+      .then(({ data }) => {
+        setUser(data)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+      .finally(() => {
+        setLoaded(true)
+      })
+  }, [userId])
+
+  return <div>{user?.email}</div>
 }
 
 export default CourseInfo

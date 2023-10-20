@@ -3,6 +3,7 @@ import axios from 'axios'
 import Layout from 'antd/es/layout/layout'
 import { Card, Row, Col, Button, Descriptions, Divider } from 'antd'
 import { Link } from 'react-router-dom'
+import Preloader from '../../components/common/Preloader'
 
 interface ICourse {
   _id: string
@@ -41,10 +42,10 @@ const Enrolled: React.FC = () => {
   const [error, setError] = useState('')
 
   useEffect(() => {
-    // Загрузка данных о курсах, на которые пользователь записан
     axios
       .get('/api/courses/user/enrolled')
       .then((response) => {
+        console.log(response.data)
         setEnrolledCourses(response.data)
       })
       .catch((err) => {
@@ -57,20 +58,10 @@ const Enrolled: React.FC = () => {
       .finally(() => {
         setLoading(false)
       })
-
-    // Загрузка данных о учителе по ID
-    axios
-      .get('/api/users/6531195da30e3b7a94bc7492')
-      .then((response) => {
-        setTeacher(response.data)
-      })
-      .catch((err) => {
-        console.error(err)
-      })
   }, [])
 
   if (loading) {
-    return <div>Loading...</div>
+    return <Preloader />
   }
 
   return (
@@ -103,19 +94,13 @@ const Enrolled: React.FC = () => {
                       </Descriptions.Item>
                     </Descriptions>
                     <Divider />
-                    {teacher ? (
-                      <Descriptions>
-                        <h3>Teacher:</h3>
-                        <Descriptions.Item label='Full Name'>
-                          {teacher.fullName}
-                        </Descriptions.Item>
-                        <Descriptions.Item label='Email'>
-                          {teacher.email}
-                        </Descriptions.Item>
-                      </Descriptions>
-                    ) : (
-                      <p>No teacher information available</p>
-                    )}
+
+                    <Descriptions>
+                      <h3>Teacher:</h3>
+                      <Descriptions.Item label=''>
+                        <GetTeacher userId={course.teacher} />
+                      </Descriptions.Item>
+                    </Descriptions>
                   </Card>
                 </Col>
               ))}
@@ -124,6 +109,36 @@ const Enrolled: React.FC = () => {
         </div>
       </Card>
     </Row>
+  )
+}
+
+const GetTeacher: React.FC<{
+  userId: string
+}> = ({ userId }) => {
+  const [user, setUser] = useState<ITeacher | null>(null)
+  const [loaded, setLoaded] = useState(false)
+
+  useEffect(() => {
+    axios({
+      url: `/api/users/${userId}`,
+      method: 'get',
+    })
+      .then(({ data }) => {
+        setUser(data)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+      .finally(() => {
+        setLoaded(true)
+      })
+  }, [userId])
+
+  return (
+    <div>
+      <a>{user?.email}</a>
+      <a>{user?.fullName}</a>
+    </div>
   )
 }
 

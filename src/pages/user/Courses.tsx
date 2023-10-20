@@ -1,21 +1,21 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { StoreType } from '../../redux/store'
-import Preloader from '../../components/common/Preloader'
-import { Typography, Row, Col, Space, Avatar, Button, Divider } from 'antd'
-import CourseFilter from '../../components/user/CourseFilter'
-import { UserOutlined } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import Layout from '../../components/common/Layout'
+import Preloader from '../../components/common/Preloader'
+import CourseFilter from '../../components/user/CourseFilter'
+import { UserOutlined } from '@ant-design/icons'
+import { Typography, Row, Col, Space, Avatar, Button } from 'antd'
 
 const { Title, Paragraph } = Typography
-export interface ICourse {
+
+interface ICourse {
   _id: string
   title: string
   about: string
   price: number
   students: string[]
+  category: string
 }
 
 interface IUser {
@@ -83,7 +83,10 @@ const CourseItem: React.FC<ICourse> = (course) => {
 const Courses = () => {
   const [courses, setCourses] = useState<ICourse[]>([])
   const [loaded, setLoaded] = useState(false)
-  const [filter, setFilter] = useState('all')
+  const [filters, setFilters] = useState<Record<string, string>>({
+    price: 'all',
+    category: 'all',
+  })
 
   useEffect(() => {
     axios({
@@ -102,23 +105,28 @@ const Courses = () => {
       })
   }, [])
 
-  const handleFilterChange = (filters: Record<string, string>) => {
-    setFilter(filter)
+  const handleFilterChange = (newFilters: Record<string, string>) => {
+    setFilters(newFilters)
 
     const filteredCourses = courses.filter((course) => {
-      if (filters.price !== 'all' && filters.price === 'free') {
+      if (newFilters.price !== 'all' && newFilters.price === 'free') {
         return course.price === 0
       }
-      if (filters.price !== 'all' && filters.price === 'paid') {
+      if (newFilters.price !== 'all' && newFilters.price === 'paid') {
         return course.price > 0
       }
-      if (filters.category !== 'all') {
-        return false
+      if (
+        newFilters.category !== 'all' &&
+        newFilters.category === course.category
+      ) {
+        return true
       }
+      return false
     })
 
     setCourses(filteredCourses)
   }
+
   return (
     <Layout>
       <Row>

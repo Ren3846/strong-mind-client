@@ -3,6 +3,7 @@ import axios from 'axios'
 import Layout from '../../components/common/Layout'
 import { Row, Col, Card, Descriptions, Typography } from 'antd'
 import { Course, Teacher } from '../../redux/store/types'
+import Preloader from '../../components/common/Preloader'
 
 const { Title } = Typography
 
@@ -48,7 +49,7 @@ const Dashboard = () => {
         <Col span={12}>
           <Card title='My Enrolled Courses'>
             {loadingCourses ? (
-              <p>Loading...</p>
+              <Preloader />
             ) : (
               <ul>
                 {enrolledCourses.map((course) => (
@@ -61,7 +62,7 @@ const Dashboard = () => {
         <Col span={12}>
           <Card title='Top Teachers'>
             {loadingTeachers ? (
-              <p>Loading...</p>
+              <Preloader />
             ) : (
               <ul>
                 {topTeachers.map((teacher) => (
