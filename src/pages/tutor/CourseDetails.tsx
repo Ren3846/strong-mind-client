@@ -16,6 +16,7 @@ const CourseDetails: React.FC = () => {
       .get(`/api/courses/${id}`)
       .then((response) => {
         setCourse(response.data)
+        console.log(response.data)
       })
       .catch((error) => {
         console.error(error)

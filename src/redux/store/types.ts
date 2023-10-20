@@ -21,3 +21,11 @@ export interface AdminUser {
   fullName: string
   role: 'admin'
 }
+
+export interface Course {
+  _id: string
+}
+
+export interface Lesson {
+  _id: string
+}
