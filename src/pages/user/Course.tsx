@@ -51,7 +51,7 @@ const Course: React.FC<{}> = () => {
                   <p>Difficulty: {course.difficulty}</p>
                   <p>Tagline: {course.tagline}</p>
                   <p>Number of Lessons: {course.lessons.length}</p>
-                  <p>Visible: {course.isVisible ? 'Yes' : 'No'}</p>
+                  {/* <p>Visible: {course.isVisible ? 'Yes' : 'No'}</p> */}
                   <img
                     src={course.thumbnail}
                     alt={course.title}

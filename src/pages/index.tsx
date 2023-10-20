@@ -39,6 +39,7 @@ import TeacherProfile from './user/Teacher'
 import MyCourses from './tutor/MyCourses'
 import CreateCourse from './tutor/AddCourse'
 import CourseDetails from './tutor/CourseDetails'
+import CourseInfo from './user/EnrolledCourseInfo'
 
 interface IProtectedRoute {
   condition: boolean
@@ -121,6 +122,17 @@ const Router: React.FC<{}> = () => {
                 condition={isAuthenticated}
                 redirect='/signin'
                 children={<Enrolled />}
+              />
+            }
+          />
+
+          <Route
+            path='/enrolled/:id/info'
+            element={
+              <ProtectedRoute
+                condition={isAuthenticated}
+                redirect='/signin'
+                children={<CourseInfo />}
               />
             }
           />
