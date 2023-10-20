@@ -3,6 +3,7 @@ import axios from 'axios'
 import Layout from 'antd/es/layout/layout'
 import { Card, Row, Descriptions } from 'antd'
 import { useParams } from 'react-router-dom'
+import Shedule from '../../components/user/Shedule'
 
 interface ICourseInfo {
   _id: string
@@ -28,7 +29,7 @@ const CourseInfo: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get(`/api/courses/enrolled/${id}/info`)
+      .get(`/api/courses/${id}`)
       .then((response) => {
         console.log(response.data)
         setCourseInfo(response.data)
@@ -50,10 +51,9 @@ const CourseInfo: React.FC = () => {
   }
 
   return (
-    <Row align='middle' justify='center'></Row>
-      <Card title='Course Information' style={{ width: '80rem' }}>
+    <Row align='middle' justify='center'>
+      <Card title='Course Details' style={{ width: '80rem' }}>
         <div>
-          <h1>Course Details</h1>
           {courseInfo ? (
             <Descriptions>
               <Descriptions.Item label='Title'>
@@ -85,6 +85,12 @@ const CourseInfo: React.FC = () => {
             <p>{error}</p>
           )}
         </div>
+      </Card>
+      <Card
+        title='Course Shedule'
+        style={{ width: '80rem', marginTop: '20px' }}
+      >
+        <div>{courseInfo ? <Shedule /> : <p>{error}</p>}</div>
       </Card>
     </Row>
   )

@@ -24,8 +24,30 @@ export interface AdminUser {
 
 export interface Course {
   _id: string
+  title: string
+  teacher: string
+  students: string[]
+  about: string
+  tagline: string
+  category: string
+  difficulty: string
+  thumbnail: string
+  price: number
+  isVisible: boolean
+  lessons: string[]
+  __v: number
 }
 
-export interface Lesson {
+export interface Teacher {
   _id: string
+  email: string
+  fullName: string
+  phone: string
+  isBlocked: boolean
+  students: string[]
+  liveLessonSchedule: any[]
+  balance: number
+  history: any[]
+  courses: string[]
+  meetings: any[]
 }

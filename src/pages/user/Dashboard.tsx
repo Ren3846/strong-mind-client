@@ -1,10 +1,77 @@
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import Layout from '../../components/common/Layout'
-import { Row } from 'antd'
+import { Row, Col, Card, Descriptions, Typography } from 'antd'
+import { Course, Teacher } from '../../redux/store/types'
+
+const { Title } = Typography
 
 const Dashboard = () => {
+  const [enrolledCourses, setEnrolledCourses] = useState<Course[]>([])
+  const [topTeachers, setTopTeachers] = useState<Teacher[]>([])
+  const [loadingCourses, setLoadingCourses] = useState(true)
+  const [loadingTeachers, setLoadingTeachers] = useState(true)
+
+  useEffect(() => {
+    axios
+      .get('/api/courses/user/enrolled')
+      .then((response) => {
+        setEnrolledCourses(response.data)
+      })
+      .catch((err) => {
+        if (err.response && err.response.status === 404) {
+          setEnrolledCourses([])
+        } else {
+          console.error(err)
+        }
+      })
+      .finally(() => {
+        setLoadingCourses(false)
+      })
+
+    axios
+      .get('/api/users/top')
+      .then((response) => {
+        setTopTeachers(response.data)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+      .finally(() => {
+        setLoadingTeachers(false)
+      })
+  }, [])
+
   return (
     <Layout>
-      <Row>Dashboard</Row>
+      <Row gutter={[16, 16]}>
+        <Col span={12}>
+          <Card title='My Enrolled Courses'>
+            {loadingCourses ? (
+              <p>Loading...</p>
+            ) : (
+              <ul>
+                {enrolledCourses.map((course) => (
+                  <li key={course._id}>{course.title}</li>
+                ))}
+              </ul>
+            )}
+          </Card>
+        </Col>
+        <Col span={12}>
+          <Card title='Top Teachers'></Card>
+            {loadingTeachers ? (
+              <p>Loading...</p>
+            ) : (
+              <ul>
+                {topTeachers.map((teacher) => (
+                  <li key={teacher._id}>{teacher.email}</li>
+                ))}
+              </ul>
+            )}
+          </Card>
+        </Col>
+      </Row>
     </Layout>
   )
 }
