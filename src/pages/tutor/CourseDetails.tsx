@@ -29,13 +29,35 @@ const CourseDetails: React.FC = () => {
 
   return (
     <Row align='middle' justify='center'>
-      <Card title='My courses' style={{ width: '60rem' }}>
+      <Card title='Course Details' style={{ width: '60rem' }}>
         <div>
           <h1>{course.title}</h1>
           <p>{course.about}</p>
           <p>Category: {course.category}</p>
           <p>Difficulty: {course.difficulty}</p>
           <p>Price: ${course.price}</p>
+
+          {course.students.length > 0 && (
+            <div>
+              <h2>Students:</h2>
+              <ul>
+                {course.students.map((student: any) => (
+                  <li key={student._id}>{student.name}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {course.lessons.length > 0 && (
+            <div>
+              <h2>Lessons:</h2>
+              <ul>
+                {course.lessons.map((lesson: any) => (
+                  <li key={lesson._id}>{lesson.title}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </Card>
     </Row>

@@ -48,15 +48,19 @@ const Teachers: React.FC = () => {
         >
           {loaded ? (
             <Space direction='horizontal'>
-              {topTeachers.map((teacher, index) => (
-                <Card key={teacher._id} title={teacher.fullName}>
-                  <p>Email: {teacher.email}</p>
-                  {/* <p>Phone: {teacher.phone}</p>
-                  <p>Balance: {teacher.balance}</p> */}
-                  <p>Students: {teacher.students.length}</p>
-                  <Link to={`/teacher/${teacher._id}`}>View Details</Link>
-                </Card>
-              ))}
+              {Array.isArray(topTeachers) ? (
+                topTeachers.map((teacher, index) =>
+                  teacher ? (
+                    <Card key={teacher._id} title={teacher.fullName}>
+                      <p>Email: {teacher.email}</p>
+                      <p>Students: {teacher.students.length}</p>
+                      <Link to={`/teacher/${teacher._id}`}>View Details</Link>
+                    </Card>
+                  ) : null,
+                )
+              ) : (
+                <p>No data available</p>
+              )}
             </Space>
           ) : (
             <Preloader />
