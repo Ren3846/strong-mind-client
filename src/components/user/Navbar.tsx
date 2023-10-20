@@ -13,7 +13,7 @@ function Navbar() {
   const user = useSelector((state: any) => state.auth.user)
 
   return (
-    <div className='header-navbar'>
+    <div className='header-navbar bg-white'>
       <Link to='/' className='navbar-logo' children='StrongMind' />
       <nav className='nav-wrapper'>
         <NavLink

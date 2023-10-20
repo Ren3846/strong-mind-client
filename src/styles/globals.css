@@ -3,13 +3,23 @@
 @tailwind utilities;
 
 body {
-  --tw-bg-opacity: 1;
+  /* --tw-bg-opacity: 1;
   background-color: rgb(
     243 244 246 / var(--tw-bg-opacity)
-  );
+  ); */
   /* background-color: rgb(243 244 246 / var(--tw-bg-opacity)); bg-gray-100 */
   /* background-color: rgb(229 231 235 / var(--tw-bg-opacity)); bg-gray-200 */
   /* background-color: rgb(209 213 219 / var(--tw-bg-opacity)); bg-gray-300 */
+
+  background: linear-gradient(
+    -45deg,
+    #ff80b553,
+    #9189fc4c,
+    #23a5d556,
+    #23d5ab48
+  );
+  background-size: 400% 400%;
+  animation: gradient 8s ease infinite;
 }
 
 .background-animation {
@@ -55,12 +65,7 @@ body {
   animation-name: count-up;
   animation-duration: 3s;
   animation-fill-mode: forwards;
-  animation-timing-function: cubic-bezier(
-    0.42,
-    0,
-    0.58,
-    1
-  );
+  animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
 }
 
 .StatsCounter__number {
