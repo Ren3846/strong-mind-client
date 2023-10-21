@@ -1,22 +1,9 @@
-import { Card, Layout, Row, Space, Button } from 'antd'
+import { Card, Row, Space, Button } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Preloader from '../../components/common/Preloader'
-
-interface ICourse {
-  _id: string
-  title: string
-  about: string
-  price: number
-  category: string
-  difficulty: string
-  tagline: string
-  lessons: string[]
-  isVisible: boolean
-  thumbnail: string
-  teacher: string
-}
+import { ICourse, ITeacher } from '../../redux/store/types'
 
 const Course: React.FC<{}> = () => {
   const { id } = useParams()
@@ -38,7 +25,7 @@ const Course: React.FC<{}> = () => {
 
   return (
     <Row align='middle' justify='center'>
-      <Card title={`Course details`} style={{ width: '60rem' }}>
+      <Card title={`Course details`} style={{ width: '60rem', margin: '20px' }}>
         {loaded ? (
           <div>
             {course ? (
@@ -73,11 +60,6 @@ const Course: React.FC<{}> = () => {
       </Card>
     </Row>
   )
-}
-
-interface ITeacher {
-  userId: string
-  email: string
 }
 
 const GetTeacherInfo: React.FC<{ userId: string }> = ({ userId }) => {

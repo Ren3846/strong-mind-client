@@ -4,12 +4,7 @@ import axios from 'axios'
 import { Button, Row, Card, Space } from 'antd'
 import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
-
-interface ITeacher {
-  userId: string
-  email: string
-  fullName: string
-}
+import { ITeacher } from '../../redux/store/types'
 
 const TeacherProfile: React.FC<{}> = () => {
   const { id } = useParams()

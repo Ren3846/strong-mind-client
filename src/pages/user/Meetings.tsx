@@ -2,7 +2,7 @@ import React from 'react'
 import type { Dayjs } from 'dayjs'
 import type { BadgeProps, CalendarProps } from 'antd'
 
-import { Badge, Calendar, Row, Card } from 'antd'
+import { Badge, Calendar, Row } from 'antd'
 import Layout from 'antd/es/layout/layout'
 
 const getListData = (value: Dayjs) => {

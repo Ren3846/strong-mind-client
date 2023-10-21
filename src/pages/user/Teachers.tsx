@@ -5,20 +5,7 @@ import { Row, Card, Space } from 'antd'
 import Preloader from '../../components/common/Preloader'
 import { Link } from 'react-router-dom'
 
-interface ITeacher {
-  _id: string
-  email: string
-  password: string
-  fullName: string
-  phone: string
-  isBlocked: boolean
-  students: string[]
-  liveLessonSchedule: any[]
-  balance: number
-  history: any[]
-  courses: string[]
-  meetings: any[]
-}
+import { ITeacher } from '../../redux/store/types'
 
 const Teachers: React.FC = () => {
   const [topTeachers, setTopTeachers] = useState<ITeacher[]>([])

@@ -1,43 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import Layout from 'antd/es/layout/layout'
 import { Card, Row, Descriptions, Avatar } from 'antd'
 import { useParams } from 'react-router-dom'
 import Shedule from '../../components/user/Shedule'
 import Preloader from '../../components/common/Preloader'
-import { UserOutlined } from '@ant-design/icons'
 
-interface ICourseInfo {
-  _id: string
-  title: string
-  teacher: string
-  students: string[]
-  about: string
-  tagline: string
-  category: string
-  difficulty: string
-  thumbnail: string
-  price: number
-  isVisible: boolean
-  lessons: string[]
-  __v: number
-}
-interface ITeacher {
-  _id: string
-  email: string
-  fullName: string
-  phone: string
-  isBlocked: boolean
-  students: string[]
-  liveLessonSchedule: any[]
-  balance: number
-  history: any[]
-  courses: string[]
-  meetings: any[]
-}
+import { ICourse, ITeacher } from '../../redux/store/types'
 
 const CourseInfo: React.FC = () => {
-  const [courseInfo, setCourseInfo] = useState<ICourseInfo | null>(null)
+  const [courseInfo, setCourseInfo] = useState<ICourse | null>(null)
   const [teacher, setTeacher] = useState<ITeacher | null>(null)
 
   const [loading, setLoading] = useState(true)

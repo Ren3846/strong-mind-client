@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Layout from '../../components/common/Layout'
-import { Row, Col, Card, Descriptions, Typography } from 'antd'
-import { Course, Teacher } from '../../redux/store/types'
+import { Row, Col, Card, Typography } from 'antd'
+import { ICourse, ITeacher } from '../../redux/store/types'
 import Preloader from '../../components/common/Preloader'
 
 const { Title } = Typography
 
 const Dashboard = () => {
-  const [enrolledCourses, setEnrolledCourses] = useState<Course[]>([])
-  const [topTeachers, setTopTeachers] = useState<Teacher[]>([])
+  const [enrolledCourses, setEnrolledCourses] = useState<ICourse[]>([])
+  const [topTeachers, setTopTeachers] = useState<ITeacher[]>([])
   const [loadingCourses, setLoadingCourses] = useState(true)
   const [loadingTeachers, setLoadingTeachers] = useState(true)
 

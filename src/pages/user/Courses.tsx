@@ -6,30 +6,14 @@ import Preloader from '../../components/common/Preloader'
 import CourseFilter from '../../components/user/CourseFilter'
 import { UserOutlined } from '@ant-design/icons'
 import { Typography, Row, Col, Space, Avatar, Button } from 'antd'
+import { ICourse, ITeacher, User } from '../../redux/store/types'
 
 const { Title, Paragraph } = Typography
-
-interface ICourse {
-  _id: string
-  title: string
-  about: string
-  price: number
-  students: string[]
-  category: string
-}
-
-interface IUser {
-  _id: string
-  email: string
-  fullName: string
-  role: 'user' | 'teacher' | 'admin'
-  balance: number
-}
 
 const CourseStudentItem: React.FC<{
   userId: string
 }> = ({ userId }) => {
-  const [user, setUser] = useState<IUser | null>(null)
+  const [user, setUser] = useState<User | null>(null)
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {

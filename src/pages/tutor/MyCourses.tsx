@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
 import { Button, Card, Divider, Row, Space, message } from 'antd'
-import Layout from 'antd/es/layout/layout'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
@@ -13,14 +12,7 @@ import {
 } from '@ant-design/icons'
 import Preloader from '../../components/common/Preloader'
 import { deleteCourse } from '../../redux/actions/course'
-
-export interface ICourse {
-  _id: string
-  title: string
-  about: string
-  price: number
-  students: string[]
-}
+import { ICourse } from '../../redux/store/types'
 
 const MyCourses: React.FC = () => {
   const [data, setData] = useState<ICourse[]>([])
@@ -60,7 +52,7 @@ const MyCourses: React.FC = () => {
 
   return (
     <Row align='middle' justify='center'>
-      <Card title='My courses' style={{ width: '60rem' }}>
+      <Card title='My courses' style={{ width: '60rem', margin: '20px' }}>
         {loaded ? (
           <ul>
             {data.map((item) =>

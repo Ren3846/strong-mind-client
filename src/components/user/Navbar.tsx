@@ -3,11 +3,15 @@ import { Button, Space } from 'antd'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import MenuDropDown from './MenuDropDown'
-import Logo from '../common/Logo'
-import { SettingOutlined } from '@ant-design/icons'
+import { StoreType } from '../../redux/store'
+import { USER_ROLE, User } from '../../redux/store/types'
 
 function Navbar() {
   const navigate = useNavigate()
+
+  const currentUser = useSelector<StoreType, User>(
+    (state: any) => state.auth.user,
+  )
 
   const isAuthLoaded = useSelector((state: any) => state.auth.loaded)
   const user = useSelector((state: any) => state.auth.user)
@@ -21,7 +25,7 @@ function Navbar() {
           className={({ isActive }) =>
             `navbar-link ${isActive ? 'active' : ''}`
           }
-          children='Home'
+          children='Dashboard'
         />
         <NavLink
           to='/courses'
@@ -37,6 +41,7 @@ function Navbar() {
           }
           children='Teachers'
         />
+        {/* {currentUser.role === USER_ROLE.TEACHER ? ( */}
         <NavLink
           to='/enrolled'
           className={({ isActive }) =>
@@ -44,6 +49,9 @@ function Navbar() {
           }
           children='Enrolled'
         />
+        {/* ) : (
+          <></>
+        )} */}
         <NavLink
           to='/meetings'
           className={({ isActive }) =>

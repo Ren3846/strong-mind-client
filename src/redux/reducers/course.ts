@@ -1,9 +1,9 @@
 import * as courseActions from '../actions/course'
 import type { ExtractActions } from '../actions'
 import { deleteItem, updateItem } from '../../utils'
-import { Course } from '../store/types'
+import { ICourse } from '../store/types'
 
-const initialState: Course[] = []
+const initialState: ICourse[] = []
 
 export const courseReducer = (
   state = initialState,

@@ -102,7 +102,17 @@ const Router: React.FC<{}> = () => {
               />
             }
           />
-          <Route path='/dashboard' element={<Dashboard />} />
+
+          <Route
+            path='/dashboard'
+            element={
+              <ProtectedRoute
+                condition={isAuthenticated}
+                redirect='/signin'
+                children={<Dashboard />}
+              />
+            }
+          />
 
           <Route
             path='/meetings'

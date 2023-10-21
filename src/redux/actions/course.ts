@@ -1,4 +1,4 @@
-import type { Course } from '../store/types'
+import type { ICourse } from '../store/types'
 
 const ActionType = {
   COURSE_ADD: 'COURSE_ADD',
@@ -7,21 +7,21 @@ const ActionType = {
   COURSE_LOADED: 'COURSE_LOADED',
 } as const
 
-export const createCourse = (course: Course) => {
+export const createCourse = (course: ICourse) => {
   return {
     type: ActionType.COURSE_ADD,
     payload: course,
   }
 }
 
-export const deleteCourse = (id: Course['_id']) => {
+export const deleteCourse = (id: ICourse['_id']) => {
   return {
     type: ActionType.COURSE_DELETE,
     payload: id,
   }
 }
 
-export const updateCourse = (id: Course['_id'], update: Partial<Course>) => {
+export const updateCourse = (id: ICourse['_id'], update: Partial<ICourse>) => {
   return {
     type: ActionType.COURSE_UPDATE,
     payload: {
@@ -31,7 +31,7 @@ export const updateCourse = (id: Course['_id'], update: Partial<Course>) => {
   }
 }
 
-export const loadedCourse = (courses: Course[]) => {
+export const loadedCourse = (courses: ICourse[]) => {
   return {
     type: ActionType.COURSE_LOADED,
     payload: courses,

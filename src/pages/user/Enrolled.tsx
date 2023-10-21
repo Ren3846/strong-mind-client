@@ -1,39 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import Layout from 'antd/es/layout/layout'
 import { Card, Row, Col, Button, Descriptions, Divider } from 'antd'
 import { Link } from 'react-router-dom'
 import Preloader from '../../components/common/Preloader'
 
-interface ICourse {
-  _id: string
-  title: string
-  teacher: string
-  students: string[]
-  about: string
-  tagline: string
-  category: string
-  difficulty: string
-  thumbnail: string
-  price: number
-  isVisible: boolean
-  lessons: string[]
-  __v: number
-}
-
-interface ITeacher {
-  _id: string
-  email: string
-  fullName: string
-  phone: string
-  isBlocked: boolean
-  students: string[]
-  liveLessonSchedule: any[]
-  balance: number
-  history: any[]
-  courses: string[]
-  meetings: any[]
-}
+import { ICourse, ITeacher } from '../../redux/store/types'
 
 const Enrolled: React.FC = () => {
   const [enrolledCourses, setEnrolledCourses] = useState<ICourse[]>([])

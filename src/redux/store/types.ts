@@ -22,7 +22,7 @@ export interface AdminUser {
   role: 'admin'
 }
 
-export interface Course {
+export interface ICourse {
   _id: string
   title: string
   teacher: string
@@ -38,7 +38,7 @@ export interface Course {
   __v: number
 }
 
-export interface Teacher {
+export interface ITeacher {
   _id: string
   email: string
   fullName: string
