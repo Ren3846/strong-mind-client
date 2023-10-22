@@ -1,4 +1,4 @@
-import { Card, Row, Space, Button } from 'antd'
+import { Card, Row, Space, Button, message } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
@@ -9,6 +9,8 @@ const Course: React.FC<{}> = () => {
   const { id } = useParams()
   const [course, setCourse] = useState<ICourse | null>(null)
   const [loaded, setLoaded] = useState(false)
+  const [enrollmentSuccess, setEnrollmentSuccess] = useState(false)
+  const [enrollmentError, setEnrollmentError] = useState(null)
 
   useEffect(() => {
     axios
@@ -22,6 +24,25 @@ const Course: React.FC<{}> = () => {
         setLoaded(true)
       })
   }, [id])
+
+  const enrollUser = () => {
+    axios
+      .patch(`/api/courses/enroll/${id}`)
+      .then(() => {
+        setEnrollmentSuccess(true)
+      })
+      .catch((error) => {
+        if (
+          error.response &&
+          error.response.status === 403 &&
+          error.response.data.message === 'You are already in this course'
+        ) {
+          message.error('Вы уже зарегистрированы на этот курс')
+        } else {
+          console.error(error)
+        }
+      })
+  }
 
   return (
     <Row align='middle' justify='center'>
@@ -44,9 +65,14 @@ const Course: React.FC<{}> = () => {
                     alt={course.title}
                     style={{ maxWidth: '100%' }}
                   />
-                  <Button type='primary' onClick={() => {}}>
-                    Enroll
-                  </Button>
+
+                  {enrollmentSuccess ? (
+                    <p>You have successfully enrolled in this course.</p>
+                  ) : (
+                    <Button type='primary' onClick={enrollUser}>
+                      Enroll
+                    </Button>
+                  )}
                   <GetTeacherInfo userId={course.teacher} />
                 </Space>
               </>

@@ -3,9 +3,17 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
-import CourseFilter from '../../components/user/CourseFilter'
 import { UserOutlined } from '@ant-design/icons'
-import { Typography, Row, Col, Space, Avatar, Button } from 'antd'
+import {
+  Typography,
+  Row,
+  Col,
+  Space,
+  Avatar,
+  Button,
+  Select,
+  Divider,
+} from 'antd'
 import { ICourse, ITeacher, User } from '../../redux/store/types'
 
 const { Title, Paragraph } = Typography
@@ -40,7 +48,6 @@ const CourseStudentItem: React.FC<{
 }
 
 const CourseItem: React.FC<ICourse> = (course) => {
-  console.log(course)
   return (
     <div className='course-item course-card'>
       <Space direction='vertical' size='middle' style={{ display: 'flex' }}>
@@ -70,6 +77,7 @@ const Courses = () => {
   const [filters, setFilters] = useState<Record<string, string>>({
     price: 'all',
     category: 'all',
+    difficulty: 'all',
   })
 
   useEffect(() => {
@@ -89,44 +97,65 @@ const Courses = () => {
       })
   }, [])
 
-  const handleFilterChange = (newFilters: Record<string, string>) => {
-    setFilters(newFilters)
-
-    const filteredCourses = courses.filter((course) => {
-      if (newFilters.price !== 'all' && newFilters.price === 'free') {
-        return course.price === 0
-      }
-      if (newFilters.price !== 'all' && newFilters.price === 'paid') {
-        return course.price > 0
-      }
-      if (
-        newFilters.category !== 'all' &&
-        newFilters.category === course.category
-      ) {
-        return true
-      }
-      return false
-    })
-
-    setCourses(filteredCourses)
+  const handleDifficultyChange = (value: string) => {
+    setFilters({ ...filters, difficulty: value })
   }
 
+  const handleCategoryChange = (value: string) => {
+    setFilters({ ...filters, category: value })
+  }
+
+  const filteredCourses = courses.filter((course) => {
+    const difficultyMatch =
+      filters.difficulty === 'all' || course.difficulty === filters.difficulty
+    const categoryMatch =
+      filters.category === 'all' || course.category === filters.category
+    return difficultyMatch && categoryMatch
+  })
   return (
     <Layout>
-      <Row>
-        <Col xs={24} sm={24} md={6} lg={4} xl={4}>
-          <CourseFilter onFilterChange={handleFilterChange} />
-        </Col>
-        <Col xs={24} sm={24} md={18} lg={18} xl={18}>
+      <Row align='middle' justify='center'>
+        <Col xs={24} sm={24} md={18} lg={18} xl={20}>
           <div>
+            <div>
+              <Space>
+                <Select
+                  value={filters.difficulty}
+                  onChange={handleDifficultyChange}
+                >
+                  <Select.Option value='all'>All</Select.Option>
+                  <Select.Option value='C1'>C1</Select.Option>
+                  <Select.Option value='C2'>C2</Select.Option>
+                  <Select.Option value='A1'>A1</Select.Option>
+                  <Select.Option value='A2'>A2</Select.Option>
+                  <Select.Option value='B1'>B1</Select.Option>
+                  <Select.Option value='B2'>B2</Select.Option>
+                </Select>
+
+                <Select
+                  value={filters.category}
+                  onChange={handleCategoryChange}
+                  style={{ width: 100 }}
+                >
+                  {/* нужно заменить только Armenian Russian English пока  */}
+                  <Select.Option value='all'>All</Select.Option>
+                  <Select.Option value='Grammar'>English</Select.Option>
+                  <Select.Option value='Literature'>Russian</Select.Option>
+                  <Select.Option value='Grammar2'>Armenian</Select.Option>
+                </Select>
+              </Space>
+            </div>
+
+            <Divider />
+
             {loaded ? (
               <div className='courses-wrapper'>
-                {courses.length ? (
-                  courses.map((course) => (
+                {filteredCourses.length ? (
+                  filteredCourses.map((course) => (
                     <CourseItem {...course} key={course._id} />
                   ))
                 ) : (
-                  <p>Нет курсов :(</p>
+                  <p>No courses match the selected difficulty and category.</p>
                 )}
               </div>
             ) : (

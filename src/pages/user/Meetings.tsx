@@ -2,7 +2,7 @@ import React from 'react'
 import type { Dayjs } from 'dayjs'
 import type { BadgeProps, CalendarProps } from 'antd'
 
-import { Badge, Calendar, Row } from 'antd'
+import { Badge, Calendar, Card, Row } from 'antd'
 import Layout from 'antd/es/layout/layout'
 
 const getListData = (value: Dayjs) => {
@@ -76,13 +76,11 @@ const Meetings: React.FC = () => {
   }
 
   return (
-    <>
-      <Layout>
-        <Row align='middle' justify='center'>
-          <Calendar style={{ padding: '50px' }} cellRender={cellRender} />
-        </Row>
-      </Layout>
-    </>
+    <Row align='middle' justify='center'>
+      <Card title='Meetings' style={{ width: '80rem', margin: '20px' }}>
+        <Calendar style={{ padding: '50px' }} cellRender={cellRender} />
+      </Card>
+    </Row>
   )
 }
 
