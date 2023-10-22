@@ -20,7 +20,7 @@ const Layout = ({ children }: Props) => {
         type='primary'
         style={{ right: 24 }}
       />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }

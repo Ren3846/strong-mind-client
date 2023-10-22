@@ -37,7 +37,10 @@ const Enrolled: React.FC = () => {
 
   return (
     <Row align='middle' justify='center'>
-      <Card title='My Enrolled Courses' style={{ width: '80rem' }}>
+      <Card
+        title='My Enrolled Courses'
+        style={{ width: '80rem', margin: '20px' }}
+      >
         <div>
           {enrolledCourses.length === 0 ? (
             <p>{error}</p>
@@ -52,6 +55,7 @@ const Enrolled: React.FC = () => {
                         <Button type='primary'>View Course</Button>
                       </Link>
                     }
+                    style={{ margin: '20px' }}
                   >
                     <Descriptions>
                       <Descriptions.Item label='About'>

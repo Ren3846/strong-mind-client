@@ -40,7 +40,7 @@ const CourseInfo: React.FC = () => {
 
   return (
     <Row align='middle' justify='center'>
-      <Card title='Course Details' style={{ width: '80rem' }}>
+      <Card title='Course Details' style={{ width: '80rem', margin: '20px' }}>
         <div>
           {courseInfo ? (
             <Descriptions>
