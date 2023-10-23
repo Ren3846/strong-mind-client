@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Form,
   Input,
@@ -15,8 +15,10 @@ const { Option } = Select
 
 const CreateCourse: React.FC = () => {
   const [form] = Form.useForm()
+  const [loading, setLoading] = useState(false);
 
   const handleCreate = (values: any) => {
+    setLoading(true);
     axios
       .post('/api/courses', values)
       .then((response) => {
@@ -26,6 +28,9 @@ const CreateCourse: React.FC = () => {
       .catch((error) => {
         console.error(error)
         message.error('Error while creating the course')
+      })
+      .finally(() => {
+        setLoading(false);
       })
   }
 
@@ -96,7 +101,7 @@ const CreateCourse: React.FC = () => {
             <InputNumber />
           </Form.Item>
           <Form.Item>
-            <Button type='primary' htmlType='submit'>
+            <Button type='primary' htmlType='submit' loading={loading}>
               Create Course
             </Button>
           </Form.Item>
