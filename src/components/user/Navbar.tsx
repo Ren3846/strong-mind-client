@@ -1,13 +1,15 @@
 import React from 'react'
-import { Button, Space } from 'antd'
+import { Badge, Button, Divider, Space } from 'antd'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import MenuDropDown from './MenuDropDown'
 import { StoreType } from '../../redux/store'
 import { USER_ROLE, User } from '../../redux/store/types'
+import { BellOutlined, UserOutlined } from '@ant-design/icons'
 
 function Navbar() {
   const navigate = useNavigate()
+  const userBalance = useSelector((state: any) => state.auth.user.balance)
 
   const currentUser = useSelector<StoreType, User>(
     (state: any) => state.auth.user,
@@ -67,16 +69,33 @@ function Navbar() {
           children='Profile'
         /> */}
       </nav>
+
       <div
         style={{
           display: 'flex',
           float: 'right',
           padding: '5px',
+          alignItems: 'center',
         }}
       >
         {isAuthLoaded ? (
           user ? (
-            <MenuDropDown user={user} />
+            <>
+              <Space>
+                <Badge count={5} size='small' style={{ marginRight: '20px' }}>
+                  <Button icon={<BellOutlined />} size='large' shape='circle' />
+                </Badge>
+                <Divider type='vertical' />
+                <div>
+                  {/* <UserOutlined
+                    style={{ fontSize: '18px', marginRight: '5px' }}
+                  /> */}
+                  <span>Balance: {userBalance}</span>
+                </div>
+                <Divider type='vertical' />
+              </Space>
+              <MenuDropDown user={user} />
+            </>
           ) : (
             <Space>
               <Button

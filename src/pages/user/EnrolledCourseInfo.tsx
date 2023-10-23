@@ -74,6 +74,11 @@ const CourseInfo: React.FC = () => {
           )}
         </div>
       </Card>
+
+      <Card title='Lessons' style={{ width: '80rem', marginTop: '20px' }}>
+        <div>{courseInfo ? <p>Lessons</p> : <p>{error}</p>}</div>
+      </Card>
+
       <Card
         title='Course Shedule'
         style={{ width: '80rem', marginTop: '20px' }}
