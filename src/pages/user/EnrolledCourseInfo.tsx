@@ -6,6 +6,7 @@ import Shedule from '../../components/user/Shedule'
 import Preloader from '../../components/common/Preloader'
 
 import { ICourse, ITeacher } from '../../redux/store/types'
+import LessonsList from '../../components/user/LessonsList'
 
 const CourseInfo: React.FC = () => {
   const [courseInfo, setCourseInfo] = useState<ICourse | null>(null)
@@ -75,14 +76,11 @@ const CourseInfo: React.FC = () => {
         </div>
       </Card>
 
-      <Card title='Lessons' style={{ width: '80rem', marginTop: '20px' }}>
-        <div>{courseInfo ? <p>Lessons</p> : <p>{error}</p>}</div>
+      <Card title='Lessons' style={{ width: '80rem', margin: '20px' }}>
+        <div>{courseInfo ? <LessonsList /> : <p>{error}</p>}</div>
       </Card>
 
-      <Card
-        title='Course Shedule'
-        style={{ width: '80rem', marginTop: '20px' }}
-      >
+      <Card title='Course Shedule' style={{ width: '80rem', margin: '20px' }}>
         <div>{courseInfo ? <Shedule /> : <p>{error}</p>}</div>
       </Card>
     </Row>
