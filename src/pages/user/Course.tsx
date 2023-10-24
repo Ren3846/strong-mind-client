@@ -37,7 +37,7 @@ const Course: React.FC<{}> = () => {
           error.response.status === 403 &&
           error.response.data.message === 'You are already in this course'
         ) {
-          message.error('Вы уже зарегистрированы на этот курс')
+          message.error('You are already in this course')
         } else {
           console.error(error)
         }

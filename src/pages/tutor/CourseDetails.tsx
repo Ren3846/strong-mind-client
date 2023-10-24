@@ -62,7 +62,7 @@ const CourseDetails: React.FC = () => {
         <div>
           <LessonsList />
         </div>
-        <Link to={`/lessons/create`}>
+        <Link to={`/lessons/create/${course._id}`}>
           <Button style={{ margin: '20px' }}>Add Lesson</Button>
         </Link>
       </Card>

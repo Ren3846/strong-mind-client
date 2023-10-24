@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Card from 'antd/lib/card'
 import axios from 'axios'
-import { Button, Divider, Space } from 'antd'
+import { Button, Divider, Space, message } from 'antd'
 import { Link } from 'react-router-dom'
 
 interface Lesson {
@@ -15,6 +15,20 @@ interface Lesson {
 function LessonsList() {
   const [lessons, setLessons] = useState<Lesson[]>([])
   const [error, setError] = useState<string>('')
+  const [data, setData] = useState<Lesson[]>([])
+
+  const handleDeleteLesson = (lessonId: string) => {
+    axios
+      .delete(`/api/lessons/${lessonId}`)
+      .then(() => {
+        message.success('Курс успешно удален')
+        setData((data) => data.filter((course) => course._id !== lessonId))
+      })
+      .catch((error) => {
+        message.error('Ошибка при удалении курса')
+        console.error(error)
+      })
+  }
 
   useEffect(() => {
     axios
@@ -43,6 +57,9 @@ function LessonsList() {
             <Link to={`/lessons/${lesson._id}`}>
               <Button type='primary'>View Lesson</Button>
             </Link>
+            <Button danger onClick={() => handleDeleteLesson(lesson._id)}>
+              Delete
+            </Button>
           </Card>
         </Space>
       ))}

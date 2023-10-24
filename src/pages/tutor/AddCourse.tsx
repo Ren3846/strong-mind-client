@@ -15,10 +15,10 @@ const { Option } = Select
 
 const CreateCourse: React.FC = () => {
   const [form] = Form.useForm()
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const handleCreate = (values: any) => {
-    setLoading(true);
+    setLoading(true)
     axios
       .post('/api/courses', values)
       .then((response) => {
@@ -30,7 +30,7 @@ const CreateCourse: React.FC = () => {
         message.error('Error while creating the course')
       })
       .finally(() => {
-        setLoading(false);
+        setLoading(false)
       })
   }
 
