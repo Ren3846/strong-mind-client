@@ -25,7 +25,7 @@ function LessonsList() {
       })
       .catch((error) => {
         console.error(error)
-        setError('Error while data dawnload')
+        setError('Error while data download')
       })
   }, [])
 

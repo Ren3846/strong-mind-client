@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Row, Typography } from 'antd'
+import { Button, Card, Row, Typography } from 'antd'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import Layout from 'antd/es/layout/layout'
 import Preloader from '../../components/common/Preloader'
+import LessonsList from '../../components/user/LessonsList'
+import { ICourse } from '../../redux/store/types'
 
 const { Title, Paragraph, Text } = Typography
 
 const CourseDetails: React.FC = () => {
   const { id } = useParams()
+  const [courseInfo, setCourseInfo] = useState<ICourse | null>(null)
+  const [error, setError] = useState('')
 
   const [course, setCourse] = useState<any>(null)
 
@@ -30,7 +34,7 @@ const CourseDetails: React.FC = () => {
 
   return (
     <Row align='middle' justify='center'>
-      <Card title='Course Details' style={{ width: '60rem', margin: '20px' }}>
+      <Card title='Course Details' style={{ width: '80rem', margin: '20px' }}>
         <div>
           <h1>{course.title}</h1>
           <p>{course.about}</p>
@@ -49,7 +53,7 @@ const CourseDetails: React.FC = () => {
             </div>
           )}
 
-          {course.lessons.length > 0 && (
+          {/* {course.lessons.length > 0 && (
             <div>
               <h2>Lessons:</h2>
               <ul>
@@ -58,8 +62,14 @@ const CourseDetails: React.FC = () => {
                 ))}
               </ul>
             </div>
-          )}
+          )} */}
         </div>
+      </Card>
+      <Card title='Lessons' style={{ width: '80rem', margin: '20px' }}>
+        <div>
+          <LessonsList />
+        </div>
+        <Button style={{ margin: '20px' }}>Add Lesson</Button>
       </Card>
     </Row>
   )
