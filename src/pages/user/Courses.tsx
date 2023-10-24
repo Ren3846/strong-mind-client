@@ -42,7 +42,10 @@ const CourseStudentItem: React.FC<{
 
   return (
     <div className='course-user' title={user?.email} style={{ margin: '5px' }}>
-      <Avatar icon={<UserOutlined />} />
+      <Space>
+        <Avatar icon={<UserOutlined />} />
+        {user?.email}
+      </Space>
     </div>
   )
 }
@@ -54,13 +57,17 @@ const CourseItem: React.FC<ICourse> = (course) => {
         <h3>{course.title}</h3>
         <p>{course.about}</p>
         <div className='course-users'>
-          {course.students.length ? (
+          {/* {course.students.length ? (
             course.students.map((user) => (
               <CourseStudentItem userId={user} key={course._id + user} />
             ))
           ) : (
             <p>Пока никого :(</p>
-          )}
+          )} */}{' '}
+          <CourseStudentItem
+            userId={course.teacher}
+            key={course._id + course.teacher}
+          />
         </div>
         <span>Price: {course.price} $</span>
         <Button type='primary' key={course._id}>

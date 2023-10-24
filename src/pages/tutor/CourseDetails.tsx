@@ -6,6 +6,7 @@ import Layout from 'antd/es/layout/layout'
 import Preloader from '../../components/common/Preloader'
 import LessonsList from '../../components/user/LessonsList'
 import { ICourse } from '../../redux/store/types'
+import { GetStudents } from '../../components/tutor/GetStudents'
 
 const { Title, Paragraph, Text } = Typography
 
@@ -41,30 +42,22 @@ const CourseDetails: React.FC = () => {
           <p>Category: {course.category}</p>
           <p>Difficulty: {course.difficulty}</p>
           <p>Price: ${course.price}</p>
-
-          {course.students.length > 0 && (
-            <div>
-              <h2>Students:</h2>
-              <ul>
-                {course.students.map((student: any) => (
-                  <li key={student._id}>{student.name}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {/* {course.lessons.length > 0 && (
-            <div>
-              <h2>Lessons:</h2>
-              <ul>
-                {course.lessons.map((lesson: any) => (
-                  <li key={lesson._id}>{lesson.title}</li>
-                ))}
-              </ul>
-            </div>
-          )} */}
         </div>
       </Card>
+      <Card title='Students' style={{ width: '80rem', margin: '20px' }}>
+        {course.students.length ? (
+          <div>
+            <ul>
+              {course.students.map((student: any) => (
+                <GetStudents userId={student} key={course._id + student} />
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <p>Пока никого :(</p>
+        )}
+      </Card>
+
       <Card title='Lessons' style={{ width: '80rem', margin: '20px' }}>
         <div>
           <LessonsList />

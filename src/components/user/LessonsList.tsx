@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Card from 'antd/lib/card'
 import axios from 'axios'
-import { Button, Divider } from 'antd'
+import { Button, Divider, Space } from 'antd'
+import { Link } from 'react-router-dom'
 
 interface Lesson {
   _id: string
@@ -32,14 +33,18 @@ function LessonsList() {
   return (
     <div>
       {lessons.map((lesson) => (
-        <Card key={lesson._id} style={{ width: '15rem' }}>
-          <h2>{lesson.title}</h2>
-          <p>{lesson.description}</p>
-          <p>Video Key: {lesson.videoKey}</p>
-          <p>Duration: {lesson.duration} minutes</p>
-          <Divider />
-          <Button type='primary'>View Lesson</Button>
-        </Card>
+        <Space>
+          <Card key={lesson._id} style={{ width: '15rem', margin: '5px' }}>
+            <h2>{lesson.title}</h2>
+            <p>{lesson.description}</p>
+            <p>Video Key: {lesson.videoKey}</p>
+            <p>Duration: {lesson.duration} minutes</p>
+            <Divider />
+            <Link to={lesson._id}>
+              <Button type='primary'>View Lesson</Button>
+            </Link>
+          </Card>
+        </Space>
       ))}
       {error && <p>{error}</p>}
     </div>
