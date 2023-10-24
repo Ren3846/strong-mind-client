@@ -55,7 +55,7 @@ const TeacherProfile: React.FC<{}> = () => {
                   <GetCourses courseId={course} key={teacher._id + course} />
                 ))
               ) : (
-                <p>Пока никого :(</p>
+                <p>No teachers :(</p>
               )}
             </div>
           ) : (

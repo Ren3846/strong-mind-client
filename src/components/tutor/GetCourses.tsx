@@ -46,7 +46,7 @@ export const GetCourses: React.FC<{
               </Button>
             </Space>
           ) : (
-            <p></p>
+            <p>No courses yet</p>
           )}
         </Card>
       </Space>

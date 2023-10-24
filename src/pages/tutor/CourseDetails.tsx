@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Card, Row, Typography } from 'antd'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Layout from 'antd/es/layout/layout'
 import Preloader from '../../components/common/Preloader'
 import LessonsList from '../../components/user/LessonsList'
@@ -62,7 +62,9 @@ const CourseDetails: React.FC = () => {
         <div>
           <LessonsList />
         </div>
-        <Button style={{ margin: '20px' }}>Add Lesson</Button>
+        <Link to={`/lessons/create`}>
+          <Button style={{ margin: '20px' }}>Add Lesson</Button>
+        </Link>
       </Card>
     </Row>
   )

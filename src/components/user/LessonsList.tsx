@@ -40,7 +40,7 @@ function LessonsList() {
             <p>Video Key: {lesson.videoKey}</p>
             <p>Duration: {lesson.duration} minutes</p>
             <Divider />
-            <Link to={lesson._id}>
+            <Link to={`/lessons/${lesson._id}`}>
               <Button type='primary'>View Lesson</Button>
             </Link>
           </Card>
