@@ -9,7 +9,7 @@ import { BellOutlined, UserOutlined } from '@ant-design/icons'
 
 function Navbar() {
   const navigate = useNavigate()
-  const userBalance = useSelector((state: any) => state.auth.user.balance)
+  const userBalance = useSelector((state: any) => state.auth.user)
 
   const currentUser = useSelector<StoreType, User>(
     (state: any) => state.auth.user,
@@ -90,7 +90,7 @@ function Navbar() {
                   {/* <UserOutlined
                     style={{ fontSize: '18px', marginRight: '5px' }}
                   /> */}
-                  <span>Balance: {userBalance}</span>
+                  <span>Balance: {userBalance.balance}</span>
                 </div>
                 <Divider type='vertical' />
               </Space>
