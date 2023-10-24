@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Input, Button, message, Card, Row, InputNumber } from 'antd'
-import { useParams } from 'react-router-dom'
+import { redirect, useParams } from 'react-router-dom'
 import axios from 'axios'
 
 const AddLesson: React.FC = () => {

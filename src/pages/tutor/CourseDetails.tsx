@@ -1,33 +1,60 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Card, Row, Typography } from 'antd'
+import { Button, Card, Divider, Row, Space, Typography, message } from 'antd'
 import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
-import Layout from 'antd/es/layout/layout'
 import Preloader from '../../components/common/Preloader'
-import LessonsList from '../../components/user/LessonsList'
-import { ICourse } from '../../redux/store/types'
 import { GetStudents } from '../../components/tutor/GetStudents'
 
 const { Title, Paragraph, Text } = Typography
 
 const CourseDetails: React.FC = () => {
   const { id } = useParams()
-  const [courseInfo, setCourseInfo] = useState<ICourse | null>(null)
-  const [error, setError] = useState('')
-
   const [course, setCourse] = useState<any>(null)
+  const [lessonsData, setLessonsData] = useState<any[]>([])
+  const [error, setError] = useState('')
 
   useEffect(() => {
     axios
       .get(`/api/courses/${id}`)
       .then((response) => {
         setCourse(response.data)
-        console.log(response.data)
+        fetchLessonData(response.data.lessons)
       })
       .catch((error) => {
-        console.error(error)
+        setError('Ошибка при загрузке данных курса')
       })
   }, [id])
+
+  const handleDeleteLesson = (lessonId: string) => {
+    axios
+      .delete(`/api/lessons/${lessonId}`)
+      .then(() => {
+        message.success('Lesson delete success')
+        setLessonsData((data) =>
+          data.filter((lesson) => lesson._id !== lessonId),
+        )
+      })
+      .catch((error) => {
+        message.error('Error while delete')
+        console.error(error)
+      })
+  }
+
+  const fetchLessonData = (lessonIds: string[]) => {
+    const promises = lessonIds.map((lessonId) => {
+      return axios
+        .get(`/api/lessons/${lessonId}`)
+        .then((response) => response.data)
+        .catch((error) => {
+          console.error(`Ошибка при получении данных урока с ID ${lessonId}`)
+          return null
+        })
+    })
+
+    Promise.all(promises).then((lessonData) => {
+      setLessonsData(lessonData)
+    })
+  }
 
   if (!course) {
     return <Preloader />
@@ -60,7 +87,33 @@ const CourseDetails: React.FC = () => {
 
       <Card title='Lessons' style={{ width: '80rem', margin: '20px' }}>
         <div>
-          <LessonsList />
+          <ul>
+            {lessonsData.map((lesson: any) => (
+              <Space>
+                <Card
+                  key={lesson._id}
+                  style={{ width: '15rem', margin: '5px' }}
+                >
+                  <h2>{lesson.title}</h2>
+                  <p>{lesson.description}</p>
+                  <p>Video Key: {lesson.videoKey}</p>
+                  <p>Duration: {lesson.duration} minutes</p>
+                  <Divider />
+                  <Space>
+                    <Link to={`/lessons/${lesson._id}`}>
+                      <Button type='primary'>View Lesson</Button>
+                    </Link>
+                    <Button
+                      danger
+                      onClick={() => handleDeleteLesson(lesson._id)}
+                    >
+                      Delete
+                    </Button>
+                  </Space>
+                </Card>
+              </Space>
+            ))}
+          </ul>
         </div>
         <Link to={`/lessons/create/${course._id}`}>
           <Button style={{ margin: '20px' }}>Add Lesson</Button>

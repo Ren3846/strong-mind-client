@@ -15,17 +15,16 @@ interface Lesson {
 function LessonsList() {
   const [lessons, setLessons] = useState<Lesson[]>([])
   const [error, setError] = useState<string>('')
-  const [data, setData] = useState<Lesson[]>([])
 
   const handleDeleteLesson = (lessonId: string) => {
     axios
       .delete(`/api/lessons/${lessonId}`)
       .then(() => {
-        message.success('Курс успешно удален')
-        setData((data) => data.filter((course) => course._id !== lessonId))
+        message.success('Lesson delete success')
+        setLessons((data) => data.filter((lesson) => lesson._id !== lessonId))
       })
       .catch((error) => {
-        message.error('Ошибка при удалении курса')
+        message.error('Error while delete')
         console.error(error)
       })
   }
@@ -35,7 +34,6 @@ function LessonsList() {
       .get('/api/lessons')
       .then((response) => {
         setLessons(response.data)
-        console.log(response)
         console.log(response.data)
       })
       .catch((error) => {
@@ -54,12 +52,14 @@ function LessonsList() {
             <p>Video Key: {lesson.videoKey}</p>
             <p>Duration: {lesson.duration} minutes</p>
             <Divider />
-            <Link to={`/lessons/${lesson._id}`}>
-              <Button type='primary'>View Lesson</Button>
-            </Link>
-            <Button danger onClick={() => handleDeleteLesson(lesson._id)}>
-              Delete
-            </Button>
+            <Space>
+              <Link to={`/lessons/${lesson._id}`}>
+                <Button type='primary'>View Lesson</Button>
+              </Link>
+              <Button danger onClick={() => handleDeleteLesson(lesson._id)}>
+                Delete
+              </Button>
+            </Space>
           </Card>
         </Space>
       ))}

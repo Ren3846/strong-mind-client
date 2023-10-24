@@ -37,7 +37,7 @@ const MyCourses: React.FC = () => {
       .delete(`/api/courses/${courseId}`)
       .then(() => {
         message.success('Курс успешно удален')
-        setData(data => data.filter(course => course._id !== courseId))
+        setData((data) => data.filter((course) => course._id !== courseId))
       })
       .catch((error) => {
         message.error('Ошибка при удалении курса')
@@ -50,7 +50,7 @@ const MyCourses: React.FC = () => {
       <Card title='My courses' style={{ width: '60rem', margin: '20px' }}>
         {loaded ? (
           <ul>
-            {data.map(item =>
+            {data.map((item) => (
               <Card key={item._id} style={{ margin: '20px' }}>
                 <Space>
                   <Link to={item._id}>
@@ -69,8 +69,7 @@ const MyCourses: React.FC = () => {
                   <Button type='default' icon={<EditOutlined />} />
                 </Space>
               </Card>
-              ,
-            )}
+            ))}
           </ul>
         ) : (
           <Preloader />
