@@ -14,20 +14,6 @@ import NotFound from './NotFound'
 import { useSelector } from 'react-redux'
 import { StoreType } from '../redux/store'
 import Navbar from '../components/user/Navbar'
-import TutorProfile from './tutor/TutorProfile'
-
-// import {
-//   USER,
-//   EXPLORE,
-//   SIGNIN,
-//   SIGNUP,
-//   COURSES,
-//   USER_PROFILE,
-//   USER_COURSES,
-//   USER_TRANSACTIONS,
-//   COURSES_ENROLLED,
-//   COURSES_ENROLLED_ID,
-// } from '../paths'
 
 import { USER_ROLE, User } from '../redux/store/types'
 import Dashboard from './user/Dashboard'
@@ -42,6 +28,7 @@ import CourseDetails from './tutor/CourseDetails'
 import CourseInfo from './user/EnrolledCourseInfo'
 import AddLesson from './tutor/AddLesson'
 import Lesson from './tutor/Lesson'
+import TutorDashboard from './tutor/TutorDashboard'
 
 interface IProtectedRoute {
   condition: boolean
@@ -111,7 +98,13 @@ const Router: React.FC<{}> = () => {
               <ProtectedRoute
                 condition={isAuthenticated}
                 redirect='/signin'
-                children={<Dashboard />}
+                children={
+                  isAuthenticated && currentUser.role === USER_ROLE.TEACHER ? (
+                    <TutorDashboard />
+                  ) : (
+                    <Dashboard />
+                  )
+                }
               />
             }
           />

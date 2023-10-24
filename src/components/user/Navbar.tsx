@@ -43,7 +43,6 @@ function Navbar() {
           }
           children='Teachers'
         />
-        {/* {currentUser.role === USER_ROLE.TEACHER ? ( */}
         <NavLink
           to='/enrolled'
           className={({ isActive }) =>
@@ -51,8 +50,14 @@ function Navbar() {
           }
           children='Enrolled'
         />
-        {/* ) : (
-          <></>
+        {/* {currentUser.role !== USER_ROLE.TEACHER && (
+          <NavLink
+            to='/enrolled'
+            className={({ isActive }) =>
+              `navbar-link ${isActive ? 'active' : ''}`
+            }
+            children='Enrolled'
+          />
         )} */}
         <NavLink
           to='/meetings'
