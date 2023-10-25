@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
-import { UserOutlined } from '@ant-design/icons'
+import { SearchOutlined, UserOutlined } from '@ant-design/icons'
 import {
   Typography,
   Row,
@@ -13,8 +13,10 @@ import {
   Button,
   Select,
   Divider,
+  Input,
 } from 'antd'
 import { ICourse, ITeacher, User } from '../../redux/store/types'
+import { SearchBar } from '../../components/common/SearchBar'
 
 const { Title, Paragraph } = Typography
 
@@ -119,6 +121,14 @@ const Courses = () => {
       filters.category === 'all' || course.category === filters.category
     return difficultyMatch && categoryMatch
   })
+
+  // const handleSearch = (query: string) => {
+  //   const filtered = courses.filter((course) => {
+  //     return course.title.toLowerCase().includes(query.toLowerCase())
+  //   })
+
+  //   setFilteredCourses(filtered)
+  // }
   return (
     <Layout>
       <Row align='middle' justify='center'>
@@ -126,6 +136,9 @@ const Courses = () => {
           <div>
             <div>
               <Space>
+                {' '}
+                <Typography.Text>Filters:</Typography.Text>
+                {/* <SearchBar onSearch={handleSearch} /> */}
                 <Select
                   value={filters.difficulty}
                   onChange={handleDifficultyChange}
@@ -138,7 +151,6 @@ const Courses = () => {
                   <Select.Option value='B1'>B1</Select.Option>
                   <Select.Option value='B2'>B2</Select.Option>
                 </Select>
-
                 <Select
                   value={filters.category}
                   onChange={handleCategoryChange}
@@ -150,6 +162,10 @@ const Courses = () => {
                   <Select.Option value='Literature'>Russian</Select.Option>
                   <Select.Option value='Grammar2'>Armenian</Select.Option>
                 </Select>
+                <Button
+                  icon={<SearchOutlined />}
+                  href='https://www.google.com'
+                />
               </Space>
             </div>
 

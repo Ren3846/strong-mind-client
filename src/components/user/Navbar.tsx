@@ -1,11 +1,11 @@
 import React from 'react'
-import { Badge, Button, Divider, Space } from 'antd'
+import { Badge, Button, Divider, Space, Tooltip } from 'antd'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import MenuDropDown from './MenuDropDown'
 import { StoreType } from '../../redux/store'
 import { USER_ROLE, User } from '../../redux/store/types'
-import { BellOutlined, UserOutlined } from '@ant-design/icons'
+import { BellOutlined, UserOutlined, WalletOutlined } from '@ant-design/icons'
 
 function Navbar() {
   const navigate = useNavigate()
@@ -95,7 +95,15 @@ function Navbar() {
                   {/* <UserOutlined
                     style={{ fontSize: '18px', marginRight: '5px' }}
                   /> */}
-                  <span>Balance: {userBalance.balance}</span>
+                  <span>Balance: {userBalance.balance} $</span>
+                  <Tooltip title='Go to Wallet'>
+                    <Button
+                      icon={<WalletOutlined />}
+                      size='large'
+                      type='link'
+                      onClick={() => navigate('/wallet')} // Здесь нужно указать путь к кошельку
+                    />
+                  </Tooltip>
                 </div>
                 <Divider type='vertical' />
               </Space>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Layout from '../../components/common/Layout'
-import { Row, Col, Card, Typography } from 'antd'
+import { Row, Col, Card, Typography, Button } from 'antd'
 import { ICourse, ITeacher } from '../../redux/store/types'
 import Preloader from '../../components/common/Preloader'
 
@@ -53,24 +53,42 @@ const Dashboard = () => {
             ) : (
               <ul>
                 {enrolledCourses.map((course) => (
-                  <li key={course._id}>{course.title}</li>
+                  <>
+                    <Card key={course._id}>
+                      {course.title}
+                      <Button type='primary' style={{ float: 'right' }}>
+                        View
+                      </Button>
+                    </Card>
+                  </>
                 ))}
               </ul>
             )}
           </Card>
         </Col>
         <Col span={12}>
-          <Card title='Top Teachers'>
+          <Card title='My Tutors'>
             {loadingTeachers ? (
               <Preloader />
             ) : (
               <ul>
                 {topTeachers.map((teacher) => (
-                  <li key={teacher._id}>{teacher.email}</li>
+                  <Card key={teacher._id}>
+                    {teacher.email}
+                    <Button type='primary' style={{ float: 'right' }}>
+                      View
+                    </Button>
+                  </Card>
                 ))}
               </ul>
             )}
           </Card>
+        </Col>
+        <Col span={24}>
+          <Card title='My Lessons'></Card>
+        </Col>
+        <Col span={24}>
+          <Card title='Shedule'></Card>
         </Col>
       </Row>
     </Layout>
