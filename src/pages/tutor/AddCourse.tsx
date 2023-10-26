@@ -17,8 +17,21 @@ const CreateCourse: React.FC = () => {
   const [form] = Form.useForm()
   const [loading, setLoading] = useState(false)
 
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
+
+  // const handleChange = (value: string[]) => {
+  //   setSelectedTags(value)
+  // }
+
+  // const clearTags = () => {
+  //   setSelectedTags([])
+  // }
+
   const handleCreate = (values: any) => {
     setLoading(true)
+
+    values.tagline = values.tagline.split(',').map((tag: string) => tag.trim())
+
     axios
       .post('/api/courses', values)
       .then((response) => {
@@ -61,7 +74,7 @@ const CreateCourse: React.FC = () => {
           >
             <Select>
               <Option value='English'>English</Option>
-              <Option value='Russian'>russian</Option>
+              <Option value='Russian'>Russian</Option>
               <Option value='Armenian'>Armenian</Option>
             </Select>
           </Form.Item>
@@ -79,12 +92,27 @@ const CreateCourse: React.FC = () => {
               <Option value='C2'>C2</Option>
             </Select>
           </Form.Item>
+
           <Form.Item
             label='Tagline'
             name='tagline'
             rules={[{ required: true, message: 'Enter a tag' }]}
           >
             <Input />
+            {/* <Select
+              mode='multiple'
+              style={{ width: '100%' }}
+              placeholder='Please select tags'
+              value={selectedTags}
+              onChange={handleChange}
+            >
+              {tagsData.map((tag: string) => (
+                <Option key={tag}>{tag}</Option>
+              ))}
+            </Select>
+            <Button type='primary' onClick={clearTags}>
+              Clear Tags
+            </Button> */}
           </Form.Item>
           <Form.Item
             label='Thumbnail Link'

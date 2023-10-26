@@ -6,6 +6,7 @@ import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
 import { ITeacher } from '../../redux/store/types'
 import { GetCourses } from '../../components/tutor/GetCourses'
+import RequestMeeting from '../../components/user/RequestMeeting'
 
 const TeacherProfile: React.FC<{}> = () => {
   const { id } = useParams()
@@ -39,6 +40,7 @@ const TeacherProfile: React.FC<{}> = () => {
               fullName: {teacher?.fullName}
               Email: {teacher?.email}
               <Button>Chat</Button>
+              {teacher?._id && <RequestMeeting teacherId={teacher._id} />}{' '}
             </Space>
           ) : (
             <Preloader />
@@ -52,7 +54,9 @@ const TeacherProfile: React.FC<{}> = () => {
             <div>
               {teacher?.courses.length ? (
                 teacher.courses.map((course) => (
-                  <GetCourses courseId={course} key={teacher._id + course} />
+                  <Space>
+                    <GetCourses courseId={course} key={teacher._id + course} />
+                  </Space>
                 ))
               ) : (
                 <p>No teachers :(</p>

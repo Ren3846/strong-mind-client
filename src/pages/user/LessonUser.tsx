@@ -23,6 +23,7 @@ const LessonUser: React.FC = () => {
     axios
       .get(`/api/lessons/${id}`)
       .then((response) => {
+        console.log(response.data)
         setLesson({ ...response.data, isLiked: false })
       })
       .catch((error) => {
@@ -37,11 +38,8 @@ const LessonUser: React.FC = () => {
     setLoading(true)
 
     try {
-      // Отправляем PATCH запрос на сервер для установки/снятия лайка
       await axios.patch(`/api/lessons/like/${lesson._id}`)
-      // Обновляем статус "лайка"
       setLesson({ ...lesson, isLiked: !lesson.isLiked })
-      // Вы можете добавить сообщение об успешном лайке
       message.success(
         lesson.isLiked ? 'Unliked the lesson' : 'Liked the lesson',
       )
