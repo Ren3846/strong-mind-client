@@ -30,18 +30,20 @@ const Course: React.FC<{}> = () => {
       .post('/api/users/purchase', { courseId: id })
       .then((response) => {
         if (response.data.success) {
-          message.success(`Списано ${response.data.amount} денег`)
+          message.success(`You paid ${response.data.amount} $`)
           setEnrollmentSuccess(true)
-        } else {
-          message.error('Недостаточно денег')
         }
+        // else {
+        //   message.error('You are already purchase this course')
+        // }
       })
       .catch((error) => {
-        if (error.response) {
-          message.error(error.response.data.message, 6)
-        } else {
-          console.error(error)
-        }
+        message.error('You are already purchase this course')
+        // if (error.response) {
+        //   message.error(error.response.data.message, 6)
+        // } else {
+        //   console.error(error)
+        // }
       })
   }
 

@@ -3,6 +3,7 @@ import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
 import axios from 'axios'
 import 'react-big-calendar/lib/css/react-big-calendar.css'
+import { Card, Row } from 'antd'
 
 const localizer = momentLocalizer(moment)
 
@@ -33,20 +34,24 @@ const TutorShedule: React.FC = () => {
   }
 
   return (
-    <div>
-      <Calendar
-        localizer={localizer}
-        events={events}
-        startAccessor='start'
-        endAccessor='end'
-        style={{ height: 500 }}
-        onSelectEvent={handleEventClick}
-      />
-    </div>
+    <Row align='middle' justify='center'>
+      <Card title='Meetings' style={{ width: '80rem', margin: '20px' }}>
+        <Calendar
+          localizer={localizer}
+          events={events}
+          startAccessor='start'
+          endAccessor='end'
+          style={{ height: 500 }}
+          onSelectEvent={handleEventClick}
+        />
+      </Card>
+    </Row>
   )
 }
 
 export default TutorShedule
+
+////////////////
 
 // import React, { useState } from 'react'
 // import FullCalendar from '@fullcalendar/react'

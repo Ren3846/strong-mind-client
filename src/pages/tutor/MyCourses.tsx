@@ -36,11 +36,11 @@ const MyCourses: React.FC = () => {
     axios
       .delete(`/api/courses/${courseId}`)
       .then(() => {
-        message.success('Курс успешно удален')
+        message.success('Delete course successful')
         setData((data) => data.filter((course) => course._id !== courseId))
       })
       .catch((error) => {
-        message.error('Ошибка при удалении курса')
+        message.error('Error delete course')
         console.error(error)
       })
   }

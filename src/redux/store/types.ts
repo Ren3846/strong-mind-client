@@ -15,13 +15,27 @@ export interface User {
   bio: string | null
   gender: string | null
   timezone: string | null
+  isBlocked: boolean
+  students: string[]
+  liveLessonSchedule: LiveLesson[]
+  history: any[]
+  courses: string[]
+  meetings: Meeting[]
 }
 
-export interface AdminUser {
-  fullName: string
-  role: 'admin'
+interface LiveLesson {
+  date: string
+  lessonId: string
+  title: string
+  currentUrl: string
 }
 
+interface Meeting {
+  userId: string
+  status: string
+  date: string
+  _id: string
+}
 export interface ICourse {
   _id: string
   title: string
@@ -50,4 +64,9 @@ export interface ITeacher {
   history: any[]
   courses: string[]
   meetings: any[]
+}
+
+export interface AdminUser {
+  fullName: string
+  role: 'admin'
 }

@@ -100,6 +100,7 @@ const Dashboard = () => {
             )}
           </Card>
         </Col>
+
         <Col span={24}>
           <Card title='My Lessons'>
             <LessonsListUser />
