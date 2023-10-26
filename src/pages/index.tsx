@@ -29,6 +29,7 @@ import CourseInfo from './user/EnrolledCourseInfo'
 import AddLesson from './tutor/AddLesson'
 import Lesson from './tutor/Lesson'
 import TutorDashboard from './tutor/TutorDashboard'
+import LessonUser from './user/LessonUser'
 
 interface IProtectedRoute {
   condition: boolean
@@ -167,6 +168,17 @@ const Router: React.FC<{}> = () => {
                 }
                 redirect='/signin'
                 children={<Lesson />}
+              />
+            }
+          />
+
+          <Route
+            path='/lessonsuser/:id'
+            element={
+              <ProtectedRoute
+                condition={isAuthenticated}
+                redirect='/signin'
+                children={<LessonUser />}
               />
             }
           />
