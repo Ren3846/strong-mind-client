@@ -21,6 +21,7 @@ import Preloader from '../../components/common/Preloader'
 
 import { UserOutlined } from '@ant-design/icons'
 import { updateUser } from '../../redux/actions/user'
+import WalletTopup from '../../components/user/Topup'
 
 const { Item } = Form
 const { Dragger } = Upload
@@ -96,6 +97,7 @@ function Profile() {
                     value={user.balance}
                     precision={2}
                   />
+                  <WalletTopup />
                 </Col>
               </Row>
               <Divider />

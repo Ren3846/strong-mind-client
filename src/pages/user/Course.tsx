@@ -27,17 +27,18 @@ const Course: React.FC<{}> = () => {
 
   const enrollUser = () => {
     axios
-      .patch(`/api/courses/enroll/${id}`)
-      .then(() => {
-        setEnrollmentSuccess(true)
+      .post('/api/users/purchase', { courseId: id })
+      .then((response) => {
+        if (response.data.success) {
+          message.success(`Списано ${response.data.amount} денег`)
+          setEnrollmentSuccess(true)
+        } else {
+          message.error('Недостаточно денег')
+        }
       })
       .catch((error) => {
-        if (
-          error.response &&
-          error.response.status === 403 &&
-          error.response.data.message === 'You are already in this course'
-        ) {
-          message.error('You are already in this course')
+        if (error.response) {
+          message.error(error.response.data.message, 6)
         } else {
           console.error(error)
         }

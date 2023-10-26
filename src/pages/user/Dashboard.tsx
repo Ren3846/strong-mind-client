@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Layout from '../../components/common/Layout'
-import { Row, Col, Card, Typography, Button } from 'antd'
+import { Row, Col, Card, Typography, Button, Space } from 'antd'
 import { ICourse, ITeacher } from '../../redux/store/types'
 import Preloader from '../../components/common/Preloader'
+import StepsDashboard from '../../components/user/Steps'
+import { Link } from 'react-router-dom'
+import Shedule from '../../components/user/Shedule'
 
 const { Title } = Typography
 
@@ -46,6 +49,9 @@ const Dashboard = () => {
   return (
     <Layout>
       <Row gutter={[16, 16]}>
+        {/* <Col span={24}>
+          <StepsDashboard />
+        </Col> */}
         <Col span={12}>
           <Card title='My Enrolled Courses'>
             {loadingCourses ? (
@@ -54,11 +60,13 @@ const Dashboard = () => {
               <ul>
                 {enrolledCourses.map((course) => (
                   <>
-                    <Card key={course._id}>
+                    <Card key={course._id} style={{ marginTop: '20px' }}>
                       {course.title}
-                      <Button type='primary' style={{ float: 'right' }}>
-                        View
-                      </Button>
+                      <Link to={`/courses/${course._id}`}>
+                        <Button type='primary' style={{ float: 'right' }}>
+                          View
+                        </Button>
+                      </Link>
                     </Card>
                   </>
                 ))}
@@ -88,7 +96,9 @@ const Dashboard = () => {
           <Card title='My Lessons'></Card>
         </Col>
         <Col span={24}>
-          <Card title='Shedule'></Card>
+          <Card title='Shedule'>
+            <Shedule />
+          </Card>
         </Col>
       </Row>
     </Layout>

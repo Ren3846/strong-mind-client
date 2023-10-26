@@ -101,7 +101,7 @@ function Navbar() {
                       icon={<WalletOutlined />}
                       size='large'
                       type='link'
-                      onClick={() => navigate('/wallet')} // Здесь нужно указать путь к кошельку
+                      onClick={() => navigate('/profile')}
                     />
                   </Tooltip>
                 </div>

@@ -1,18 +1,27 @@
+// import { Spin } from 'antd'
+
+// const Preloader = () => {
+//   return (
+//     <div
+//       style={{
+//         display: 'flex',
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//         height: '100%',
+//       }}
+//     >
+//       <Spin size='large' />
+//     </div>
+//   )
+// }
+
+// export default Preloader
+import React from 'react'
+import { LoadingOutlined } from '@ant-design/icons'
 import { Spin } from 'antd'
 
-const Preloader = () => {
-  return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100%',
-      }}
-    >
-      <Spin size='large' />
-    </div>
-  )
-}
+const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />
+
+const Preloader: React.FC = () => <Spin indicator={antIcon} />
 
 export default Preloader
