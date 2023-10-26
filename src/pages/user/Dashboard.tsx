@@ -64,7 +64,7 @@ const Dashboard = () => {
                   <>
                     <Card key={course._id} style={{ marginTop: '20px' }}>
                       {course.title}
-                      <Link to={`/courses/${course._id}`}>
+                      <Link to={`/enrolled/${course._id}/info`}>
                         <Button type='primary' style={{ float: 'right' }}>
                           View
                         </Button>
@@ -89,9 +89,11 @@ const Dashboard = () => {
                       style={{ marginRight: '10px' }}
                     />
                     {teacher.email}
-                    <Button type='primary' style={{ float: 'right' }}>
-                      View
-                    </Button>
+                    <Link to={`/teacher/${teacher._id}`}>
+                      <Button type='primary' style={{ float: 'right' }}>
+                        View
+                      </Button>
+                    </Link>
                   </Card>
                 ))}
               </ul>

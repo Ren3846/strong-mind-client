@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Modal, DatePicker, TimePicker, Button, message } from 'antd'
 import axios from 'axios'
 import dayjs, { Dayjs } from 'dayjs'
+import { PhoneOutlined } from '@ant-design/icons'
 
 interface CallRequestProps {
   teacherId: string
@@ -52,6 +53,7 @@ const RequestMeeting: React.FC<CallRequestProps> = ({ teacherId }) => {
   return (
     <div>
       <Button type='primary' onClick={showModal} disabled={loading}>
+        <PhoneOutlined />
         Request a Call
       </Button>
       <Modal

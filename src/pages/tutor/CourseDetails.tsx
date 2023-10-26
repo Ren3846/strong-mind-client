@@ -21,7 +21,7 @@ const CourseDetails: React.FC = () => {
         fetchLessonData(response.data.lessons)
       })
       .catch((error) => {
-        setError('Ошибка при загрузке данных курса')
+        setError('Error while dawnload data')
       })
   }, [id])
 
@@ -46,7 +46,7 @@ const CourseDetails: React.FC = () => {
         .get(`/api/lessons/${lessonId}`)
         .then((response) => response.data)
         .catch((error) => {
-          console.error(`Ошибка при получении данных урока с ID ${lessonId}`)
+          console.error(`Error get data ID ${lessonId}`)
           return null
         })
     })
@@ -81,7 +81,7 @@ const CourseDetails: React.FC = () => {
             </ul>
           </div>
         ) : (
-          <p>Пока никого :(</p>
+          <p>Nobody :(</p>
         )}
       </Card>
 

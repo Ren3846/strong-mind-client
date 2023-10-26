@@ -4,6 +4,7 @@ import Layout from '../../components/common/Layout'
 import { Row, Col, Card, Typography } from 'antd'
 import { ICourse, ITeacher } from '../../redux/store/types'
 import Preloader from '../../components/common/Preloader'
+import TutorShedule from './TutorShedule'
 
 const { Title } = Typography
 
@@ -69,7 +70,9 @@ const TutorDashboard = () => {
           <Card title='My Students'></Card>
         </Col>
         <Col span={24}>
-          <Card title='Shedule'></Card>
+          <Card title='Shedule'>
+            <TutorShedule />
+          </Card>
         </Col>
       </Row>
     </Layout>

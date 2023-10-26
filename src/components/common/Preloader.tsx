@@ -22,6 +22,16 @@ import { Spin } from 'antd'
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />
 
-const Preloader: React.FC = () => <Spin indicator={antIcon} />
+const Preloader: React.FC = () => (
+  <Spin
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100%',
+    }}
+    indicator={antIcon}
+  />
+)
 
 export default Preloader

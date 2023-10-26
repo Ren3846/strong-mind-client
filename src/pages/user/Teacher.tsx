@@ -7,6 +7,7 @@ import Preloader from '../../components/common/Preloader'
 import { ITeacher } from '../../redux/store/types'
 import { GetCourses } from '../../components/tutor/GetCourses'
 import RequestMeeting from '../../components/user/RequestMeeting'
+import { WechatOutlined } from '@ant-design/icons'
 
 const TeacherProfile: React.FC<{}> = () => {
   const { id } = useParams()
@@ -39,7 +40,10 @@ const TeacherProfile: React.FC<{}> = () => {
             <Space direction='vertical'>
               fullName: {teacher?.fullName}
               Email: {teacher?.email}
-              <Button>Chat</Button>
+              <Button>
+                <WechatOutlined />
+                Chat
+              </Button>
               {teacher?._id && <RequestMeeting teacherId={teacher._id} />}{' '}
             </Space>
           ) : (
