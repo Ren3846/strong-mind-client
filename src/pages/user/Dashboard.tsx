@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Layout from '../../components/common/Layout'
-import { Row, Col, Card, Typography, Button, Space } from 'antd'
+import { Row, Col, Card, Typography, Button, Space, Avatar } from 'antd'
 import { ICourse, ITeacher } from '../../redux/store/types'
 import Preloader from '../../components/common/Preloader'
 import StepsDashboard from '../../components/user/Steps'
 import { Link } from 'react-router-dom'
 import Shedule from '../../components/user/Shedule'
+import LessonsListUser from '../../components/user/LessonsListUser'
+import { UserOutlined } from '@ant-design/icons'
 
 const { Title } = Typography
 
@@ -81,7 +83,11 @@ const Dashboard = () => {
             ) : (
               <ul>
                 {topTeachers.map((teacher) => (
-                  <Card key={teacher._id}>
+                  <Card key={teacher._id} style={{ marginTop: '20px' }}>
+                    <Avatar
+                      icon={<UserOutlined />}
+                      style={{ marginRight: '10px' }}
+                    />
                     {teacher.email}
                     <Button type='primary' style={{ float: 'right' }}>
                       View
@@ -93,7 +99,9 @@ const Dashboard = () => {
           </Card>
         </Col>
         <Col span={24}>
-          <Card title='My Lessons'></Card>
+          <Card title='My Lessons'>
+            <LessonsListUser />
+          </Card>
         </Col>
         <Col span={24}>
           <Card title='Shedule'>
