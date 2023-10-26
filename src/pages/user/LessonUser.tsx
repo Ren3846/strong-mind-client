@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Card, Button, Divider, Space, Row } from 'antd'
+import { Card, Button, Divider, Space, Row, message } from 'antd'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
+import { HeartOutlined, HeartFilled } from '@ant-design/icons'
 
 interface ILesson {
   _id: string
@@ -9,24 +10,48 @@ interface ILesson {
   description: string | null
   videoKey: string | null
   duration: number | null
+  isLiked: boolean
 }
 
 const LessonUser: React.FC = () => {
   const { id } = useParams()
   const [lesson, setLesson] = useState<ILesson | null>(null)
   const [error, setError] = useState<string>('')
+  const [loading, setLoading] = useState<boolean>(false)
 
   useEffect(() => {
     axios
       .get(`/api/lessons/${id}`)
       .then((response) => {
-        setLesson(response.data)
+        setLesson({ ...response.data, isLiked: false })
       })
       .catch((error) => {
         console.error(error)
         setError('Error while fetching lesson data')
       })
   }, [id])
+
+  const handleLikeClick = async () => {
+    if (!lesson) return
+
+    setLoading(true)
+
+    try {
+      // Отправляем PATCH запрос на сервер для установки/снятия лайка
+      await axios.patch(`/api/lessons/like/${lesson._id}`)
+      // Обновляем статус "лайка"
+      setLesson({ ...lesson, isLiked: !lesson.isLiked })
+      // Вы можете добавить сообщение об успешном лайке
+      message.success(
+        lesson.isLiked ? 'Unliked the lesson' : 'Liked the lesson',
+      )
+    } catch (error) {
+      console.error(error)
+      message.error('Error while liking the lesson')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div>
@@ -44,14 +69,20 @@ const LessonUser: React.FC = () => {
                 <p>Video Key: {lesson.videoKey}</p>
                 <p>Duration: {lesson.duration} minutes</p>
                 <Divider />
+                <Button
+                  type='primary'
+                  icon={lesson.isLiked ? <HeartFilled /> : <HeartOutlined />}
+                  onClick={handleLikeClick}
+                  loading={loading}
+                >
+                  {lesson.isLiked ? 'Liked' : 'Like'}
+                </Button>
               </div>
             )}
           </Space>
         </Card>
-      </Row>
-      <Row align='middle' justify='center'>
         <Card
-          title={`Lesson`}
+          title={`Video`}
           style={{ width: '60rem', margin: '20px' }}
           className='lesson-card'
         >
@@ -64,10 +95,10 @@ const LessonUser: React.FC = () => {
               Your browser does not support the video tag.
             </video>
           )}
-
-          {error && <p>{error}</p>}
         </Card>
       </Row>
+
+      {error && <p>{error}</p>}
     </div>
   )
 }
