@@ -1,16 +1,23 @@
 import { Card, Row, Space, Button, message } from 'antd'
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import React, { useEffect, useMemo, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Preloader from '../../components/common/Preloader'
 import { ICourse, ITeacher } from '../../redux/store/types'
+import { useSelector } from 'react-redux'
+import { StoreType } from '../../redux/store'
 
 const Course: React.FC<{}> = () => {
   const { id } = useParams()
+  const user = useSelector((state: StoreType) => state.auth.user);
+  const navigate = useNavigate();
   const [course, setCourse] = useState<ICourse | null>(null)
   const [loaded, setLoaded] = useState(false)
   const [enrollmentSuccess, setEnrollmentSuccess] = useState(false)
   const [enrollmentError, setEnrollmentError] = useState(null)
+  const [enrollLoading, setEnrollLoading] = useState(false);
+
+  const course_purchased = useMemo(() => user?.courses.includes(id || ""), [id, user]);
 
   useEffect(() => {
     axios
@@ -26,6 +33,7 @@ const Course: React.FC<{}> = () => {
   }, [id])
 
   const enrollUser = () => {
+    setEnrollLoading(true);
     axios
       .post('/api/users/purchase', { courseId: id })
       .then((response) => {
@@ -44,6 +52,8 @@ const Course: React.FC<{}> = () => {
         // } else {
         //   console.error(error)
         // }
+      }).finally(() => {
+        setEnrollLoading(false);
       })
   }
 
@@ -72,9 +82,23 @@ const Course: React.FC<{}> = () => {
                   {enrollmentSuccess ? (
                     <p>You have successfully enrolled in this course.</p>
                   ) : (
-                    <Button type='primary' onClick={enrollUser}>
-                      Enroll
-                    </Button>
+                    <Space>
+                      <Button
+                        disabled={course_purchased}
+                        loading={enrollLoading}
+                        type={course_purchased ? 'default' : 'primary'}
+                        onClick={enrollUser}
+                        children={course_purchased ? "Enrolled" : "Enroll"}
+                      />
+                      {
+                        course_purchased ?
+                          <Button
+                            type="link"
+                            onClick={() => navigate(`/enrolled/${course._id}/info`)}
+                            children="Go to course page"
+                          /> : null
+                      }
+                    </Space>
                   )}
                   <GetTeacherInfo userId={course.teacher} />
                 </Space>

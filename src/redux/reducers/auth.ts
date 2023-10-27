@@ -1,7 +1,11 @@
 import { authActions } from '../actions/index'
 import type { ExtractActions } from '../actions/index'
+import { User } from '../store/types'
 
-const initialState = {
+const initialState: {
+  loaded: boolean
+  user: User | null
+} = {
   loaded: false,
   user: null,
 }
