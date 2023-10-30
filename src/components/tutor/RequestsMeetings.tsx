@@ -108,7 +108,7 @@ const TeacherMeetings: React.FC = () => {
                       </>
                     ) : (
                       <>
-                        <CloseCircleTwoTone twoToneColor='#eb2f96' />
+                        <CloseCircleTwoTone twoToneColor='#ffda00' />
                         <p>Pending</p>
                       </>
                     )}

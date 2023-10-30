@@ -23,13 +23,10 @@ import Preloader from '../../components/common/Preloader'
 
 import { UserOutlined, WalletOutlined } from '@ant-design/icons'
 import { updateUser } from '../../redux/actions/user'
-import WalletTopup from '../../components/user/Topup'
 import { useNavigate } from 'react-router-dom'
 
 const { Item } = Form
 const { Dragger } = Upload
-const { Title } = Typography
-const { Option } = Select
 
 const genderOptions = [
   'Male',

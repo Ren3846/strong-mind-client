@@ -13,12 +13,9 @@ import {
   Button,
   Select,
   Divider,
-  Input,
 } from 'antd'
-import { ICourse, ITeacher, User } from '../../redux/store/types'
-import { SearchBar } from '../../components/common/SearchBar'
-
-const { Title, Paragraph } = Typography
+import { ICourse, User } from '../../redux/store/types'
+import GetLikes from '../../components/common/GetLikes'
 
 const CourseStudentItem: React.FC<{
   userId: string
@@ -43,12 +40,22 @@ const CourseStudentItem: React.FC<{
   }, [userId])
 
   return (
-    <div className='course-user' title={user?.email} style={{ margin: '5px' }}>
-      <Space>
-        <Avatar icon={<UserOutlined />} />
-        {user?.email}
-      </Space>
-    </div>
+    <>
+      {loaded ? (
+        <div
+          className='course-user'
+          title={user?.email}
+          style={{ margin: '5px' }}
+        >
+          <Space>
+            <Avatar icon={<UserOutlined />} />
+            {user?.email}
+          </Space>
+        </div>
+      ) : (
+        <Preloader />
+      )}
+    </>
   )
 }
 
@@ -56,16 +63,13 @@ const CourseItem: React.FC<ICourse> = (course) => {
   return (
     <div className='course-item course-card'>
       <Space direction='vertical' size='middle' style={{ display: 'flex' }}>
-        <h3>{course.title}</h3>
+        <Space direction='horizontal'>
+          <h3>{course.title}</h3>
+          <GetLikes courseId={course._id} />
+        </Space>
+
         <p>{course.about}</p>
         <div className='course-users'>
-          {/* {course.students.length ? (
-            course.students.map((user) => (
-              <CourseStudentItem userId={user} key={course._id + user} />
-            ))
-          ) : (
-            <p>Пока никого :(</p>
-          )} */}{' '}
           <CourseStudentItem
             userId={course.teacher}
             key={course._id + course.teacher}
@@ -136,7 +140,6 @@ const Courses = () => {
           <div>
             <div>
               <Space>
-                {' '}
                 <Typography.Text>Filters:</Typography.Text>
                 {/* <SearchBar onSearch={handleSearch} /> */}
                 <Select

@@ -7,7 +7,7 @@ import Landing from './Landing'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 import Profile from './user/Profile'
-import Courses from './user/Courses'
+import Courses from './user/AllCourses'
 
 import NotFound from './NotFound'
 
