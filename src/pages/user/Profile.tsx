@@ -14,18 +14,22 @@ import {
   Statistic,
   Col,
   Divider,
+  Select,
+  Tooltip,
 } from 'antd'
 import { updateUserDetailsAPI } from '../../api/user'
 import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
 
-import { UserOutlined } from '@ant-design/icons'
+import { UserOutlined, WalletOutlined } from '@ant-design/icons'
 import { updateUser } from '../../redux/actions/user'
 import WalletTopup from '../../components/user/Topup'
+import { useNavigate } from 'react-router-dom'
 
 const { Item } = Form
 const { Dragger } = Upload
 const { Title } = Typography
+const { Option } = Select
 
 const genderOptions = [
   'Male',
@@ -44,9 +48,12 @@ const genderOptions = [
   'Not Specified',
 ]
 
+const timezones = ['GMT-12:00', 'GMT-11:00', 'GMT-10:00']
+
 function Profile() {
   const user = useSelector((state: any) => state.auth.user)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [loaded, setLoaded] = useState(true)
   const [editedUser, setEditedUser] = useState({ ...user })
@@ -97,7 +104,12 @@ function Profile() {
                     value={user.balance}
                     precision={2}
                   />
-                  <WalletTopup />
+                  <Button
+                    icon={<WalletOutlined />}
+                    onClick={() => navigate('/profile/wallet')}
+                  >
+                    Wallet
+                  </Button>
                 </Col>
               </Row>
               <Divider />
@@ -178,6 +190,21 @@ function Profile() {
                     onChange={handleFieldChange}
                   />
                 </Item>
+
+                {/* <Item label='Timezone'>
+                  <Select
+                    id='timezone'
+                    value={editedUser.timezone}
+                    onChange={handleFieldChange}
+                  >
+                    {timezones.map((timezone, index) => (
+                      <Option key={index} value={timezone}>
+                        {timezone}
+                      </Option>
+                    ))}
+                  </Select>
+                </Item> */}
+
                 <Divider />
 
                 <Item label='Avatar'>

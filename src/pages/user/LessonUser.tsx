@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { Card, Button, Divider, Space, Row, message } from 'antd'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { HeartOutlined, HeartFilled } from '@ant-design/icons'
+import { useSelector } from 'react-redux'
+import { StoreType } from '../../redux/store'
 
 interface ILesson {
   _id: string
@@ -10,10 +12,11 @@ interface ILesson {
   description: string | null
   videoKey: string | null
   duration: number | null
-  isLiked: boolean
+  likes: string[]
 }
 
 const LessonUser: React.FC = () => {
+  const user = useSelector((state: StoreType) => state.auth.user)
   const { id } = useParams()
   const [lesson, setLesson] = useState<ILesson | null>(null)
   const [error, setError] = useState<string>('')
@@ -32,17 +35,22 @@ const LessonUser: React.FC = () => {
       })
   }, [id])
 
+  const lessonLiked = useMemo(
+    () => (lesson ? lesson.likes.includes(user?._id ?? '') : false),
+    [lesson, user?._id],
+  )
+
   const handleLikeClick = async () => {
     if (!lesson) return
 
     setLoading(true)
 
     try {
-      await axios.patch(`/api/lessons/like/${lesson._id}`)
-      setLesson({ ...lesson, isLiked: !lesson.isLiked })
-      message.success(
-        lesson.isLiked ? 'Unliked the lesson' : 'Liked the lesson',
-      )
+      const { data } = await axios.patch(`/api/lessons/like/${lesson._id}`)
+      setLesson(data)
+      // message.success(
+      //   lesson.isLiked ? 'Unliked the lesson' : 'Liked the lesson',
+      // )
     } catch (error) {
       console.error(error)
       message.error('Error while liking the lesson')
@@ -69,11 +77,11 @@ const LessonUser: React.FC = () => {
                 <Divider />
                 <Button
                   type='primary'
-                  icon={lesson.isLiked ? <HeartFilled /> : <HeartOutlined />}
+                  icon={lessonLiked ? <HeartFilled /> : <HeartOutlined />}
                   onClick={handleLikeClick}
                   loading={loading}
                 >
-                  {lesson.isLiked ? 'Liked' : 'Like'}
+                  {lessonLiked ? 'Liked' : 'Like'}
                 </Button>
               </div>
             )}

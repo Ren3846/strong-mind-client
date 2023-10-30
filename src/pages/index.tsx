@@ -30,6 +30,7 @@ import AddLesson from './tutor/AddLesson'
 import Lesson from './tutor/Lesson'
 import TutorDashboard from './tutor/TutorDashboard'
 import LessonUser from './user/LessonUser'
+import Wallet from './user/Wallet'
 
 interface IProtectedRoute {
   condition: boolean
@@ -193,6 +194,17 @@ const Router: React.FC<{}> = () => {
                 condition={isAuthenticated}
                 redirect='/signin'
                 children={<Profile />}
+              />
+            }
+          />
+
+          <Route
+            path='/profile/wallet'
+            element={
+              <ProtectedRoute
+                condition={isAuthenticated}
+                redirect='/signin'
+                children={<Wallet />}
               />
             }
           />

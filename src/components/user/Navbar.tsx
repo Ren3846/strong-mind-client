@@ -101,7 +101,7 @@ function Navbar() {
                       icon={<WalletOutlined />}
                       size='large'
                       type='link'
-                      onClick={() => navigate('/profile')}
+                      onClick={() => navigate('/profile/wallet')}
                     />
                   </Tooltip>
                 </div>

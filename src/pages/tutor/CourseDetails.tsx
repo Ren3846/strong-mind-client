@@ -12,7 +12,7 @@ import {
 import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
 import Preloader from '../../components/common/Preloader'
-import { GetStudents } from '../../components/tutor/GetStudents'
+import { GetStudents } from '../../components/tutor/GetTutor'
 
 const { Title, Paragraph, Text } = Typography
 

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { User } from '../../redux/store/types'
 import { UserOutlined } from '@ant-design/icons'
 import { Avatar, Space } from 'antd'
+import { Link } from 'react-router-dom'
 
 export const GetStudents: React.FC<{
   userId: string
@@ -30,7 +31,7 @@ export const GetStudents: React.FC<{
     <div className='course-user' title={user?.email} style={{ margin: '5px' }}>
       <Space>
         <Avatar icon={<UserOutlined />} />
-        <a>{user?.email}</a>
+        <Link to={`/teacher/${user?._id}`}>{user?.email}</Link>
       </Space>
     </div>
   )

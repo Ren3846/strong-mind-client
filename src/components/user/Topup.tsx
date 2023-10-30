@@ -25,8 +25,7 @@ const WalletTopup: React.FC = () => {
   }
 
   return (
-    <Card style={{ marginTop: '10px' }}>
-      <h4>Top up your balance</h4>
+    <>
       <Input
         placeholder='Enter the amount'
         value={amount}
@@ -34,9 +33,9 @@ const WalletTopup: React.FC = () => {
         style={{ marginBottom: '10px' }}
       />
       <Button type='primary' onClick={handleTopup} loading={loading}>
-        Top Up
+        Pay
       </Button>
-    </Card>
+    </>
   )
 }
 

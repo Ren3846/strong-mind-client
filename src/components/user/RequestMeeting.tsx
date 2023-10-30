@@ -52,7 +52,7 @@ const RequestMeeting: React.FC<CallRequestProps> = ({ teacherId }) => {
 
   return (
     <div>
-      <Button type='primary' onClick={showModal} disabled={loading}>
+      <Button type='primary' onClick={showModal} loading={loading}>
         <PhoneOutlined />
         Request a Call
       </Button>

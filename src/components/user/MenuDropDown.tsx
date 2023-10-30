@@ -41,14 +41,15 @@ function MenuDropDown({ user }: MenuDropDownProps) {
       ) : (
         <></>
       )}
-      <Menu.Item key='logout' onClick={handleLogOut}>
+
+      <Menu.Item key='logout' onClick={handleLogOut} danger>
         Log out
       </Menu.Item>
     </Menu>
   )
 
   return (
-    <Dropdown overlay={menu} trigger={['click']}>
+    <Dropdown overlay={menu} trigger={['hover']}>
       <Button>
         <UserOutlined />
         {user?.email} <DownOutlined />
@@ -58,3 +59,62 @@ function MenuDropDown({ user }: MenuDropDownProps) {
 }
 
 export default React.memo(MenuDropDown)
+
+// import React from 'react'
+// import { useSelector } from 'react-redux'
+
+// import { DownOutlined, UserOutlined } from '@ant-design/icons'
+// import type { MenuProps } from 'antd'
+// import { Button, Dropdown, message, Space } from 'antd'
+
+// const handleMenuClick: MenuProps['onClick'] = (e) => {
+//   message.info('Click on menu item.')
+//   console.log('click', e)
+// }
+
+// const items: MenuProps['items'] = [
+//   {
+//     label: '1st menu item',
+//     key: '1',
+//     icon: <UserOutlined />,
+//   },
+//   {
+//     label: '2nd menu item',
+//     key: '2',
+//     icon: <UserOutlined />,
+//   },
+//   {
+//     label: '3rd menu item',
+//     key: '3',
+//     icon: <UserOutlined />,
+//     danger: true,
+//   },
+//   {
+//     label: '4rd menu item',
+//     key: '4',
+//     icon: <UserOutlined />,
+//     danger: true,
+//     disabled: true,
+//   },
+// ]
+
+// const menuProps = {
+//   items,
+//   onClick: handleMenuClick,
+// }
+
+// const MenuDropDown: React.FC = () => (
+//   <Space wrap>
+//     <Dropdown menu={menuProps}>
+//       <Button>
+//         <Space>
+//           <UserOutlined />
+//           Button
+//           <DownOutlined />
+//         </Space>
+//       </Button>
+//     </Dropdown>
+//   </Space>
+// )
+
+// export default React.memo(MenuDropDown)

@@ -1,41 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Layout from '../../components/common/Layout'
-import {
-  Row,
-  Col,
-  Card,
-  Typography,
-  Space,
-  Divider,
-  Button,
-  message,
-  List,
-} from 'antd'
+import { Row, Col, Card, Button, Space } from 'antd'
 import { ICourse, ITeacher } from '../../redux/store/types'
 import Preloader from '../../components/common/Preloader'
 import TutorShedule from '../../components/tutor/TutorShedule'
 import { Link } from 'react-router-dom'
-import { SearchOutlined } from '@ant-design/icons'
 import TeacherMeetings from '../../components/tutor/RequestsMeetings'
 import GetLikes from '../../components/common/GetLikes'
-
-const { Title } = Typography
+import { GetStudents } from '../../components/tutor/GetTutor'
+import { useSelector } from 'react-redux'
+import { StoreType } from '../../redux/store'
 
 const TutorDashboard = () => {
-  const [topTeachers, setTopTeachers] = useState<ITeacher[]>([])
-
-  const [loadingCourses, setLoadingCourses] = useState(true)
-  const [loadingTeachers, setLoadingTeachers] = useState(true)
-
   const [data, setData] = useState<ICourse[]>([])
   const [loaded, setLoaded] = useState(false)
+
+  const user = useSelector((state: StoreType) => state.auth.user)
+  console.log('user', user)
 
   useEffect(() => {
     axios
       .get('/api/courses/created')
       .then((response) => {
-        console.log(response.data)
+        console.log('Courses', response.data)
         setData(response.data)
       })
       .catch((error) => {
@@ -43,18 +31,6 @@ const TutorDashboard = () => {
       })
       .finally(() => {
         setLoaded(true)
-      })
-
-    axios
-      .get('/api/users/top')
-      .then((response) => {
-        setTopTeachers(response.data)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-      .finally(() => {
-        setLoadingTeachers(false)
       })
   }, [])
 
@@ -85,19 +61,7 @@ const TutorDashboard = () => {
         <Col span={12}>
           <Card title='My Students'></Card>
         </Col>
-        {/* <Col span={12}>
-          <Card title='Top Teachers'>
-            {loadingTeachers ? (
-              <Preloader />
-            ) : (
-              <ul>
-                {topTeachers.map((teacher) => (
-                  <li key={teacher._id}>{teacher.email}</li>
-                ))}
-              </ul>
-            )}
-          </Card>
-        </Col> */}
+
         <Col span={24}>
           <Card title='Requests'>
             <TeacherMeetings />

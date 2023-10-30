@@ -1,4 +1,5 @@
-import { message } from 'antd'
+import { HeartOutlined } from '@ant-design/icons'
+import { Button, message } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
@@ -28,11 +29,15 @@ const GetLikes: React.FC<GetLikesProps> = ({ courseId }) => {
 
   return (
     <div>
-      {loadingLikes ? (
-        <p>Loading...</p>
-      ) : (
-        <h4>{`Course Likes: ${courseLikes}`}</h4>
-      )}
+      <Button
+        loading={loadingLikes}
+        value='large'
+        type='text'
+        icon={<HeartOutlined />}
+      >
+        {' '}
+        {courseLikes}
+      </Button>
     </div>
   )
 }
