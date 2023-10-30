@@ -14,15 +14,15 @@ import {
 } from 'antd'
 import { ICourse, ITeacher } from '../../redux/store/types'
 import Preloader from '../../components/common/Preloader'
-import TutorShedule from './TutorShedule'
+import TutorShedule from '../../components/tutor/TutorShedule'
 import { Link } from 'react-router-dom'
 import { SearchOutlined } from '@ant-design/icons'
-import TeacherMeetings from '../../components/tutor/Tutor meetings'
+import TeacherMeetings from '../../components/tutor/RequestsMeetings'
+import GetLikes from '../../components/common/GetLikes'
 
 const { Title } = Typography
 
 const TutorDashboard = () => {
-  const [enrolledCourses, setEnrolledCourses] = useState<ICourse[]>([])
   const [topTeachers, setTopTeachers] = useState<ITeacher[]>([])
 
   const [loadingCourses, setLoadingCourses] = useState(true)
@@ -32,22 +32,6 @@ const TutorDashboard = () => {
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    axios
-      .get('/api/courses/user/enrolled')
-      .then((response) => {
-        setEnrolledCourses(response.data)
-      })
-      .catch((err) => {
-        if (err.response && err.response.status === 404) {
-          setEnrolledCourses([])
-        } else {
-          console.error(err)
-        }
-      })
-      .finally(() => {
-        setLoadingCourses(false)
-      })
-
     axios
       .get('/api/courses/created')
       .then((response) => {
@@ -83,17 +67,13 @@ const TutorDashboard = () => {
               <ul>
                 {data.map((item) => (
                   <Card key={item._id} style={{ marginTop: '10px' }}>
-                    <Space>
-                      <Link to={`/mycourses/${item._id}`}>
-                        <li key={item._id}>{item.title}</li>
-                      </Link>
-                      {/* <Link
-                        to={`/mycourses/${item._id}`}
-                        style={{ float: 'right' }}
-                      >
-                        <Button type='primary'>View</Button>
-                      </Link> */}
-                    </Space>
+                    <p key={item._id}>{item.title}</p>
+                    <GetLikes courseId={item._id} />
+                    <Link to={`/mycourses/${item._id}`}>
+                      <Button type='primary' style={{ float: 'right' }}>
+                        View
+                      </Button>
+                    </Link>
                   </Card>
                 ))}
               </ul>

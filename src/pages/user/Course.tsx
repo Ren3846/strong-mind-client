@@ -6,18 +6,22 @@ import Preloader from '../../components/common/Preloader'
 import { ICourse, ITeacher } from '../../redux/store/types'
 import { useSelector } from 'react-redux'
 import { StoreType } from '../../redux/store'
+import GetLikes from '../../components/common/GetLikes'
 
 const Course: React.FC<{}> = () => {
   const { id } = useParams()
-  const user = useSelector((state: StoreType) => state.auth.user);
-  const navigate = useNavigate();
+  const user = useSelector((state: StoreType) => state.auth.user)
+  const navigate = useNavigate()
   const [course, setCourse] = useState<ICourse | null>(null)
   const [loaded, setLoaded] = useState(false)
   const [enrollmentSuccess, setEnrollmentSuccess] = useState(false)
   const [enrollmentError, setEnrollmentError] = useState(null)
-  const [enrollLoading, setEnrollLoading] = useState(false);
+  const [enrollLoading, setEnrollLoading] = useState(false)
 
-  const course_purchased = useMemo(() => user?.courses.includes(id || ""), [id, user]);
+  const course_purchased = useMemo(
+    () => user?.courses.includes(id || ''),
+    [id, user],
+  )
 
   useEffect(() => {
     axios
@@ -33,7 +37,7 @@ const Course: React.FC<{}> = () => {
   }, [id])
 
   const enrollUser = () => {
-    setEnrollLoading(true);
+    setEnrollLoading(true)
     axios
       .post('/api/users/purchase', { courseId: id })
       .then((response) => {
@@ -46,14 +50,15 @@ const Course: React.FC<{}> = () => {
         // }
       })
       .catch((error) => {
-        message.error('You are already purchase this course')
-        // if (error.response) {
-        //   message.error(error.response.data.message, 6)
-        // } else {
-        //   console.error(error)
-        // }
-      }).finally(() => {
-        setEnrollLoading(false);
+        // message.error('You are already purchase this course')
+        if (error.response) {
+          message.error(error.response.data.message, 6)
+        } else {
+          console.error(error)
+        }
+      })
+      .finally(() => {
+        setEnrollLoading(false)
       })
   }
 
@@ -78,6 +83,7 @@ const Course: React.FC<{}> = () => {
                     alt={course.title}
                     style={{ maxWidth: '100%' }}
                   />
+                  <GetLikes courseId={course._id} />
 
                   {enrollmentSuccess ? (
                     <p>You have successfully enrolled in this course.</p>
@@ -88,16 +94,17 @@ const Course: React.FC<{}> = () => {
                         loading={enrollLoading}
                         type={course_purchased ? 'default' : 'primary'}
                         onClick={enrollUser}
-                        children={course_purchased ? "Enrolled" : "Enroll"}
+                        children={course_purchased ? 'Enrolled' : 'Enroll'}
                       />
-                      {
-                        course_purchased ?
-                          <Button
-                            type="link"
-                            onClick={() => navigate(`/enrolled/${course._id}/info`)}
-                            children="Go to course page"
-                          /> : null
-                      }
+                      {course_purchased ? (
+                        <Button
+                          type='link'
+                          onClick={() =>
+                            navigate(`/enrolled/${course._id}/info`)
+                          }
+                          children='Go to course page'
+                        />
+                      ) : null}
                     </Space>
                   )}
                   <GetTeacherInfo userId={course.teacher} />

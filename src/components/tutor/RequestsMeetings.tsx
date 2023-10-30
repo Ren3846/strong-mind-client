@@ -14,13 +14,12 @@ const TeacherMeetings: React.FC = () => {
   const user = useSelector((state: any) => state.auth.user)
   const dispatch = useDispatch()
 
-  const teacherId = '65366b5e8ce3e04f6a6bbb7f'
-
   useEffect(() => {
     setLoading(true)
     axios
       .get<ITeacher>(`/api/users/${user._id}`)
       .then((response) => {
+        console.log(response.data)
         setTeacher(response.data)
       })
       .catch((error) => {
@@ -30,11 +29,11 @@ const TeacherMeetings: React.FC = () => {
       .finally(() => {
         setLoading(false)
       })
-  }, [teacherId])
+  }, [])
 
   const handleAcceptMeeting = (meetingId: string) => {
     axios
-      .get(`/api/users/meetings/${meetingId}?action=accept`)
+      .post(`/api/users/meetings/${meetingId}?action=accept`)
       .then(() => {
         message.success('Meeting request accepted successfully')
         setTeacher((prevTeacher) => {
@@ -58,6 +57,32 @@ const TeacherMeetings: React.FC = () => {
       })
   }
 
+  const handleRejectMeeting = (meetingId: string) => {
+    axios
+      .post(`/api/users/meetings/${meetingId}?action=reject`)
+      .then(() => {
+        message.success('Meeting request rejected successfully')
+        setTeacher((prevTeacher) => {
+          if (prevTeacher) {
+            return {
+              ...prevTeacher,
+              meetings: prevTeacher.meetings.map((meeting) => {
+                if (meeting._id === meetingId) {
+                  meeting.status = 'rejected'
+                }
+                return meeting
+              }),
+            }
+          }
+          return prevTeacher
+        })
+      })
+      .catch((error) => {
+        console.error('Error while rejecting meeting request:', error)
+        message.error('Error while rejecting meeting request')
+      })
+  }
+
   return (
     <div>
       {loading ? (
@@ -72,23 +97,40 @@ const TeacherMeetings: React.FC = () => {
                   <Space align='center'>
                     <Text strong>{meeting.date}</Text>
                     {meeting.status === 'accepted' ? (
-                      <CheckCircleTwoTone twoToneColor='#52c41a' />
+                      <>
+                        <CheckCircleTwoTone twoToneColor='#52c41a' />
+                        <p>Accepted</p>
+                      </>
+                    ) : meeting.status === 'rejected' ? (
+                      <>
+                        <CloseCircleTwoTone twoToneColor='#ff4d4f' />
+                        <p>Rejected</p>
+                      </>
                     ) : (
-                      <CloseCircleTwoTone twoToneColor='#eb2f96' />
+                      <>
+                        <CloseCircleTwoTone twoToneColor='#eb2f96' />
+                        <p>Pending</p>
+                      </>
                     )}
                   </Space>
                 </div>
                 {meeting.status === 'pending' && (
                   <>
-                    <Button
-                      type='primary'
-                      onClick={() => handleAcceptMeeting(meeting._id)}
-                    >
-                      Accept
-                    </Button>
-                    {/* <Button danger type='primary'>
-                      Reject
-                    </Button> */}
+                    <Space>
+                      <Button
+                        type='primary'
+                        onClick={() => handleAcceptMeeting(meeting._id)}
+                      >
+                        Accept
+                      </Button>
+                      <Button
+                        danger
+                        type='primary'
+                        onClick={() => handleRejectMeeting(meeting._id)}
+                      >
+                        Reject
+                      </Button>
+                    </Space>
                   </>
                 )}
               </List.Item>
