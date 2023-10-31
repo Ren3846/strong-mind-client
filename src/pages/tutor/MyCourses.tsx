@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { Button, Card, Divider, Row, Space, message } from 'antd'
+import { Button, Card, Divider, Row, Skeleton, Space, message } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
@@ -72,7 +72,7 @@ const MyCourses: React.FC = () => {
             ))}
           </ul>
         ) : (
-          <Preloader />
+          <Skeleton active />
         )}
 
         <Divider />

@@ -1,6 +1,16 @@
 import React, { useState, ChangeEvent } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { message, Form, Input, Button, Row, Card, Avatar, Upload } from 'antd'
+import {
+  message,
+  Form,
+  Input,
+  Button,
+  Row,
+  Card,
+  Avatar,
+  Upload,
+  Skeleton,
+} from 'antd'
 import { updateUserDetailsAPI } from '../../api/user'
 import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
@@ -103,7 +113,7 @@ function TutorProfile() {
               </Form>
             </>
           ) : (
-            <Preloader />
+            <Skeleton active />
           )}
         </Card>
       </Row>

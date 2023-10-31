@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Button, List, message, Space, Typography } from 'antd'
+import { Card, Button, List, message, Space, Typography, Skeleton } from 'antd'
 import axios from 'axios'
 import { ITeacher } from '../../redux/store/types'
 import { CheckCircleTwoTone, CloseCircleTwoTone } from '@ant-design/icons'
@@ -86,7 +86,7 @@ const TeacherMeetings: React.FC = () => {
   return (
     <div>
       {loading ? (
-        <Preloader />
+        <Skeleton active />
       ) : (
         teacher && (
           <List

@@ -1,4 +1,4 @@
-import { Card, Row, Space, Button, message } from 'antd'
+import { Card, Row, Space, Button, message, Skeleton } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
@@ -115,7 +115,7 @@ const Course: React.FC<{}> = () => {
             )}
           </div>
         ) : (
-          <Preloader />
+          <Skeleton active />
         )}
       </Card>
     </Row>

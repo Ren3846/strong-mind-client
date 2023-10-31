@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Layout from '../../components/common/Layout'
-import { Row, Card, Space } from 'antd'
+import { Row, Card, Space, Skeleton } from 'antd'
 import Preloader from '../../components/common/Preloader'
 import { Link } from 'react-router-dom'
 
@@ -50,7 +50,7 @@ const Teachers: React.FC = () => {
               )}
             </Space>
           ) : (
-            <Preloader />
+            <Skeleton active />
           )}
         </Card>
       </Row>

@@ -1,6 +1,11 @@
 import React from 'react'
-import { DownOutlined, UserOutlined } from '@ant-design/icons'
-import { Button, Dropdown, Menu } from 'antd'
+import {
+  DownOutlined,
+  FileOutlined,
+  LogoutOutlined,
+  UserOutlined,
+} from '@ant-design/icons'
+import { Avatar, Button, Dropdown, Menu, Space } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { authLogout } from '../../redux/actions/auth'
@@ -30,19 +35,32 @@ function MenuDropDown({ user }: MenuDropDownProps) {
 
   const menu = (
     <Menu>
-      <Menu.Item key='profile' onClick={() => navigate('/profile')}>
+      <Menu.Item
+        icon={<UserOutlined />}
+        key='profile'
+        onClick={() => navigate('/profile')}
+      >
         Profile
       </Menu.Item>
 
       {currentUser.role === USER_ROLE.TEACHER ? (
-        <Menu.Item key='mycourses' onClick={() => navigate('/mycourses')}>
+        <Menu.Item
+          icon={<FileOutlined />}
+          key='mycourses'
+          onClick={() => navigate('/mycourses')}
+        >
           My courses
         </Menu.Item>
       ) : (
         <></>
       )}
 
-      <Menu.Item key='logout' onClick={handleLogOut} danger>
+      <Menu.Item
+        icon={<LogoutOutlined />}
+        key='logout'
+        onClick={handleLogOut}
+        danger
+      >
         Log out
       </Menu.Item>
     </Menu>
@@ -50,9 +68,15 @@ function MenuDropDown({ user }: MenuDropDownProps) {
 
   return (
     <Dropdown overlay={menu} trigger={['hover']}>
-      <Button>
-        <UserOutlined />
-        {user?.email} <DownOutlined />
+      <Button size='middle' type='text'>
+        <Space direction='horizontal'>
+          <Avatar
+            size='small'
+            style={{ backgroundColor: '#6466f1' }}
+            icon={<UserOutlined />}
+          />
+          {user?.email} <DownOutlined />
+        </Space>
       </Button>
     </Dropdown>
   )

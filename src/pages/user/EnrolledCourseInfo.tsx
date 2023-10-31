@@ -35,9 +35,9 @@ const CourseInfo: React.FC = () => {
       })
   }, [])
 
-  if (loading) {
-    return <Preloader />
-  }
+  // if (loading) {
+  //   return <Preloader />
+  // }
 
   return (
     <Row align='middle' justify='center'>
