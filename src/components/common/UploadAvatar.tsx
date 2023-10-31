@@ -2,10 +2,12 @@ import { Form, Upload, Button, message } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
 import axios from 'axios'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 const UploadAvatar = () => {
   const [form] = Form.useForm()
-  const [fileId, setFileId] = useState(null) // Идентификатор файла
+  const [fileId, setFileId] = useState(null)
+  const user = useSelector((state: any) => state.auth.user)
 
   const onFinish = (values: any) => {
     console.log('Received values:', values)
@@ -35,9 +37,6 @@ const UploadAvatar = () => {
         message.error('Произошла ошибка при загрузке фото')
       })
   }
-  //   const fieldid = '/user/95fae5fa-c1ab-4896-b556-7739d5513387.png'
-  //   const baseUrl = 'http://localhost:3000/api'
-  //   const imageUrl = `${baseUrl}/${fieldid}`
 
   return (
     <>
@@ -62,11 +61,6 @@ const UploadAvatar = () => {
           </Upload>
         </Form.Item>
       </Form>
-      {/* <img
-        src={`/api/users/avatar/${fileId}`}
-        alt='Avatar'
-        style={{ width: '100px' }}
-      /> */}
     </>
   )
 }

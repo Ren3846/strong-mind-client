@@ -25,6 +25,7 @@ import { UserOutlined, WalletOutlined } from '@ant-design/icons'
 import { updateUser } from '../../redux/actions/user'
 import { useNavigate } from 'react-router-dom'
 import UploadAvatar from '../../components/common/UploadAvatar'
+import { baseImageUrl } from '../index'
 
 const { Item } = Form
 const { Dragger } = Upload
@@ -80,7 +81,7 @@ function Profile() {
   }
 
   console.log(user)
-
+  const imageUrl = `${baseImageUrl}/${user.image}`
   return (
     <Layout>
       <Row align='middle' justify='center'>
@@ -88,7 +89,7 @@ function Profile() {
           {loaded ? (
             <>
               <Row justify='center'>
-                <Avatar size={120} icon={<UserOutlined />} />
+                <Avatar size={120} src={imageUrl} />
               </Row>
 
               <Divider />
