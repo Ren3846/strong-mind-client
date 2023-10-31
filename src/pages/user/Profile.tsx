@@ -24,6 +24,7 @@ import Preloader from '../../components/common/Preloader'
 import { UserOutlined, WalletOutlined } from '@ant-design/icons'
 import { updateUser } from '../../redux/actions/user'
 import { useNavigate } from 'react-router-dom'
+import UploadAvatar from '../../components/common/UploadAvatar'
 
 const { Item } = Form
 const { Dragger } = Upload
@@ -204,7 +205,7 @@ function Profile() {
 
                 <Divider />
 
-                <Item label='Avatar'>
+                {/* <Item label='Avatar'>
                   <Dragger>
                     <p className='ant-upload-drag-icon'>
                       <UserOutlined />
@@ -213,13 +214,14 @@ function Profile() {
                       Click or drag file to this area to upload
                     </p>
                   </Dragger>
-                </Item>
+                </Item> */}
                 <Item>
                   <Button type='primary' onClick={saveProfile}>
                     Save
                   </Button>
                 </Item>
               </Form>
+              <UploadAvatar />
             </>
           ) : (
             <Preloader />

@@ -21,6 +21,7 @@ export interface User {
   history: any[]
   courses: string[]
   meetings: Meeting[]
+  image: string
 }
 
 interface LiveLesson {

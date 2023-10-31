@@ -2,6 +2,7 @@ import API from './index'
 import { USER_ROLE } from '../redux/store/types'
 import { User } from '../redux/store/types'
 import { ITeacher, ICourse } from '../redux/store/types'
+import axios from 'axios'
 
 export interface UserData {}
 
@@ -57,8 +58,15 @@ const getUserDetailsAPI = () => API.get<User>('/user')
 // Функция для обновления данных пользователя
 const updateUserDetailsAPI = (body: User) => API.patch('/users/profile', body)
 
-//
-//
+export function uploadAvatarAPI(formData: any) {
+  const uploadURL = '/api/users/avatar'
+
+  return axios.post(uploadURL, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+} //
 //
 //
 // Функция для создания заказа
