@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Card, Row, Descriptions, Avatar } from 'antd'
+import { Card, Row, Descriptions, Avatar, Skeleton } from 'antd'
 import { useParams } from 'react-router-dom'
 import Shedule from '../../components/user/Shedule'
 import Preloader from '../../components/common/Preloader'
@@ -12,7 +12,7 @@ const CourseInfo: React.FC = () => {
   const [courseInfo, setCourseInfo] = useState<ICourse | null>(null)
   const [teacher, setTeacher] = useState<ITeacher | null>(null)
 
-  const [loading, setLoading] = useState(true)
+  const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState('')
   const { id } = useParams()
 
@@ -31,7 +31,7 @@ const CourseInfo: React.FC = () => {
         }
       })
       .finally(() => {
-        setLoading(false)
+        setLoaded(true)
       })
   }, [])
 
@@ -42,42 +42,51 @@ const CourseInfo: React.FC = () => {
   return (
     <Row align='middle' justify='center'>
       <Card title='Course Details' style={{ width: '80rem', margin: '20px' }}>
-        <div>
-          {courseInfo ? (
-            <Descriptions>
-              <Descriptions.Item label='Title'>
-                {courseInfo.title}
-              </Descriptions.Item>
-              <Descriptions.Item label='About'>
-                {courseInfo.about}
-              </Descriptions.Item>
-              <Descriptions.Item label='Tagline'>
-                {courseInfo.tagline}
-              </Descriptions.Item>
-              <Descriptions.Item label='Category'>
-                {courseInfo.category}
-              </Descriptions.Item>
-              <Descriptions.Item label='Difficulty'>
-                {courseInfo.difficulty}
-              </Descriptions.Item>
-              <Descriptions.Item label='Price'>
-                ${courseInfo.price}
-              </Descriptions.Item>
-              <Descriptions.Item label='Is Visible'>
-                {courseInfo.isVisible ? 'Yes' : 'No'}
-              </Descriptions.Item>
-              <Descriptions.Item label='Teacher'>
-                <GetTeacher userId={courseInfo.teacher} />
-              </Descriptions.Item>
-            </Descriptions>
-          ) : (
-            <p>{error}</p>
-          )}
-        </div>
+        {loaded ? (
+          <div>
+            {courseInfo ? (
+              <Descriptions>
+                <Descriptions.Item label='Title'>
+                  {courseInfo.title}
+                </Descriptions.Item>
+                <Descriptions.Item label='About'>
+                  {courseInfo.about}
+                </Descriptions.Item>
+                <Descriptions.Item label='Tagline'>
+                  {courseInfo.tagline}
+                </Descriptions.Item>
+                <Descriptions.Item label='Category'>
+                  {courseInfo.category}
+                </Descriptions.Item>
+                <Descriptions.Item label='Difficulty'>
+                  {courseInfo.difficulty}
+                </Descriptions.Item>
+                <Descriptions.Item label='Price'>
+                  ${courseInfo.price}
+                </Descriptions.Item>
+                <Descriptions.Item label='Is Visible'>
+                  {courseInfo.isVisible ? 'Yes' : 'No'}
+                </Descriptions.Item>
+                <Descriptions.Item label='Teacher'>
+                  <GetTeacher userId={courseInfo.teacher} />
+                </Descriptions.Item>
+              </Descriptions>
+            ) : (
+              <p>{error}</p>
+            )}
+          </div>
+        ) : (
+          <Skeleton active />
+        )}
       </Card>
 
-      <Card title='Lessons' style={{ width: '80rem', margin: '20px' }}>
-        <div>{courseInfo ? <LessonsListUser /> : <p>{error}</p>}</div>
+      <Card
+        title='Lessons in this Course'
+        style={{ width: '80rem', margin: '20px' }}
+      >
+        <div>
+          {courseInfo ? <LessonsListUser courseId={id} /> : <p>{error}</p>}
+        </div>
       </Card>
 
       <Card title='Course Shedule' style={{ width: '80rem', margin: '20px' }}>

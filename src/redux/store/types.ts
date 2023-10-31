@@ -66,6 +66,14 @@ export interface ITeacher {
   meetings: any[]
 }
 
+export interface ILesson {
+  _id: string
+  title: string | null
+  description: string | null
+  videoKey: string | null
+  duration: number | null
+}
+
 export interface AdminUser {
   fullName: string
   role: 'admin'

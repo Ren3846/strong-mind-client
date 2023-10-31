@@ -23,55 +23,32 @@ function Navbar() {
       <Link to='/' className='navbar-logo' children='StrongMind' />
       <nav className='nav-wrapper'>
         <NavLink
-          to='/dashboard'
-          className={({ isActive }) =>
-            `navbar-link ${isActive ? 'active' : ''}`
-          }
-          children='Dashboard'
-        />
-        <NavLink
           to='/courses'
           className={({ isActive }) =>
             `navbar-link ${isActive ? 'active' : ''}`
           }
-          children='Courses'
+          children='All Courses'
         />
         <NavLink
           to='/teachers'
           className={({ isActive }) =>
             `navbar-link ${isActive ? 'active' : ''}`
           }
-          children='Teachers'
+          children='Top Teachers'
         />
-        <NavLink
+        {/* <NavLink
           to='/enrolled'
           className={({ isActive }) =>
             `navbar-link ${isActive ? 'active' : ''}`
           }
           children='Enrolled'
         />
-        {/* {currentUser.role !== USER_ROLE.TEACHER && (
-          <NavLink
-            to='/enrolled'
-            className={({ isActive }) =>
-              `navbar-link ${isActive ? 'active' : ''}`
-            }
-            children='Enrolled'
-          />
-        )} */}
         <NavLink
           to='/meetings'
           className={({ isActive }) =>
             `navbar-link ${isActive ? 'active' : ''}`
           }
           children='Meetings'
-        />
-        {/* <NavLink
-          to='/profile'
-          className={({ isActive }) =>
-            `navbar-link ${isActive ? 'active' : ''}`
-          }
-          children='Profile'
         /> */}
       </nav>
 

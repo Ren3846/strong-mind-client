@@ -1,7 +1,10 @@
 import React from 'react'
 import {
+  CalendarOutlined,
   DownOutlined,
+  FileDoneOutlined,
   FileOutlined,
+  HomeOutlined,
   LogoutOutlined,
   UserOutlined,
 } from '@ant-design/icons'
@@ -36,11 +39,34 @@ function MenuDropDown({ user }: MenuDropDownProps) {
   const menu = (
     <Menu>
       <Menu.Item
+        icon={<HomeOutlined />}
+        key='dashboard'
+        onClick={() => navigate('/dashboard')}
+      >
+        Dashboard
+      </Menu.Item>
+      <Menu.Item
         icon={<UserOutlined />}
         key='profile'
         onClick={() => navigate('/profile')}
       >
         Profile
+      </Menu.Item>
+
+      <Menu.Item
+        icon={<FileDoneOutlined />}
+        key='enrolled'
+        onClick={() => navigate('/enrolled')}
+      >
+        Enrolled Courses
+      </Menu.Item>
+
+      <Menu.Item
+        icon={<CalendarOutlined />}
+        key='meetings'
+        onClick={() => navigate('/meetings')}
+      >
+        Meetings
       </Menu.Item>
 
       {currentUser.role === USER_ROLE.TEACHER ? (

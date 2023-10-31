@@ -6,16 +6,21 @@ import GetStartedTutor from '../components/landing/GetStartedTutor'
 import '../styles/globals.css'
 
 import Footer from '../components/common/Footer'
+import {
+  ClockCircleOutlined,
+  HourglassOutlined,
+  UserOutlined,
+} from '@ant-design/icons'
 
-const navigation = [
-  { name: 'Home', href: '/user' },
-  { name: 'Courses', href: '/explore' },
-  { name: 'Teach', href: '/tutor' },
-  { name: 'Contact', href: '/contact' },
-]
+// const navigation = [
+//   { name: 'Home', href: '/user' },
+//   { name: 'Courses', href: '/explore' },
+//   { name: 'Teach', href: '/tutor' },
+//   { name: 'Contact', href: '/contact' },
+// ]
 
 export default function Hero() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  // const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const el = useRef(null)
 
@@ -27,7 +32,11 @@ export default function Hero() {
             <div className='relative rounded-full px-3 py-1 text-md leading-6 text-gray-600 ring-1 ring-gray-900/30 hover:ring-gray-900/30'>
               Teach, inspire, and grow with StrongMind dynamic learning
               platform.{' '}
-              <Link to='/tutor' className='font-semibold text-indigo-600'>
+              <Link
+                to='/signup'
+                className='font-semibold text-indigo-600'
+                style={{ textDecoration: 'none' }}
+              >
                 <span className='absolute inset-0' aria-hidden='true' />
                 Join As a Tutor
                 <span aria-hidden='true'>&rarr;</span>
@@ -47,16 +56,18 @@ export default function Hero() {
             </p>
             <div className='mt-10 flex items-center justify-center gap-x-6 '>
               <Link
-                to='/user'
+                to='/signup'
                 className='rounded-md  bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+                style={{ textDecoration: 'none' }}
               >
                 Let`s start as student
               </Link>
               <Link
-                to='/user#about'
+                to='/courses'
                 className='text-sm font-semibold leading-6 text-gray-900'
+                style={{ textDecoration: 'none' }}
               >
-                Learn more <span aria-hidden='true'>→</span>
+                Explore courses <span aria-hidden='true'>→</span>
               </Link>
             </div>
           </div>
@@ -69,29 +80,26 @@ export default function Hero() {
             <dl className='grid grid-cols-1 gap-x-8 gap-y-16 text-center lg:grid-cols-3 '>
               <div className='mx-auto flex max-w-xs flex-col gap-y-4 hero-stats'>
                 <dt className='text-base leading-7 text-gray-600'>
-                  Minutes of learning online every 24 hours
+                  From 5$ per hour
                 </dt>
                 <div className='order-first text-3xl font-semibold tracking-tight flex justify-center text-gray-900 sm:text-5xl'>
-                  {/* <Counter value={724} /> */}
-                  <h1>724</h1>
+                  <HourglassOutlined style={{ color: '#5046e5' }} />
                 </div>
               </div>
               <div className='mx-auto flex max-w-xs flex-col gap-y-4 hero-stats'>
                 <dt className='text-base leading-7 text-gray-600'>
-                  Courses sold every week
+                  Free 2 lessons for you
                 </dt>
                 <div className='order-first text-3xl font-semibold flex justify-center tracking-tight text-gray-900 sm:text-5xl'>
-                  {/* <Counter value={543} /> */}
-                  <h1>543</h1>
+                  <UserOutlined style={{ color: '#5046e5' }} />
                 </div>
               </div>
               <div className='mx-auto flex max-w-xs flex-col gap-y-4 hero-stats'>
                 <dt className='text-base leading-7 text-gray-600'>
-                  New users yearly
+                  Lessons from 25 to 55 min
                 </dt>
                 <div className='order-first text-3xl font-semibold flex justify-center tracking-tight text-gray-900 sm:text-5xl'>
-                  {/* <Counter value={1803} /> */}
-                  <h1>1803</h1>
+                  <ClockCircleOutlined style={{ color: '#5046e5' }} />
                 </div>
               </div>
             </dl>

@@ -1,71 +1,72 @@
 import React, { useState, useEffect } from 'react'
 import Card from 'antd/lib/card'
 import axios from 'axios'
-import { Button, Divider, Space, message } from 'antd'
+import { Button, Skeleton, Space, message } from 'antd'
 import { Link } from 'react-router-dom'
+import { ILesson } from '../../redux/store/types'
 
-interface Lesson {
-  _id: string
-  title: string | null
-  description: string | null
-  videoKey: string | null
-  duration: number | null
-}
-
-function LessonsListUser() {
-  const [lessons, setLessons] = useState<Lesson[]>([])
+function CourseDetailsUser({ courseId }: any) {
+  const [course, setCourse] = useState<any | null>(null)
   const [error, setError] = useState<string>('')
-
-  //   const handleDeleteLesson = (lessonId: string) => {
-  //     axios
-  //       .delete(`/api/lessons/${lessonId}`)
-  //       .then(() => {
-  //         message.success('Lesson delete success')
-  //         setLessons((data) => data.filter((lesson) => lesson._id !== lessonId))
-  //       })
-  //       .catch((error) => {
-  //         message.error('Error while delete')
-  //         console.error(error)
-  //       })
-  //   }
 
   useEffect(() => {
     axios
-      .get('/api/lessons')
+      .get(`/api/courses/${courseId}`)
       .then((response) => {
-        setLessons(response.data)
-        console.log(response.data)
+        const courseData = response.data
+        setCourse(courseData)
+        console.log(courseData)
+
+        const lessonPromises = courseData.lessons.map((lessonId: string) =>
+          axios.get(`/api/lessons/${lessonId}`),
+        )
+
+        Promise.all(lessonPromises)
+          .then((lessonResponses) => {
+            const updatedCourseData = {
+              ...courseData,
+              lessons: lessonResponses.map(
+                (lessonResponse) => lessonResponse.data,
+              ),
+            }
+            setCourse(updatedCourseData)
+          })
+          .catch((lessonError) => {
+            console.error(lessonError)
+            setError('Error while fetching lesson data')
+          })
       })
       .catch((error) => {
         console.error(error)
         setError('Error while data download')
       })
-  }, [])
+  }, [courseId])
 
   return (
     <div>
-      {lessons.map((lesson) => (
-        <Space>
-          <Card key={lesson._id} style={{ width: '15rem', margin: '5px' }}>
-            <h2>{lesson.title}</h2>
-            <p>{lesson.description}</p>
-            <p>Video Key: {lesson.videoKey}</p>
-            <p>Duration: {lesson.duration} minutes</p>
-            <Divider />
-            <Space>
-              <Link to={`/lessonsuser/${lesson._id}`}>
-                <Button type='primary'>View Lesson</Button>
-              </Link>
-              {/* <Button danger onClick={() => handleDeleteLesson(lesson._id)}>
-                Delete
-              </Button> */}
-            </Space>
-          </Card>
-        </Space>
-      ))}
-      {error && <p>{error}</p>}
+      {course ? (
+        <>
+          {course.lessons.map((lesson: ILesson) => (
+            <Card style={{ width: '15rem', margin: '5px' }}>
+              <Space direction='vertical'>
+                <h4>{lesson.title}</h4>
+                <p>{lesson.description}</p>
+                <p>Video Key: {lesson.videoKey}</p>
+                <p>Duration: {lesson.duration} minutes</p>
+                <Space>
+                  <Link to={`/lessonsuser/${lesson._id}`}>
+                    <Button type='primary'>View Lesson</Button>
+                  </Link>
+                </Space>
+              </Space>
+            </Card>
+          ))}
+        </>
+      ) : (
+        <Skeleton active />
+      )}
     </div>
   )
 }
 
-export default LessonsListUser
+export default CourseDetailsUser

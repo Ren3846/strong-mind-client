@@ -12,7 +12,6 @@ const TeacherMeetings: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false)
 
   const user = useSelector((state: any) => state.auth.user)
-  const dispatch = useDispatch()
 
   useEffect(() => {
     setLoading(true)
