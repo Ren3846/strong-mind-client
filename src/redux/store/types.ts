@@ -65,6 +65,7 @@ export interface ITeacher {
   history: any[]
   courses: string[]
   meetings: any[]
+  image: string
 }
 
 export interface ILesson {

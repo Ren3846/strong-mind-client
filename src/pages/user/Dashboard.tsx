@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 import Shedule from '../../components/user/Shedule'
 import LessonsListUser from '../../components/user/LessonsListUser'
 import { UserOutlined } from '@ant-design/icons'
+import { baseImageUrl } from '..'
 
 const { Title } = Typography
 
@@ -85,7 +86,7 @@ const Dashboard = () => {
                 {topTeachers.map((teacher) => (
                   <Card key={teacher._id} style={{ marginTop: '20px' }}>
                     <Avatar
-                      icon={<UserOutlined />}
+                      src={`${baseImageUrl}/${teacher.image}`}
                       style={{ marginRight: '10px' }}
                     />
                     {teacher.email}

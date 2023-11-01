@@ -16,6 +16,7 @@ import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
 
 import { UserOutlined } from '@ant-design/icons'
+import { baseImageUrl } from '..'
 
 const { Item } = Form
 const { Dragger } = Upload
@@ -57,7 +58,7 @@ function TutorProfile() {
           {loaded ? (
             <>
               <Row justify='center'>
-                <Avatar size={120} icon={<UserOutlined />} />
+                <Avatar size={120} src={`${baseImageUrl}/${user?.image}`} />
               </Row>
 
               <h3 style={{ color: 'red' }}>Role: {user.role}</h3>

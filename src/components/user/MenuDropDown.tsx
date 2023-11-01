@@ -15,6 +15,7 @@ import { authLogout } from '../../redux/actions/auth'
 import { handleLogOutAPI } from '../../api/user'
 import { StoreType } from '../../redux/store'
 import { USER_ROLE, User } from '../../redux/store/types'
+import { baseImageUrl } from '../../pages'
 
 interface MenuDropDownProps {
   user: any
@@ -104,7 +105,7 @@ function MenuDropDown({ user }: MenuDropDownProps) {
           <Avatar
             size='small'
             style={{ backgroundColor: '#6466f1' }}
-            icon={<UserOutlined />}
+            src={`${baseImageUrl}/${currentUser.image}`}
           />
           {user?.email} <DownOutlined />
         </Space>

@@ -21,6 +21,7 @@ import GetLikes from '../../components/common/GetLikes'
 import { useSelector } from 'react-redux'
 import { StoreType } from '../../redux/store'
 import { SearchOutlined, UserOutlined } from '@ant-design/icons'
+import { baseImageUrl } from '..'
 
 const TutorDashboard = () => {
   const [courses, setCourses] = useState<ICourse[]>([])
@@ -139,10 +140,14 @@ const TutorDashboard = () => {
                 dataSource={currentItems}
                 renderItem={(student) => (
                   <List.Item>
-                    <List.Item.Meta
-                      avatar={<Avatar icon={<UserOutlined />} />}
-                      title={student.email}
-                    />
+                    <Link to={`user/${student._id}`}>
+                      <List.Item.Meta
+                        avatar={
+                          <Avatar src={`${baseImageUrl}/${student.image}`} />
+                        }
+                        title={student.email}
+                      />
+                    </Link>
                   </List.Item>
                 )}
               />
