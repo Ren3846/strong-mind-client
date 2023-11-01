@@ -32,12 +32,12 @@ const UploadAvatar = () => {
 
         setFileId(newFileId)
         onSuccess(response, file)
-        message.success('Фото успешно загружено')
+        message.success('Photo uploaded successfully')
       })
       .catch((error) => {
         console.log(error)
-        onError('Произошла ошибка при загрузке фото', error, file)
-        message.error('Произошла ошибка при загрузке фото')
+        onError('An error occurred while uploading the photo', error, file)
+        message.error('An error occurred while uploading the photo')
       })
   }
 
