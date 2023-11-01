@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { User } from '../../redux/store/types'
 import { UserOutlined } from '@ant-design/icons'
-import { Avatar, Space } from 'antd'
+import { Avatar, Skeleton, Space } from 'antd'
 import { Link } from 'react-router-dom'
 import { baseImageUrl } from '../../pages'
 
@@ -29,11 +29,22 @@ export const GetStudents: React.FC<{
   }, [userId])
 
   return (
-    <div className='course-user' title={user?.email} style={{ margin: '5px' }}>
-      <Space>
-        <Avatar src={`${baseImageUrl}/${user?.image}`} />
-        <Link to={`/teacher/${user?._id}`}>{user?.email}</Link>
-      </Space>
-    </div>
+    <>
+      {' '}
+      {loaded ? (
+        <div
+          className='course-user'
+          title={user?.email}
+          style={{ margin: '5px' }}
+        >
+          <Space>
+            <Avatar src={`${baseImageUrl}/${user?.image}`} />
+            <Link to={`/teacher/${user?._id}`}>{user?.email}</Link>
+          </Space>
+        </div>
+      ) : (
+        <Skeleton active />
+      )}
+    </>
   )
 }

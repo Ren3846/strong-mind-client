@@ -5,6 +5,7 @@ import {
   Divider,
   List,
   Row,
+  Skeleton,
   Space,
   Typography,
   message,
@@ -13,8 +14,16 @@ import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
 import Preloader from '../../components/common/Preloader'
 import { GetStudents } from '../../components/tutor/GetTutor'
+import MyBreadcrumb from '../../components/common/Breadcrumb'
+import GetLikes from '../../components/common/GetLikes'
 
 const { Title, Paragraph, Text } = Typography
+
+const breadcrumbItems = [
+  { title: 'Dashboard', link: '/Dashboard' },
+  { title: 'My courses', link: '/mycourses' },
+  { title: 'Course Info' },
+]
 
 const CourseDetails: React.FC = () => {
   const { id } = useParams()
@@ -24,6 +33,7 @@ const CourseDetails: React.FC = () => {
 
   const [courseLikes, setCourseLikes] = useState([])
   const [loadingLikes, setLoadingLikes] = useState(true)
+  const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     axios
@@ -88,6 +98,8 @@ const CourseDetails: React.FC = () => {
 
   return (
     <Row align='middle' justify='center'>
+      <MyBreadcrumb items={breadcrumbItems} />
+
       <Card title='Course Details' style={{ width: '80rem', margin: '20px' }}>
         <div>
           <h1>{course.title}</h1>
@@ -102,8 +114,10 @@ const CourseDetails: React.FC = () => {
           ) : (
             <h4>{`Course Likes: ${courseLikes}`}</h4>
           )}
+          {/* <GetLikes courseId={course.id} /> */}
         </div>
       </Card>
+
       <Card title='Students' style={{ width: '80rem', margin: '20px' }}>
         {course.students.length ? (
           <div>

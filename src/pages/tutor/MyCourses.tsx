@@ -12,6 +12,12 @@ import {
 } from '@ant-design/icons'
 import Preloader from '../../components/common/Preloader'
 import { ICourse } from '../../redux/store/types'
+import MyBreadcrumb from '../../components/common/Breadcrumb'
+
+const breadcrumbItems = [
+  { title: 'Dashboard', link: '/Dashboard' },
+  { title: 'My courses' },
+]
 
 const MyCourses: React.FC = () => {
   const [data, setData] = useState<ICourse[]>([])
@@ -47,7 +53,9 @@ const MyCourses: React.FC = () => {
 
   return (
     <Row align='middle' justify='center'>
-      <Card title='My courses' style={{ width: '60rem', margin: '20px' }}>
+      <MyBreadcrumb items={breadcrumbItems} />
+
+      <Card title='My courses' style={{ width: '80rem', margin: '20px' }}>
         {loaded ? (
           <ul>
             {data.map((item) => (

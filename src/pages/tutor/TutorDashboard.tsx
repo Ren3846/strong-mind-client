@@ -24,10 +24,7 @@ import { SearchOutlined, UserOutlined } from '@ant-design/icons'
 import { baseImageUrl } from '..'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 
-const breadcrumbItems = [
-  { title: 'Home', link: '/' },
-  { title: 'Dashboard', link: '/dashboard' },
-]
+const breadcrumbItems = [{ title: 'Home', link: '/' }, { title: 'Dashboard' }]
 
 const TutorDashboard = () => {
   const [courses, setCourses] = useState<ICourse[]>([])
