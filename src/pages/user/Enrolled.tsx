@@ -5,6 +5,12 @@ import { Link } from 'react-router-dom'
 import Preloader from '../../components/common/Preloader'
 
 import { ICourse, ITeacher } from '../../redux/store/types'
+import MyBreadcrumb from '../../components/common/Breadcrumb'
+
+const breadcrumbItems = [
+  { title: 'Dashboard', link: '/dashboard' },
+  { title: 'Enrolled courses' },
+]
 
 const Enrolled: React.FC = () => {
   const [enrolledCourses, setEnrolledCourses] = useState<ICourse[]>([])
@@ -37,6 +43,8 @@ const Enrolled: React.FC = () => {
 
   return (
     <Row align='middle' justify='center'>
+      <MyBreadcrumb items={breadcrumbItems} />
+
       <Card
         title='My Enrolled Courses'
         style={{ width: '80rem', margin: '20px' }}

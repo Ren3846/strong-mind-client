@@ -1,5 +1,5 @@
 import React from 'react'
-import { Breadcrumb, Col } from 'antd'
+import { Breadcrumb, Col, Row } from 'antd'
 
 interface BreadcrumbItem {
   title: string
@@ -12,7 +12,7 @@ interface MyBreadcrumbProps {
 
 const MyBreadcrumb: React.FC<MyBreadcrumbProps> = ({ items }) => {
   return (
-    <Col span={24}>
+    <Col span={18} style={{ marginTop: '20px' }}>
       <Breadcrumb>
         {items.map((item, index) => (
           <Breadcrumb.Item key={index}>

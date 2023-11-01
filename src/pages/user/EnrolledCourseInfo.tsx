@@ -7,6 +7,7 @@ import Preloader from '../../components/common/Preloader'
 
 import { ICourse, ITeacher } from '../../redux/store/types'
 import LessonsListUser from '../../components/user/LessonsListUser'
+import MyBreadcrumb from '../../components/common/Breadcrumb'
 
 const CourseInfo: React.FC = () => {
   const [courseInfo, setCourseInfo] = useState<ICourse | null>(null)
@@ -15,6 +16,12 @@ const CourseInfo: React.FC = () => {
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState('')
   const { id } = useParams()
+
+  const breadcrumbItems = [
+    { title: 'Dashboard', link: '/dashboard' },
+    { title: 'Enrolled ', link: '/enrolled' },
+    { title: 'Course ' },
+  ]
 
   useEffect(() => {
     axios
@@ -41,6 +48,8 @@ const CourseInfo: React.FC = () => {
 
   return (
     <Row align='middle' justify='center'>
+      <MyBreadcrumb items={breadcrumbItems} />
+
       <Card title='Course Details' style={{ width: '80rem', margin: '20px' }}>
         {loaded ? (
           <div>

@@ -5,6 +5,7 @@ import axios from 'axios'
 import { HeartOutlined, HeartFilled } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 import { StoreType } from '../../redux/store'
+import MyBreadcrumb from '../../components/common/Breadcrumb'
 
 interface ILesson {
   _id: string
@@ -21,6 +22,13 @@ const LessonUser: React.FC = () => {
   const [lesson, setLesson] = useState<ILesson | null>(null)
   const [error, setError] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false)
+
+  const breadcrumbItems = [
+    { title: 'Dashboard', link: '/dashboard' },
+    { title: 'Enrolled ', link: '/enrolled' },
+    { title: 'Course ', link: '/enrolled' },
+    { title: 'Lesson ' },
+  ]
 
   useEffect(() => {
     axios
@@ -62,9 +70,11 @@ const LessonUser: React.FC = () => {
   return (
     <div>
       <Row align='middle' justify='center'>
+        <MyBreadcrumb items={breadcrumbItems} />
+
         <Card
           title={`Lesson`}
-          style={{ width: '60rem', margin: '20px' }}
+          style={{ width: '80rem', margin: '20px' }}
           className='lesson-card'
         >
           <Space>
@@ -89,7 +99,7 @@ const LessonUser: React.FC = () => {
         </Card>
         <Card
           title={`Video`}
-          style={{ width: '60rem', margin: '20px' }}
+          style={{ width: '80rem', margin: '20px' }}
           className='lesson-card'
         >
           {lesson && lesson.videoKey && (

@@ -10,14 +10,11 @@ import Shedule from '../../components/user/Shedule'
 import LessonsListUser from '../../components/user/LessonsListUser'
 import { UserOutlined } from '@ant-design/icons'
 import { baseImageUrl } from '..'
-import MyBreadcrumb from '../../components/user/Breadcrumb'
+import MyBreadcrumb from '../../components/common/Breadcrumb'
 
 const { Title } = Typography
 
-const breadcrumbItems = [
-  { title: 'Home', link: '/' },
-  { title: 'Dashboard', link: '/dashboard' },
-]
+const breadcrumbItems = [{ title: 'Home', link: '/' }, { title: 'Dashboard' }]
 
 const Dashboard = () => {
   const [enrolledCourses, setEnrolledCourses] = useState<ICourse[]>([])

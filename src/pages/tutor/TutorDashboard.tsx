@@ -22,7 +22,7 @@ import { useSelector } from 'react-redux'
 import { StoreType } from '../../redux/store'
 import { SearchOutlined, UserOutlined } from '@ant-design/icons'
 import { baseImageUrl } from '..'
-import MyBreadcrumb from '../../components/user/Breadcrumb'
+import MyBreadcrumb from '../../components/common/Breadcrumb'
 
 const breadcrumbItems = [
   { title: 'Home', link: '/' },

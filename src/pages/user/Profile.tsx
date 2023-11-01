@@ -26,9 +26,15 @@ import { updateUser } from '../../redux/actions/user'
 import { useNavigate } from 'react-router-dom'
 import UploadAvatar from '../../components/common/UploadAvatar'
 import { baseImageUrl } from '../index'
+import MyBreadcrumb from '../../components/common/Breadcrumb'
 
 const { Item } = Form
 const { Dragger } = Upload
+
+const breadcrumbItems = [
+  { title: 'Dashboard', link: '/dashboard' },
+  { title: 'Profile ' },
+]
 
 const genderOptions = [
   'Male',
@@ -88,8 +94,21 @@ function Profile() {
         <Card title='Profile' style={{ width: '60rem' }}>
           {loaded ? (
             <>
-              <Row justify='center'>
-                <Avatar size={120} src={imageUrl} />
+              <Row justify='start'>
+                {/* <Col span={4}>
+                  <Avatar size={120} src={imageUrl} />
+                </Col> */}
+                <Col span={4}>
+                  <UploadAvatar />
+                </Col>
+                <Col span={12}>
+                  <ul>
+                    <li>Name: {user.fullName}</li>
+                    <li>Bio: {user.bio}</li>
+                    <li>Email: {user.email}</li>
+                    <li>Phone: {user.phone}</li>
+                  </ul>
+                </Col>
               </Row>
 
               <Divider />
@@ -222,7 +241,6 @@ function Profile() {
                   </Button>
                 </Item>
               </Form>
-              <UploadAvatar />
             </>
           ) : (
             <Preloader />

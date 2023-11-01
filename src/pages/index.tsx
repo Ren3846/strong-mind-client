@@ -29,7 +29,7 @@ import CourseInfo from './user/EnrolledCourseInfo'
 import AddLesson from './tutor/AddLesson'
 import Lesson from './tutor/Lesson'
 import TutorDashboard from './tutor/TutorDashboard'
-import LessonUser from './user/LessonUser'
+import LessonUser from './user/Lesson'
 import Wallet from './user/Wallet'
 
 interface IProtectedRoute {

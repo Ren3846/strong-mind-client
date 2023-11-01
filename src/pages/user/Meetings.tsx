@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
 import { Alert, Calendar, Card, Col, List, Row } from 'antd'
+import MyBreadcrumb from '../../components/common/Breadcrumb'
+
+const breadcrumbItems = [
+  { title: 'Dashboard', link: '/dashboard' },
+  { title: 'Meetings ' },
+]
 
 const CalendarPage: React.FC = () => {
   const [value, setValue] = useState(() => dayjs('2017-01-25'))
@@ -27,42 +33,47 @@ const CalendarPage: React.FC = () => {
   }
 
   return (
-    <Row gutter={[16, 16]}>
-      <Col span={6}>
-        <Card title='Agenda' style={{ margin: '20px 0px 0px 20px' }}>
-          <List
-            dataSource={agenda}
-            renderItem={(item, index) => (
-              <List.Item>
-                {index + 1}: {item}
-              </List.Item>
-            )}
-          />
-        </Card>
+    <>
+      <Row style={{ marginLeft: '30px' }}>
+        <MyBreadcrumb items={breadcrumbItems} />
+      </Row>
+      <Row gutter={[16, 16]}>
+        <Col span={6}>
+          <Card title='Agenda' style={{ margin: '20px 0px 0px 20px' }}>
+            <List
+              dataSource={agenda}
+              renderItem={(item, index) => (
+                <List.Item>
+                  {index + 1}: {item}
+                </List.Item>
+              )}
+            />
+          </Card>
 
-        <Card title='Meetings' style={{ margin: '20px 0px 0px 20px' }}>
-          <List
-            dataSource={agenda}
-            renderItem={(item, index) => <List.Item></List.Item>}
-          />
-        </Card>
-      </Col>
+          <Card title='Meetings' style={{ margin: '20px 0px 0px 20px' }}>
+            <List
+              dataSource={agenda}
+              renderItem={(item, index) => <List.Item></List.Item>}
+            />
+          </Card>
+        </Col>
 
-      <Col span={18}>
-        <Card title='Calendar' style={{ margin: '20px 20px 20px 0px' }}>
-          <Alert
-            message={`You selected date: ${selectedValue?.format(
-              'YYYY-MM-DD',
-            )}`}
-          />
-          <Calendar
-            value={value}
-            onSelect={onSelect}
-            onPanelChange={onPanelChange}
-          />
-        </Card>
-      </Col>
-    </Row>
+        <Col span={18}>
+          <Card title='Calendar' style={{ margin: '20px 20px 20px 0px' }}>
+            <Alert
+              message={`You selected date: ${selectedValue?.format(
+                'YYYY-MM-DD',
+              )}`}
+            />
+            <Calendar
+              value={value}
+              onSelect={onSelect}
+              onPanelChange={onPanelChange}
+            />
+          </Card>
+        </Col>
+      </Row>
+    </>
   )
 }
 

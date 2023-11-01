@@ -1,12 +1,15 @@
-import { Form, Upload, Button, message } from 'antd'
+import { Form, Upload, Button, message, Modal, Avatar } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
 import axios from 'axios'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { baseImageUrl } from '../../pages'
 
 const UploadAvatar = () => {
   const [form] = Form.useForm()
   const [fileId, setFileId] = useState(null)
+  const [previewVisible, setPreviewVisible] = useState(false)
+  const [previewImage, setPreviewImage] = useState('')
   const user = useSelector((state: any) => state.auth.user)
 
   const onFinish = (values: any) => {
@@ -38,6 +41,16 @@ const UploadAvatar = () => {
       })
   }
 
+  const handlePreview = async (file: any) => {
+    if (file.url) {
+      setPreviewImage(file.url)
+      setPreviewVisible(true)
+    }
+  }
+
+  const handleCancel = () => setPreviewVisible(false)
+  const imageUrl = `${baseImageUrl}/${user.image}`
+
   return (
     <>
       <Form
@@ -45,22 +58,36 @@ const UploadAvatar = () => {
         name='customized_form_controls'
         layout='horizontal'
         onFinish={onFinish}
-        initialValues={{ size: 'large' }}
+        initialValues={{ size: 'small' }}
       >
-        <Form.Item label='Avatar'>
+        <Form.Item>
           <Upload
             customRequest={({ file, onSuccess, onError }) =>
               customRequest({ file, onSuccess, onError })
             }
             name='avatar'
-            listType='picture-card'
+            listType='picture-circle'
             className='avatar-uploader'
-            showUploadList={true}
+            action='https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188'
+            showUploadList={false}
+            onPreview={handlePreview}
           >
-            <Button icon={<UploadOutlined />}></Button>
+            {imageUrl ? (
+              <Avatar src={imageUrl} style={{ width: '90%', height: '90%' }} />
+            ) : (
+              <Button icon={<UploadOutlined />}></Button>
+            )}
           </Upload>
         </Form.Item>
       </Form>
+      <Modal
+        visible={previewVisible}
+        title='Preview'
+        footer={null}
+        onCancel={handleCancel}
+      >
+        <img alt='Avatar' style={{ width: '100%' }} src={previewImage} />
+      </Modal>
     </>
   )
 }
