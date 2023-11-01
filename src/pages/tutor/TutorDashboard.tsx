@@ -22,6 +22,12 @@ import { useSelector } from 'react-redux'
 import { StoreType } from '../../redux/store'
 import { SearchOutlined, UserOutlined } from '@ant-design/icons'
 import { baseImageUrl } from '..'
+import MyBreadcrumb from '../../components/user/Breadcrumb'
+
+const breadcrumbItems = [
+  { title: 'Home', link: '/' },
+  { title: 'Dashboard', link: '/dashboard' },
+]
 
 const TutorDashboard = () => {
   const [courses, setCourses] = useState<ICourse[]>([])
@@ -83,6 +89,8 @@ const TutorDashboard = () => {
   return (
     <Layout>
       <Row gutter={[16, 16]}>
+        <MyBreadcrumb items={breadcrumbItems} />
+
         <Col span={12}>
           <Card title='My courses' style={{ height: '50vh' }}>
             {loaded ? (

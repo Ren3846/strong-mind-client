@@ -10,8 +10,14 @@ import Shedule from '../../components/user/Shedule'
 import LessonsListUser from '../../components/user/LessonsListUser'
 import { UserOutlined } from '@ant-design/icons'
 import { baseImageUrl } from '..'
+import MyBreadcrumb from '../../components/user/Breadcrumb'
 
 const { Title } = Typography
+
+const breadcrumbItems = [
+  { title: 'Home', link: '/' },
+  { title: 'Dashboard', link: '/dashboard' },
+]
 
 const Dashboard = () => {
   const [enrolledCourses, setEnrolledCourses] = useState<ICourse[]>([])
@@ -52,6 +58,7 @@ const Dashboard = () => {
   return (
     <Layout>
       <Row gutter={[16, 16]}>
+        <MyBreadcrumb items={breadcrumbItems} />
         {/* <Col span={24}>
           <StepsDashboard />
         </Col> */}
