@@ -17,7 +17,11 @@ import { updateUserDetailsAPI } from '../../api/user'
 import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
 
-import { CaretRightOutlined, WalletOutlined } from '@ant-design/icons'
+import {
+  ArrowRightOutlined,
+  CaretRightOutlined,
+  WalletOutlined,
+} from '@ant-design/icons'
 import { updateUser } from '../../redux/actions/user'
 import { useNavigate } from 'react-router-dom'
 import UploadAvatar from '../../components/common/UploadAvatar'
@@ -100,16 +104,16 @@ function Profile() {
                 <Col span={12}>
                   <ul>
                     <p>
-                      <CaretRightOutlined /> {user.fullName}
+                      <ArrowRightOutlined /> {user.fullName}
                     </p>
                     <p>
-                      <CaretRightOutlined /> {user.bio}
+                      <ArrowRightOutlined /> {user.bio}
                     </p>
                     <p>
-                      <CaretRightOutlined /> {user.email}
+                      <ArrowRightOutlined /> {user.email}
                     </p>
                     <p>
-                      <CaretRightOutlined /> {user.phone}
+                      <ArrowRightOutlined /> {user.phone}
                     </p>
                   </ul>
                 </Col>

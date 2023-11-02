@@ -6,7 +6,7 @@ const WalletWithdrawal: React.FC = () => {
   const [amount, setAmount] = useState<string>('')
   const [loading, setLoading] = useState(false)
 
-  const handleTopup = async () => {
+  const handleWithdrawal = async () => {
     setLoading(true)
 
     try {
@@ -14,11 +14,11 @@ const WalletWithdrawal: React.FC = () => {
         amount: parseFloat(amount),
       })
 
-      message.success('Balance topped up successfully', 8)
+      message.success('Withdrawal successfully', 8)
       console.log('Response:', response.data)
     } catch (error) {
       console.error(error)
-      message.error('Error while topping up the balance')
+      message.error('Error while withdrawal balance')
     } finally {
       setLoading(false)
     }
@@ -32,7 +32,7 @@ const WalletWithdrawal: React.FC = () => {
         onChange={(e) => setAmount(e.target.value)}
         style={{ marginBottom: '10px' }}
       />
-      <Button type='primary' onClick={handleTopup} loading={loading}>
+      <Button type='primary' onClick={handleWithdrawal} loading={loading}>
         Withdrawal
       </Button>
     </>
