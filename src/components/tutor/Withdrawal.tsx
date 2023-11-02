@@ -10,7 +10,7 @@ const WalletWithdrawal: React.FC = () => {
     setLoading(true)
 
     try {
-      const response = await axios.post('/api/users/wallet/topup', {
+      const response = await axios.post('/api/users/withdrawal', {
         amount: parseFloat(amount),
       })
 
