@@ -8,26 +8,16 @@ import {
   Button,
   Row,
   Card,
-  Avatar,
   Upload,
-  Typography,
   Statistic,
   Col,
   Divider,
-  Select,
-  Tooltip,
 } from 'antd'
 import { updateUserDetailsAPI } from '../../api/user'
 import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
 
-import {
-  CaretRightOutlined,
-  InfoCircleOutlined,
-  MinusOutlined,
-  UserOutlined,
-  WalletOutlined,
-} from '@ant-design/icons'
+import { CaretRightOutlined, WalletOutlined } from '@ant-design/icons'
 import { updateUser } from '../../redux/actions/user'
 import { useNavigate } from 'react-router-dom'
 import UploadAvatar from '../../components/common/UploadAvatar'

@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Layout from '../../components/common/Layout'
-import { Row, Col, Card, Typography, Button, Space, Avatar } from 'antd'
+import {
+  Row,
+  Col,
+  Card,
+  Typography,
+  Button,
+  Space,
+  Avatar,
+  Skeleton,
+} from 'antd'
 import { ICourse, ITeacher } from '../../redux/store/types'
 import Preloader from '../../components/common/Preloader'
 import StepsDashboard from '../../components/user/Steps'
@@ -62,7 +71,7 @@ const Dashboard = () => {
         <Col span={12}>
           <Card title='My Enrolled Courses'>
             {loadingCourses ? (
-              <Preloader />
+              <Skeleton active />
             ) : (
               <ul>
                 {enrolledCourses.map((course) => (
@@ -84,7 +93,7 @@ const Dashboard = () => {
         <Col span={12}>
           <Card title='My Tutors'>
             {loadingTeachers ? (
-              <Preloader />
+              <Skeleton active />
             ) : (
               <ul>
                 {topTeachers.map((teacher) => (

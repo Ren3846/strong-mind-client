@@ -65,10 +65,12 @@ const CourseItem: React.FC<ICourse> = (course) => {
   return (
     <div className='course-item course-card'>
       <Space direction='vertical' size='middle' style={{ display: 'flex' }}>
-        <Space direction='horizontal'>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <h3>{course.title}</h3>
-          <GetLikes courseId={course._id} />
-        </Space>
+          <div>
+            <GetLikes courseId={course._id} />
+          </div>
+        </div>
 
         <p>{course.about}</p>
         <div className='course-users'>
@@ -78,6 +80,7 @@ const CourseItem: React.FC<ICourse> = (course) => {
           />
         </div>
         <span>Price: {course.price} $</span>
+
         <Button type='primary' key={course._id}>
           <Link to={course._id}>Explore</Link>
         </Button>

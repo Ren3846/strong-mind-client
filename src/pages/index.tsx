@@ -13,7 +13,7 @@ import NotFound from './NotFound'
 
 import { useSelector } from 'react-redux'
 import { StoreType } from '../redux/store'
-import Navbar from '../components/user/Navbar'
+import Navbar from '../components/common/Navbar'
 
 import { USER_ROLE, User } from '../redux/store/types'
 import Dashboard from './user/Dashboard'
@@ -31,6 +31,7 @@ import Lesson from './tutor/Lesson'
 import TutorDashboard from './tutor/TutorDashboard'
 import LessonUser from './user/Lesson'
 import Wallet from './user/Wallet'
+import Footer from '../components/common/Footer'
 
 interface IProtectedRoute {
   condition: boolean
@@ -41,9 +42,7 @@ interface IProtectedRoute {
 export const baseImageUrl =
   'https://strongmind.fra1.cdn.digitaloceanspaces.com/'
 
-const ScrollToTop: React.FC<{
-  children: JSX.Element
-}> = ({ children }) => {
+const ScrollToTop: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const location = useLocation()
   useLayoutEffect(() => {
     document.documentElement.scrollTo(0, 0)
@@ -250,6 +249,7 @@ const Router: React.FC<{}> = () => {
 
           <Route path='*' element={<NotFound />} />
         </Routes>
+        {/* <Footer /> */}
       </>
     </ScrollToTop>
   ) : (

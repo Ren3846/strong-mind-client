@@ -3,9 +3,12 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import WalletTopup from '../../components/user/Topup'
+import { StoreType } from '../../redux/store'
+import { USER_ROLE, User } from '../../redux/store/types'
+import WalletWithdrawal from '../../components/tutor/Withdrawal'
 
 const Wallet = () => {
-  const user = useSelector((state: any) => state.auth.user)
+  const user = useSelector<StoreType, User>((state: any) => state.auth.user)
 
   const [loading, setLoading] = useState(true)
   const [paymentHistory, setPaymentHistory] = useState([])
@@ -61,9 +64,15 @@ const Wallet = () => {
           precision={2}
         />
       </Card>
-      <Card title='TopUp' style={{ width: '60rem', marginTop: '20px' }}>
-        <WalletTopup />
+
+      <Card style={{ width: '60rem', marginTop: '20px' }}>
+        {user.role === USER_ROLE.TEACHER ? (
+          <WalletWithdrawal />
+        ) : (
+          <WalletTopup />
+        )}
       </Card>
+
       <Card title='History' style={{ width: '60rem', marginTop: '20px' }}>
         <Table
           loading={loading}

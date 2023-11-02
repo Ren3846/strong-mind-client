@@ -1,11 +1,7 @@
 import React, { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import Logo from '../components/common/Logo'
-import GetStartedStudent from '../components/landing/GetStartedStudent.tsx'
-import GetStartedTutor from '../components/landing/GetStartedTutor'
 import '../styles/globals.css'
 
-import Footer from '../components/common/Footer'
 import {
   ClockCircleOutlined,
   HourglassOutlined,
@@ -27,7 +23,7 @@ export default function Landing() {
   }
 
   return (
-    <div className='relative isolate px-6 lg:px-8'>
+    <>
       <div className='mx-auto max-w-2xl py-6 pt-6 sm:pt-24 lg:pt-28'>
         <div className='hidden sm:mb-8 sm:flex sm:justify-center'>
           <motion.div
@@ -122,9 +118,7 @@ export default function Landing() {
           </div>
         </div>
       </div>
-
       <hr className='w-64 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 light:bg-gray-700' />
-
       <div className='text-center'>
         <div className='mx-auto max-w-7xl px-6 lg:px-8 p-5 rounded-lg'>
           <dl className='grid grid-cols-1 gap-x-8 gap-y-16 text-center lg:grid-cols-3 '>
@@ -206,9 +200,6 @@ export default function Landing() {
           </dl>
         </div>
       </div>
-      <GetStartedStudent />
-      <GetStartedTutor />
-      <Footer />
-    </div>
+    </>
   )
 }
