@@ -47,19 +47,21 @@ function CourseDetailsUser({ courseId }: any) {
       {course ? (
         <>
           {course.lessons.map((lesson: ILesson) => (
-            <Card style={{ width: '15rem', margin: '5px' }}>
-              <Space direction='vertical'>
-                <h4>{lesson.title}</h4>
-                <p>{lesson.description}</p>
-                <p>Video Key: {lesson.videoKey}</p>
-                <p>Duration: {lesson.duration} minutes</p>
-                <Space>
-                  <Link to={`/lessonsuser/${lesson._id}`}>
-                    <Button type='primary'>View Lesson</Button>
-                  </Link>
+            <Space direction='horizontal'>
+              <Card style={{ width: '15rem', margin: '5px' }}>
+                <Space direction='vertical'>
+                  <h4>{lesson.title}</h4>
+                  <p>{lesson.description}</p>
+                  {/* <p>Video Key: {lesson.videoKey}</p> */}
+                  <p>Duration: {lesson.duration} minutes</p>
+                  <Space>
+                    <Link to={`/lessonsuser/${lesson._id}`}>
+                      <Button type='primary'>View Lesson</Button>
+                    </Link>
+                  </Space>
                 </Space>
-              </Space>
-            </Card>
+              </Card>
+            </Space>
           ))}
         </>
       ) : (

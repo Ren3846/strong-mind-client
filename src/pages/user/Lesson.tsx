@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { Card, Button, Divider, Space, Row, message } from 'antd'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { HeartOutlined, HeartFilled } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 import { StoreType } from '../../redux/store'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
+import { ErrorMessage } from '../../components/common/ErrorMessage'
 
 interface ILesson {
   _id: string
@@ -22,6 +23,8 @@ const LessonUser: React.FC = () => {
   const [lesson, setLesson] = useState<ILesson | null>(null)
   const [error, setError] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false)
+
+  const [video, setVideo] = useState<string | null>(null)
 
   const breadcrumbItems = [
     { title: 'Dashboard', link: '/dashboard' },
@@ -41,6 +44,17 @@ const LessonUser: React.FC = () => {
         console.error(error)
         setError('Error while fetching lesson data')
       })
+
+    axios
+      .get(`/api/lessons/video/${id}`)
+      .then((response) => {
+        setVideo(response.data)
+        console.log('video', response.data)
+      })
+      .catch((error) => {
+        console.error(error)
+        setError('Error while fetching lesson video')
+      })
   }, [id])
 
   const lessonLiked = useMemo(
@@ -56,9 +70,6 @@ const LessonUser: React.FC = () => {
     try {
       const { data } = await axios.patch(`/api/lessons/like/${lesson._id}`)
       setLesson(data)
-      // message.success(
-      //   lesson.isLiked ? 'Unliked the lesson' : 'Liked the lesson',
-      // )
     } catch (error) {
       console.error(error)
       message.error('Error while liking the lesson')
@@ -67,13 +78,15 @@ const LessonUser: React.FC = () => {
     }
   }
 
+  const videoSrc = video || ''
+
   return (
     <div>
       <Row align='middle' justify='center'>
         <MyBreadcrumb items={breadcrumbItems} />
 
         <Card
-          title={`Lesson`}
+          title={`Lesson Info`}
           style={{ width: '80rem', margin: '20px' }}
           className='lesson-card'
         >
@@ -82,7 +95,7 @@ const LessonUser: React.FC = () => {
               <div style={{ width: '15rem', margin: '5px' }}>
                 <h2>{lesson.title}</h2>
                 <p>{lesson.description}</p>
-                <p>Video Key: {lesson.videoKey}</p>
+                {/* <p>Video Key: {lesson.videoKey}</p> */}
                 <p>Duration: {lesson.duration} minutes</p>
                 <Divider />
                 <Button
@@ -102,11 +115,11 @@ const LessonUser: React.FC = () => {
           style={{ width: '80rem', margin: '20px' }}
           className='lesson-card'
         >
-          {lesson && lesson.videoKey && (
+          {lesson && (
             <video
-              src={lesson.videoKey}
+              src={videoSrc}
               controls
-              style={{ width: '100%', maxWidth: '800px' }}
+              style={{ width: '100%', maxWidth: '800px', maxHeight: '500px' }}
             >
               Your browser does not support the video tag.
             </video>
@@ -114,7 +127,7 @@ const LessonUser: React.FC = () => {
         </Card>
       </Row>
 
-      {error && <p>{error}</p>}
+      <ErrorMessage message={error} />
     </div>
   )
 }
