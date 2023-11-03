@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
-import { SearchOutlined, UserOutlined } from '@ant-design/icons'
+import { SearchOutlined } from '@ant-design/icons'
 import {
   Typography,
   Row,
@@ -13,7 +13,6 @@ import {
   Button,
   Select,
   Divider,
-  Skeleton,
 } from 'antd'
 import { ICourse, User } from '../../redux/store/types'
 import GetLikes from '../../components/common/GetLikes'
@@ -97,8 +96,6 @@ const Courses = () => {
     category: 'all',
     difficulty: 'all',
   })
-
-  const { Paragraph } = Typography
 
   useEffect(() => {
     axios({

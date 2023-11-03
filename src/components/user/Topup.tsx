@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { Input, Button, message } from 'antd'
+import { Input, Button, message, Space } from 'antd'
 import axios from 'axios'
+import { DollarCircleFilled } from '@ant-design/icons'
 
 const WalletTopup: React.FC = () => {
   const [amount, setAmount] = useState<string>('')
@@ -26,15 +27,22 @@ const WalletTopup: React.FC = () => {
 
   return (
     <>
-      <Input
-        placeholder='Enter the amount'
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-        style={{ marginBottom: '10px' }}
-      />
-      <Button type='primary' onClick={handleTopup} loading={loading}>
-        Pay
-      </Button>
+      <Space.Compact>
+        <Input
+          placeholder='Enter the amount'
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          style={{ marginBottom: '10px' }}
+        />
+        <Button
+          type='primary'
+          onClick={handleTopup}
+          loading={loading}
+          icon={<DollarCircleFilled />}
+        >
+          Pay
+        </Button>
+      </Space.Compact>
     </>
   )
 }

@@ -31,7 +31,6 @@ import Lesson from './tutor/Lesson'
 import TutorDashboard from './tutor/TutorDashboard'
 import LessonUser from './user/Lesson'
 import Wallet from './user/Wallet'
-import Footer from '../components/common/Footer'
 
 interface IProtectedRoute {
   condition: boolean

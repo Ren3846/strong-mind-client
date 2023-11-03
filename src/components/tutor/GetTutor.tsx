@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { User } from '../../redux/store/types'
-import { UserOutlined } from '@ant-design/icons'
 import { Avatar, Skeleton, Space } from 'antd'
 import { Link } from 'react-router-dom'
 import { baseImageUrl } from '../../pages'
@@ -30,7 +29,6 @@ export const GetStudents: React.FC<{
 
   return (
     <>
-      {' '}
       {loaded ? (
         <div
           className='course-user'

@@ -1,23 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import {
-  Button,
-  Card,
-  Divider,
-  List,
-  Row,
-  Skeleton,
-  Space,
-  Typography,
-  message,
-} from 'antd'
+import { Button, Card, Divider, Row, Space, Typography, message } from 'antd'
 import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
 import Preloader from '../../components/common/Preloader'
 import { GetStudents } from '../../components/tutor/GetTutor'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
-import GetLikes from '../../components/common/GetLikes'
-
-const { Title, Paragraph, Text } = Typography
 
 const breadcrumbItems = [
   { title: 'Dashboard', link: '/Dashboard' },
@@ -57,7 +44,7 @@ const CourseDetails: React.FC = () => {
         message.error('Error while fetching course likes')
       })
       .finally(() => {
-        setLoadingLikes(false)
+        setLoaded(false)
       })
   }, [id])
 

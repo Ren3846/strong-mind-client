@@ -1,4 +1,4 @@
-import { Card, Row, Statistic, message, Table } from 'antd'
+import { Card, Row, Statistic, message, Table, Tag, Skeleton } from 'antd'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
@@ -6,6 +6,12 @@ import WalletTopup from '../../components/user/Topup'
 import { StoreType } from '../../redux/store'
 import { USER_ROLE, User } from '../../redux/store/types'
 import WalletWithdrawal from '../../components/tutor/Withdrawal'
+import {
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  SyncOutlined,
+} from '@ant-design/icons'
+import Preloader from '../../components/common/Preloader'
 
 const Wallet = () => {
   const user = useSelector<StoreType, User>((state: any) => state.auth.user)
@@ -42,17 +48,45 @@ const Wallet = () => {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
+      render: (status: string) => {
+        switch (status) {
+          case 'pending':
+            return (
+              <Tag icon={<SyncOutlined spin />} color='processing'>
+                {status}
+              </Tag>
+            )
+          case 'accepted':
+            return (
+              <Tag icon={<CheckCircleOutlined />} color='success'>
+                {status}
+              </Tag>
+            )
+          case 'rejected':
+            return (
+              <Tag icon={<CloseCircleOutlined />} color='error'>
+                {status}
+              </Tag>
+            )
+          default:
+            return <Tag color='default'>{status}</Tag>
+        }
+      },
     },
     {
-      title: 'Created At',
+      title: 'Date',
       dataIndex: 'createdAt',
       key: 'createdAt',
+      render: (date: string) => {
+        const formattedDate = new Date(date).toLocaleString()
+        return <span>{formattedDate}</span>
+      },
     },
-    {
-      title: 'Updated At',
-      dataIndex: 'updatedAt',
-      key: 'updatedAt',
-    },
+    // {
+    //   title: 'Updated At',
+    //   dataIndex: 'updatedAt',
+    //   key: 'updatedAt',
+    // },
   ]
 
   return (

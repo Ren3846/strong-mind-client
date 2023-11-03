@@ -8,7 +8,6 @@ import {
   Button,
   Row,
   Card,
-  Upload,
   Statistic,
   Col,
   Divider,
@@ -17,11 +16,7 @@ import { updateUserDetailsAPI } from '../../api/user'
 import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
 
-import {
-  ArrowRightOutlined,
-  CaretRightOutlined,
-  WalletOutlined,
-} from '@ant-design/icons'
+import { ArrowRightOutlined, WalletOutlined } from '@ant-design/icons'
 import { updateUser } from '../../redux/actions/user'
 import { useNavigate } from 'react-router-dom'
 import UploadAvatar from '../../components/common/UploadAvatar'
@@ -29,7 +24,6 @@ import { baseImageUrl } from '../index'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 
 const { Item } = Form
-const { Dragger } = Upload
 
 const breadcrumbItems = [
   { title: 'Dashboard', link: '/dashboard' },
