@@ -1,8 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Button, List, message, Space, Typography, Skeleton } from 'antd'
+import {
+  Card,
+  Button,
+  List,
+  message,
+  Space,
+  Typography,
+  Skeleton,
+  Tag,
+} from 'antd'
 import axios from 'axios'
 import { ITeacher } from '../../redux/store/types'
-import { CheckCircleTwoTone, CloseCircleTwoTone } from '@ant-design/icons'
+import {
+  CheckCircleOutlined,
+  CheckCircleTwoTone,
+  CloseCircleOutlined,
+  CloseCircleTwoTone,
+  SyncOutlined,
+} from '@ant-design/icons'
 import Preloader from '../common/Preloader'
 import { useDispatch, useSelector } from 'react-redux'
 const { Text } = Typography
@@ -73,6 +88,7 @@ const TeacherMeetings: React.FC = () => {
               }),
             }
           }
+
           return prevTeacher
         })
       })
@@ -80,6 +96,10 @@ const TeacherMeetings: React.FC = () => {
         console.error('Error while rejecting meeting request:', error)
         message.error('Error while rejecting meeting request')
       })
+  }
+
+  const formatDateTime = (dateTimeString: string) => {
+    return new Date(dateTimeString).toLocaleString()
   }
 
   return (
@@ -94,22 +114,20 @@ const TeacherMeetings: React.FC = () => {
               <List.Item key={meeting._id}>
                 <div>
                   <Space align='center'>
-                    <Text strong>{meeting.date}</Text>
+                    {/* <Text strong>{meeting.date}</Text> */}
+                    {formatDateTime(meeting.date)}
                     {meeting.status === 'accepted' ? (
-                      <>
-                        <CheckCircleTwoTone twoToneColor='#52c41a' />
-                        <p>Accepted</p>
-                      </>
+                      <Tag icon={<CheckCircleOutlined />} color='success'>
+                        Accepted
+                      </Tag>
                     ) : meeting.status === 'rejected' ? (
-                      <>
-                        <CloseCircleTwoTone twoToneColor='#ff4d4f' />
-                        <p>Rejected</p>
-                      </>
+                      <Tag icon={<CloseCircleOutlined />} color='error'>
+                        Rejected
+                      </Tag>
                     ) : (
-                      <>
-                        <CloseCircleTwoTone twoToneColor='#ffda00' />
-                        <p>Pending</p>
-                      </>
+                      <Tag icon={<SyncOutlined spin />} color='processing'>
+                        Pending
+                      </Tag>
                     )}
                   </Space>
                 </div>

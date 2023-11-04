@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 import Preloader from '../../components/common/Preloader'
 import { GetStudents } from '../../components/tutor/GetTutor'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
+import { LikeFilled, LikeOutlined } from '@ant-design/icons'
 
 const breadcrumbItems = [
   { title: 'Dashboard', link: '/Dashboard' },
@@ -44,7 +45,7 @@ const CourseDetails: React.FC = () => {
         message.error('Error while fetching course likes')
       })
       .finally(() => {
-        setLoaded(false)
+        setLoadingLikes(false)
       })
   }, [id])
 
@@ -87,7 +88,22 @@ const CourseDetails: React.FC = () => {
     <Row align='middle' justify='center'>
       <MyBreadcrumb items={breadcrumbItems} />
 
-      <Card title='Course Details' style={{ width: '80rem', margin: '20px' }}>
+      <Card
+        title='Course Details'
+        style={{ width: '80rem', margin: '20px' }}
+        extra={
+          <>
+            {courseLikes} <LikeFilled />
+          </>
+        }
+        // cover={
+        //   <img
+        //     alt='example'
+        //     src='https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png'
+        //     style={{ maxHeight: '250px' }}
+        //   />
+        // }
+      >
         <div>
           <h1>{course.title}</h1>
           <p>{course.about}</p>
@@ -130,7 +146,7 @@ const CourseDetails: React.FC = () => {
                 >
                   <h2>{lesson.title}</h2>
                   <p>{lesson.description}</p>
-                  <p>Video Key: {lesson.videoKey}</p>
+                  {/* <p>Video Key: {lesson.videoKey}</p> */}
                   <p>Duration: {lesson.duration} minutes</p>
                   <Divider />
                   <Space>
