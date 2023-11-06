@@ -22,6 +22,7 @@ import { useNavigate } from 'react-router-dom'
 import UploadAvatar from '../../components/common/UploadAvatar'
 import { baseImageUrl } from '../index'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
+import TeacherAvailability from '../../components/tutor/TeacherAvailability'
 
 const { Item } = Form
 
@@ -132,6 +133,8 @@ function Profile() {
                   </Button>
                 </Col>
               </Row>
+              <Divider />
+              <TeacherAvailability />
               <Divider />
 
               <Form layout='vertical'>
