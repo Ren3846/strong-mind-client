@@ -7,8 +7,6 @@ import {
   Space,
   Button,
   Form,
-  Input,
-  DatePicker,
   TimePicker,
   Modal,
   message,
@@ -20,8 +18,10 @@ const GetAvailableDays = () => {
   const [loading, setLoading] = useState(false)
   const [modalVisible, setModalVisible] = useState(false)
   const [form] = Form.useForm()
+  const [selectedDayOfWeek, setSelectedDayOfWeek] = useState(null)
 
-  const showModal = () => {
+  const showModal = (dayOfWeek: any) => {
+    setSelectedDayOfWeek(dayOfWeek)
     setModalVisible(true)
   }
 
@@ -29,11 +29,12 @@ const GetAvailableDays = () => {
     try {
       const values = await form.validateFields()
       const requestBody = {
+        dayOfWeek: selectedDayOfWeek, // Pass the selected day of the week
         timeSlots: [
           {
             start: values.start.format('HH:mm'),
             end: values.end.format('HH:mm'),
-            isAvailable: values.isAvailable,
+            isAvailable: true,
             meetingId: values.meetingId || '',
           },
         ],
@@ -75,7 +76,10 @@ const GetAvailableDays = () => {
             <Card
               title={`${getDayOfWeek(item.dayOfWeek)}`}
               extra={
-                <Button type='primary' onClick={showModal}>
+                <Button
+                  type='primary'
+                  onClick={() => showModal(item.dayOfWeek)}
+                >
                   <EditOutlined />
                 </Button>
               }
@@ -84,7 +88,9 @@ const GetAvailableDays = () => {
                 <div key={index}>
                   <Space>
                     {timeSlot.isAvailable ? (
-                      <Tag color='green'>Available</Tag>
+                      <Tag color='green' style={{ marginBottom: 10 }}>
+                        Available
+                      </Tag>
                     ) : (
                       <Tag color='red'>Unavailable</Tag>
                     )}
