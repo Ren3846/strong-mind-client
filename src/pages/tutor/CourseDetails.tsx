@@ -96,13 +96,13 @@ const CourseDetails: React.FC = () => {
             {courseLikes} <LikeFilled />
           </>
         }
-        // cover={
-        //   <img
-        //     alt='example'
-        //     src='https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png'
-        //     style={{ maxHeight: '250px' }}
-        //   />
-        // }
+        cover={
+          <img
+            alt='example'
+            src='https://img.freepik.com/free-photo/close-up-hand-taking-notes_23-2148888827.jpg?t=st=1699300390~exp=1699300990~hmac=ea1206e19d4d0ff0ede785cc330d1d55d565f4b718a7f22ad638482015ccd77e'
+            style={{ maxHeight: '450px' }}
+          />
+        }
       >
         <div>
           <h1>{course.title}</h1>

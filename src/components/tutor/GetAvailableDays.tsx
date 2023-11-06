@@ -88,9 +88,7 @@ const GetAvailableDays = () => {
                 <div key={index}>
                   <Space>
                     {timeSlot.isAvailable ? (
-                      <Tag color='green' style={{ marginBottom: 10 }}>
-                        Available
-                      </Tag>
+                      <Tag color='green'>Available</Tag>
                     ) : (
                       <Tag color='red'>Unavailable</Tag>
                     )}

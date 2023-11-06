@@ -11,6 +11,7 @@ import {
   Statistic,
   Col,
   Divider,
+  Space,
 } from 'antd'
 import { updateUserDetailsAPI } from '../../api/user'
 import Layout from '../../components/common/Layout'
