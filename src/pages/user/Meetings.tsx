@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
-import { Alert, Calendar, Card, Col, List, Row } from 'antd'
+import { Alert, Calendar, Card, Col, List, Row, Timeline } from 'antd'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 
 const breadcrumbItems = [
@@ -31,6 +31,7 @@ const CalendarPage: React.FC = () => {
     ]
     setAgenda(data)
   }
+  const hoursArray = Array.from({ length: 24 }, (_, i) => i)
 
   return (
     <>
@@ -54,7 +55,14 @@ const CalendarPage: React.FC = () => {
             <List
               dataSource={agenda}
               renderItem={(item, index) => <List.Item></List.Item>}
-            />
+            ></List>
+            <Timeline mode='left'>
+              {hoursArray.map((hour) => (
+                <Timeline.Item key={hour}>
+                  {hour < 10 ? `0${hour}:00` : `${hour}:00`}
+                </Timeline.Item>
+              ))}
+            </Timeline>
           </Card>
         </Col>
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Checkbox, TimePicker, Button, Space } from 'antd'
+import { Checkbox, TimePicker, Button, Space, Divider } from 'antd'
 import moment, { Moment } from 'moment'
 
 interface TeacherAvailabilityProps {}
@@ -21,7 +21,6 @@ const TeacherAvailability: React.FC<TeacherAvailabilityProps> = (props) => {
   }
 
   const handleSubmit = () => {
-    // You can process and save the selected days and hours here
     console.log('Selected Days:', selectedDays)
     console.log('Selected Hours:', selectedHours)
   }
@@ -30,7 +29,8 @@ const TeacherAvailability: React.FC<TeacherAvailabilityProps> = (props) => {
     <div>
       <Space direction='vertical'>
         <div>
-          <h4>Available Days:</h4>
+          <Divider orientation='left'>Available Days:</Divider>
+
           <Checkbox.Group>
             <Checkbox value='Monday'>Monday</Checkbox>
             <Checkbox value='Tuesday'>Tuesday</Checkbox>
@@ -42,11 +42,15 @@ const TeacherAvailability: React.FC<TeacherAvailabilityProps> = (props) => {
           </Checkbox.Group>
         </div>
         <div>
-          <h4>Available Hours:</h4>
+          <Divider orientation='left'>Available Hours:</Divider>
+
           <TimePicker.RangePicker
             format={timeFormat}
             // onChange={handleTimeChange}
             placeholder={['Start Time', 'End Time']}
+            minuteStep={30}
+
+            // disabledTime={['16:00']}
           />
         </div>
         <Button type='primary' onClick={handleSubmit}>
