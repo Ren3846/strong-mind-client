@@ -23,6 +23,7 @@ import UploadAvatar from '../../components/common/UploadAvatar'
 import { baseImageUrl } from '../index'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import TeacherAvailability from '../../components/tutor/TeacherAvailability'
+import GetAvailableDays from '../../components/tutor/GetAvailableDays'
 
 const { Item } = Form
 
@@ -86,7 +87,7 @@ function Profile() {
   return (
     <Layout>
       <Row align='middle' justify='center'>
-        <Card title='Profile' style={{ width: '60rem' }}>
+        <Card title='Profile' style={{ width: '80rem' }}>
           {loaded ? (
             <>
               <Row justify='start'>
@@ -134,7 +135,9 @@ function Profile() {
                 </Col>
               </Row>
               <Divider />
-              <TeacherAvailability />
+              <GetAvailableDays />
+              {/* <TeacherAvailability /> */}
+
               <Divider />
 
               <Form layout='vertical'>

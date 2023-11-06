@@ -41,7 +41,17 @@ const CalendarPage: React.FC = () => {
       </Row>
       <Row gutter={[16, 16]}>
         <Col span={6}>
-          <Card title='Agenda' style={{ margin: '20px 0px 0px 20px' }}>
+          <Card
+            title='Agenda'
+            style={{ margin: '20px 0px 0px 20px' }}
+            extra={
+              <Alert
+                message={`You selected date: ${selectedValue?.format(
+                  'YYYY-MM-DD',
+                )}`}
+              />
+            }
+          >
             <List
               dataSource={agenda}
               renderItem={(item, index) => (
@@ -53,21 +63,17 @@ const CalendarPage: React.FC = () => {
           </Card>
 
           <Card title='Meetings' style={{ margin: '20px 0px 0px 20px' }}>
-            <List
+            {/* <List
               dataSource={agenda}
               renderItem={(item, index) => <List.Item></List.Item>}
-            ></List>
+            ></List> */}
+
             <TimeLine />
           </Card>
         </Col>
 
         <Col span={18}>
           <Card title='Calendar' style={{ margin: '20px 20px 20px 0px' }}>
-            <Alert
-              message={`You selected date: ${selectedValue?.format(
-                'YYYY-MM-DD',
-              )}`}
-            />
             <Calendar
               value={value}
               onSelect={onSelect}
