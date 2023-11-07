@@ -1,7 +1,7 @@
 import { Form, Upload, Button, message, Modal, Avatar } from 'antd'
-import { UploadOutlined } from '@ant-design/icons'
+import { DeleteOutlined, UploadOutlined, UserOutlined } from '@ant-design/icons'
 import axios from 'axios'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { baseImageUrl } from '../../pages'
 
@@ -11,6 +11,11 @@ const UploadAvatar = () => {
   const [previewVisible, setPreviewVisible] = useState(false)
   const [previewImage, setPreviewImage] = useState('')
   const user = useSelector((state: any) => state.auth.user)
+  const [image, setImageUrl] = useState('')
+
+  useEffect(() => {
+    setImageUrl(`${baseImageUrl}/${user.image}`)
+  }, [user])
 
   const onFinish = (values: any) => {
     console.log('Received values:', values)
@@ -32,6 +37,7 @@ const UploadAvatar = () => {
 
         setFileId(newFileId)
         onSuccess(response, file)
+        setImageUrl(`${baseImageUrl}/${newFileId}`)
         message.success('Photo uploaded successfully')
       })
       .catch((error) => {
@@ -48,8 +54,21 @@ const UploadAvatar = () => {
     }
   }
 
+  const handleDelete = () => {
+    axios
+      .delete('/api/users/avatar')
+      .then(() => {
+        setFileId(null)
+        setImageUrl('')
+        message.success('Photo deleted successfully')
+      })
+      .catch((error) => {
+        console.error(error)
+        message.error('An error occurred while deleting the photo')
+      })
+  }
+
   const handleCancel = () => setPreviewVisible(false)
-  const imageUrl = `${baseImageUrl}/${user.image}`
 
   return (
     <>
@@ -68,20 +87,25 @@ const UploadAvatar = () => {
             name='avatar'
             listType='picture-circle'
             className='avatar-uploader'
-            action='https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188'
             showUploadList={false}
             onPreview={handlePreview}
           >
-            {imageUrl ? (
-              <Avatar src={imageUrl} style={{ width: '90%', height: '90%' }} />
+            {image ? (
+              <Avatar src={image} style={{ width: '90%', height: '90%' }} />
             ) : (
-              <Button icon={<UploadOutlined />}></Button>
+              // <Button icon={<UploadOutlined />} />
+              <Avatar icon={<UserOutlined />} />
             )}
           </Upload>
+          {image && (
+            <Button size='small' danger onClick={handleDelete}>
+              <DeleteOutlined />
+            </Button>
+          )}
         </Form.Item>
       </Form>
       <Modal
-        visible={previewVisible}
+        open={previewVisible}
         title='Preview'
         footer={null}
         onCancel={handleCancel}

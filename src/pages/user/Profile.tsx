@@ -11,20 +11,25 @@ import {
   Statistic,
   Col,
   Divider,
-  Space,
+  Select,
+  Tabs,
 } from 'antd'
 import { updateUserDetailsAPI } from '../../api/user'
 import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
 
-import { ArrowRightOutlined, WalletOutlined } from '@ant-design/icons'
+import {
+  ArrowRightOutlined,
+  CalendarOutlined,
+  WalletOutlined,
+} from '@ant-design/icons'
 import { updateUser } from '../../redux/actions/user'
 import { useNavigate } from 'react-router-dom'
 import UploadAvatar from '../../components/common/UploadAvatar'
-import { baseImageUrl } from '../index'
-import MyBreadcrumb from '../../components/common/Breadcrumb'
-import TeacherAvailability from '../../components/tutor/TeacherAvailability'
+
 import GetAvailableDays from '../../components/tutor/GetAvailableDays'
+import TabPane from 'antd/es/tabs/TabPane'
+import Wallet from './Wallet'
 
 const { Item } = Form
 
@@ -32,25 +37,6 @@ const breadcrumbItems = [
   { title: 'Dashboard', link: '/dashboard' },
   { title: 'Profile ' },
 ]
-
-const genderOptions = [
-  'Male',
-  'Female',
-  'Non-binary',
-  'Other',
-  'Transgender Male',
-  'Transgender Female',
-  'Genderfluid',
-  'Agender',
-  'Bigender',
-  'Demiboy',
-  'Demigirl',
-  'Intersex',
-  'Polygender',
-  'Not Specified',
-]
-
-const timezones = ['GMT-12:00', 'GMT-11:00', 'GMT-10:00']
 
 function Profile() {
   const user = useSelector((state: any) => state.auth.user)
@@ -83,8 +69,22 @@ function Profile() {
       })
   }
 
+  const handleChange = (value: string) => {
+    setEditedUser({
+      ...editedUser,
+      timezone: value,
+    })
+  }
+
+  const handleChangeGender = (value: string) => {
+    setEditedUser({
+      ...editedUser,
+      gender: value,
+    })
+  }
+
   console.log(user)
-  const imageUrl = `${baseImageUrl}/${user.image}`
+
   return (
     <Layout>
       <Row align='middle' justify='center'>
@@ -92,9 +92,6 @@ function Profile() {
           {loaded ? (
             <>
               <Row justify='start'>
-                {/* <Col span={4}>
-                  <Avatar size={120} src={imageUrl} />
-                </Col> */}
                 <Col span={4}>
                   <UploadAvatar />
                 </Col>
@@ -127,16 +124,39 @@ function Profile() {
                     value={user.balance}
                     precision={2}
                   />
-                  <Button
+                  {/* <Button
                     icon={<WalletOutlined />}
                     onClick={() => navigate('/profile/wallet')}
                   >
                     Wallet
-                  </Button>
+                  </Button> */}
                 </Col>
               </Row>
               <Divider />
-              <GetAvailableDays />
+              <Tabs defaultActiveKey='1'>
+                <TabPane
+                  tab={
+                    <span>
+                      <CalendarOutlined />
+                      Calendar
+                    </span>
+                  }
+                  key='1'
+                >
+                  <GetAvailableDays />
+                </TabPane>
+                <TabPane
+                  tab={
+                    <span>
+                      <WalletOutlined />
+                      Wallet
+                    </span>
+                  }
+                  key='2'
+                >
+                  <Wallet />
+                </TabPane>
+              </Tabs>
               {/* <TeacherAvailability /> */}
 
               <Divider />
@@ -187,63 +207,37 @@ function Profile() {
                 </Item>
 
                 <Item label='Gender'>
-                  <Input
-                    type='text'
-                    name='gender'
+                  <Select
+                    defaultValue='Male'
+                    style={{ width: 120 }}
+                    onChange={handleChangeGender}
                     value={editedUser.gender}
-                    onChange={handleFieldChange}
+                    options={[
+                      { value: 'male', label: 'Male' },
+                      { value: 'female', label: 'Female' },
+                      { value: 'non-binary', label: 'Non-binary' },
+                      { value: 'other', label: 'Other' },
+                    ]}
                   />
                 </Item>
-
-                {/* <Item label='Gender' name='gender'>
-                  <Select
-                    style={{ width: 200 }}
-                    onChange={handleFieldChange}
-                    placeholder='Select a gender'
-                  >
-                    {genderOptions.map((gender, index) => (
-                      <Select.Option key={index} value={gender}>
-                        {gender}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </Item> */}
 
                 <Item label='Timezone'>
-                  <Input
-                    type='text'
-                    name='timezone'
+                  <Select
+                    defaultValue='GMT-12:00'
+                    style={{ width: 120 }}
+                    onChange={handleChange}
                     value={editedUser.timezone}
-                    onChange={handleFieldChange}
+                    options={[
+                      { value: 'GMT-12:00', label: 'GMT-12:00' },
+                      { value: 'GMT-11:00', label: 'GMT-11:00' },
+                      { value: 'GMT-10:00', label: 'GMT-10:00' },
+                      { value: 'disabled', label: 'GMT-9:00', disabled: true },
+                    ]}
                   />
                 </Item>
-
-                {/* <Item label='Timezone'>
-                  <Select
-                    id='timezone'
-                    value={editedUser.timezone}
-                    onChange={handleFieldChange}
-                  >
-                    {timezones.map((timezone, index) => (
-                      <Option key={index} value={timezone}>
-                        {timezone}
-                      </Option>
-                    ))}
-                  </Select>
-                </Item> */}
 
                 <Divider />
 
-                {/* <Item label='Avatar'>
-                  <Dragger>
-                    <p className='ant-upload-drag-icon'>
-                      <UserOutlined />
-                    </p>
-                    <p className='ant-upload-text'>
-                      Click or drag file to this area to upload
-                    </p>
-                  </Dragger>
-                </Item> */}
                 <Item>
                   <Button type='primary' onClick={saveProfile}>
                     Save

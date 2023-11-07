@@ -66,7 +66,20 @@ export interface ITeacher {
   history: any[]
   courses: string[]
   meetings: any[]
+  country: string
+  availabilities: {
+    MON: number[]
+    TUE: number[]
+    WED: number[]
+    THU: number[]
+    FRI: number[]
+    SAT: number[]
+    SUN: number[]
+    _id: string
+  }
   image: string
+  role: string
+  password: string
 }
 
 export interface ILesson {

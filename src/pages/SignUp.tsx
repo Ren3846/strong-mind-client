@@ -24,6 +24,7 @@ import { userSignUpAPI } from '../api/user'
 import Layout from '../components/common/Layout'
 import { authLogin } from '../redux/actions/auth'
 import { useDispatch } from 'react-redux'
+import { ErrorMessage } from '../components/common/ErrorMessage'
 
 const { Option } = Select
 const { Text } = Typography
@@ -64,11 +65,19 @@ function SignUp() {
         setIsLoading(false)
         dispatch(authLogin(res.data.user))
       })
-      .catch((err) => {
+      .catch((error) => {
         setIsLoading(false)
-        const errorMessage =
-          err.response?.data?.errors?.message || 'An error occurred'
-        setError(errorMessage)
+        if (error.response) {
+          // Server responded with an error
+          const responseData = error.response.data
+          setError(responseData.message || 'An error occurred.')
+        } else if (error.request) {
+          // The request was made but no response received
+          setError('Request failed. Please check your connection.')
+        } else {
+          // Something happened in setting up the request
+          setError('An unexpected error occurred.')
+        }
       })
   }
 
@@ -224,14 +233,16 @@ function SignUp() {
               </Checkbox>
             </Form.Item>
 
-            {error && (
+            <ErrorMessage message={error || ''} />
+
+            {/* {error && (
               <Alert
                 message={error}
                 type='error'
                 showIcon
                 style={{ marginBottom: '10px' }}
               />
-            )}
+            )} */}
             <Form.Item>
               <Button
                 type='primary'

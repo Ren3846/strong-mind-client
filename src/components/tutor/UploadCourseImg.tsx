@@ -7,7 +7,7 @@ import axios from 'axios'
 const UploadImgCourse: React.FC = () => {
   const props: UploadProps = {
     name: 'file',
-    action: '/api/courses/cover/65366da64100379fb6de3678',
+    action: '/api/courses/cover/',
 
     onChange(info) {
       if (info.file.status !== 'uploading') {
