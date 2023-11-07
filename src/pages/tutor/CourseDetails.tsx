@@ -7,6 +7,13 @@ import { GetStudents } from '../../components/tutor/GetTutor'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import { LikeFilled, LikeOutlined } from '@ant-design/icons'
 
+import { UploadOutlined } from '@ant-design/icons'
+import type { UploadProps } from 'antd'
+import { Upload } from 'antd'
+import UploadImgCourse from '../../components/tutor/UploadCourseImg'
+import { baseImageUrl } from '..'
+import GetLikes from '../../components/common/GetLikes'
+
 const breadcrumbItems = [
   { title: 'Dashboard', link: '/Dashboard' },
   { title: 'My courses', link: '/mycourses' },
@@ -28,25 +35,26 @@ const CourseDetails: React.FC = () => {
       .get(`/api/courses/${id}`)
       .then((response) => {
         setCourse(response.data)
+        console.log(response.data)
         fetchLessonData(response.data.lessons)
       })
       .catch((error) => {
         setError('Error while dawnload data')
       })
 
-    axios
-      .get(`/api/courses/${id}/likes`)
-      .then((response) => {
-        console.log(response.data)
-        setCourseLikes(response.data)
-      })
-      .catch((error) => {
-        console.error(error)
-        message.error('Error while fetching course likes')
-      })
-      .finally(() => {
-        setLoadingLikes(false)
-      })
+    // axios
+    //   .get(`/api/courses/${id}/likes`)
+    //   .then((response) => {
+    //     console.log(response.data)
+    //     setCourseLikes(response.data)
+    //   })
+    //   .catch((error) => {
+    //     console.error(error)
+    //     message.error('Error while fetching course likes')
+    //   })
+    //   .finally(() => {
+    //     setLoadingLikes(false)
+    //   })
   }, [id])
 
   const handleDeleteLesson = (lessonId: string) => {
@@ -93,17 +101,19 @@ const CourseDetails: React.FC = () => {
         style={{ width: '80rem', margin: '20px' }}
         extra={
           <>
-            {courseLikes} <LikeFilled />
+            {/* {courseLikes} <LikeFilled /> */}
+            <GetLikes courseId={''} />
           </>
         }
         cover={
           <img
             alt='example'
-            src='https://img.freepik.com/free-photo/close-up-hand-taking-notes_23-2148888827.jpg?t=st=1699300390~exp=1699300990~hmac=ea1206e19d4d0ff0ede785cc330d1d55d565f4b718a7f22ad638482015ccd77e'
+            src={`${baseImageUrl}${course.cover}`}
             style={{ maxHeight: '450px' }}
           />
         }
       >
+        <UploadImgCourse />
         <div>
           <h1>{course.title}</h1>
           <p>{course.about}</p>
@@ -111,14 +121,14 @@ const CourseDetails: React.FC = () => {
           <p>Difficulty: {course.difficulty}</p>
           <p>Price: ${course.price}</p>
         </div>
-        <div>
+        {/* <div>
           {loadingLikes ? (
             <p>Loading...</p>
           ) : (
             <h4>{`Course Likes: ${courseLikes}`}</h4>
           )}
-          {/* <GetLikes courseId={course.id} /> */}
-        </div>
+          <GetLikes courseId={course.id} />
+        </div> */}
       </Card>
 
       <Card title='Students' style={{ width: '80rem', margin: '20px' }}>

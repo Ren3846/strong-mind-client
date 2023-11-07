@@ -47,6 +47,7 @@ export interface ICourse {
   category: string
   difficulty: string
   thumbnail: string
+  cover: string
   price: number
   isVisible: boolean
   lessons: string[]
