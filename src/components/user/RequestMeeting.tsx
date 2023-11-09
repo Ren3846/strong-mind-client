@@ -36,8 +36,7 @@ const RequestMeeting: React.FC<CallRequestProps> = ({ teacherId }) => {
         const dateTime = new Date(
           date.format('YYYY-MM-DD') + ' ' + time.format('HH:mm:ss'),
         )
-        await axios.post('/api/users/meetings/request', {
-          teacherId,
+        await axios.post(`/api/meetings/${teacherId}`, {
           date: dateTime.toISOString(),
         })
         message.success('Call request sent successfully')
@@ -67,7 +66,11 @@ const RequestMeeting: React.FC<CallRequestProps> = ({ teacherId }) => {
           onChange={(value) => setDate(value)}
           style={{ marginBottom: '10px' }}
         />
-        <TimePicker onChange={(value) => setTime(value)} format='HH:mm' />
+        <TimePicker
+          minuteStep={30}
+          onChange={(value) => setTime(value)}
+          format='HH:mm'
+        />
       </Modal>
     </div>
   )

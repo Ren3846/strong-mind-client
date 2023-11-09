@@ -37,7 +37,7 @@ const UploadAvatar = () => {
 
         setFileId(newFileId)
         onSuccess(response, file)
-        setImageUrl(`${baseImageUrl}/${newFileId}`)
+        setImageUrl(`${baseImageUrl}${newFileId}`)
         message.success('Photo uploaded successfully')
       })
       .catch((error) => {

@@ -119,7 +119,7 @@ const CourseDetails: React.FC = () => {
           <p>{course.about}</p>
           <p>Category: {course.category}</p>
           <p>Difficulty: {course.difficulty}</p>
-          <p>Price: ${course.price}</p>
+          <p>Price: ${course.meetingPrice}</p>
         </div>
         {/* <div>
           {loadingLikes ? (

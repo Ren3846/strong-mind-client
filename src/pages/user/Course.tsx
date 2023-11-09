@@ -1,4 +1,4 @@
-import { Card, Row, Space, Button, message, Skeleton } from 'antd'
+import { Card, Row, Space, Button, message, Skeleton, Rate } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
@@ -39,10 +39,10 @@ const Course: React.FC<{}> = () => {
   const enrollUser = () => {
     setEnrollLoading(true)
     axios
-      .post('/api/users/purchase', { courseId: id })
+      .post('/api/users/enroll', { courseId: id })
       .then((response) => {
         if (response.data.success) {
-          message.success(`You paid ${response.data.amount} $`)
+          message.success(`You enrolled th course ${response.data.title} $`)
           setEnrollmentSuccess(true)
         }
         // else {
@@ -64,7 +64,17 @@ const Course: React.FC<{}> = () => {
 
   return (
     <Row align='middle' justify='center'>
-      <Card title={`Course details`} style={{ width: '60rem', margin: '20px' }}>
+      <Card
+        title={`Course details`}
+        style={{ width: '60rem', margin: '20px' }}
+        extra={
+          <Rate
+            disabled
+            defaultValue={4}
+            style={{ color: 'rgb(167 167 255)' }}
+          />
+        }
+      >
         {loaded ? (
           <div>
             {course ? (
@@ -72,18 +82,17 @@ const Course: React.FC<{}> = () => {
                 <Space direction='vertical'>
                   <h2>{course.title}</h2>
                   <p>{course.about}</p>
-                  <p>Price: {course.price} $</p>
+                  <p>Price: {course.meetingPrice} $</p>
                   <p>Category: {course.category}</p>
                   <p>Difficulty: {course.difficulty}</p>
                   <p>Tagline: {course.tagline}</p>
                   <p>Number of Lessons: {course.lessons.length}</p>
                   {/* <p>Visible: {course.isVisible ? 'Yes' : 'No'}</p> */}
-                  <img
+                  {/* <img
                     src={course.thumbnail}
                     alt={course.title}
                     style={{ maxWidth: '100%' }}
-                  />
-                  <GetLikes courseId={course._id} />
+                  /> */}
 
                   {enrollmentSuccess ? (
                     <p>You have successfully enrolled in this course.</p>
@@ -117,6 +126,19 @@ const Course: React.FC<{}> = () => {
         ) : (
           <Skeleton active />
         )}
+      </Card>
+      <Card
+        title={`Video by Teacher`}
+        style={{ width: '60rem', margin: '20px' }}
+        className='lesson-card'
+      >
+        <video
+          // src={videoSrc}
+          controls
+          style={{ width: '100%', maxWidth: '800px', maxHeight: '500px' }}
+        >
+          Your browser does not support the video tag.
+        </video>
       </Card>
     </Row>
   )

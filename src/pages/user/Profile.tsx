@@ -30,6 +30,7 @@ import UploadAvatar from '../../components/common/UploadAvatar'
 import GetAvailableDays from '../../components/tutor/GetAvailableDays'
 import TabPane from 'antd/es/tabs/TabPane'
 import Wallet from './Wallet'
+import { USER_ROLE } from '../../redux/store/types'
 
 const { Item } = Form
 
@@ -134,17 +135,21 @@ function Profile() {
               </Row>
               <Divider />
               <Tabs defaultActiveKey='1'>
-                <TabPane
-                  tab={
-                    <span>
-                      <CalendarOutlined />
-                      Calendar
-                    </span>
-                  }
-                  key='1'
-                >
-                  <GetAvailableDays />
-                </TabPane>
+                {user.role === USER_ROLE.TEACHER ? (
+                  <TabPane
+                    tab={
+                      <span>
+                        <CalendarOutlined />
+                        Calendar
+                      </span>
+                    }
+                    key='1'
+                  >
+                    <GetAvailableDays />
+                  </TabPane>
+                ) : (
+                  <></>
+                )}
                 <TabPane
                   tab={
                     <span>
@@ -208,7 +213,7 @@ function Profile() {
 
                 <Item label='Gender'>
                   <Select
-                    defaultValue='Male'
+                    defaultValue=''
                     style={{ width: 120 }}
                     onChange={handleChangeGender}
                     value={editedUser.gender}
@@ -223,7 +228,7 @@ function Profile() {
 
                 <Item label='Timezone'>
                   <Select
-                    defaultValue='GMT-12:00'
+                    defaultValue=''
                     style={{ width: 120 }}
                     onChange={handleChange}
                     value={editedUser.timezone}

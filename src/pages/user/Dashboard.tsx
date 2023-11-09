@@ -92,7 +92,7 @@ const Dashboard = () => {
         </Col>
         <Col span={12}>
           <Card title='My Tutors'>
-            {loadingTeachers ? (
+            {/* {loadingTeachers ? (
               <Skeleton active />
             ) : (
               <ul>
@@ -111,7 +111,7 @@ const Dashboard = () => {
                   </Card>
                 ))}
               </ul>
-            )}
+            )} */}
           </Card>
         </Col>
 

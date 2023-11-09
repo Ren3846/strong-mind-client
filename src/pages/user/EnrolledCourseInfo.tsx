@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Card, Row, Descriptions, Avatar, Skeleton } from 'antd'
+import {
+  Card,
+  Row,
+  Descriptions,
+  Avatar,
+  Skeleton,
+  Divider,
+  Button,
+  List,
+} from 'antd'
 import { useParams } from 'react-router-dom'
 import Shedule from '../../components/user/Shedule'
 import Preloader from '../../components/common/Preloader'
@@ -8,11 +17,15 @@ import Preloader from '../../components/common/Preloader'
 import { ICourse, ITeacher } from '../../redux/store/types'
 import LessonsListUser from '../../components/user/LessonsListUser'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
+import RequestMeeting from '../../components/user/RequestMeeting'
+import PurchaseCourse from '../../components/user/PurchaseMeetings'
+import { useSelector } from 'react-redux'
 
 const CourseInfo: React.FC = () => {
   const [courseInfo, setCourseInfo] = useState<ICourse | null>(null)
   const [teacher, setTeacher] = useState<ITeacher | null>(null)
-
+  const user = useSelector((state: any) => state.auth.user)
+  console.log('user', user)
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState('')
   const { id } = useParams()
@@ -54,32 +67,34 @@ const CourseInfo: React.FC = () => {
         {loaded ? (
           <div>
             {courseInfo ? (
-              <Descriptions>
-                <Descriptions.Item label='Title'>
-                  {courseInfo.title}
-                </Descriptions.Item>
-                <Descriptions.Item label='About'>
-                  {courseInfo.about}
-                </Descriptions.Item>
-                <Descriptions.Item label='Tagline'>
-                  {courseInfo.tagline}
-                </Descriptions.Item>
-                <Descriptions.Item label='Category'>
-                  {courseInfo.category}
-                </Descriptions.Item>
-                <Descriptions.Item label='Difficulty'>
-                  {courseInfo.difficulty}
-                </Descriptions.Item>
-                <Descriptions.Item label='Price'>
-                  ${courseInfo.price}
-                </Descriptions.Item>
-                <Descriptions.Item label='Is Visible'>
-                  {courseInfo.isVisible ? 'Yes' : 'No'}
-                </Descriptions.Item>
-                <Descriptions.Item label='Teacher'>
-                  <GetTeacher userId={courseInfo.teacher} />
-                </Descriptions.Item>
-              </Descriptions>
+              <>
+                {' '}
+                <Descriptions>
+                  <Descriptions.Item label='Title'>
+                    {courseInfo.title}
+                  </Descriptions.Item>
+                  <Descriptions.Item label='About'>
+                    {courseInfo.about}
+                  </Descriptions.Item>
+                  <Descriptions.Item label='Tagline'>
+                    {courseInfo.tagline}
+                  </Descriptions.Item>
+                  <Descriptions.Item label='Category'>
+                    {courseInfo.category}
+                  </Descriptions.Item>
+                  <Descriptions.Item label='Difficulty'>
+                    {courseInfo.difficulty}
+                  </Descriptions.Item>
+                  <Descriptions.Item label='Price for lesson'>
+                    ${courseInfo.meetingPrice}
+                  </Descriptions.Item>
+
+                  <Descriptions.Item label='Teacher'>
+                    <GetTeacher userId={courseInfo.teacher} />
+                  </Descriptions.Item>
+                </Descriptions>
+                <RequestMeeting teacherId={courseInfo.teacher} />
+              </>
             ) : (
               <p>{error}</p>
             )}
@@ -87,6 +102,8 @@ const CourseInfo: React.FC = () => {
         ) : (
           <Skeleton active />
         )}
+        <Divider />
+        {id ? <PurchaseCourse courseIdd={id} /> : <></>}
       </Card>
 
       <Card

@@ -40,7 +40,7 @@ export const GetCourses: React.FC<{
               <h3>{course.title}</h3>
               <p>{course.about}</p>
 
-              <span>Price: {course.price} $</span>
+              <span>Price: {course.meetingPrice} $</span>
               <Button type='primary' key={course._id}>
                 <Link to={`/courses/${course._id}`}>Explore</Link>
               </Button>

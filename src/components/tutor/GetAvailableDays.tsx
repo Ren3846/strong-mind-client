@@ -14,6 +14,7 @@ import {
   Row,
 } from 'antd'
 import { CheckCircleOutlined, EditOutlined } from '@ant-design/icons'
+import { useSelector } from 'react-redux'
 
 const GetAvailableDays: React.FC = () => {
   const [data, setData] = useState<any>({})
@@ -26,6 +27,8 @@ const GetAvailableDays: React.FC = () => {
   const [hourCheckboxes, setHourCheckboxes] = useState<JSX.Element[]>([])
   // const [showUnavailable, setShowUnavailable] = useState(false)
 
+  const user = useSelector((state: any) => state.auth.user)
+
   const showModal = (dayOfWeek: string) => {
     console.log(dayOfWeek)
     setSelectedDayOfWeek(dayOfWeek)
@@ -35,14 +38,16 @@ const GetAvailableDays: React.FC = () => {
   useEffect(() => {
     const hoursInDay = Array.from({ length: 24 }, (_, i) => i)
     const checkboxes = hoursInDay.map((hour) => (
-      <Checkbox key={hour} value={hour} style={{ paddingRight: 10 }}>
-        {hour}:00
-      </Checkbox>
+      <Tag style={{ width: 80, marginBottom: 5 }} color='warning'>
+        <Checkbox key={hour} value={hour} style={{ paddingRight: 10 }}>
+          {hour}:00
+        </Checkbox>
+      </Tag>
     ))
     setHourCheckboxes(checkboxes)
 
     axios
-      .get('/api/users/availability/all')
+      .get(`/api/users/availability/all/${user._id}`)
       .then((response) => {
         console.log(response.data)
         setData(response.data)
@@ -55,7 +60,7 @@ const GetAvailableDays: React.FC = () => {
   const handleOk = async () => {
     try {
       const values = await form.validateFields()
-      const selectedHourSlots = values.availableHours.map(
+      const selectedHourSlots = values.UnavailableHours.map(
         (hour: number) => hour,
       )
 
@@ -64,7 +69,7 @@ const GetAvailableDays: React.FC = () => {
         slots: selectedHourSlots,
       }
 
-      await axios.patch(`/api/users/availability`, requestBody)
+      await axios.patch('/api/users/availability/', requestBody)
       message.success('Changes successfully saved')
       setModalVisible(false)
       form.resetFields()
@@ -95,7 +100,11 @@ const GetAvailableDays: React.FC = () => {
                 {timeSlot}
               </Tag>
             ) : ( */}
-            <Tag color='red' style={{ margin: '1px' }}>
+            <Tag
+              icon={<CheckCircleOutlined />}
+              color='green'
+              style={{ margin: '1px' }}
+            >
               {timeSlot}:00
             </Tag>
             {/* )} */}
@@ -125,7 +134,7 @@ const GetAvailableDays: React.FC = () => {
         ))}
       </Row>
       <Modal
-        title='Select Unvailable Time'
+        title='Select Available Time'
         open={modalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -135,7 +144,7 @@ const GetAvailableDays: React.FC = () => {
           <Form.Item
             name='UnavailableHours'
             rules={[
-              { required: true, message: 'Please specify unavailable hours' },
+              { required: true, message: 'Please specify available hours' },
             ]}
           >
             <Checkbox.Group style={{ width: '100%' }}>

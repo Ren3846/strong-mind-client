@@ -4,24 +4,38 @@ export enum USER_ROLE {
   ADMIN = 'admin',
 }
 
+interface Availability {
+  MON: string[]
+  TUE: string[]
+  WED: string[]
+  THU: string[]
+  FRI: string[]
+  SAT: string[]
+  SUN: string[]
+  _id: string
+}
+
 export interface User {
   _id: string
   email: string
-  balance: number
-  role: USER_ROLE
-  fullName: string
   phone: string
-  country: string
-  bio: string | null
-  gender: string | null
-  timezone: string | null
+  bio: string
+  avatar: string
+  timezone: string
+  gender: string
+  image: string
+  role: string
   isBlocked: boolean
   students: string[]
-  liveLessonSchedule: LiveLesson[]
+  meetings: any[]
+  fullName: string
+  balance: number
+  country: string
   history: any[]
   courses: string[]
-  meetings: Meeting[]
-  image: string
+  purchasedMeetings: any[]
+  availabilities: Availability
+  __v: number
 }
 
 interface LiveLesson {
@@ -52,6 +66,7 @@ export interface ICourse {
   isVisible: boolean
   lessons: string[]
   __v: number
+  meetingPrice: number
 }
 
 export interface ITeacher {

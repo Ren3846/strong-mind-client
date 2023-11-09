@@ -78,7 +78,7 @@ const CourseItem: React.FC<ICourse> = (course) => {
             key={course._id + course.teacher}
           />
         </div>
-        <span>Price: {course.price} $</span>
+        <span>Price: {course.meetingPrice} $</span>
 
         <Button type='primary' key={course._id}>
           <Link to={course._id}>Explore</Link>

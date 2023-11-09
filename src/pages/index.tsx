@@ -38,8 +38,7 @@ interface IProtectedRoute {
   children: JSX.Element | JSX.Element[]
 }
 
-export const baseImageUrl =
-  'https://strongmind.fra1.cdn.digitaloceanspaces.com/'
+export const baseImageUrl = 'https://strongmind.fra1.cdn.digitaloceanspaces.com'
 
 export const baseVideoUrl = 'https://strongmind.fra1.digitaloceanspaces.com/'
 

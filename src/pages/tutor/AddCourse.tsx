@@ -122,9 +122,11 @@ const CreateCourse: React.FC = () => {
             <Input />
           </Form.Item>
           <Form.Item
-            label='Price'
-            name='price'
-            rules={[{ required: true, message: 'Enter the price' }]}
+            label='Meeting Price'
+            name='meetingPrice'
+            rules={[
+              { required: true, message: 'Enter the price for meetings' },
+            ]}
           >
             <InputNumber />
           </Form.Item>
