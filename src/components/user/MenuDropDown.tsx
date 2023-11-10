@@ -105,7 +105,7 @@ function MenuDropDown({ user }: MenuDropDownProps) {
           <Avatar
             size='small'
             style={{ backgroundColor: '#6466f1' }}
-            src={`${baseImageUrl}/${currentUser.image}`}
+            src={`${baseImageUrl}/${currentUser.avatar}`}
           />
           {user?.email} <DownOutlined />
         </Space>

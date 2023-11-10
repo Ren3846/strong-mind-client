@@ -57,7 +57,7 @@ function Profile() {
   const saveProfile = () => {
     updateUserDetailsAPI(editedUser)
       .then((response) => {
-        console.log(response)
+        console.log(response.data)
         message.success('Profile updated successfully', 3)
         dispatch(updateUser(response.data._id, response.data))
       })

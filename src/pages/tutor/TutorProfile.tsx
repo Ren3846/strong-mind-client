@@ -58,7 +58,7 @@ function TutorProfile() {
           {loaded ? (
             <>
               <Row justify='center'>
-                <Avatar size={120} src={`${baseImageUrl}/${user?.image}`} />
+                <Avatar size={120} src={`${baseImageUrl}/${user?.avatar}`} />
               </Row>
 
               <h3 style={{ color: 'red' }}>Role: {user.role}</h3>

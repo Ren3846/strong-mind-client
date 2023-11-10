@@ -14,7 +14,7 @@ const UploadAvatar = () => {
   const [image, setImageUrl] = useState('')
 
   useEffect(() => {
-    setImageUrl(`${baseImageUrl}/${user.image}`)
+    setImageUrl(`${baseImageUrl}/${user.avatar}`)
   }, [user])
 
   const onFinish = (values: any) => {

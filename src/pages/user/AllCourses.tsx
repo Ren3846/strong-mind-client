@@ -49,7 +49,7 @@ const CourseStudentItem: React.FC<{
           style={{ margin: '5px' }}
         >
           <Space>
-            <Avatar src={`${baseImageUrl}/${user?.image}`} />
+            <Avatar src={`${baseImageUrl}/${user?.avatar}`} />
             {user?.email}
           </Space>
         </div>

@@ -36,7 +36,7 @@ export const GetStudents: React.FC<{
           style={{ margin: '5px' }}
         >
           <Space>
-            <Avatar src={`${baseImageUrl}/${user?.image}`} />
+            <Avatar src={`${baseImageUrl}/${user?.avatar}`} />
             <Link to={`/teacher/${user?._id}`}>{user?.email}</Link>
           </Space>
         </div>

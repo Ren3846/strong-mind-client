@@ -148,7 +148,7 @@ const TutorDashboard = () => {
                     <Link to={`user/${student._id}`}>
                       <List.Item.Meta
                         avatar={
-                          <Avatar src={`${baseImageUrl}/${student.image}`} />
+                          <Avatar src={`${baseImageUrl}/${student.avatar}`} />
                         }
                         title={student.email}
                       />
