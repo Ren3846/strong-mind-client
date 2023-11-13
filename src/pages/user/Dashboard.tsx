@@ -1,28 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Layout from '../../components/common/Layout'
-import {
-  Row,
-  Col,
-  Card,
-  Typography,
-  Button,
-  Space,
-  Avatar,
-  Skeleton,
-} from 'antd'
+import { Row, Col, Card, Button, Skeleton } from 'antd'
 import { ICourse, ITeacher } from '../../redux/store/types'
-import Preloader from '../../components/common/Preloader'
-import StepsDashboard from '../../components/user/Steps'
 import { Link } from 'react-router-dom'
-import Shedule from '../../components/user/Shedule'
-import LessonsListUser from '../../components/user/LessonsListUser'
-import { UserOutlined } from '@ant-design/icons'
-import { baseImageUrl } from '..'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import BookedMeetings from '../../components/tutor/ReqMeetings'
-
-const { Title } = Typography
 
 const breadcrumbItems = [{ title: 'Home', link: '/' }, { title: 'Dashboard' }]
 
@@ -123,9 +106,7 @@ const Dashboard = () => {
           </Card>
         </Col>
         <Col span={24}>
-          <Card title='Shedule'>
-            <Shedule />
-          </Card>
+          <Card title='Shedule'>{/* <Shedule /> */}</Card>
         </Col>
       </Row>
     </Layout>

@@ -200,36 +200,11 @@ const Courses = () => {
           <Typography.Title level={2} style={{ margin: 0 }}>
             Conversational English A2-C2
           </Typography.Title>
-          {loaded ? (
-            <div className='courses-wrapper'>
-              {filteredCourses.length ? (
-                filteredCourses.map((course) => (
-                  <CourseItem {...course} key={course._id} />
-                ))
-              ) : (
-                <p>No courses match the selected difficulty and category.</p>
-              )}
-            </div>
-          ) : (
-            <Preloader />
-          )}
+
           <Divider />
           <Typography.Title level={2} style={{ margin: 0 }}>
             Test preparation A1-C1
           </Typography.Title>
-          {loaded ? (
-            <div className='courses-wrapper'>
-              {filteredCourses.length ? (
-                filteredCourses.map((course) => (
-                  <CourseItem {...course} key={course._id} />
-                ))
-              ) : (
-                <p>No courses match the selected difficulty and category.</p>
-              )}
-            </div>
-          ) : (
-            <Preloader />
-          )}
         </Col>
       </Row>
     </Layout>

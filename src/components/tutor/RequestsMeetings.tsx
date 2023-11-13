@@ -193,7 +193,7 @@ const BookedMeetings = () => {
             return {
               ...meeting,
               teacherName: teacherResponse.data.fullName,
-              studentName: studentResponse.data.fullName,
+              studentName: studentResponse.data.email,
               courseName: courseResponse.data.title,
             }
           }),
@@ -213,7 +213,6 @@ const BookedMeetings = () => {
       await axios.patch(`/api/meetings/status/${meetingId}`, {
         status: 'accepted',
       })
-      // Обновить статус встречи
       setMeetings((prevMeetings: any) =>
         prevMeetings.map((meeting: any) =>
           meeting._id === meetingId
@@ -231,7 +230,6 @@ const BookedMeetings = () => {
       await axios.patch(`/api/meetings/status/${meetingId}`, {
         status: 'rejected',
       })
-      // Обновить статус встречи
       setMeetings((prevMeetings: any) =>
         prevMeetings.map((meeting: any) =>
           meeting._id === meetingId
@@ -269,28 +267,31 @@ const BookedMeetings = () => {
                       Pending
                     </Tag>
                   )}
-                  {meeting.studentName}{' '}
+                  {meeting.studentName}
                 </Space>
               </div>
-              {/* {meeting.status === 'pending' && (
-                <> */}
-              <Space>
-                <Button
-                  type='primary'
-                  onClick={() => handleAcceptMeeting(meeting._id)}
-                >
-                  Accept
-                </Button>
-                <Button
-                  danger
-                  type='primary'
-                  onClick={() => handleRejectMeeting(meeting._id)}
-                >
-                  Reject
-                </Button>
-              </Space>
-              {/* </>
-              )} */}
+
+              {meeting.status === 'draft' ? (
+                <>
+                  <Space>
+                    <Button
+                      type='primary'
+                      onClick={() => handleAcceptMeeting(meeting._id)}
+                    >
+                      Accept
+                    </Button>
+                    <Button
+                      danger
+                      type='primary'
+                      onClick={() => handleRejectMeeting(meeting._id)}
+                    >
+                      Reject
+                    </Button>
+                  </Space>
+                </>
+              ) : (
+                <></>
+              )}
             </List.Item>
           )}
         />

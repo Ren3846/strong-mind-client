@@ -93,7 +93,7 @@ function Profile() {
           {loaded ? (
             <>
               <Row justify='start'>
-                <Col span={4}>
+                <Col span={5}>
                   <UploadAvatar />
                 </Col>
                 <Col span={12}>

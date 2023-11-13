@@ -57,7 +57,7 @@ const RequestMeeting: React.FC<CallRequestProps> = ({ teacherId }) => {
       </Button>
       <Modal
         title='Choose Date and Time'
-        visible={modalVisible}
+        open={modalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
         okButtonProps={{ loading }}

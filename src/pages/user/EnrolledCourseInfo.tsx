@@ -11,7 +11,6 @@ import {
   List,
 } from 'antd'
 import { useParams } from 'react-router-dom'
-import Shedule from '../../components/user/Shedule'
 import Preloader from '../../components/common/Preloader'
 
 import { ICourse, ITeacher } from '../../redux/store/types'
@@ -116,7 +115,7 @@ const CourseInfo: React.FC = () => {
       </Card>
 
       <Card title='Course Shedule' style={{ width: '80rem', margin: '20px' }}>
-        <div>{courseInfo ? <Shedule /> : <p>{error}</p>}</div>
+        {/* <div>{courseInfo ? <Shedule /> : <p>{error}</p>}</div> */}
       </Card>
     </Row>
   )

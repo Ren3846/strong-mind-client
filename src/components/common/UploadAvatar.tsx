@@ -47,12 +47,12 @@ const UploadAvatar = () => {
       })
   }
 
-  const handlePreview = async (file: any) => {
-    if (file.url) {
-      setPreviewImage(file.url)
-      setPreviewVisible(true)
-    }
-  }
+  // const handlePreview = async (file: any) => {
+  //   if (file.url) {
+  //     setPreviewImage(file.url)
+  //     setPreviewVisible(true)
+  //   }
+  // }
 
   const handleDelete = () => {
     axios
@@ -68,7 +68,7 @@ const UploadAvatar = () => {
       })
   }
 
-  const handleCancel = () => setPreviewVisible(false)
+  // const handleCancel = () => setPreviewVisible(false)
 
   return (
     <>
@@ -77,18 +77,17 @@ const UploadAvatar = () => {
         name='customized_form_controls'
         layout='horizontal'
         onFinish={onFinish}
-        initialValues={{ size: 'small' }}
+        initialValues={{ size: 'medium' }}
       >
         <Form.Item>
           <Upload
             customRequest={({ file, onSuccess, onError }) =>
               customRequest({ file, onSuccess, onError })
             }
-            name='avatar'
+            // name='avatar'
             listType='picture-circle'
-            className='avatar-uploader'
-            showUploadList={false}
-            onPreview={handlePreview}
+            showUploadList={true}
+            // onPreview={handlePreview}
           >
             {image ? (
               <Avatar src={image} style={{ width: '90%', height: '90%' }} />
@@ -104,14 +103,14 @@ const UploadAvatar = () => {
           )}
         </Form.Item>
       </Form>
-      <Modal
+      {/* <Modal
         open={previewVisible}
         title='Preview'
         footer={null}
         onCancel={handleCancel}
       >
         <img alt='Avatar' style={{ width: '100%' }} src={previewImage} />
-      </Modal>
+      </Modal> */}
     </>
   )
 }

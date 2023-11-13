@@ -13,14 +13,12 @@ import {
   Pagination,
 } from 'antd'
 import { ICourse, USER_ROLE, User } from '../../redux/store/types'
-import Preloader from '../../components/common/Preloader'
-import TutorShedule from '../../components/tutor/TutorShedule'
 import { Link } from 'react-router-dom'
 import TeacherMeetings from '../../components/tutor/RequestsMeetings'
 import GetLikes from '../../components/common/GetLikes'
 import { useSelector } from 'react-redux'
 import { StoreType } from '../../redux/store'
-import { SearchOutlined, UserOutlined } from '@ant-design/icons'
+import { SearchOutlined } from '@ant-design/icons'
 import { baseImageUrl } from '..'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import BookedMeetings from '../../components/tutor/ReqMeetings'
@@ -196,18 +194,16 @@ const TutorDashboard = () => {
 
         <Col span={24}>
           <Card title='Requests'>
-            {user?.role === USER_ROLE.TEACHER ? (
-              <TeacherMeetings />
-            ) : (
+            {/* {user?.role === USER_ROLE.TEACHER ? ( */}
+            <TeacherMeetings />
+            {/* ) : (
               <BookedMeetings />
-            )}
+            )} */}
           </Card>
         </Col>
 
         <Col span={24}>
-          <Card title='Shedule'>
-            <TutorShedule />
-          </Card>
+          <Card title='Shedule'>{/* <TutorShedule /> */}</Card>
         </Col>
       </Row>
     </Layout>
