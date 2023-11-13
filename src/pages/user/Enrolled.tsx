@@ -120,7 +120,7 @@ const GetTeacher: React.FC<{
   return (
     <div>
       <a>{user?.email}</a>
-      <a>{user?.fullName}</a>
+      {/* <a>{user?.fullName}</a> */}
     </div>
   )
 }

@@ -44,7 +44,7 @@ const TeacherProfile: React.FC<{}> = () => {
                 <WechatOutlined />
                 Chat
               </Button>
-              {teacher?._id && <RequestMeeting teacherId={teacher._id} />}{' '}
+              {/* {teacher?._id && <RequestMeeting teacherId={teacher._id} />}{' '} */}
             </Space>
           ) : (
             <Preloader />

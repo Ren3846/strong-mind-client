@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { Input, Button, message, Space, List, Tag } from 'antd'
+import { Input, Button, message, Space, List, Tag, Divider } from 'antd'
 import { DollarCircleFilled } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 
@@ -44,16 +44,18 @@ const PurchaseCourse: React.FC<{
         >
           Buy meetings
         </Button>
-        <List
-          dataSource={user.purchasedMeetings}
-          renderItem={(item: any) => (
-            <Button>
-              Quantity: {item.quantity}
-              {/* Course: {item.course}, , ID: {item._id} */}
-            </Button>
-          )}
-        />
       </Space.Compact>
+      <Divider />
+
+      <List
+        dataSource={user.purchasedMeetings}
+        renderItem={(item: any) => (
+          <Button>
+            Quantity: {item.quantity}
+            {/* Course: {item.course}, , ID: {item._id} */}
+          </Button>
+        )}
+      />
     </div>
   )
 }

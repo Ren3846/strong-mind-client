@@ -93,7 +93,7 @@ const CourseInfo: React.FC = () => {
                     <GetTeacher userId={courseInfo.teacher} />
                   </Descriptions.Item>
                 </Descriptions>
-                <RequestMeeting teacherId={courseInfo.teacher} />
+                {id ? <RequestMeeting teacherId={id} /> : <></>}
               </>
             ) : (
               <p>{error}</p>

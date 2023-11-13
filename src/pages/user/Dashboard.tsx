@@ -20,6 +20,7 @@ import LessonsListUser from '../../components/user/LessonsListUser'
 import { UserOutlined } from '@ant-design/icons'
 import { baseImageUrl } from '..'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
+import BookedMeetings from '../../components/tutor/ReqMeetings'
 
 const { Title } = Typography
 
@@ -117,7 +118,8 @@ const Dashboard = () => {
 
         <Col span={24}>
           <Card title='My Lessons'>
-            <LessonsListUser />
+            {/* <LessonsListUser /> */}
+            <BookedMeetings />
           </Card>
         </Col>
         <Col span={24}>

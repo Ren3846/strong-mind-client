@@ -12,7 +12,7 @@ import {
   List,
   Pagination,
 } from 'antd'
-import { ICourse, User } from '../../redux/store/types'
+import { ICourse, USER_ROLE, User } from '../../redux/store/types'
 import Preloader from '../../components/common/Preloader'
 import TutorShedule from '../../components/tutor/TutorShedule'
 import { Link } from 'react-router-dom'
@@ -23,6 +23,7 @@ import { StoreType } from '../../redux/store'
 import { SearchOutlined, UserOutlined } from '@ant-design/icons'
 import { baseImageUrl } from '..'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
+import BookedMeetings from '../../components/tutor/ReqMeetings'
 
 const breadcrumbItems = [{ title: 'Home', link: '/' }, { title: 'Dashboard' }]
 
@@ -92,7 +93,6 @@ const TutorDashboard = () => {
           <Card title='My courses' style={{ height: '50vh' }}>
             {loaded ? (
               <>
-                {' '}
                 <ul>
                   {courses.map((item) => (
                     <Card key={item._id} style={{ marginTop: '10px' }}>
@@ -196,7 +196,11 @@ const TutorDashboard = () => {
 
         <Col span={24}>
           <Card title='Requests'>
-            <TeacherMeetings />
+            {user?.role === USER_ROLE.TEACHER ? (
+              <TeacherMeetings />
+            ) : (
+              <BookedMeetings />
+            )}
           </Card>
         </Col>
 
