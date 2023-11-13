@@ -11,7 +11,6 @@ import {
   CloseCircleOutlined,
   SyncOutlined,
 } from '@ant-design/icons'
-import Preloader from '../../components/common/Preloader'
 
 const Wallet = () => {
   const user = useSelector<StoreType, User>((state: any) => state.auth.user)
@@ -20,18 +19,27 @@ const Wallet = () => {
   const [paymentHistory, setPaymentHistory] = useState([])
 
   useEffect(() => {
-    axios
-      .get('/api/orders/topup')
-      .then((response) => {
-        console.log(response.data)
+    const fetchPaymentHistory = async () => {
+      try {
+        let response
+        if (user.role === USER_ROLE.TEACHER) {
+          response = await axios.get(
+            '/api/orders/withdrawal/teacher-withdrawals',
+          )
+        } else {
+          response = await axios.get('/api/orders/topup/user-topups')
+        }
         setPaymentHistory(response.data)
-      })
-      .catch((error) => {
-        console.error(error)
+      } catch (error) {
+        console.error('Error while fetching history:', error)
         message.error('Error while fetching history')
-      })
-      .finally(() => setLoading(false))
-  }, [])
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchPaymentHistory()
+  }, [user.role])
 
   const columns = [
     {
@@ -82,11 +90,6 @@ const Wallet = () => {
         return <span>{formattedDate}</span>
       },
     },
-    // {
-    //   title: 'Updated At',
-    //   dataIndex: 'updatedAt',
-    //   key: 'updatedAt',
-    // },
   ]
 
   return (
