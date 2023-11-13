@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Card, List, Skeleton, Space, Tag, Button } from 'antd'
+import { Button, Card, List, Skeleton, Space, Tag } from 'antd'
 import {
   CheckCircleOutlined,
   CloseCircleOutlined,
@@ -9,12 +9,12 @@ import {
 
 const BookedMeetings = () => {
   const [meetings, setMeetings] = useState<any>([])
-  const [loading, setLoading] = useState(true)
+  const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     const fetchMeetings = async () => {
       try {
-        const response = await axios.get('/api/meetings/')
+        const response = await axios.get('/api/meetings/booked')
         const meetingsData = await Promise.all(
           response.data.map(async (meeting: any) => {
             const teacherResponse = await axios.get(
@@ -27,63 +27,31 @@ const BookedMeetings = () => {
               `/api/courses/${meeting.course}`,
             )
 
+            console.log(meeting.course)
+            console.log(meeting.teacher)
+            console.log(meeting.student)
+
             return {
               ...meeting,
               teacherName: teacherResponse.data.fullName,
-              studentName: studentResponse.data.email,
+
+              studentName: studentResponse.data.fullName,
               courseName: courseResponse.data.title,
             }
           }),
         )
         setMeetings(meetingsData)
-        setLoading(false)
+        setLoaded(true)
       } catch (error) {
         console.error('Error fetching meetings:', error)
       }
     }
-
     fetchMeetings()
   }, [])
 
-  const handleAcceptMeeting = async (meetingId: string) => {
-    try {
-      await axios.patch(`/api/meetings/status/${meetingId}`, {
-        status: 'accepted',
-      })
-      setMeetings((prevMeetings: any) =>
-        prevMeetings.map((meeting: any) =>
-          meeting._id === meetingId
-            ? { ...meeting, status: 'accepted' }
-            : meeting,
-        ),
-      )
-    } catch (error) {
-      console.error('Error accepting meeting:', error)
-    }
-  }
-
-  const handleRejectMeeting = async (meetingId: string) => {
-    try {
-      await axios.patch(`/api/meetings/status/${meetingId}`, {
-        status: 'rejected',
-      })
-      setMeetings((prevMeetings: any) =>
-        prevMeetings.map((meeting: any) =>
-          meeting._id === meetingId
-            ? { ...meeting, status: 'rejected' }
-            : meeting,
-        ),
-      )
-    } catch (error) {
-      console.error('Error rejecting meeting:', error)
-    }
-  }
-
   return (
     <div>
-      {loading ? (
-        <Skeleton active />
-      ) : (
+      {loaded ? (
         <List
           dataSource={meetings}
           renderItem={(meeting: any) => (
@@ -107,21 +75,10 @@ const BookedMeetings = () => {
                   {meeting.studentName}
                 </Space>
               </div>
-
-              {meeting.status === 'draft' ? (
+              {meeting.status === 'accepted' ? (
                 <>
                   <Space>
-                    <Button
-                      type='primary'
-                      onClick={() => handleAcceptMeeting(meeting._id)}
-                    >
-                      Accept
-                    </Button>
-                    <Button
-                      danger
-                      type='primary'
-                      onClick={() => handleRejectMeeting(meeting._id)}
-                    >
+                    <Button danger type='primary' onClick={() => {}}>
                       Reject
                     </Button>
                   </Space>
@@ -132,6 +89,35 @@ const BookedMeetings = () => {
             </List.Item>
           )}
         />
+      ) : (
+        // <Space direction='horizontal'>
+        //   <>
+        //     {meetings.map((meeting: any) => (
+        //       <Card key={meeting._id} style={{ width: 300, margin: '16px' }}>
+        //         <Card.Meta
+        //           title={
+        //             <>
+        //               <strong>Teacher:</strong> {meeting.teacherName}
+        //             </>
+        //           }
+        //           description={
+        //             <>
+        //               <strong>Student:</strong> {meeting.studentName}
+        //               <br />
+        //               <strong>Course:</strong> {meeting.courseName}
+        //               <br />
+        //               <strong>Date:</strong>{' '}
+        //               {new Date(meeting.start_date).toLocaleString()}
+        //               <br />
+        //               <strong>Status:</strong> {meeting.status}
+        //             </>
+        //           }
+        //         />
+        //       </Card>
+        //     ))}
+        //   </>
+        // </Space>
+        <Skeleton active />
       )}
     </div>
   )
