@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { Input, Button, message, Space, List, Tag, Divider } from 'antd'
 import { DollarCircleFilled } from '@ant-design/icons'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateUser } from '../../redux/actions/user'
 
 const PurchaseCourse: React.FC<{
   courseIdd: string
@@ -10,6 +11,7 @@ const PurchaseCourse: React.FC<{
   const [courseId, setCourseId] = useState('')
   const [quantity, setQuantity] = useState(1)
   const user = useSelector((state: any) => state.auth.user)
+  const dispatch = useDispatch()
 
   const handlePurchase = async () => {
     try {
@@ -19,8 +21,13 @@ const PurchaseCourse: React.FC<{
       }
 
       await axios.post('/api/users/purchase/', requestData)
+      dispatch(
+        updateUser(user._id, {
+          purchasedMeetings: [...user.purchasedMeetings, { quantity }],
+        }),
+      )
+
       message.success('Purchase successful')
-      setCourseId('')
       setQuantity(1)
     } catch (error) {
       console.error(error)

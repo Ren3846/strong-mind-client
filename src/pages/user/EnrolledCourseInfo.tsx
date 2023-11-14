@@ -22,7 +22,6 @@ import { useSelector } from 'react-redux'
 
 const CourseInfo: React.FC = () => {
   const [courseInfo, setCourseInfo] = useState<ICourse | null>(null)
-  const [teacher, setTeacher] = useState<ITeacher | null>(null)
   const user = useSelector((state: any) => state.auth.user)
   console.log('user', user)
   const [loaded, setLoaded] = useState(false)
@@ -67,7 +66,6 @@ const CourseInfo: React.FC = () => {
           <div>
             {courseInfo ? (
               <>
-                {' '}
                 <Descriptions>
                   <Descriptions.Item label='Title'>
                     {courseInfo.title}
@@ -92,7 +90,11 @@ const CourseInfo: React.FC = () => {
                     <GetTeacher userId={courseInfo.teacher} />
                   </Descriptions.Item>
                 </Descriptions>
-                {id ? <RequestMeeting teacherId={id} /> : <></>}
+                {user && id ? (
+                  <RequestMeeting teacherId={user?._id} courseId={id} />
+                ) : (
+                  <></>
+                )}
               </>
             ) : (
               <p>{error}</p>
