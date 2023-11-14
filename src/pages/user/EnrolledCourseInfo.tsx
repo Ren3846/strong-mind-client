@@ -90,8 +90,11 @@ const CourseInfo: React.FC = () => {
                     <GetTeacher userId={courseInfo.teacher} />
                   </Descriptions.Item>
                 </Descriptions>
-                {user && id ? (
-                  <RequestMeeting teacherId={user?._id} courseId={id} />
+                {id ? (
+                  <RequestMeeting
+                    teacherId={courseInfo.teacher}
+                    courseId={id}
+                  />
                 ) : (
                   <></>
                 )}

@@ -23,9 +23,11 @@ const RequestMeeting: React.FC<CallRequestProps> = ({
     const fetchBusySchedule = async () => {
       try {
         const response = await axios.get(
-          `/api/users/two-week-schedule/${teacherId}`,
+          `/api/users/two-week-free-schedule/6551f2ea4213ff0156c4ced1`,
         )
         setBusySchedule(response.data)
+        const keys = Object.keys(response.data)
+        console.log('shedule', keys)
       } catch (error) {
         console.error('Error fetching busy schedule:', error)
       }
@@ -84,21 +86,18 @@ const RequestMeeting: React.FC<CallRequestProps> = ({
 
     const currentDay = date.format('DD.MM.YYYY')
     const busyHoursForDay = busySchedule[currentDay] || []
-    console.log(busySchedule[currentDay])
+
     if (busyHoursForDay.length === 0) {
-      return []
+      return Array.from({ length: 24 }).map((_, index) => index)
     }
 
-    const disabledHoursArray = Array.from({ length: 24 }).map(
-      (_, index) => index,
-    )
-
-    const disabledHoursForDay = busyHoursForDay.map((hour) =>
+    const busyHoursArray = busyHoursForDay.map((hour) =>
       parseInt(hour.split(':')[0]),
     )
-    return disabledHoursArray.filter((hour) =>
-      disabledHoursForDay.includes(hour),
-    )
+
+    return Array.from({ length: 24 })
+      .map((_, index) => index)
+      .filter((hour) => !busyHoursArray.includes(hour))
   }
 
   return (
