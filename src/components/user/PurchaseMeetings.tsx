@@ -51,18 +51,17 @@ const PurchaseCourse: React.FC<{
         >
           Buy meetings
         </Button>
+        <List
+          dataSource={user.purchasedMeetings}
+          renderItem={(item: any) => (
+            <Button>
+              Quantity: {item.quantity}
+              {/* Course: {item.course}, , ID: {item._id} */}
+            </Button>
+          )}
+        />
       </Space.Compact>
       <Divider />
-
-      <List
-        dataSource={user.purchasedMeetings}
-        renderItem={(item: any) => (
-          <Button>
-            Quantity: {item.quantity}
-            {/* Course: {item.course}, , ID: {item._id} */}
-          </Button>
-        )}
-      />
     </div>
   )
 }

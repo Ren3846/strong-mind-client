@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Modal, DatePicker, TimePicker, Button, message } from 'antd'
+import { Modal, DatePicker, TimePicker, Button, message, Space } from 'antd'
 import dayjs, { Dayjs } from 'dayjs'
 import { PhoneOutlined } from '@ant-design/icons'
 
@@ -115,7 +115,7 @@ const RequestMeeting: React.FC<CallRequestProps> = ({
       >
         <DatePicker
           onChange={(value) => setDate(value)}
-          style={{ marginBottom: '10px' }}
+          style={{ marginBottom: '10px', marginRight: '10px' }}
           disabledDate={disabledDate}
         />
         <TimePicker
