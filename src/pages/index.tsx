@@ -21,7 +21,7 @@ import Enrolled from './user/Enrolled'
 import Meetings from './user/Meetings'
 import Course from './user/Course'
 import Teachers from './user/Teachers'
-import TeacherProfile from './user/Teacher'
+import TeacherProfile from './user/TeacherProfile'
 import MyCourses from './tutor/MyCourses'
 import CreateCourse from './tutor/AddCourse'
 import CourseDetails from './tutor/CourseDetails'
@@ -31,6 +31,7 @@ import Lesson from './tutor/Lesson'
 import TutorDashboard from './tutor/TutorDashboard'
 import LessonUser from './user/Lesson'
 import Wallet from './user/Wallet'
+import StudentProfile from './tutor/StudentProfile'
 
 interface IProtectedRoute {
   condition: boolean
@@ -188,6 +189,7 @@ const Router: React.FC<{}> = () => {
 
           <Route path='/teachers' element={<Teachers />} />
           <Route path='/teacher/:id' element={<TeacherProfile />} />
+          <Route path='/dashboard/user/:id' element={<StudentProfile />} />
 
           <Route
             path='/profile'
