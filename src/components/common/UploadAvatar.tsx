@@ -96,11 +96,11 @@ const UploadAvatar = () => {
               <Avatar icon={<UserOutlined />} />
             )}
           </Upload>
-          {image && (
+          {/* {image && (
             <Button size='small' danger onClick={handleDelete}>
               <DeleteOutlined />
             </Button>
-          )}
+          )} */}
         </Form.Item>
       </Form>
       {/* <Modal

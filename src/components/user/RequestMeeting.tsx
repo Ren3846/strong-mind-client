@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Modal, DatePicker, TimePicker, Button, message, Space } from 'antd'
+import { Drawer, DatePicker, TimePicker, Button, message, Space } from 'antd'
 import dayjs, { Dayjs } from 'dayjs'
 import { PhoneOutlined } from '@ant-design/icons'
 
@@ -13,7 +13,7 @@ const RequestMeeting: React.FC<CallRequestProps> = ({
   teacherId,
   courseId,
 }) => {
-  const [modalVisible, setModalVisible] = useState(false)
+  const [drawerVisible, setDrawerVisible] = useState(false)
   const [date, setDate] = useState<Dayjs | null>(null)
   const [time, setTime] = useState<Dayjs | null>(null)
   const [loading, setLoading] = useState(false)
@@ -23,7 +23,7 @@ const RequestMeeting: React.FC<CallRequestProps> = ({
     const fetchBusySchedule = async () => {
       try {
         const response = await axios.get(
-          `/api/users/two-week-free-schedule/6551f2ea4213ff0156c4ced1`,
+          `/api/users/two-week-free-schedule/${teacherId}`,
         )
         setBusySchedule(response.data)
         const keys = Object.keys(response.data)
@@ -36,19 +36,19 @@ const RequestMeeting: React.FC<CallRequestProps> = ({
     fetchBusySchedule()
   }, [teacherId])
 
-  const showModal = () => {
-    setModalVisible(true)
+  const showDrawer = () => {
+    setDrawerVisible(true)
   }
 
   const handleOk = () => {
-    setModalVisible(false)
+    setDrawerVisible(false)
     if (date && time) {
       sendCallRequest()
     }
   }
 
   const handleCancel = () => {
-    setModalVisible(false)
+    setDrawerVisible(false)
   }
 
   const sendCallRequest = async () => {
@@ -102,16 +102,30 @@ const RequestMeeting: React.FC<CallRequestProps> = ({
 
   return (
     <div>
-      <Button type='primary' onClick={showModal} loading={loading}>
+      <Button type='primary' onClick={showDrawer} loading={loading}>
         <PhoneOutlined />
         Request a Call
       </Button>
-      <Modal
+      <Drawer
         title='Choose Date and Time'
-        open={modalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        okButtonProps={{ loading }}
+        placement='right'
+        visible={drawerVisible}
+        onClose={handleCancel}
+        width={360}
+        footer={
+          <div
+            style={{
+              textAlign: 'right',
+            }}
+          >
+            <Button onClick={handleCancel} style={{ marginRight: 8 }}>
+              Cancel
+            </Button>
+            <Button onClick={handleOk} type='primary'>
+              Submit
+            </Button>
+          </div>
+        }
       >
         <DatePicker
           onChange={(value) => setDate(value)}
@@ -123,7 +137,7 @@ const RequestMeeting: React.FC<CallRequestProps> = ({
           format='HH'
           disabledHours={disabledHours}
         />
-      </Modal>
+      </Drawer>
     </div>
   )
 }

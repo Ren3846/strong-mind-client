@@ -30,18 +30,18 @@ const PurchaseCourse: React.FC<{
         quantity: quantity,
       }
 
-      await axios.post('/api/users/purchase/', requestData)
+      const response = await axios.post('/api/users/purchase/', requestData)
 
       fetchUserData()
-
+      console.log(response.data)
       message.success('Purchase successful')
+      // message.info(`Server Response: ${JSON.stringify(response.data)}`)
       setQuantity(1)
     } catch (error) {
       console.error(error)
-      message.error('Error while making the purchase')
+      message.error('Ooops.. Probably you have no money')
     }
   }
-
   useEffect(() => {
     fetchUserData()
   }, [])
@@ -62,17 +62,12 @@ const PurchaseCourse: React.FC<{
         >
           Buy meetings
         </Button>
-        <List
-          dataSource={user.purchasedMeetings}
-          renderItem={(item: any) => (
-            <Button>
-              Quantity: {item.quantity}
-              {/* Course: {item.course}, , ID: {item._id} */}
-            </Button>
-          )}
-        />
       </Space.Compact>
       <Divider />
+      <List
+        dataSource={user.purchasedMeetings}
+        renderItem={(item: any) => <Button> Quantity: {item.quantity}</Button>}
+      />
     </div>
   )
 }

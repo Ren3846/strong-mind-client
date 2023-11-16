@@ -5,13 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 import Preloader from '../../components/common/Preloader'
 import { GetStudents } from '../../components/tutor/GetTutor'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
-import { LikeFilled, LikeOutlined } from '@ant-design/icons'
-
-import { UploadOutlined } from '@ant-design/icons'
-import type { UploadProps } from 'antd'
-import { Upload } from 'antd'
 import UploadImgCourse from '../../components/tutor/UploadCourseImg'
-import { baseImageUrl } from '..'
 import GetLikes from '../../components/common/GetLikes'
 
 const breadcrumbItems = [
@@ -25,10 +19,6 @@ const CourseDetails: React.FC = () => {
   const [course, setCourse] = useState<any>(null)
   const [lessonsData, setLessonsData] = useState<any[]>([])
   const [error, setError] = useState('')
-
-  const [courseLikes, setCourseLikes] = useState([])
-  const [loadingLikes, setLoadingLikes] = useState(true)
-  const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     axios

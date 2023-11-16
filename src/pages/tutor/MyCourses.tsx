@@ -58,21 +58,35 @@ const MyCourses: React.FC = () => {
           <ul>
             {data.map((item) => (
               <Card key={item._id} style={{ margin: '20px' }}>
-                <Space>
+                <Space
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                  }}
+                >
                   <Link to={item._id}>
                     <li key={item._id}>{item.title}</li>
                   </Link>
                   <Divider type='vertical' />
-                  <Button
-                    type='primary'
-                    danger
-                    icon={<DeleteOutlined />}
-                    onClick={() => handleDeleteCourse(item._id)}
-                  />
-                  <Link to={item._id}>
-                    <Button type='primary' icon={<SearchOutlined />} />
-                  </Link>
-                  <Button type='default' icon={<EditOutlined />} />
+                  <div>
+                    <Button
+                      type='primary'
+                      danger
+                      icon={<DeleteOutlined />}
+                      onClick={() => handleDeleteCourse(item._id)}
+                    />
+                    <Link to={item._id}>
+                      <Button
+                        type='primary'
+                        icon={<SearchOutlined />}
+                        style={{ margin: 5 }}
+                      />
+                    </Link>
+                    <Link to={`edit/${item._id}`}>
+                      <Button type='default' icon={<EditOutlined />} />
+                    </Link>
+                  </div>
                 </Space>
               </Card>
             ))}

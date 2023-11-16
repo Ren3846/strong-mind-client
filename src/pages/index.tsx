@@ -32,6 +32,7 @@ import TutorDashboard from './tutor/TutorDashboard'
 import LessonUser from './user/Lesson'
 import Wallet from './user/Wallet'
 import StudentProfile from './tutor/StudentProfile'
+import CourseEdit from './tutor/CourseEdit'
 
 interface IProtectedRoute {
   condition: boolean
@@ -221,6 +222,19 @@ const Router: React.FC<{}> = () => {
                 }
                 redirect='/profile'
                 children={<MyCourses />}
+              />
+            }
+          />
+
+          <Route
+            path='/mycourses/edit/:id'
+            element={
+              <ProtectedRoute
+                condition={
+                  isAuthenticated && currentUser.role === USER_ROLE.TEACHER
+                }
+                redirect='/profile'
+                children={<CourseEdit />}
               />
             }
           />

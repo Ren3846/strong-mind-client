@@ -51,7 +51,7 @@ const GetAvailableDays: React.FC = () => {
       .then((response) => {
         console.log(response.data)
         setData(response.data)
-        setSelectedHours(response.data) // Initialize selected hours state
+        setSelectedHours(response.data)
       })
       .catch((error) => {
         console.error('Error while making the GET request:', error)
