@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
 import { Button, Card, Divider, Row, Skeleton, Space, message } from 'antd'
-import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import {
@@ -10,7 +9,6 @@ import {
   PlusOutlined,
   SearchOutlined,
 } from '@ant-design/icons'
-import Preloader from '../../components/common/Preloader'
 import { ICourse } from '../../redux/store/types'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 

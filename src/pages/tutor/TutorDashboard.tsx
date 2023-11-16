@@ -143,7 +143,7 @@ const TutorDashboard = () => {
                 dataSource={currentItems}
                 renderItem={(student) => (
                   <List.Item>
-                    <Link to={`user/${student._id}`}>
+                    <Link to={`/user/${student._id}`}>
                       <List.Item.Meta
                         avatar={
                           <Avatar src={`${baseImageUrl}/${student.avatar}`} />

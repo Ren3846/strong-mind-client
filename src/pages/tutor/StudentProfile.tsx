@@ -5,7 +5,6 @@ import { Button, Row, Card, Space } from 'antd'
 import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
 import { User } from '../../redux/store/types'
-import { GetCourses } from '../../components/tutor/GetCourses'
 import { WechatOutlined } from '@ant-design/icons'
 
 const StudentProfile: React.FC<{}> = () => {

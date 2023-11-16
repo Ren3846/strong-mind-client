@@ -228,36 +228,36 @@ function Profile() {
 
                 <Item label='Timezone'>
                   <Select
-                    defaultValue=''
+                    defaultValue='+1'
                     style={{ width: 120 }}
                     onChange={handleChange}
                     value={editedUser.timezone}
                     options={[
-                      { value: 'Etc/GMT+12', label: 'GMT-12:00' },
-                      { value: 'Etc/GMT+11', label: 'GMT-11:00' },
-                      { value: 'Etc/GMT+10', label: 'GMT-10:00' },
-                      { value: 'Etc/GMT+9', label: 'GMT-09:00' },
-                      { value: 'Etc/GMT+8', label: 'GMT-08:00' },
-                      { value: 'Etc/GMT+7', label: 'GMT-07:00' },
-                      { value: 'Etc/GMT+6', label: 'GMT-06:00' },
-                      { value: 'Etc/GMT+5', label: 'GMT-05:00' },
-                      { value: 'Etc/GMT+4', label: 'GMT-04:00' },
-                      { value: 'Etc/GMT+3', label: 'GMT-03:00' },
-                      { value: 'Etc/GMT+2', label: 'GMT-02:00' },
-                      { value: 'Etc/GMT+1', label: 'GMT-01:00' },
-                      { value: 'Etc/GMT', label: 'GMT' },
-                      { value: 'Etc/GMT-1', label: 'GMT+01:00' },
-                      { value: 'Etc/GMT-2', label: 'GMT+02:00' },
-                      { value: 'Etc/GMT-3', label: 'GMT+03:00' },
-                      { value: 'Etc/GMT-4', label: 'GMT+04:00' },
-                      { value: 'Etc/GMT-5', label: 'GMT+05:00' },
-                      { value: 'Etc/GMT-6', label: 'GMT+06:00' },
-                      { value: 'Etc/GMT-7', label: 'GMT+07:00' },
-                      { value: 'Etc/GMT-8', label: 'GMT+08:00' },
-                      { value: 'Etc/GMT-9', label: 'GMT+09:00' },
-                      { value: 'Etc/GMT-10', label: 'GMT+10:00' },
-                      { value: 'Etc/GMT-11', label: 'GMT+11:00' },
-                      { value: 'Etc/GMT-12', label: 'GMT+12:00' },
+                      { value: '+12', label: 'GMT-12:00' },
+                      { value: '+11', label: 'GMT-11:00' },
+                      { value: '+10', label: 'GMT-10:00' },
+                      { value: '+9', label: 'GMT-09:00' },
+                      { value: '+8', label: 'GMT-08:00' },
+                      { value: '+7', label: 'GMT-07:00' },
+                      { value: '+6', label: 'GMT-06:00' },
+                      { value: '+5', label: 'GMT-05:00' },
+                      { value: '+4', label: 'GMT-04:00' },
+                      { value: '+3', label: 'GMT-03:00' },
+                      { value: '+2', label: 'GMT-02:00' },
+                      { value: '+1', label: 'GMT-01:00' },
+                      { value: '0', label: 'GMT' },
+                      { value: '-1', label: 'GMT+01:00' },
+                      { value: '-2', label: 'GMT+02:00' },
+                      { value: '-3', label: 'GMT+03:00' },
+                      { value: '-4', label: 'GMT+04:00' },
+                      { value: '-5', label: 'GMT+05:00' },
+                      { value: '-6', label: 'GMT+06:00' },
+                      { value: '-7', label: 'GMT+07:00' },
+                      { value: '-8', label: 'GMT+08:00' },
+                      { value: '-9', label: 'GMT+09:00' },
+                      { value: '-10', label: 'GMT+10:00' },
+                      { value: '-11', label: 'GMT+11:00' },
+                      { value: '-12', label: 'GMT+12:00' },
                     ]}
                   />
                 </Item>
