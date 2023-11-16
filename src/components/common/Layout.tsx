@@ -1,6 +1,10 @@
 import { Layout as AntLayout } from 'antd'
 
-import { QuestionCircleOutlined } from '@ant-design/icons'
+import {
+  CommentOutlined,
+  CustomerServiceOutlined,
+  QuestionCircleOutlined,
+} from '@ant-design/icons'
 import { FloatButton } from 'antd'
 import Footer from './Footer'
 
@@ -21,11 +25,17 @@ const Layout = ({ children }: Props) => {
         {children}
       </AntLayout.Content>
 
-      <FloatButton
-        icon={<QuestionCircleOutlined />}
-        type='primary'
-        style={{ right: 24 }}
-      />
+      <>
+        <FloatButton.Group
+          trigger='hover'
+          type='primary'
+          style={{ right: 30 }}
+          icon={<QuestionCircleOutlined />}
+        >
+          <FloatButton />
+          <FloatButton icon={<CommentOutlined />} />
+        </FloatButton.Group>
+      </>
       {/* <Footer /> */}
     </div>
   )

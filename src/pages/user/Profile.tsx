@@ -233,10 +233,31 @@ function Profile() {
                     onChange={handleChange}
                     value={editedUser.timezone}
                     options={[
-                      { value: 'GMT-12:00', label: 'GMT-12:00' },
-                      { value: 'GMT-11:00', label: 'GMT-11:00' },
-                      { value: 'GMT-10:00', label: 'GMT-10:00' },
-                      { value: 'disabled', label: 'GMT-9:00', disabled: true },
+                      { value: 'Etc/GMT+12', label: 'GMT-12:00' },
+                      { value: 'Etc/GMT+11', label: 'GMT-11:00' },
+                      { value: 'Etc/GMT+10', label: 'GMT-10:00' },
+                      { value: 'Etc/GMT+9', label: 'GMT-09:00' },
+                      { value: 'Etc/GMT+8', label: 'GMT-08:00' },
+                      { value: 'Etc/GMT+7', label: 'GMT-07:00' },
+                      { value: 'Etc/GMT+6', label: 'GMT-06:00' },
+                      { value: 'Etc/GMT+5', label: 'GMT-05:00' },
+                      { value: 'Etc/GMT+4', label: 'GMT-04:00' },
+                      { value: 'Etc/GMT+3', label: 'GMT-03:00' },
+                      { value: 'Etc/GMT+2', label: 'GMT-02:00' },
+                      { value: 'Etc/GMT+1', label: 'GMT-01:00' },
+                      { value: 'Etc/GMT', label: 'GMT' },
+                      { value: 'Etc/GMT-1', label: 'GMT+01:00' },
+                      { value: 'Etc/GMT-2', label: 'GMT+02:00' },
+                      { value: 'Etc/GMT-3', label: 'GMT+03:00' },
+                      { value: 'Etc/GMT-4', label: 'GMT+04:00' },
+                      { value: 'Etc/GMT-5', label: 'GMT+05:00' },
+                      { value: 'Etc/GMT-6', label: 'GMT+06:00' },
+                      { value: 'Etc/GMT-7', label: 'GMT+07:00' },
+                      { value: 'Etc/GMT-8', label: 'GMT+08:00' },
+                      { value: 'Etc/GMT-9', label: 'GMT+09:00' },
+                      { value: 'Etc/GMT-10', label: 'GMT+10:00' },
+                      { value: 'Etc/GMT-11', label: 'GMT+11:00' },
+                      { value: 'Etc/GMT-12', label: 'GMT+12:00' },
                     ]}
                   />
                 </Item>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import {
-  List,
   Card,
   Tag,
   Button,
@@ -9,7 +8,6 @@ import {
   Checkbox,
   Modal,
   message,
-  Input,
   Col,
   Row,
 } from 'antd'
@@ -18,28 +16,30 @@ import { useSelector } from 'react-redux'
 
 const GetAvailableDays: React.FC = () => {
   const [data, setData] = useState<any>({})
-  // const [loading, setLoading] = useState(false)
   const [modalVisible, setModalVisible] = useState(false)
   const [form] = Form.useForm()
   const [selectedDayOfWeek, setSelectedDayOfWeek] = useState<string | null>(
     null,
   )
   const [hourCheckboxes, setHourCheckboxes] = useState<JSX.Element[]>([])
-  // const [showUnavailable, setShowUnavailable] = useState(false)
+  const [selectedHours, setSelectedHours] = useState<any>({})
 
   const user = useSelector((state: any) => state.auth.user)
 
   const showModal = (dayOfWeek: string) => {
-    console.log(dayOfWeek)
     setSelectedDayOfWeek(dayOfWeek)
     setModalVisible(true)
+
+    form.setFieldsValue({
+      UnavailableHours: selectedHours[dayOfWeek] || [],
+    })
   }
 
   useEffect(() => {
     const hoursInDay = Array.from({ length: 24 }, (_, i) => i)
     const checkboxes = hoursInDay.map((hour) => (
-      <Tag style={{ width: 80, marginBottom: 5 }} color='warning'>
-        <Checkbox key={hour} value={hour} style={{ paddingRight: 10 }}>
+      <Tag style={{ width: 80, marginBottom: 5 }} color='warning' key={hour}>
+        <Checkbox value={hour} style={{ paddingRight: 10 }}>
           {hour}:00
         </Checkbox>
       </Tag>
@@ -51,6 +51,7 @@ const GetAvailableDays: React.FC = () => {
       .then((response) => {
         console.log(response.data)
         setData(response.data)
+        setSelectedHours(response.data) // Initialize selected hours state
       })
       .catch((error) => {
         console.error('Error while making the GET request:', error)
@@ -63,6 +64,13 @@ const GetAvailableDays: React.FC = () => {
       const selectedHourSlots = values.UnavailableHours.map(
         (hour: number) => hour,
       )
+
+      const updatedSelectedHours = {
+        ...selectedHours,
+        [selectedDayOfWeek!]: selectedHourSlots,
+      }
+
+      setSelectedHours(updatedSelectedHours)
 
       const requestBody = {
         day: selectedDayOfWeek,
@@ -85,7 +93,7 @@ const GetAvailableDays: React.FC = () => {
   }
 
   const renderTimeSlots = (dayOfWeek: string) => {
-    const dayData = data[dayOfWeek] || []
+    const dayData = selectedHours[dayOfWeek] || []
 
     if (!Array.isArray(dayData)) {
       return null
@@ -95,11 +103,6 @@ const GetAvailableDays: React.FC = () => {
       <div>
         {dayData.map((timeSlot: any, index: any) => (
           <span key={index}>
-            {/* {timeSlot.isAvailable ? (
-              <Tag icon={<CheckCircleOutlined />} color='green'>
-                {timeSlot}
-              </Tag>
-            ) : ( */}
             <Tag
               icon={<CheckCircleOutlined />}
               color='green'
@@ -107,7 +110,6 @@ const GetAvailableDays: React.FC = () => {
             >
               {timeSlot}:00
             </Tag>
-            {/* )} */}
           </span>
         ))}
       </div>
@@ -138,7 +140,6 @@ const GetAvailableDays: React.FC = () => {
         open={modalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
-        // okButtonProps={{ loading }}
       >
         <Form form={form}>
           <Form.Item

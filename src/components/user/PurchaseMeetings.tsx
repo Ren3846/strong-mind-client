@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Input, Button, message, Space, List, Tag, Divider } from 'antd'
+import { Input, Button, message, Space, List, Divider } from 'antd'
 import { DollarCircleFilled } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateUser } from '../../redux/actions/user'
@@ -8,10 +8,20 @@ import { updateUser } from '../../redux/actions/user'
 const PurchaseCourse: React.FC<{
   courseIdd: string
 }> = ({ courseIdd }) => {
-  const [courseId, setCourseId] = useState('')
   const [quantity, setQuantity] = useState(1)
   const user = useSelector((state: any) => state.auth.user)
   const dispatch = useDispatch()
+
+  const fetchUserData = async () => {
+    try {
+      const response = await axios.get(`/api/users/${user._id}`)
+      const updatedUserData = response.data
+
+      dispatch(updateUser(user._id, updatedUserData))
+    } catch (error) {
+      console.error('Error fetching user data:', error)
+    }
+  }
 
   const handlePurchase = async () => {
     try {
@@ -21,11 +31,8 @@ const PurchaseCourse: React.FC<{
       }
 
       await axios.post('/api/users/purchase/', requestData)
-      dispatch(
-        updateUser(user._id, {
-          purchasedMeetings: [...user.purchasedMeetings, { quantity }],
-        }),
-      )
+
+      fetchUserData()
 
       message.success('Purchase successful')
       setQuantity(1)
@@ -34,6 +41,10 @@ const PurchaseCourse: React.FC<{
       message.error('Error while making the purchase')
     }
   }
+
+  useEffect(() => {
+    fetchUserData()
+  }, [])
 
   return (
     <div>

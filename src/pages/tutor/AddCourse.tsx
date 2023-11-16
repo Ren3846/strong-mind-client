@@ -10,6 +10,7 @@ import {
   InputNumber,
 } from 'antd'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const { Option } = Select
 
@@ -17,26 +18,20 @@ const CreateCourse: React.FC = () => {
   const [form] = Form.useForm()
   const [loading, setLoading] = useState(false)
 
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
-
-  // const handleChange = (value: string[]) => {
-  //   setSelectedTags(value)
-  // }
-
-  // const clearTags = () => {
-  //   setSelectedTags([])
-  // }
+  const navigate = useNavigate()
 
   const handleCreate = (values: any) => {
     setLoading(true)
-
-    values.tagline = values.tagline.split(',').map((tag: string) => tag.trim())
 
     axios
       .post('/api/courses', values)
       .then((response) => {
         message.success('Course created successfully')
-        form.resetFields()
+        // form.resetFields()
+        console.log(response.data)
+
+        const courseId = response.data._id
+        navigate(`/mycourses/${courseId}`)
       })
       .catch((error) => {
         console.error(error)
@@ -93,27 +88,22 @@ const CreateCourse: React.FC = () => {
             </Select>
           </Form.Item>
 
-          <Form.Item
+          {/* <Form.Item
             label='Tagline'
             name='tagline'
             rules={[{ required: true, message: 'Enter a tag' }]}
           >
             <Input />
-            {/* <Select
-              mode='multiple'
-              style={{ width: '100%' }}
-              placeholder='Please select tags'
-              value={selectedTags}
-              onChange={handleChange}
-            >
-              {tagsData.map((tag: string) => (
-                <Option key={tag}>{tag}</Option>
-              ))}
-            </Select>
-            <Button type='primary' onClick={clearTags}>
-              Clear Tags
-            </Button> */}
+          </Form.Item> */}
+
+          <Form.Item
+            label='Tagline'
+            name='tagline'
+            rules={[{ required: true, message: 'Enter a tag' }]}
+          >
+            <Select mode='tags' placeholder='Enter tags'></Select>
           </Form.Item>
+
           <Form.Item
             label='Thumbnail Link'
             name='thumbnail'
@@ -121,8 +111,9 @@ const CreateCourse: React.FC = () => {
           >
             <Input />
           </Form.Item>
+
           <Form.Item
-            label='Meeting Price'
+            label='Price per meeting'
             name='meetingPrice'
             rules={[
               { required: true, message: 'Enter the price for meetings' },

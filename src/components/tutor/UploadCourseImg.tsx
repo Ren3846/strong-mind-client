@@ -23,7 +23,7 @@ const UploadImgCourse: React.FC = () => {
 
   return (
     <Upload {...props}>
-      <Button icon={<UploadOutlined />}>Click to Upload</Button>
+      <Button icon={<UploadOutlined />}>Upload Video</Button>
     </Upload>
   )
 }

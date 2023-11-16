@@ -105,13 +105,13 @@ const CourseDetails: React.FC = () => {
             <GetLikes courseId={''} />
           </>
         }
-        cover={
-          <img
-            alt='example'
-            src={`${baseImageUrl}${course.cover}`}
-            style={{ maxHeight: '450px' }}
-          />
-        }
+        // cover={
+        //   <img
+        //     alt='example'
+        //     src={`${baseImageUrl}${course.cover}`}
+        //     style={{ maxHeight: '450px' }}
+        //   />
+        // }
       >
         <UploadImgCourse />
         <div>
