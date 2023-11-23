@@ -5,7 +5,7 @@ import { Row, Col, Card, Button, Skeleton } from 'antd'
 import { ICourse, ITeacher } from '../../redux/store/types'
 import { Link } from 'react-router-dom'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
-import BookedMeetings from '../../components/tutor/BookedMeetings'
+import BookedMeetings from '../../components/user/BookedMeetings'
 
 const breadcrumbItems = [{ title: 'Home', link: '/' }, { title: 'Dashboard' }]
 
