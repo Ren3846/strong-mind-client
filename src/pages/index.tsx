@@ -117,7 +117,7 @@ const Router: React.FC<{}> = () => {
           />
 
           <Route
-            path='/chat'
+            path='/chat/:chatId'
             element={
               <ProtectedRoute
                 condition={isAuthenticated}

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Input, Button, List, Card } from 'antd'
 import io, { Socket } from 'socket.io-client'
 import { DefaultEventsMap } from 'socket.io/dist/typed-events'
+import axios from 'axios'
+import { useParams } from 'react-router-dom'
 
 const { TextArea } = Input
 
@@ -10,22 +12,29 @@ interface MessageType {
 }
 
 const Chat = () => {
+  const {chatId} = useParams();
+  const [connected, setConnected] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const [messages, setMessages] = useState<MessageType[]>([])
   const [messageInput, setMessageInput] = useState('')
   const socket = React.useRef<Socket<DefaultEventsMap, DefaultEventsMap>>()
 
   useEffect(() => {
     console.log('Подключение к сокету...')
-    socket.current = io('http://localhost:3001')
+    socket.current = io('http://localhost:3000/api')
+
+    getChat(chatId || "");
 
     const handleIncomingMessage = (data: MessageType) => {
       console.log('Получено сообщение:', data)
       setMessages((prevMessages) => [...prevMessages, data])
     }
 
-    socket.current.on('message', handleIncomingMessage)
+    socket.current.on("connect", () => {
+      setConnected(true);
+    })
 
-    socket.current.emit('message', { text: 'Пользователь подключился' })
+    socket.current.on('message', handleIncomingMessage)
 
     return () => {
       console.log('Отключение сокета...')
@@ -33,13 +42,34 @@ const Chat = () => {
         socket.current.disconnect()
       }
     }
-  }, [])
+  }, [chatId])
 
-  const sendMessage = () => {
-    if (socket.current) {
-      console.log('Отправка сообщения...')
-      socket.current.emit('message', { text: messageInput })
-    }
+  const getChat = (chatId: string) => {
+    console.log(`Загружаем историю сообщений чата ${chatId}`)
+    setLoaded(false);
+    axios({
+      url: `/api/chat/${chatId}`,
+      method: "get"
+    }).then(({data}) => {
+      console.log(`chat ${chatId} data:`, data);
+    }).catch(err => {
+      console.error(`Error fetching chat ${chatId}`)
+    })
+  }
+
+  const sendMessage = (chatId: string, message: string) => {
+    axios({
+      url: "/api/chat/message",
+      method: "post",
+      data: {
+        chatId,
+        content: message
+      }
+    }).then(({data}) => {
+      console.log("Message sent!", data)
+    }).catch(err => {
+      console.error("Error sending message", err);
+    })
     setMessageInput('')
   }
 
@@ -47,6 +77,7 @@ const Chat = () => {
     <div style={{ maxWidth: '600px', margin: 'auto' }}>
       <Card title='Chat'>
         <List
+          loading={!connected || !loaded}
           dataSource={messages}
           renderItem={(msg, index) => (
             <List.Item key={index}>
@@ -61,7 +92,7 @@ const Chat = () => {
         />
         <Button
           type='primary'
-          onClick={sendMessage}
+          onClick={() => sendMessage(chatId || "", messageInput)}
           style={{ marginTop: '8px' }}
         >
           Send
