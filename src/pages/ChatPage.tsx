@@ -15,11 +15,11 @@ const Chat = () => {
   const socket = React.useRef<Socket<DefaultEventsMap, DefaultEventsMap>>()
 
   useEffect(() => {
-    console.log('1: Подключение к сокету...')
+    console.log('Подключение к сокету...')
     socket.current = io('http://localhost:3001')
 
     const handleIncomingMessage = (data: MessageType) => {
-      console.log('3: Получено сообщение:', data)
+      console.log('Получено сообщение:', data)
       setMessages((prevMessages) => [...prevMessages, data])
     }
 
@@ -28,15 +28,16 @@ const Chat = () => {
     socket.current.emit('message', { text: 'Пользователь подключился' })
 
     return () => {
-      console.log('7: Отключение сокета...')
+      console.log('Отключение сокета...')
       if (socket.current) {
         socket.current.disconnect()
       }
     }
   }, [])
+
   const sendMessage = () => {
     if (socket.current) {
-      console.log('8: Отправка сообщения на сервер...')
+      console.log('Отправка сообщения...')
       socket.current.emit('message', { text: messageInput })
     }
     setMessageInput('')
