@@ -29,6 +29,8 @@ const TeacherProfile: React.FC<{}> = () => {
       })
   }, [id])
 
+  const handleChat = () => {}
+
   return (
     <Layout>
       <Row align='middle' justify='center'>
@@ -38,9 +40,9 @@ const TeacherProfile: React.FC<{}> = () => {
         >
           {loaded ? (
             <Space direction='vertical'>
-              fullName: {teacher?.fullName}
-              Email: {teacher?.email}
-              <Button>
+              {`FullName: ${teacher?.fullName}`}
+              {`Email: ${teacher?.email}`}
+              <Button onClick={handleChat}>
                 <WechatOutlined />
                 Chat
               </Button>
@@ -63,7 +65,7 @@ const TeacherProfile: React.FC<{}> = () => {
                   </Space>
                 ))
               ) : (
-                <p>No teachers :(</p>
+                <p>No courses :(</p>
               )}
             </div>
           ) : (

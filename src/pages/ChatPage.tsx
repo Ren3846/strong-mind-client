@@ -12,9 +12,9 @@ interface MessageType {
 }
 
 const Chat = () => {
-  const {chatId} = useParams();
-  const [connected, setConnected] = useState(false);
-  const [loaded, setLoaded] = useState(false);
+  const { chatId } = useParams()
+  const [connected, setConnected] = useState(false)
+  const [loaded, setLoaded] = useState(false)
   const [messages, setMessages] = useState<MessageType[]>([])
   const [messageInput, setMessageInput] = useState('')
   const socket = React.useRef<Socket<DefaultEventsMap, DefaultEventsMap>>()
@@ -23,15 +23,15 @@ const Chat = () => {
     console.log('Подключение к сокету...')
     socket.current = io('http://localhost:3000/api')
 
-    getChat(chatId || "");
+    getChat(chatId || '')
 
     const handleIncomingMessage = (data: MessageType) => {
       console.log('Получено сообщение:', data)
       setMessages((prevMessages) => [...prevMessages, data])
     }
 
-    socket.current.on("connect", () => {
-      setConnected(true);
+    socket.current.on('connect', () => {
+      setConnected(true)
     })
 
     socket.current.on('message', handleIncomingMessage)
@@ -46,30 +46,34 @@ const Chat = () => {
 
   const getChat = (chatId: string) => {
     console.log(`Загружаем историю сообщений чата ${chatId}`)
-    setLoaded(false);
+    setLoaded(false)
     axios({
       url: `/api/chat/${chatId}`,
-      method: "get"
-    }).then(({data}) => {
-      console.log(`chat ${chatId} data:`, data);
-    }).catch(err => {
-      console.error(`Error fetching chat ${chatId}`)
+      method: 'get',
     })
+      .then(({ data }) => {
+        console.log(`chat ${chatId} data:`, data)
+      })
+      .catch((err) => {
+        console.error(`Error fetching chat ${chatId}`)
+      })
   }
 
   const sendMessage = (chatId: string, message: string) => {
     axios({
-      url: "/api/chat/message",
-      method: "post",
+      url: '/api/chat/message',
+      method: 'post',
       data: {
         chatId,
-        content: message
-      }
-    }).then(({data}) => {
-      console.log("Message sent!", data)
-    }).catch(err => {
-      console.error("Error sending message", err);
+        content: message,
+      },
     })
+      .then(({ data }) => {
+        console.log('Message sent!', data)
+      })
+      .catch((err) => {
+        console.error('Error sending message', err)
+      })
     setMessageInput('')
   }
 
@@ -92,7 +96,7 @@ const Chat = () => {
         />
         <Button
           type='primary'
-          onClick={() => sendMessage(chatId || "", messageInput)}
+          onClick={() => sendMessage(chatId || '', messageInput)}
           style={{ marginTop: '8px' }}
         >
           Send
