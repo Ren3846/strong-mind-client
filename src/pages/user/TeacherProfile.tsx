@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Button, Row, Card, Space } from 'antd'
 import Layout from '../../components/common/Layout'
@@ -13,6 +13,11 @@ const TeacherProfile: React.FC<{}> = () => {
   const { id } = useParams()
   const [loaded, setLoaded] = useState(false)
   const [teacher, setTeacher] = useState<ITeacher | null>(null)
+
+  const [data, setData] = useState<any>(null)
+  const [error, setError] = useState<string | null>(null)
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     axios
@@ -29,7 +34,23 @@ const TeacherProfile: React.FC<{}> = () => {
       })
   }, [id])
 
-  const handleChat = () => {}
+  const handleChat = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/api/chat', {
+        receiver: teacher?._id,
+      })
+
+      setData(response.data)
+      setError(null)
+
+      if (response.data?._id) {
+        navigate(`/chat/${response.data._id}`)
+      }
+    } catch (error) {
+      setError('Произошла ошибка при выполнении запроса')
+      console.error('Ошибка Axios:', error)
+    }
+  }
 
   return (
     <Layout>
@@ -46,7 +67,9 @@ const TeacherProfile: React.FC<{}> = () => {
                 <WechatOutlined />
                 Chat
               </Button>
-              {/* {teacher?._id && <RequestMeeting teacherId={teacher._id} />}{' '} */}
+              {teacher?._id && id && (
+                <RequestMeeting courseId={id} teacherId={teacher._id} />
+              )}
             </Space>
           ) : (
             <Preloader />
@@ -60,8 +83,8 @@ const TeacherProfile: React.FC<{}> = () => {
             <div>
               {teacher?.courses.length ? (
                 teacher.courses.map((course) => (
-                  <Space>
-                    <GetCourses courseId={course} key={teacher._id + course} />
+                  <Space key={teacher._id + course}>
+                    <GetCourses courseId={course} />
                   </Space>
                 ))
               ) : (
@@ -69,11 +92,6 @@ const TeacherProfile: React.FC<{}> = () => {
               )}
             </div>
           ) : (
-            // <Space direction='vertical'>
-            //   fullName: {teacher?.fullName}
-            //   Email: {teacher?.email}
-            //   <Button>Chat</Button>
-            // </Space>
             <Preloader />
           )}
         </Card>
