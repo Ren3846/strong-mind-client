@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { Input, Button, List, Card, Avatar } from 'antd'
+import { Input, Button, List, Card, Avatar, Space, Row, Col } from 'antd'
 import io, { Socket } from 'socket.io-client'
 import { DefaultEventsMap } from 'socket.io/dist/typed-events'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { UserOutlined } from '@ant-design/icons'
 import CustomAvatar from '../components/common/Avatar'
+import { useSelector } from 'react-redux'
 import { StoreType } from '../redux/store'
 import { User } from '../redux/store/types'
-import { useSelector } from 'react-redux'
 
 const { TextArea } = Input
 
@@ -113,34 +113,48 @@ const Chat = () => {
   }
 
   return (
-    <div style={{ maxWidth: '600px', margin: 'auto' }}>
-      <Card title='Chat'>
-        <List
-          loading={!connected || !loaded}
-          dataSource={messages}
-          renderItem={(msg, index) => (
-            <List.Item key={index}>
-              <List.Item.Meta
-                title={msg.content}
-                avatar={<CustomAvatar avatar={currentUser.avatar} />}
-              />
-            </List.Item>
-          )}
-        />
-        <TextArea
-          rows={3}
-          value={messageInput}
-          onChange={(e) => setMessageInput(e.target.value)}
-        />
-        <Button
-          type='primary'
-          onClick={() => sendMessage(chatId || '', messageInput)}
-          style={{ marginTop: '8px' }}
-        >
-          Send
-        </Button>
-      </Card>
-    </div>
+    <>
+      <Row>
+        <Col span={4}>
+          <Card title='All chats' style={{ margin: '20px' }}></Card>
+        </Col>
+        <Col span={12}>
+          <Card title='Chat' style={{ margin: '20px' }}>
+            <List
+              loading={!connected || !loaded}
+              dataSource={messages}
+              renderItem={(msg, index) => (
+                <List.Item key={index}>
+                  <List.Item.Meta
+                    title={msg.content}
+                    description={new Date(msg.createdAt).toLocaleString()}
+                    avatar={<CustomAvatar avatar={currentUser.avatar} />}
+                    style={{
+                      textAlign:
+                        msg.sender === currentUser._id ? 'left' : 'right',
+                    }}
+                  />
+                </List.Item>
+              )}
+            />
+            <TextArea
+              rows={3}
+              value={messageInput}
+              onChange={(e) => setMessageInput(e.target.value)}
+            />
+            <Space>
+              <Button
+                type='primary'
+                onClick={() => sendMessage(chatId || '', messageInput)}
+                style={{ marginTop: '8px' }}
+              >
+                Send
+              </Button>
+            </Space>
+          </Card>
+        </Col>
+      </Row>
+    </>
   )
 }
 
