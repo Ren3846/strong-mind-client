@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
-import { Button, Row, Card, Space } from 'antd'
+import { Button, Row, Card, Space, Avatar } from 'antd'
 import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
 import { ITeacher } from '../../redux/store/types'
 import { GetCourses } from '../../components/tutor/GetCourses'
 import RequestMeeting from '../../components/user/RequestMeeting'
-import { WechatOutlined } from '@ant-design/icons'
+import { UserOutlined, WechatOutlined } from '@ant-design/icons'
+import CustomAvatar from '../../components/common/Avatar'
 
 const TeacherProfile: React.FC<{}> = () => {
   const { id } = useParams()
@@ -36,7 +37,7 @@ const TeacherProfile: React.FC<{}> = () => {
 
   const handleChat = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/api/chat', {
+      const response = await axios.post('/api/chat', {
         receiver: teacher?._id,
       })
 
@@ -56,8 +57,15 @@ const TeacherProfile: React.FC<{}> = () => {
     <Layout>
       <Row align='middle' justify='center'>
         <Card
-          title='Teacher`s profile'
+          title={`Teacher Profile`}
           style={{ width: '60rem', margin: '20px' }}
+          extra={
+            <CustomAvatar avatar={teacher?.avatar} />
+            // <Avatar
+            //   style={{ backgroundColor: '#3523a9bf' }}
+            //   icon={<UserOutlined />}
+            // />
+          }
         >
           {loaded ? (
             <Space direction='vertical'>

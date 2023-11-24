@@ -17,6 +17,7 @@ const Chat = () => {
   const [loaded, setLoaded] = useState(false)
   const [messages, setMessages] = useState<MessageType[]>([])
   const [messageInput, setMessageInput] = useState('')
+
   const socket = React.useRef<Socket<DefaultEventsMap, DefaultEventsMap>>()
 
   useEffect(() => {
