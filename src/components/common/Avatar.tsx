@@ -4,7 +4,7 @@ import { UserOutlined } from '@ant-design/icons'
 export const baseImageUrl = 'https://strongmind.fra1.cdn.digitaloceanspaces.com'
 
 const CustomAvatar = ({ avatar }: any) => {
-  const avatarSrc = avatar ? `${baseImageUrl}${avatar}` : null
+  const avatarSrc = avatar ? `${baseImageUrl}/${avatar}` : null
 
   return (
     <Avatar
