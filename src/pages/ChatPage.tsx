@@ -1,16 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import { Input, Button, List, Card, Avatar, Space, Row, Col } from 'antd'
+import React, { useState, useEffect, useRef } from 'react'
+import { Input, Button, List, Card, Space, Row, Col } from 'antd'
 import io, { Socket } from 'socket.io-client'
 import { DefaultEventsMap } from 'socket.io/dist/typed-events'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { UserOutlined } from '@ant-design/icons'
 import CustomAvatar from '../components/common/Avatar'
 import { useSelector } from 'react-redux'
 import { StoreType } from '../redux/store'
 import { User } from '../redux/store/types'
+import MyBreadcrumb from '../components/common/Breadcrumb'
 
 const { TextArea } = Input
+
+const breadcrumbItems = [
+  { title: 'Dashboard', link: '/dashboard' },
+  { title: 'Chat' },
+]
 
 interface MessageType {
   _id: string
@@ -35,15 +41,18 @@ const Chat = () => {
   const [messages, setMessages] = useState<MessageType[]>([])
   const [messageInput, setMessageInput] = useState('')
   const [chat, setChat] = useState<ChatType | null>(null)
-  const socket = React.useRef<Socket<DefaultEventsMap, DefaultEventsMap>>()
+  const [receiver, setReceiver] = useState<User>()
 
   const currentUser = useSelector<StoreType, User>(
     (state: any) => state.auth.user,
   )
+  const messageListRef = useRef<HTMLDivElement>(null)
+
+  const socket = useRef<Socket<DefaultEventsMap, DefaultEventsMap>>()
 
   useEffect(() => {
     console.log('Подключение к сокету...')
-    socket.current = io('http://localhost:3000/api')
+    socket.current = io('/api')
 
     getChat(chatId || '')
 
@@ -61,9 +70,16 @@ const Chat = () => {
     }
   }, [chatId])
 
+  useEffect(() => {
+    if (messageListRef.current) {
+      messageListRef.current.scrollTop = messageListRef.current.scrollHeight
+    }
+  }, [messages])
+
   const getChat = (chatId: string) => {
     console.log(`Загружаем историю сообщений чата ${chatId}`)
     setLoaded(false)
+
     axios({
       url: `/api/chat/${chatId}`,
       method: 'get',
@@ -73,6 +89,28 @@ const Chat = () => {
         setChat(data)
         setMessages(data.messages)
         setLoaded(true)
+
+        axios({
+          url: `/api/users/${data.receiver}`,
+          method: 'get',
+        })
+          .then((userData) => {
+            console.log(`Receiver user data:`, userData.data)
+            setReceiver(userData.data)
+
+            setChat((prevChat) => {
+              if (prevChat) {
+                return {
+                  ...prevChat,
+                  receiverDetails: userData.data,
+                }
+              }
+              return null
+            })
+          })
+          .catch((userError) => {
+            console.error('Error fetching receiver user details', userError)
+          })
       })
       .catch((err) => {
         console.error(`Error fetching chat ${chatId}`, err)
@@ -104,7 +142,6 @@ const Chat = () => {
     })
       .then(({ data }) => {
         console.log('Message sent!', data)
-        handleIncomingMessage(data)
       })
       .catch((err) => {
         console.error('Error sending message', err)
@@ -112,45 +149,66 @@ const Chat = () => {
     setMessageInput('')
   }
 
+  const getProfileLink = (userId: any, userRole: string) => {
+    return userRole === 'teacher' ? `/user/${userId}` : `/teacher/${userId}`
+  }
+
   return (
     <>
-      <Row>
-        <Col span={4}>
-          <Card title='All chats' style={{ margin: '20px' }}></Card>
-        </Col>
+      <Row align='middle' justify='center'>
         <Col span={12}>
-          <Card title='Chat' style={{ margin: '20px' }}>
-            <List
-              loading={!connected || !loaded}
-              dataSource={messages}
-              renderItem={(msg, index) => (
-                <List.Item key={index}>
-                  <List.Item.Meta
-                    title={msg.content}
-                    description={new Date(msg.createdAt).toLocaleString()}
-                    avatar={<CustomAvatar avatar={currentUser.avatar} />}
-                    style={{
-                      textAlign:
-                        msg.sender === currentUser._id ? 'left' : 'right',
-                    }}
-                  />
-                </List.Item>
-              )}
-            />
-            <TextArea
-              rows={3}
-              value={messageInput}
-              onChange={(e) => setMessageInput(e.target.value)}
-            />
-            <Space>
-              <Button
-                type='primary'
-                onClick={() => sendMessage(chatId || '', messageInput)}
-                style={{ marginTop: '8px' }}
-              >
-                Send
-              </Button>
-            </Space>
+          <MyBreadcrumb items={breadcrumbItems} />
+
+          <Card
+            title='Chat'
+            style={{ margin: '20px' }}
+            extra={
+              <>
+                {' '}
+                <Link to={getProfileLink(receiver?._id, currentUser.role)}>
+                  {receiver?.fullName}{' '}
+                  <CustomAvatar avatar={receiver?.avatar} />
+                </Link>
+              </>
+            }
+          >
+            <div
+              ref={messageListRef}
+              style={{ maxHeight: '450px', overflowY: 'auto', padding: 25 }}
+            >
+              <List
+                loading={!connected || !loaded}
+                dataSource={messages}
+                renderItem={(msg, index) => (
+                  <List.Item key={index}>
+                    <List.Item.Meta
+                      title={msg.content}
+                      description={new Date(msg.createdAt).toLocaleString()}
+                      style={{
+                        textAlign:
+                          msg.sender === currentUser._id ? 'right' : 'left',
+                      }}
+                    />
+                  </List.Item>
+                )}
+              />
+            </div>
+            <Card style={{ marginTop: 25 }}>
+              <TextArea
+                rows={3}
+                value={messageInput}
+                onChange={(e) => setMessageInput(e.target.value)}
+              />
+              <Space>
+                <Button
+                  type='primary'
+                  onClick={() => sendMessage(chatId || '', messageInput)}
+                  style={{ marginTop: '8px' }}
+                >
+                  Send
+                </Button>
+              </Space>
+            </Card>
           </Card>
         </Col>
       </Row>

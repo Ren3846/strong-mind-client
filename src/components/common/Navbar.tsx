@@ -6,6 +6,7 @@ import MenuDropDown from '../user/MenuDropDown'
 import { StoreType } from '../../redux/store'
 import { USER_ROLE, User } from '../../redux/store/types'
 import { BellOutlined, UserOutlined, WalletOutlined } from '@ant-design/icons'
+import Notifications from './Notifications'
 
 function Navbar() {
   const navigate = useNavigate()
@@ -64,9 +65,7 @@ function Navbar() {
           user ? (
             <>
               <Space>
-                <Badge count={5} size='small' style={{ marginRight: '20px' }}>
-                  <Button icon={<BellOutlined />} size='large' shape='circle' />
-                </Badge>
+                <Notifications />
                 <Divider type='vertical' />
                 <div>
                   {/* <UserOutlined
