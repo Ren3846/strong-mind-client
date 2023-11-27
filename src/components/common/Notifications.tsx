@@ -9,7 +9,7 @@ import Preloader from './Preloader'
 
 const Notifications = () => {
   const user = useSelector((state: any) => state.auth.user)
-  const [otherUsers, setOtherUsers] = useState<{ [key: string]: User }>({})
+  const [receivers, setReceivers] = useState<{ [key: string]: User }>({})
   const [loading, setLoading] = useState(true)
 
   console.log(user)
@@ -26,7 +26,7 @@ const Notifications = () => {
       Promise.all(promises)
         .then((users) => {
           const mergedUsers = Object.assign({}, ...users)
-          setOtherUsers(mergedUsers)
+          setReceivers(mergedUsers)
         })
         .catch((error) => {
           console.error(error)
@@ -70,18 +70,21 @@ const Notifications = () => {
                 to={`/chat/${chat.chatId}`}
                 onClick={() => handleChatClick(chat.chatId)}
               >
-                <span>
-                  {chat.hasUnreadMessages ? (
+                {chat.hasUnreadMessages ? (
+                  <span style={{ color: 'red' }}>
                     <MessageOutlined
                       style={{ color: 'red', marginRight: '8px' }}
                     />
-                  ) : (
+                    {receivers[chat.otherUserId]?.fullName}
+                  </span>
+                ) : (
+                  <span>
                     <MailOutlined
                       style={{ color: 'black', marginRight: '8px' }}
                     />
-                  )}
-                  {otherUsers[chat.otherUserId]?.fullName || chat.otherUserId}
-                </span>
+                    {receivers[chat.otherUserId]?.fullName}
+                  </span>
+                )}
               </Link>
             )}
           </Menu.Item>
@@ -97,7 +100,13 @@ const Notifications = () => {
         size='small'
         style={{ marginRight: '20px' }}
       >
-        <Button icon={<BellOutlined />} size='large' shape='circle' />
+        <Button
+          icon={<BellOutlined />}
+          // type='primary'
+          size='large'
+          shape='circle'
+          // ghost
+        />
       </Badge>
     </Dropdown>
   )
