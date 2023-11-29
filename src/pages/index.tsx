@@ -33,6 +33,7 @@ import LessonUser from './user/Lesson'
 import Wallet from './user/Wallet'
 import StudentProfile from './tutor/StudentProfile'
 import CourseEdit from './tutor/CourseEdit'
+import ChatPage from './ChatPage'
 
 interface IProtectedRoute {
   condition: boolean
@@ -111,6 +112,17 @@ const Router: React.FC<{}> = () => {
                     <Dashboard />
                   )
                 }
+              />
+            }
+          />
+
+          <Route
+            path='/chat/:chatId'
+            element={
+              <ProtectedRoute
+                condition={isAuthenticated}
+                redirect='/signin'
+                children={<ChatPage />}
               />
             }
           />

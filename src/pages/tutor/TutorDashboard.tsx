@@ -21,7 +21,7 @@ import { StoreType } from '../../redux/store'
 import { SearchOutlined } from '@ant-design/icons'
 import { baseImageUrl } from '..'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
-import BookedMeetings from '../../components/tutor/BookedMeetings'
+import BookedMeetings from '../../components/user/BookedMeetings'
 
 const breadcrumbItems = [{ title: 'Home', link: '/' }, { title: 'Dashboard' }]
 

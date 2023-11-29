@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
-import { Button, Row, Card, Space } from 'antd'
+import { Button, Row, Card, Space, Avatar } from 'antd'
 import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
 import { ITeacher } from '../../redux/store/types'
 import { GetCourses } from '../../components/tutor/GetCourses'
 import RequestMeeting from '../../components/user/RequestMeeting'
-import { WechatOutlined } from '@ant-design/icons'
+import { UserOutlined, WechatOutlined } from '@ant-design/icons'
+import CustomAvatar from '../../components/common/Avatar'
 
 const TeacherProfile: React.FC<{}> = () => {
   const { id } = useParams()
   const [loaded, setLoaded] = useState(false)
   const [teacher, setTeacher] = useState<ITeacher | null>(null)
+
+  const [data, setData] = useState<any>(null)
+  const [error, setError] = useState<string | null>(null)
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     axios
@@ -29,22 +35,49 @@ const TeacherProfile: React.FC<{}> = () => {
       })
   }, [id])
 
+  const handleChat = async () => {
+    try {
+      const response = await axios.post('/api/chat', {
+        receiver: teacher?._id,
+      })
+
+      setData(response.data)
+      setError(null)
+
+      if (response.data?._id) {
+        navigate(`/chat/${response.data._id}`)
+      }
+    } catch (error) {
+      setError('Произошла ошибка при выполнении запроса')
+      console.error('Ошибка Axios:', error)
+    }
+  }
+
   return (
     <Layout>
       <Row align='middle' justify='center'>
         <Card
-          title='Teacher`s profile'
+          title={`Teacher Profile`}
           style={{ width: '60rem', margin: '20px' }}
+          extra={
+            <CustomAvatar avatar={teacher?.avatar} />
+            // <Avatar
+            //   style={{ backgroundColor: '#3523a9bf' }}
+            //   icon={<UserOutlined />}
+            // />
+          }
         >
           {loaded ? (
             <Space direction='vertical'>
-              fullName: {teacher?.fullName}
-              Email: {teacher?.email}
-              <Button>
+              {`FullName: ${teacher?.fullName}`}
+              {`Email: ${teacher?.email}`}
+              <Button onClick={handleChat}>
                 <WechatOutlined />
                 Chat
               </Button>
-              {/* {teacher?._id && <RequestMeeting teacherId={teacher._id} />}{' '} */}
+              {teacher?._id && id && (
+                <RequestMeeting courseId={id} teacherId={teacher._id} />
+              )}
             </Space>
           ) : (
             <Preloader />
@@ -58,20 +91,15 @@ const TeacherProfile: React.FC<{}> = () => {
             <div>
               {teacher?.courses.length ? (
                 teacher.courses.map((course) => (
-                  <Space>
-                    <GetCourses courseId={course} key={teacher._id + course} />
+                  <Space key={teacher._id + course}>
+                    <GetCourses courseId={course} />
                   </Space>
                 ))
               ) : (
-                <p>No teachers :(</p>
+                <p>No courses :(</p>
               )}
             </div>
           ) : (
-            // <Space direction='vertical'>
-            //   fullName: {teacher?.fullName}
-            //   Email: {teacher?.email}
-            //   <Button>Chat</Button>
-            // </Space>
             <Preloader />
           )}
         </Card>

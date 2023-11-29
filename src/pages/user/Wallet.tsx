@@ -11,6 +11,7 @@ import {
   CloseCircleOutlined,
   SyncOutlined,
 } from '@ant-design/icons'
+import Layout from '../../components/common/Layout'
 
 const Wallet = () => {
   const user = useSelector<StoreType, User>((state: any) => state.auth.user)
@@ -93,31 +94,33 @@ const Wallet = () => {
   ]
 
   return (
-    <Row align='middle' justify='center'>
-      <Card title='Balance' style={{ width: '60rem', marginTop: '20px' }}>
-        <Statistic
-          title='Account Balance ($)'
-          value={user.balance}
-          precision={2}
-        />
-      </Card>
+    <Layout>
+      <Row align='middle' justify='center'>
+        <Card title='Balance' style={{ width: '60rem', marginTop: '20px' }}>
+          <Statistic
+            title='Account Balance ($)'
+            value={user.balance}
+            precision={2}
+          />
+        </Card>
 
-      <Card style={{ width: '60rem', marginTop: '20px' }}>
-        {user.role === USER_ROLE.TEACHER ? (
-          <WalletWithdrawal />
-        ) : (
-          <WalletTopup />
-        )}
-      </Card>
+        <Card style={{ width: '60rem', marginTop: '20px' }}>
+          {user.role === USER_ROLE.TEACHER ? (
+            <WalletWithdrawal />
+          ) : (
+            <WalletTopup />
+          )}
+        </Card>
 
-      <Card title='History' style={{ width: '60rem', marginTop: '20px' }}>
-        <Table
-          loading={loading}
-          columns={columns}
-          dataSource={paymentHistory}
-        />
-      </Card>
-    </Row>
+        <Card title='History' style={{ width: '60rem', marginTop: '20px' }}>
+          <Table
+            loading={loading}
+            columns={columns}
+            dataSource={paymentHistory}
+          />
+        </Card>
+      </Row>
+    </Layout>
   )
 }
 

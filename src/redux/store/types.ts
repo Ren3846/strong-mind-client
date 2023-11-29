@@ -74,6 +74,7 @@ export interface ITeacher {
   email: string
   fullName: string
   phone: string
+  avatar: string
   isBlocked: boolean
   students: string[]
   liveLessonSchedule: any[]
