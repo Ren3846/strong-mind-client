@@ -163,7 +163,6 @@ function Profile() {
                 </TabPane>
               </Tabs>
 
-
               <Divider />
 
               <Form layout='vertical'>
@@ -234,13 +233,13 @@ function Profile() {
                     onChange={handleChange}
                     value={editedUser.timezone}
                     options={[
-                      { value: '+12', label: 'GMT+12:00' },
-                      { value: '+11', label: 'GMT+11:00' },
-                      { value: '+10', label: 'GMT+10:00' },
-                      { value: '+9', label: 'GMT+09:00' },
-                      { value: '+8', label: 'GMT+08:00' },
-                      { value: '+7', label: 'GMT+07:00' },
-                      { value: '+6', label: 'GMT+06:00' },
+                      { value: '+12', label: 'UTC+12:00' },
+                      { value: '+11', label: 'UTC+11:00' },
+                      { value: '+10', label: 'UTC+10:00' },
+                      { value: '+9', label: 'UTC+09:00' },
+                      { value: '+8', label: 'UTC+08:00' },
+                      { value: '+7', label: 'UTC+07:00' },
+                      { value: '+6', label: 'UTC+06:00' },
                       { value: '+5', label: 'UTC+05:00' },
                       { value: '+4', label: 'UTC+04:00' },
                       { value: '+3', label: 'UTC+03:00' },
@@ -252,13 +251,13 @@ function Profile() {
                       { value: '-3', label: 'UTC-03:00' },
                       { value: '-4', label: 'UTC-04:00' },
                       { value: '-5', label: 'UTC-05:00' },
-                      { value: '-6', label: 'GMT-06:00' },
-                      { value: '-7', label: 'GMT-07:00' },
-                      { value: '-8', label: 'GMT-08:00' },
-                      { value: '-9', label: 'GMT-09:00' },
-                      { value: '-10', label: 'GMT-10:00' },
-                      { value: '-11', label: 'GMT-11:00' },
-                      { value: '-12', label: 'GMT-12:00' },
+                      { value: '-6', label: 'UTC-06:00' },
+                      { value: '-7', label: 'UTC-07:00' },
+                      { value: '-8', label: 'UTC-08:00' },
+                      { value: '-9', label: 'UTC-09:00' },
+                      { value: '-10', label: 'UTC-10:00' },
+                      { value: '-11', label: 'UTC-11:00' },
+                      { value: '-12', label: 'UTC-12:00' },
                     ]}
                   />
                 </Item>

@@ -15,7 +15,7 @@ import { CheckCircleOutlined, EditOutlined } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 
 const GetAvailableDays: React.FC = () => {
-  const user = useSelector((state: any) => state.auth.user);
+  const user = useSelector((state: any) => state.auth.user)
   const [modalVisible, setModalVisible] = useState(false)
   const [form] = Form.useForm()
   const [selectedDayOfWeek, setSelectedDayOfWeek] = useState<string | null>(
@@ -23,7 +23,6 @@ const GetAvailableDays: React.FC = () => {
   )
   const [hourCheckboxes, setHourCheckboxes] = useState<JSX.Element[]>([])
   const [selectedHours, setSelectedHours] = useState<any>(user.availabilities)
-
 
   const showModal = (dayOfWeek: string) => {
     setSelectedDayOfWeek(dayOfWeek)
@@ -44,7 +43,6 @@ const GetAvailableDays: React.FC = () => {
       </Tag>
     ))
     setHourCheckboxes(checkboxes)
-
   }, [user._id])
 
   const handleOk = async () => {
@@ -131,9 +129,7 @@ const GetAvailableDays: React.FC = () => {
         onCancel={handleCancel}
       >
         <Form form={form}>
-          <Form.Item
-            name='UnavailableHours'
-          >
+          <Form.Item name='UnavailableHours'>
             <Checkbox.Group style={{ width: '100%' }}>
               {hourCheckboxes}
             </Checkbox.Group>

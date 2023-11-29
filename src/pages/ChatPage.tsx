@@ -161,7 +161,7 @@ const Chat = () => {
 
           <Card
             title='Chat'
-            style={{ margin: '20px' }}
+            style={{ marginTop: '20px' }}
             extra={
               <>
                 {' '}
