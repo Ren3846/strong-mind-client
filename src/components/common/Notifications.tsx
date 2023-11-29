@@ -54,6 +54,12 @@ const Notifications = () => {
     markChatAsRead(chatId)
   }
 
+  const chatsWithUnreadMessages = user.chats.filter(
+    (chat: any) => chat.hasUnreadMessages === true,
+  )
+
+  const numberOfChatsWithUnreadMessages = chatsWithUnreadMessages.length
+
   const chatMenu = (
     <Menu>
       {user.chats.length === 0 ? (
@@ -96,7 +102,7 @@ const Notifications = () => {
   return (
     <Dropdown overlay={chatMenu} placement='bottom'>
       <Badge
-        count={user.chats.length}
+        count={numberOfChatsWithUnreadMessages}
         size='small'
         style={{ marginRight: '20px' }}
       >
