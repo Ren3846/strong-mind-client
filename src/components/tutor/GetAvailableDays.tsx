@@ -15,16 +15,15 @@ import { CheckCircleOutlined, EditOutlined } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 
 const GetAvailableDays: React.FC = () => {
-  const [data, setData] = useState<any>({})
+  const user = useSelector((state: any) => state.auth.user);
   const [modalVisible, setModalVisible] = useState(false)
   const [form] = Form.useForm()
   const [selectedDayOfWeek, setSelectedDayOfWeek] = useState<string | null>(
     null,
   )
   const [hourCheckboxes, setHourCheckboxes] = useState<JSX.Element[]>([])
-  const [selectedHours, setSelectedHours] = useState<any>({})
+  const [selectedHours, setSelectedHours] = useState<any>(user.availabilities)
 
-  const user = useSelector((state: any) => state.auth.user)
 
   const showModal = (dayOfWeek: string) => {
     setSelectedDayOfWeek(dayOfWeek)
@@ -46,17 +45,7 @@ const GetAvailableDays: React.FC = () => {
     ))
     setHourCheckboxes(checkboxes)
 
-    axios
-      .get(`/api/users/availability/all/${user._id}`)
-      .then((response) => {
-        console.log(response.data)
-        setData(response.data)
-        setSelectedHours(response.data)
-      })
-      .catch((error) => {
-        console.error('Error while making the GET request:', error)
-      })
-  }, [])
+  }, [user._id])
 
   const handleOk = async () => {
     try {
@@ -119,7 +108,7 @@ const GetAvailableDays: React.FC = () => {
   return (
     <div>
       <Row gutter={16}>
-        {Object.keys(data).map((dayOfWeek) => (
+        {Object.keys(selectedHours).map((dayOfWeek) => (
           <Col span={6} key={dayOfWeek}>
             <Card
               title={getDayOfWeek(dayOfWeek)}
@@ -144,9 +133,6 @@ const GetAvailableDays: React.FC = () => {
         <Form form={form}>
           <Form.Item
             name='UnavailableHours'
-            rules={[
-              { required: true, message: 'Please specify available hours' },
-            ]}
           >
             <Checkbox.Group style={{ width: '100%' }}>
               {hourCheckboxes}

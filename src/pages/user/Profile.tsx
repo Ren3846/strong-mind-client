@@ -162,7 +162,7 @@ function Profile() {
                   <Wallet />
                 </TabPane>
               </Tabs>
-              {/* <TeacherAvailability /> */}
+
 
               <Divider />
 
@@ -229,6 +229,7 @@ function Profile() {
                 <Item label='Timezone'>
                   <Select
                     defaultValue='+1'
+                    virtual={false}
                     style={{ width: 120 }}
                     onChange={handleChange}
                     value={editedUser.timezone}
