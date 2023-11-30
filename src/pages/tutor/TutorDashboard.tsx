@@ -14,14 +14,14 @@ import {
 } from 'antd'
 import { ICourse, USER_ROLE, User } from '../../redux/store/types'
 import { Link } from 'react-router-dom'
-import TeacherMeetings from '../../components/tutor/RequestsMeetings'
 import GetLikes from '../../components/common/GetLikes'
 import { useSelector } from 'react-redux'
 import { StoreType } from '../../redux/store'
 import { SearchOutlined } from '@ant-design/icons'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
-import BookedMeetings from '../../components/user/BookedMeetings'
 import { CDN_BASE } from '../..'
+// import BookedMeetings from '../../components/user/BookedMeetings'
+import MeetingsTeacher from '../../components/tutor/MeetingsTeacher'
 
 const breadcrumbItems = [{ title: 'Home', link: '/' }, { title: 'Dashboard' }]
 
@@ -195,7 +195,7 @@ const TutorDashboard = () => {
         <Col span={24}>
           <Card title='Requests'>
             {/* {user?.role === USER_ROLE.TEACHER ? ( */}
-            <TeacherMeetings />
+            <MeetingsTeacher />
             {/* ) : (
               <BookedMeetings />
             )} */}

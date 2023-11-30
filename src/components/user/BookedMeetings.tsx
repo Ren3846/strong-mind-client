@@ -4,8 +4,10 @@ import { Button, Card, List, Skeleton, Space, Tag } from 'antd'
 import {
   CheckCircleOutlined,
   CloseCircleOutlined,
+  RightOutlined,
   SyncOutlined,
 } from '@ant-design/icons'
+import { Link } from 'react-router-dom'
 
 const BookedMeetings = () => {
   const [meetings, setMeetings] = useState<any>([])
@@ -79,8 +81,13 @@ const BookedMeetings = () => {
                 <>
                   <Space>
                     <Button danger type='primary' onClick={() => {}}>
-                      Reject
+                      Cancel
                     </Button>
+                    <Link to={`/meeting/${meeting._id}`}>
+                      <Button type='primary' onClick={() => {}}>
+                        <RightOutlined />
+                      </Button>
+                    </Link>
                   </Space>
                 </>
               ) : (
