@@ -13,6 +13,8 @@ import { authLoaded } from './redux/actions/auth'
 
 // const socket = io('ws://localhost:3000')
 
+export const CDN_BASE = "https://strongmind.fra1.cdn.digitaloceanspaces.com/";
+
 const ApiInit: React.FC<{}> = () => {
   const dispatch = useDispatch()
 

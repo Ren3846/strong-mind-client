@@ -19,9 +19,9 @@ import GetLikes from '../../components/common/GetLikes'
 import { useSelector } from 'react-redux'
 import { StoreType } from '../../redux/store'
 import { SearchOutlined } from '@ant-design/icons'
-import { baseImageUrl } from '..'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import BookedMeetings from '../../components/user/BookedMeetings'
+import { CDN_BASE } from '../..'
 
 const breadcrumbItems = [{ title: 'Home', link: '/' }, { title: 'Dashboard' }]
 
@@ -146,7 +146,7 @@ const TutorDashboard = () => {
                     <Link to={`/user/${student._id}`}>
                       <List.Item.Meta
                         avatar={
-                          <Avatar src={`${baseImageUrl}/${student.avatar}`} />
+                          <Avatar src={CDN_BASE + student.avatar} />
                         }
                         title={student.email}
                       />

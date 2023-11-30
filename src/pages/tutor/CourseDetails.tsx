@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 import Preloader from '../../components/common/Preloader'
 import { GetStudents } from '../../components/tutor/GetTutor'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
-import UploadImgCourse from '../../components/tutor/UploadCourseImg'
+import ManageCourseCover from '../../components/tutor/ManageCourseCover'
 import GetLikes from '../../components/common/GetLikes'
 
 const breadcrumbItems = [
@@ -31,21 +31,8 @@ const CourseDetails: React.FC = () => {
       .catch((error) => {
         setError('Error while dawnload data')
       })
-
-    // axios
-    //   .get(`/api/courses/${id}/likes`)
-    //   .then((response) => {
-    //     console.log(response.data)
-    //     setCourseLikes(response.data)
-    //   })
-    //   .catch((error) => {
-    //     console.error(error)
-    //     message.error('Error while fetching course likes')
-    //   })
-    //   .finally(() => {
-    //     setLoadingLikes(false)
-    //   })
   }, [id])
+  
 
   const handleDeleteLesson = (lessonId: string) => {
     axios
@@ -103,7 +90,16 @@ const CourseDetails: React.FC = () => {
         //   />
         // }
       >
-        <UploadImgCourse />
+        <ManageCourseCover
+          courseId={course._id}
+          cover={!!course.cover}
+          onChange={(newCover: string | null) => {
+            setCourse((course: any) => ({
+              ...course,
+              cover: newCover
+            }))
+          }}
+        />
         <div>
           <h1>{course.title}</h1>
           <p>{course.about}</p>

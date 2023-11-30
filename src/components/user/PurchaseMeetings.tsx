@@ -5,12 +5,18 @@ import { DollarCircleFilled } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateUser } from '../../redux/actions/user'
 
-const PurchaseCourse: React.FC<{
-  courseIdd: string
-}> = ({ courseIdd }) => {
+const PurchaseMeetings: React.FC<{
+  courseId: string
+}> = ({ courseId }) => {
   const [quantity, setQuantity] = useState(1)
   const user = useSelector((state: any) => state.auth.user)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  
+  const purchasedForCourse = user.purchasedMeetings.find(
+    (item: any) => item.course === courseId
+  );
+
+  const purchasedQuantity = purchasedForCourse ? purchasedForCourse.quantity : 0;
 
   const fetchUserData = async () => {
     try {
@@ -26,7 +32,7 @@ const PurchaseCourse: React.FC<{
   const handlePurchase = async () => {
     try {
       const requestData = {
-        courseId: courseIdd,
+        courseId: courseId,
         quantity: quantity,
       }
 
@@ -47,7 +53,7 @@ const PurchaseCourse: React.FC<{
   }, [])
 
   return (
-    <div>
+    <Space>
       <Space.Compact>
         <Input
           type='number'
@@ -64,12 +70,13 @@ const PurchaseCourse: React.FC<{
         </Button>
       </Space.Compact>
       <Divider />
-      <List
-        dataSource={user.purchasedMeetings}
-        renderItem={(item: any) => <Button> Quantity: {item.quantity}</Button>}
-      />
-    </div>
+      <div>
+        {
+          `${purchasedQuantity} meetings purchased`
+        }
+      </div>
+    </Space>
   )
 }
 
-export default PurchaseCourse
+export default PurchaseMeetings

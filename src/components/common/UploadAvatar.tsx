@@ -3,7 +3,7 @@ import { DeleteOutlined, UploadOutlined, UserOutlined } from '@ant-design/icons'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { baseImageUrl } from '../../pages'
+import { CDN_BASE } from '../..'
 
 const UploadAvatar = () => {
   const [form] = Form.useForm()
@@ -14,7 +14,7 @@ const UploadAvatar = () => {
   const [image, setImageUrl] = useState('')
 
   useEffect(() => {
-    setImageUrl(`${baseImageUrl}/${user.avatar}`)
+    setImageUrl(CDN_BASE + user.avatar)
   }, [user])
 
   const onFinish = (values: any) => {
@@ -37,7 +37,7 @@ const UploadAvatar = () => {
 
         setFileId(newFileId)
         onSuccess(response, file)
-        setImageUrl(`${baseImageUrl}${newFileId}`)
+        setImageUrl(CDN_BASE + newFileId)
         message.success('Photo uploaded successfully')
       })
       .catch((error) => {

@@ -17,7 +17,7 @@ import { ICourse, ITeacher } from '../../redux/store/types'
 import LessonsListUser from '../../components/user/LessonsListUser'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import RequestMeeting from '../../components/user/RequestMeeting'
-import PurchaseCourse from '../../components/user/PurchaseMeetings'
+import PurchaseMeetings from '../../components/user/PurchaseMeetings'
 import { useSelector } from 'react-redux'
 
 const CourseInfo: React.FC = () => {
@@ -51,7 +51,7 @@ const CourseInfo: React.FC = () => {
       .finally(() => {
         setLoaded(true)
       })
-  }, [])
+  }, [id])
 
   // if (loading) {
   //   return <Preloader />
@@ -107,7 +107,7 @@ const CourseInfo: React.FC = () => {
           <Skeleton active />
         )}
         <Divider />
-        {id ? <PurchaseCourse courseIdd={id} /> : <></>}
+        {id ? <PurchaseMeetings courseId={id} /> : <></>}
       </Card>
 
       <Card

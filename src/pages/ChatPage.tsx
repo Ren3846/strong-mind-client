@@ -197,6 +197,7 @@ const Chat = () => {
               <TextArea
                 rows={3}
                 value={messageInput}
+                onPressEnter={() => sendMessage(chatId || '', messageInput)}
                 onChange={(e) => setMessageInput(e.target.value)}
               />
               <Space>
