@@ -16,7 +16,7 @@ import {
 } from 'antd'
 import { ICourse, User } from '../../redux/store/types'
 import GetLikes from '../../components/common/GetLikes'
-import { baseImageUrl } from '..'
+import { CDN_BASE } from '../..'
 
 const CourseStudentItem: React.FC<{
   userId: string
@@ -49,7 +49,7 @@ const CourseStudentItem: React.FC<{
           style={{ margin: '5px' }}
         >
           <Space>
-            <Avatar src={`${baseImageUrl}/${user?.avatar}`} />
+            <Avatar src={CDN_BASE + user?.avatar} />
             {user?.email}
           </Space>
         </div>

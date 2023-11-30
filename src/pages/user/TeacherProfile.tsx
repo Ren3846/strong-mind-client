@@ -75,9 +75,6 @@ const TeacherProfile: React.FC<{}> = () => {
                 <WechatOutlined />
                 Chat
               </Button>
-              {teacher?._id && id && (
-                <RequestMeeting courseId={id} teacherId={teacher._id} />
-              )}
             </Space>
           ) : (
             <Preloader />

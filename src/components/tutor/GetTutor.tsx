@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { User } from '../../redux/store/types'
 import { Avatar, Skeleton, Space } from 'antd'
 import { Link } from 'react-router-dom'
-import { baseImageUrl } from '../../pages'
+import { CDN_BASE } from '../..'
 
 export const GetStudents: React.FC<{
   userId: string
@@ -36,7 +36,7 @@ export const GetStudents: React.FC<{
           style={{ margin: '5px' }}
         >
           <Space>
-            <Avatar src={`${baseImageUrl}/${user?.avatar}`} />
+            <Avatar src={CDN_BASE + user?.avatar} />
             <Link to={`/teacher/${user?._id}`}>{user?.email}</Link>
           </Space>
         </div>

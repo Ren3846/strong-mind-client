@@ -1,10 +1,9 @@
 import { Avatar } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
-
-export const baseImageUrl = 'https://strongmind.fra1.cdn.digitaloceanspaces.com'
+import { CDN_BASE } from '../..'
 
 const CustomAvatar = ({ avatar }: any) => {
-  const avatarSrc = avatar ? `${baseImageUrl}/${avatar}` : null
+  const avatarSrc = avatar ? CDN_BASE + avatar : null
 
   return (
     <Avatar
