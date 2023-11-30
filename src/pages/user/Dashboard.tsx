@@ -49,9 +49,6 @@ const Dashboard = () => {
     <Layout>
       <Row gutter={[16, 16]}>
         <MyBreadcrumb items={breadcrumbItems} />
-        {/* <Col span={24}>
-          <StepsDashboard />
-        </Col> */}
         <Col span={12}>
           <Card title='My Enrolled Courses'>
             {loadingCourses ? (
@@ -101,7 +98,6 @@ const Dashboard = () => {
 
         <Col span={24}>
           <Card title='My Lessons'>
-            {/* <LessonsListUser /> */}
             <BookedMeetings />
           </Card>
         </Col>

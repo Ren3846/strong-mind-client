@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Button, Card, List, Skeleton, Space, Tag } from 'antd'
+import { Card, List, Skeleton, Space, Tag, Button } from 'antd'
+
 import {
   CheckCircleOutlined,
   CloseCircleOutlined,
+  RightOutlined,
   SyncOutlined,
 } from '@ant-design/icons'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-const BookedMeetings = () => {
+const MeetingsTeacher = () => {
   const [meetings, setMeetings] = useState<any>([])
-  const [loaded, setLoaded] = useState(false)
+  const [loading, setLoading] = useState(true)
+
+  const user = useSelector((state: any) => state.auth.user)
 
   useEffect(() => {
     const fetchMeetings = async () => {
@@ -26,22 +32,16 @@ const BookedMeetings = () => {
             const courseResponse = await axios.get(
               `/api/courses/${meeting.course}`,
             )
-
-            console.log(meeting.course)
-            console.log(meeting.teacher)
-            console.log(meeting.student)
-
             return {
               ...meeting,
               teacherName: teacherResponse.data.fullName,
-
-              studentName: studentResponse.data.fullName,
+              studentName: studentResponse.data.email,
               courseName: courseResponse.data.title,
             }
           }),
         )
         setMeetings(meetingsData)
-        setLoaded(true)
+        setLoading(false)
       } catch (error) {
         console.error('Error fetching meetings:', error)
       }
@@ -49,9 +49,45 @@ const BookedMeetings = () => {
     fetchMeetings()
   }, [])
 
+  const handleAcceptMeeting = async (meetingId: string) => {
+    try {
+      await axios.patch(`/api/meetings/status/${meetingId}`, {
+        status: 'accepted',
+      })
+      setMeetings((prevMeetings: any) =>
+        prevMeetings.map((meeting: any) =>
+          meeting._id === meetingId
+            ? { ...meeting, status: 'accepted' }
+            : meeting,
+        ),
+      )
+    } catch (error) {
+      console.error('Error accepting meeting:', error)
+    }
+  }
+
+  const handleRejectMeeting = async (meetingId: string) => {
+    try {
+      await axios.patch(`/api/meetings/status/${meetingId}`, {
+        status: 'rejected',
+      })
+      setMeetings((prevMeetings: any) =>
+        prevMeetings.map((meeting: any) =>
+          meeting._id === meetingId
+            ? { ...meeting, status: 'rejected' }
+            : meeting,
+        ),
+      )
+    } catch (error) {
+      console.error('Error rejecting meeting:', error)
+    }
+  }
+
   return (
     <div>
-      {loaded ? (
+      {loading ? (
+        <Skeleton active />
+      ) : (
         <List
           dataSource={meetings}
           renderItem={(meeting: any) => (
@@ -73,12 +109,24 @@ const BookedMeetings = () => {
                     </Tag>
                   )}
                   {meeting.studentName}
+                  {meeting.courseName}
                 </Space>
               </div>
-              {meeting.status === 'accepted' ? (
+
+              {meeting.status === 'draft' ? (
                 <>
                   <Space>
-                    <Button danger type='primary' onClick={() => {}}>
+                    <Button
+                      type='primary'
+                      onClick={() => handleAcceptMeeting(meeting._id)}
+                    >
+                      Accept
+                    </Button>
+                    <Button
+                      danger
+                      type='primary'
+                      onClick={() => handleRejectMeeting(meeting._id)}
+                    >
                       Reject
                     </Button>
                   </Space>
@@ -86,41 +134,17 @@ const BookedMeetings = () => {
               ) : (
                 <></>
               )}
+              <Link to={`/meeting/${meeting._id}`}>
+                <Button type='primary'>
+                  <RightOutlined />
+                </Button>
+              </Link>
             </List.Item>
           )}
         />
-      ) : (
-        // <Space direction='horizontal'>
-        //   <>
-        //     {meetings.map((meeting: any) => (
-        //       <Card key={meeting._id} style={{ width: 300, margin: '16px' }}>
-        //         <Card.Meta
-        //           title={
-        //             <>
-        //               <strong>Teacher:</strong> {meeting.teacherName}
-        //             </>
-        //           }
-        //           description={
-        //             <>
-        //               <strong>Student:</strong> {meeting.studentName}
-        //               <br />
-        //               <strong>Course:</strong> {meeting.courseName}
-        //               <br />
-        //               <strong>Date:</strong>{' '}
-        //               {new Date(meeting.start_date).toLocaleString()}
-        //               <br />
-        //               <strong>Status:</strong> {meeting.status}
-        //             </>
-        //           }
-        //         />
-        //       </Card>
-        //     ))}
-        //   </>
-        // </Space>
-        <Skeleton active />
       )}
     </div>
   )
 }
 
-export default BookedMeetings
+export default MeetingsTeacher
