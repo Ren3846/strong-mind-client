@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Drawer, DatePicker, TimePicker, Button, message, Space } from 'antd'
 import dayjs, { Dayjs } from 'dayjs'
 import { PhoneOutlined } from '@ant-design/icons'
+import { RangePickerProps } from 'antd/es/date-picker'
 
 interface CallRequestProps {
   teacherId: string
@@ -71,12 +72,9 @@ const RequestMeeting: React.FC<CallRequestProps> = ({
     }
   }
 
-  const disabledDate = (current: Dayjs | null) => {
-    if (!current) {
-      return false
-    }
-    const isBeforeToday = current.isBefore(dayjs().startOf('day'))
-    return isBeforeToday
+  const disabledDate = (current: Dayjs) => {
+    const dateAvailable = Object.keys(busySchedule).includes(current.format('DD.MM.YYYY'));
+    return !dateAvailable
   }
 
   const disabledHours = () => {
@@ -134,6 +132,7 @@ const RequestMeeting: React.FC<CallRequestProps> = ({
         />
         <TimePicker
           onChange={(value) => setTime(value)}
+          showNow={false}
           format='HH'
           disabledHours={disabledHours}
         />
