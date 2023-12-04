@@ -245,7 +245,7 @@ function Profile() {
                       { value: '+3', label: 'UTC+03:00' },
                       { value: '+2', label: 'UTC+02:00' },
                       { value: '+1', label: 'UTC+01:00' },
-                      { value: '0', label: 'UTC' },
+                      { value: '+0', label: 'UTC + 0' },
                       { value: '-1', label: 'UTC-01:00' },
                       { value: '-2', label: 'UTC-02:00' },
                       { value: '-3', label: 'UTC-03:00' },
