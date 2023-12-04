@@ -97,12 +97,9 @@ const Dashboard = () => {
         </Col>
 
         <Col span={24}>
-          <Card title='My Lessons'>
+          <Card title='Accepted meetings'>
             <BookedMeetings />
           </Card>
-        </Col>
-        <Col span={24}>
-          <Card title='Shedule'>{/* <Shedule /> */}</Card>
         </Col>
       </Row>
     </Layout>

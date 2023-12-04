@@ -30,13 +30,13 @@ function Navbar() {
           }
           children='All Courses'
         />
-        <NavLink
+        {/* <NavLink
           to='/teachers'
           className={({ isActive }) =>
             `navbar-link ${isActive ? 'active' : ''}`
           }
           children='Top Teachers'
-        />
+        /> */}
         {/* <NavLink
           to='/enrolled'
           className={({ isActive }) =>

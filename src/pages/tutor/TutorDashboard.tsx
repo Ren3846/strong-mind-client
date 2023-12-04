@@ -171,32 +171,11 @@ const TutorDashboard = () => {
               />
             </div>
           </Card>
-          {/* <Card title='My Students'>
-            {loaded ? (
-              <ul>
-                {students.map((student) => (
-                  <li style={{ marginTop: '5px' }}>
-                    <Avatar
-                      icon={<UserOutlined />}
-                      style={{ marginRight: '10px' }}
-                    />
-                    {student.email}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <Skeleton active />
-            )}
-          </Card> */}
         </Col>
 
         <Col span={24}>
-          <Card title='Requests'>
-            {/* {user?.role === USER_ROLE.TEACHER ? ( */}
+          <Card title='Requests from students'>
             <MeetingsTeacher />
-            {/* ) : (
-              <BookedMeetings />
-            )} */}
           </Card>
         </Col>
       </Row>
