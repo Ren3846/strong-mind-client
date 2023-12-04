@@ -15,39 +15,49 @@ const MeetingsTeacher = () => {
   const [meetings, setMeetings] = useState<any>([])
   const [loading, setLoading] = useState(true)
 
-  const user = useSelector((state: any) => state.auth.user)
+  const userMeetingsIds = useSelector((state: any) => state.auth.user.meetings)
+  console.log('userMeetingsIds', userMeetingsIds)
 
   useEffect(() => {
     const fetchMeetings = async () => {
       try {
-        const response = await axios.get('/api/meetings/booked')
         const meetingsData = await Promise.all(
-          response.data.map(async (meeting: any) => {
+          userMeetingsIds.map(async (meetingId: string) => {
+            const meetingResponse = await axios.get(
+              `/api/meetings/${meetingId}`,
+            )
             const teacherResponse = await axios.get(
-              `/api/users/${meeting.teacher}`,
+              `/api/users/${meetingResponse.data.teacher}`,
             )
             const studentResponse = await axios.get(
-              `/api/users/${meeting.student}`,
+              `/api/users/${meetingResponse.data.student}`,
             )
             const courseResponse = await axios.get(
-              `/api/courses/${meeting.course}`,
+              `/api/courses/${meetingResponse.data.course}`,
             )
+
             return {
-              ...meeting,
+              ...meetingResponse.data,
               teacherName: teacherResponse.data.fullName,
               studentName: studentResponse.data.email,
               courseName: courseResponse.data.title,
             }
           }),
         )
+
         setMeetings(meetingsData)
         setLoading(false)
       } catch (error) {
         console.error('Error fetching meetings:', error)
       }
     }
-    fetchMeetings()
-  }, [])
+
+    if (userMeetingsIds.length > 0) {
+      fetchMeetings()
+    } else {
+      setLoading(false)
+    }
+  }, [userMeetingsIds])
 
   const handleAcceptMeeting = async (meetingId: string) => {
     try {

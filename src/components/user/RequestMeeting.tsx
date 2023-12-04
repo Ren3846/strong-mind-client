@@ -58,6 +58,8 @@ const RequestMeeting: React.FC<CallRequestProps> = ({
         const formattedDate = date.format('DD.MM.YYYY')
         const formattedHour = time.format('HH')
 
+        console.log(formattedDate, formattedHour)
+
         await axios.post(`/api/meetings/${courseId}`, {
           date: formattedDate,
           hour: formattedHour,
