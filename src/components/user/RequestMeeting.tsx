@@ -55,15 +55,16 @@ const RequestMeeting: React.FC<CallRequestProps> = ({
     setLoading(true)
     try {
       if (date && time) {
-        const dateTime = new Date(
-          date.format('DD.MM.YYYY') + ' ' + time.format('HH'),
-        )
+        const formattedDate = date.format('DD.MM.YYYY')
+        const formattedHour = time.format('HH')
 
         await axios.post(`/api/meetings/${courseId}`, {
-          date: dateTime.toISOString(),
+          date: formattedDate,
+          hour: formattedHour,
         })
+
         message.success('Call request sent successfully')
-        console.log(dateTime)
+        console.log(formattedDate, formattedHour)
       }
     } catch (error) {
       console.error(error)
