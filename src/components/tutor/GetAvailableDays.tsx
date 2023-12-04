@@ -22,7 +22,7 @@ const GetAvailableDays: React.FC = () => {
     null,
   )
   const [hourCheckboxes, setHourCheckboxes] = useState<JSX.Element[]>([])
-  const [selectedHours, setSelectedHours] = useState<any>(user.availabilities)
+  const [selectedHours, setSelectedHours] = useState<any>([])
 
   const showModal = (dayOfWeek: string) => {
     setSelectedDayOfWeek(dayOfWeek)
@@ -34,6 +34,18 @@ const GetAvailableDays: React.FC = () => {
   }
 
   useEffect(() => {
+    const fetchTeacherSchedule = async () => {
+      try {
+        const response = await axios.get(`/api/users/teacher-schedule`)
+        const teacherSchedule = response.data
+        setSelectedHours(teacherSchedule)
+        console.log(teacherSchedule)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    fetchTeacherSchedule()
+
     const hoursInDay = Array.from({ length: 24 }, (_, i) => i)
     const checkboxes = hoursInDay.map((hour) => (
       <Tag style={{ width: 80, marginBottom: 5 }} color='warning' key={hour}>
