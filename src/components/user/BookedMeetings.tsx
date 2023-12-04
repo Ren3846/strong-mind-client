@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Card, List, Skeleton, Space, Tag, Button } from 'antd'
+import { List, Skeleton, Space, Tag, Button } from 'antd'
 
 import {
   CheckCircleOutlined,
@@ -59,38 +59,21 @@ const BookedMeetings = () => {
     }
   }, [userMeetingsIds])
 
-  const handleAcceptMeeting = async (meetingId: string) => {
-    try {
-      await axios.patch(`/api/meetings/status/${meetingId}`, {
-        status: 'accepted',
-      })
-      setMeetings((prevMeetings: any) =>
-        prevMeetings.map((meeting: any) =>
-          meeting._id === meetingId
-            ? { ...meeting, status: 'accepted' }
-            : meeting,
-        ),
-      )
-    } catch (error) {
-      console.error('Error accepting meeting:', error)
-    }
-  }
-
-  const handleRejectMeeting = async (meetingId: string) => {
-    try {
-      await axios.patch(`/api/meetings/status/${meetingId}`, {
-        status: 'rejected',
-      })
-      setMeetings((prevMeetings: any) =>
-        prevMeetings.map((meeting: any) =>
-          meeting._id === meetingId
-            ? { ...meeting, status: 'rejected' }
-            : meeting,
-        ),
-      )
-    } catch (error) {
-      console.error('Error rejecting meeting:', error)
-    }
+  const handleCancelMeeting = async (meetingId: string) => {
+    // try {
+    //   await axios.patch(`/api/meetings/status/${meetingId}`, {
+    //     status: 'rejected',
+    //   })
+    //   setMeetings((prevMeetings: any) =>
+    //     prevMeetings.map((meeting: any) =>
+    //       meeting._id === meetingId
+    //         ? { ...meeting, status: 'rejected' }
+    //         : meeting,
+    //     ),
+    //   )
+    // } catch (error) {
+    //   console.error('Error rejecting meeting:', error)
+    // }
   }
 
   return (
@@ -139,33 +122,6 @@ const BookedMeetings = () => {
           )}
         />
       ) : (
-        // <Space direction='horizontal'>
-        //   <>
-        //     {meetings.map((meeting: any) => (
-        //       <Card key={meeting._id} style={{ width: 300, margin: '16px' }}>
-        //         <Card.Meta
-        //           title={
-        //             <>
-        //               <strong>Teacher:</strong> {meeting.teacherName}
-        //             </>
-        //           }
-        //           description={
-        //             <>
-        //               <strong>Student:</strong> {meeting.studentName}
-        //               <br />
-        //               <strong>Course:</strong> {meeting.courseName}
-        //               <br />
-        //               <strong>Date:</strong>{' '}
-        //               {new Date(meeting.start_date).toLocaleString()}
-        //               <br />
-        //               <strong>Status:</strong> {meeting.status}
-        //             </>
-        //           }
-        //         />
-        //       </Card>
-        //     ))}
-        //   </>
-        // </Space>
         <Skeleton active />
       )}
     </div>

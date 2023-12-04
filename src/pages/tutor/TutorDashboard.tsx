@@ -145,9 +145,7 @@ const TutorDashboard = () => {
                   <List.Item>
                     <Link to={`/user/${student._id}`}>
                       <List.Item.Meta
-                        avatar={
-                          <Avatar src={CDN_BASE + student.avatar} />
-                        }
+                        avatar={<Avatar src={CDN_BASE + student.avatar} />}
                         title={student.email}
                       />
                     </Link>
@@ -200,10 +198,6 @@ const TutorDashboard = () => {
               <BookedMeetings />
             )} */}
           </Card>
-        </Col>
-
-        <Col span={24}>
-          <Card title='Shedule'>{/* <TutorShedule /> */}</Card>
         </Col>
       </Row>
     </Layout>

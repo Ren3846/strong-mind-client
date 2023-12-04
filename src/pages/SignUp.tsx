@@ -7,10 +7,8 @@ import {
   Input,
   Button,
   Typography,
-  Alert,
   Select,
   Checkbox,
-  Col,
   Card,
   Space,
 } from 'antd'
@@ -27,7 +25,6 @@ import { useDispatch } from 'react-redux'
 import { ErrorMessage } from '../components/common/ErrorMessage'
 
 const { Option } = Select
-const { Text } = Typography
 
 const tailFormItemLayout = {
   wrapperCol: {

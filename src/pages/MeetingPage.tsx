@@ -15,8 +15,6 @@ import GetUser from '../components/common/GetUser'
 import { useParams } from 'react-router-dom'
 import { GetCourse } from '../components/common/GetCourse'
 
-const { Title, Paragraph } = Typography
-
 const MeetingPage: FC<{}> = () => {
   const { meetingId } = useParams()
   const [meeting, setMeeting] = useState<any>({})

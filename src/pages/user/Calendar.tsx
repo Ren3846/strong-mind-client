@@ -89,18 +89,6 @@ const CalendarPage: React.FC = () => {
     setAgenda(agendaData)
   }
 
-  // const fetchMeetingInfo = async (meetingId: string) => {
-  //   try {
-  //     const response = await fetch(`/api/meetings/${meetingId}`)
-  //     const data = await response.json()
-  //     console.log('Meeting Info:', data)
-  //     setMeeting(data)
-  //     // Добавьте логику для отображения дополнительной информации, например, модального окна
-  //   } catch (error) {
-  //     console.error('Ошибка при загрузке данных о встрече:', error)
-  //   }
-  // }
-
   console.log(meetings)
 
   return (

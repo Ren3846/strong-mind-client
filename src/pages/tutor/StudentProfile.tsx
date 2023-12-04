@@ -70,31 +70,6 @@ const StudentProfile: React.FC<{}> = () => {
             <Preloader />
           )}
         </Card>
-        {/* <Card
-          title='Teacher`s courses'
-          style={{ width: '60rem', margin: '20px' }}
-        >
-          {loaded ? (
-            <div>
-              {student?.courses.length ? (
-                student.courses.map((course) => (
-                  <Space>
-                    <GetCourses courseId={course} key={student._id + course} />
-                  </Space>
-                ))
-              ) : (
-                <p>No students :(</p>
-              )}
-            </div>
-          ) : (
-            // <Space direction='vertical'>
-            //   fullName: {student?.fullName}
-            //   Email: {student?.email}
-            //   <Button>Chat</Button>
-            // </Space>
-            <Preloader />
-          )}
-        </Card> */}
       </Row>
     </Layout>
   )

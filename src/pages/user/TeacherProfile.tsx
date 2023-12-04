@@ -6,8 +6,7 @@ import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
 import { ITeacher } from '../../redux/store/types'
 import { GetCourses } from '../../components/tutor/GetCourses'
-import RequestMeeting from '../../components/user/RequestMeeting'
-import { UserOutlined, WechatOutlined } from '@ant-design/icons'
+import { WechatOutlined } from '@ant-design/icons'
 import CustomAvatar from '../../components/common/Avatar'
 
 const TeacherProfile: React.FC<{}> = () => {

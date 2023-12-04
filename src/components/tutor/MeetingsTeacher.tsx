@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Card, List, Skeleton, Space, Tag, Button } from 'antd'
+import { List, Skeleton, Space, Tag, Button } from 'antd'
 
 import {
   CheckCircleOutlined,
@@ -16,7 +16,6 @@ const MeetingsTeacher = () => {
   const [loading, setLoading] = useState(true)
 
   const userMeetingsIds = useSelector((state: any) => state.auth.user.meetings)
-  console.log('userMeetingsIds', userMeetingsIds)
 
   useEffect(() => {
     const fetchMeetings = async () => {

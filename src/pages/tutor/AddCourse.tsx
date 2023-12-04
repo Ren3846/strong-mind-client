@@ -88,14 +88,6 @@ const CreateCourse: React.FC = () => {
             </Select>
           </Form.Item>
 
-          {/* <Form.Item
-            label='Tagline'
-            name='tagline'
-            rules={[{ required: true, message: 'Enter a tag' }]}
-          >
-            <Input />
-          </Form.Item> */}
-
           <Form.Item
             label='Tagline'
             name='tagline'

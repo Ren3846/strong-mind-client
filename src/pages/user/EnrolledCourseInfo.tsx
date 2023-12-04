@@ -4,11 +4,8 @@ import {
   Card,
   Row,
   Descriptions,
-  Avatar,
   Skeleton,
   Divider,
-  Button,
-  List,
 } from 'antd'
 import { useParams } from 'react-router-dom'
 import Preloader from '../../components/common/Preloader'

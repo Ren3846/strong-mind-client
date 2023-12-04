@@ -3,7 +3,7 @@ import { Button, Card, Divider, Row, Space, Typography, message } from 'antd'
 import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
 import Preloader from '../../components/common/Preloader'
-import { GetStudents } from '../../components/tutor/GetTutor'
+import { GetTutor } from '../../components/tutor/GetTutor'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import ManageCourseCover from '../../components/tutor/ManageCourseCover'
 import GetLikes from '../../components/common/GetLikes'
@@ -32,7 +32,6 @@ const CourseDetails: React.FC = () => {
         setError('Error while dawnload data')
       })
   }, [id])
-  
 
   const handleDeleteLesson = (lessonId: string) => {
     axios
@@ -96,7 +95,7 @@ const CourseDetails: React.FC = () => {
           onChange={(newCover: string | null) => {
             setCourse((course: any) => ({
               ...course,
-              cover: newCover
+              cover: newCover,
             }))
           }}
         />
@@ -122,7 +121,7 @@ const CourseDetails: React.FC = () => {
           <div>
             <ul>
               {course.students.map((student: any) => (
-                <GetStudents userId={student} key={course._id + student} />
+                <GetTutor userId={student} key={course._id + student} />
               ))}
             </ul>
           </div>

@@ -5,7 +5,7 @@ import { Avatar, Skeleton, Space } from 'antd'
 import { Link } from 'react-router-dom'
 import { CDN_BASE } from '../..'
 
-export const GetStudents: React.FC<{
+export const GetTutor: React.FC<{
   userId: string
 }> = ({ userId }) => {
   const [user, setUser] = useState<User | null>(null)
