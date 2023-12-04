@@ -103,7 +103,7 @@ const MeetingsTeacher = () => {
           renderItem={(meeting: any) => (
             <List.Item key={meeting._id}>
               <div>
-                <Space align='center'>
+                <Space>
                   {new Date(meeting.start_date).toLocaleString()}
                   {meeting.status === 'accepted' ? (
                     <Tag icon={<CheckCircleOutlined />} color='success'>
@@ -119,13 +119,13 @@ const MeetingsTeacher = () => {
                     </Tag>
                   )}
                   {meeting.studentName}
-                  {meeting.courseName}
+                  {/* {meeting.courseName} */}
                 </Space>
               </div>
 
-              {meeting.status === 'draft' ? (
-                <>
-                  <Space>
+              <Space>
+                {meeting.status === 'draft' ? (
+                  <>
                     <Button
                       type='primary'
                       onClick={() => handleAcceptMeeting(meeting._id)}
@@ -139,16 +139,16 @@ const MeetingsTeacher = () => {
                     >
                       Reject
                     </Button>
-                  </Space>
-                </>
-              ) : (
-                <></>
-              )}
-              <Link to={`/meeting/${meeting._id}`}>
-                <Button type='primary'>
-                  <RightOutlined />
-                </Button>
-              </Link>
+                  </>
+                ) : (
+                  <></>
+                )}
+                <Link to={`/meeting/${meeting._id}`}>
+                  <Button>
+                    <RightOutlined />
+                  </Button>
+                </Link>
+              </Space>
             </List.Item>
           )}
         />
