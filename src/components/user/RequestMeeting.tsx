@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Drawer, DatePicker, TimePicker, Button, message, Space } from 'antd'
-import dayjs, { Dayjs } from 'dayjs'
+import { Dayjs } from 'dayjs'
 import { PhoneOutlined } from '@ant-design/icons'
-import { RangePickerProps } from 'antd/es/date-picker'
 
 interface CallRequestProps {
   teacherId: string
@@ -57,12 +56,14 @@ const RequestMeeting: React.FC<CallRequestProps> = ({
     try {
       if (date && time) {
         const dateTime = new Date(
-          date.format('YYYY-MM-DD') + ' ' + time.format('HH:mm:ss'),
+          date.format('DD.MM.YYYY') + ' ' + time.format('HH:mm:ss'),
         )
+
         await axios.post(`/api/meetings/${courseId}`, {
           date: dateTime.toISOString(),
         })
         message.success('Call request sent successfully')
+        console.log(dateTime)
       }
     } catch (error) {
       console.error(error)
