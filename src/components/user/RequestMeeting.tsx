@@ -73,7 +73,9 @@ const RequestMeeting: React.FC<CallRequestProps> = ({
   }
 
   const disabledDate = (current: Dayjs) => {
-    const dateAvailable = Object.keys(busySchedule).includes(current.format('DD.MM.YYYY'));
+    const dateAvailable = Object.keys(busySchedule).includes(
+      current.format('DD.MM.YYYY'),
+    )
     return !dateAvailable
   }
 
