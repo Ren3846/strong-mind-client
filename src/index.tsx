@@ -9,11 +9,7 @@ import './styles/style.sass'
 import { getSignedInUserAPI } from './api/user'
 import { authLoaded } from './redux/actions/auth'
 
-// import { io } from 'socket.io-client'
-
-// const socket = io('ws://localhost:3000')
-
-export const CDN_BASE = "https://strongmind.fra1.cdn.digitaloceanspaces.com/";
+export const CDN_BASE = 'https://strongmind.fra1.cdn.digitaloceanspaces.com/'
 
 const ApiInit: React.FC<{}> = () => {
   const dispatch = useDispatch()
