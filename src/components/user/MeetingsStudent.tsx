@@ -11,7 +11,7 @@ import {
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-const BookedMeetings = () => {
+const MeetingsStudent = () => {
   const [meetings, setMeetings] = useState<any>([])
   const [loaded, setLoaded] = useState(false)
 
@@ -128,4 +128,4 @@ const BookedMeetings = () => {
   )
 }
 
-export default BookedMeetings
+export default MeetingsStudent

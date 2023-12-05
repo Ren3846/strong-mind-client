@@ -11,16 +11,14 @@ import {
   Card,
 } from 'antd'
 import { MailOutlined, LockOutlined } from '@ant-design/icons'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { userSignInAPI } from '../api/user'
 import { authLogin } from '../redux/actions/auth'
 import Layout from '../components/common/Layout'
-
-const { Text } = Typography
+import { ErrorMessage } from '../components/common/ErrorMessage'
 
 function SignIn() {
   const [form] = Form.useForm()
-  const user = useSelector((state: any) => state.user)
   const dispatch = useDispatch()
 
   const [error, setError] = useState<string | null>(null)
@@ -36,10 +34,15 @@ function SignIn() {
         .then((response: any) => {
           handleSignInSuccess(response.data.user)
         })
-        .catch((err) => {
-          console.log(err)
-          setError(err?.response?.data?.errors?.message || 'An error occurred.')
-          showErrorNotification(error)
+        .catch((error) => {
+          if (error.response) {
+            const responseData = error.response.data
+            setError(responseData.message || 'An error occurred.')
+          } else if (error.request) {
+            setError('Request failed. Please check your connection.')
+          } else {
+            setError('An unexpected error occurred.')
+          }
         })
     })
   }
@@ -49,15 +52,6 @@ function SignIn() {
     dispatch(authLogin(user))
 
     return navigate('/dashboard')
-  }
-
-  const showErrorNotification = (errorMessage: string | null) => {
-    if (errorMessage) {
-      message.error(errorMessage)
-      setTimeout(() => {
-        message.destroy()
-      }, 3000)
-    }
   }
 
   const showSuccessNotification = (messageText: string) => {
@@ -121,7 +115,7 @@ function SignIn() {
             </Form.Item>
 
             <Form.Item shouldUpdate className='flex justify-center'>
-              <Text type='danger'>{error}</Text>
+              <ErrorMessage message={error || ''} />
             </Form.Item>
 
             <Form.Item>

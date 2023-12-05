@@ -5,7 +5,7 @@ import { Row, Col, Card, Button, Skeleton } from 'antd'
 import { ICourse, ITeacher } from '../../redux/store/types'
 import { Link } from 'react-router-dom'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
-import BookedMeetings from '../../components/user/BookedMeetings'
+import MeetingsStudent from '../../components/user/MeetingsStudent'
 
 const breadcrumbItems = [{ title: 'Home', link: '/' }, { title: 'Dashboard' }]
 
@@ -98,7 +98,7 @@ const Dashboard = () => {
 
         <Col span={24}>
           <Card title='Accepted meetings'>
-            <BookedMeetings />
+            <MeetingsStudent />
           </Card>
         </Col>
       </Row>

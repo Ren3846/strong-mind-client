@@ -4,6 +4,7 @@ import { User } from '../../redux/store/types'
 import { Avatar, Skeleton, Space } from 'antd'
 import { Link } from 'react-router-dom'
 import { CDN_BASE } from '../..'
+import CustomAvatar from '../common/CustomAvatar'
 
 export const GetTutor: React.FC<{
   userId: string

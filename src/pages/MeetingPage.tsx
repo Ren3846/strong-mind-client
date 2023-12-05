@@ -1,13 +1,4 @@
-import {
-  Button,
-  Card,
-  Col,
-  Descriptions,
-  Row,
-  Skeleton,
-  Space,
-  Typography,
-} from 'antd'
+import { Button, Card, Col, Descriptions, Row, Skeleton, Space } from 'antd'
 import axios from 'axios'
 import React, { FC, useEffect, useState } from 'react'
 import Layout from '../components/common/Layout'
@@ -35,12 +26,10 @@ const MeetingPage: FC<{}> = () => {
   }, [meetingId])
 
   const handleReschedule = () => {
-    // Add logic for rescheduling
     console.log('Reschedule clicked')
   }
 
   const handleCancel = () => {
-    // Add logic for canceling
     console.log('Cancel clicked')
   }
 

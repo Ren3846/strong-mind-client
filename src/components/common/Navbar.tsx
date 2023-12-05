@@ -7,6 +7,7 @@ import { StoreType } from '../../redux/store'
 import { USER_ROLE, User } from '../../redux/store/types'
 import { BellOutlined, UserOutlined, WalletOutlined } from '@ant-design/icons'
 import Notifications from './Notifications'
+import SwitchLang from './SwitchLanguage'
 
 function Navbar() {
   const navigate = useNavigate()
@@ -28,15 +29,15 @@ function Navbar() {
           className={({ isActive }) =>
             `navbar-link ${isActive ? 'active' : ''}`
           }
-          children='All Courses'
+          children='Courses'
         />
-        {/* <NavLink
+        <NavLink
           to='/teachers'
           className={({ isActive }) =>
             `navbar-link ${isActive ? 'active' : ''}`
           }
-          children='Top Teachers'
-        /> */}
+          children='Teachers'
+        />
         {/* <NavLink
           to='/enrolled'
           className={({ isActive }) =>
@@ -68,9 +69,6 @@ function Navbar() {
                 <Notifications />
                 <Divider type='vertical' />
                 <div>
-                  {/* <UserOutlined
-                    style={{ fontSize: '18px', marginRight: '5px' }}
-                  /> */}
                   <span>Balance: {userBalance.balance} $</span>
                   <Tooltip title='Go to Wallet'>
                     <Button
@@ -84,6 +82,8 @@ function Navbar() {
                 <Divider type='vertical' />
               </Space>
               <MenuDropDown user={user} />
+              <Divider type='vertical' />
+              <SwitchLang />
             </>
           ) : (
             <Space>

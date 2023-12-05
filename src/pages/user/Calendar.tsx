@@ -13,10 +13,10 @@ import {
   Typography,
 } from 'antd'
 import MeetingsTeacher from '../../components/tutor/MeetingsTeacher'
-import BookedMeetings from '../../components/user/BookedMeetings'
+import MeetingsStudent from '../../components/user/MeetingsStudent'
 import { useSelector } from 'react-redux'
 import { USER_ROLE } from '../../redux/store/types'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import {
   ArrowRightOutlined,
   ClockCircleOutlined,
@@ -89,7 +89,11 @@ const CalendarPage: React.FC = () => {
     setAgenda(agendaData)
   }
 
-  console.log(meetings)
+  const openZoomInNewTab = (e: any, zoomUrl: string) => {
+    e.preventDefault()
+    window.open(zoomUrl, '_blank')
+    return false
+  }
 
   return (
     <>
@@ -102,7 +106,7 @@ const CalendarPage: React.FC = () => {
             {user.role === USER_ROLE.TEACHER ? (
               <MeetingsTeacher />
             ) : (
-              <BookedMeetings />
+              <MeetingsStudent />
             )}
           </Card>
 
@@ -130,12 +134,26 @@ const CalendarPage: React.FC = () => {
                   <br />
                   <ClockCircleOutlined /> {item.startDate}
                   <br />
-                  Zoom URL: {item.zoomUrl} <br />
-                  Status: <Tag>{item.status} </Tag>
-                  <br /> <br />
+                  {item.zoomUrl ? (
+                    `ZoomURL: ${item.zoomUrl}`
+                  ) : (
+                    <>Zoom link will be here..</>
+                  )}
+                  <br />
+                  {/* Status: <Tag>{item.status} </Tag> */}
                   <Space>
-                    <Button type='primary'>Zoom</Button>
-
+                    {item.zoomUrl ? (
+                      <NavLink to={item.zoomUrl}>
+                        <Button
+                          type='primary'
+                          onClick={(e) => openZoomInNewTab(e, item.zoomUrl)}
+                        >
+                          Start zoom
+                        </Button>
+                      </NavLink>
+                    ) : (
+                      <></>
+                    )}
                     <Link to={`/meeting/${item.meetingId}`}>
                       <Button>View</Button>
                     </Link>

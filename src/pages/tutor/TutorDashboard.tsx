@@ -20,7 +20,7 @@ import { StoreType } from '../../redux/store'
 import { SearchOutlined } from '@ant-design/icons'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import { CDN_BASE } from '../..'
-// import BookedMeetings from '../../components/user/BookedMeetings'
+// import MeetingsStudent from '../../components/user/MeetingsStudent'
 import MeetingsTeacher from '../../components/tutor/MeetingsTeacher'
 
 const breadcrumbItems = [{ title: 'Home', link: '/' }, { title: 'Dashboard' }]

@@ -1,10 +1,6 @@
 import { Layout as AntLayout } from 'antd'
 
-import {
-  CommentOutlined,
-  CustomerServiceOutlined,
-  QuestionCircleOutlined,
-} from '@ant-design/icons'
+import { CommentOutlined, QuestionCircleOutlined } from '@ant-design/icons'
 import { FloatButton } from 'antd'
 import Footer from './Footer'
 
@@ -36,7 +32,7 @@ const Layout = ({ children }: Props) => {
           <FloatButton icon={<CommentOutlined />} />
         </FloatButton.Group>
       </>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }

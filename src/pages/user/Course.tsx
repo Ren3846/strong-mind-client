@@ -7,22 +7,20 @@ import { useSelector } from 'react-redux'
 import { StoreType } from '../../redux/store'
 import { CDN_BASE } from '../..'
 
-const CourseCoverVideo: React.FC<{cover: string | null | undefined}> = ({cover}) => {
-  if(!cover) return null;
+const CourseCoverVideo: React.FC<{ cover: string | null | undefined }> = ({
+  cover,
+}) => {
+  if (!cover) return null
   return (
     <Card
-        title={`Video by Teacher`}
-        style={{ width: '60rem', margin: '20px' }}
-        className='lesson-card'
-      >
-        <video
-          src={CDN_BASE + cover}
-          controls
-          style={{ width: '100%' }}
-        >
-          Your browser does not support the video tag.
-        </video>
-      </Card>
+      title={`Video by Teacher`}
+      style={{ width: '60rem', margin: '20px' }}
+      className='lesson-card'
+    >
+      <video src={CDN_BASE + cover} controls style={{ width: '100%' }}>
+        Your browser does not support the video tag.
+      </video>
+    </Card>
   )
 }
 
@@ -33,7 +31,9 @@ const Course: React.FC<{}> = () => {
   const [course, setCourse] = useState<ICourse | null>(null)
   const [loaded, setLoaded] = useState(false)
   const [enrollLoading, setEnrollLoading] = useState(false)
-  const [purchased, setPurchased] = useState(() => user?.courses.includes(id || ''));
+  const [purchased, setPurchased] = useState(() =>
+    user?.courses.includes(id || ''),
+  )
 
   useEffect(() => {
     axios
@@ -53,7 +53,7 @@ const Course: React.FC<{}> = () => {
     axios
       .post('/api/users/enroll', { courseId: id })
       .then((response) => {
-        message.success("You successfully enrolled!")
+        message.success('You successfully enrolled!')
         setPurchased(true)
       })
       .catch((error) => {
@@ -133,9 +133,7 @@ const Course: React.FC<{}> = () => {
           <Skeleton active />
         )}
       </Card>
-      <CourseCoverVideo
-        cover={course?.cover}
-      />
+      <CourseCoverVideo cover={course?.cover} />
     </Row>
   )
 }

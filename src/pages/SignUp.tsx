@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { USER_ROLE } from '../redux/store/types'
 import {
   Row,
@@ -41,7 +41,6 @@ const tailFormItemLayout = {
 
 function SignUp() {
   const [form] = Form.useForm()
-  const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const dispatch = useDispatch()
@@ -65,14 +64,11 @@ function SignUp() {
       .catch((error) => {
         setIsLoading(false)
         if (error.response) {
-          // Server responded with an error
           const responseData = error.response.data
           setError(responseData.message || 'An error occurred.')
         } else if (error.request) {
-          // The request was made but no response received
           setError('Request failed. Please check your connection.')
         } else {
-          // Something happened in setting up the request
           setError('An unexpected error occurred.')
         }
       })
@@ -145,22 +141,6 @@ function SignUp() {
               <Input />
             </Form.Item>
 
-            {/* <Form.Item
-            name='password'
-            label='Password'
-            rules={[
-              {
-                required: true,
-                message:
-                  'Please enter your password',
-              },
-            ]}
-          >
-            <Input.Password
-              prefix={<LockOutlined />}
-            />
-          </Form.Item> */}
-
             <Form.Item
               name='password'
               label='Password'
@@ -232,14 +212,6 @@ function SignUp() {
 
             <ErrorMessage message={error || ''} />
 
-            {/* {error && (
-              <Alert
-                message={error}
-                type='error'
-                showIcon
-                style={{ marginBottom: '10px' }}
-              />
-            )} */}
             <Form.Item>
               <Button
                 type='primary'
