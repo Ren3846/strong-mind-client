@@ -1,7 +1,6 @@
 import API from './index'
 import { USER_ROLE } from '../redux/store/types'
 import { User } from '../redux/store/types'
-import { ITeacher, ICourse } from '../redux/store/types'
 import axios from 'axios'
 
 export interface UserData {}

@@ -1,17 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
-import {
-  Alert,
-  Button,
-  Calendar,
-  Card,
-  Col,
-  List,
-  Row,
-  Space,
-  Tag,
-  Typography,
-} from 'antd'
+import { Alert, Button, Calendar, Card, Col, List, Row, Space } from 'antd'
 import MeetingsTeacher from '../../components/tutor/MeetingsTeacher'
 import MeetingsStudent from '../../components/user/MeetingsStudent'
 import { useSelector } from 'react-redux'
@@ -33,8 +22,6 @@ type Meeting = {
   status: string
   meetingId: string
 }
-
-const { Text } = Typography
 
 const CalendarPage: React.FC = () => {
   const [value, setValue] = useState(() => dayjs())
@@ -182,7 +169,7 @@ const CalendarPage: React.FC = () => {
                         {meetingsOnDate.map((meeting) => (
                           <li key={meeting._id}>
                             {/* <strong>{meeting.course}</strong>: {meeting.student}{' '} */}
-                            <InfoCircleOutlined />{' '}
+                            <InfoCircleOutlined style={{ color: 'blue' }} />{' '}
                             {new Date(meeting.start_date).toLocaleTimeString(
                               [],
                               { hour: '2-digit', minute: '2-digit' },

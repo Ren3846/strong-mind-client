@@ -1,21 +1,15 @@
 import React from 'react'
-import { Badge, Button, Divider, Space, Tooltip } from 'antd'
+import { Button, Divider, Space, Tooltip } from 'antd'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import MenuDropDown from '../user/MenuDropDown'
-import { StoreType } from '../../redux/store'
-import { USER_ROLE, User } from '../../redux/store/types'
-import { BellOutlined, UserOutlined, WalletOutlined } from '@ant-design/icons'
+import { WalletOutlined } from '@ant-design/icons'
 import Notifications from './Notifications'
 import SwitchLang from './SwitchLanguage'
 
 function Navbar() {
   const navigate = useNavigate()
   const userBalance = useSelector((state: any) => state.auth.user)
-
-  const currentUser = useSelector<StoreType, User>(
-    (state: any) => state.auth.user,
-  )
 
   const isAuthLoaded = useSelector((state: any) => state.auth.loaded)
   const user = useSelector((state: any) => state.auth.user)
