@@ -1,18 +1,19 @@
-import { textContainer, textVariant2  } from '../../utils/motions'
+import { textContainer, textVariant2 } from '../../utils/motions'
 import { motion } from 'framer-motion'
 
-// import styles from '../../styles'
-
 interface TypingTextProps {
-  title: string;
-  textStyles?: string;
+  title: string
+  textStyles?: string
 }
 
-
-  
-
-export const TypingText: React.FC<TypingTextProps> = ({ title, textStyles }) => (
-  <motion.p variants={textContainer} className={`font-normal text-[14px] text-secondary-white ${textStyles}`}>
+export const TypingText: React.FC<TypingTextProps> = ({
+  title,
+  textStyles,
+}) => (
+  <motion.p
+    variants={textContainer}
+    className={`font-normal text-[14px] text-secondary-white ${textStyles}`}
+  >
     {Array.from(title).map((letter, index) => (
       <motion.span variants={textVariant2} key={index}>
         {letter === ' ' ? '\u00A0' : letter}
@@ -22,8 +23,8 @@ export const TypingText: React.FC<TypingTextProps> = ({ title, textStyles }) => 
 )
 
 interface TitleTextProps {
-  title: string;
-  textStyles?: string;
+  title: string
+  textStyles?: string
 }
 
 export const TitleText: React.FC<TitleTextProps> = ({ title, textStyles }) => (

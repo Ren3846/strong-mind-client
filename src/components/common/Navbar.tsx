@@ -3,16 +3,18 @@ import { Button, Divider, Space, Tooltip } from 'antd'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import MenuDropDown from '../user/MenuDropDown'
-import { WalletOutlined } from '@ant-design/icons'
+import { LoginOutlined, UserOutlined, WalletOutlined } from '@ant-design/icons'
 import Notifications from './Notifications'
 import SwitchLang from './SwitchLanguage'
+import useTranslations from '../../lang/useTranslations'
+import Preloader from './Preloader'
 
 function Navbar() {
+  const t = useTranslations('Navbar')
   const navigate = useNavigate()
-  const userBalance = useSelector((state: any) => state.auth.user)
 
-  const isAuthLoaded = useSelector((state: any) => state.auth.loaded)
   const user = useSelector((state: any) => state.auth.user)
+  const isAuthLoaded = useSelector((state: any) => state.auth.loaded)
 
   return (
     <div className='header-navbar bg-navbar'>
@@ -23,29 +25,15 @@ function Navbar() {
           className={({ isActive }) =>
             `navbar-link ${isActive ? 'active' : ''}`
           }
-          children='Courses'
+          children={t('courses')}
         />
         <NavLink
           to='/teachers'
           className={({ isActive }) =>
             `navbar-link ${isActive ? 'active' : ''}`
           }
-          children='Teachers'
+          children={t('teachers')}
         />
-        {/* <NavLink
-          to='/enrolled'
-          className={({ isActive }) =>
-            `navbar-link ${isActive ? 'active' : ''}`
-          }
-          children='Enrolled'
-        />
-        <NavLink
-          to='/meetings'
-          className={({ isActive }) =>
-            `navbar-link ${isActive ? 'active' : ''}`
-          }
-          children='Meetings'
-        /> */}
       </nav>
 
       <div
@@ -63,8 +51,10 @@ function Navbar() {
                 <Notifications />
                 <Divider type='vertical' />
                 <div>
-                  <span>Balance: {userBalance.balance} $</span>
-                  <Tooltip title='Go to Wallet'>
+                  <span>
+                    {t('balance')} {user.balance} $
+                  </span>
+                  <Tooltip title={t('go_to_wallet')}>
                     <Button
                       icon={<WalletOutlined />}
                       size='large'
@@ -82,18 +72,21 @@ function Navbar() {
           ) : (
             <Space>
               <Button
-                children='Log in'
+                children={t('log_in')}
                 onClick={() => navigate('/signin')}
+                icon={<LoginOutlined />}
               ></Button>
               <Button
-                type='default'
-                children='Register'
+                type='primary'
+                children={t('register')}
                 onClick={() => navigate('/signup')}
-              />
+                icon={<UserOutlined />}
+              />{' '}
+              <SwitchLang />
             </Space>
           )
         ) : (
-          'Loading...'
+          <Preloader />
         )}
       </div>
     </div>

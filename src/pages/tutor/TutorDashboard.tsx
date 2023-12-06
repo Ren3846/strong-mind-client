@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Layout from '../../components/common/Layout'
 import {
@@ -12,7 +12,7 @@ import {
   List,
   Pagination,
 } from 'antd'
-import { ICourse, USER_ROLE, User } from '../../redux/store/types'
+import { ICourse, User } from '../../redux/store/types'
 import { Link } from 'react-router-dom'
 import GetLikes from '../../components/common/GetLikes'
 import { useSelector } from 'react-redux'
@@ -20,12 +20,14 @@ import { StoreType } from '../../redux/store'
 import { SearchOutlined } from '@ant-design/icons'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import { CDN_BASE } from '../..'
-// import MeetingsStudent from '../../components/user/MeetingsStudent'
 import MeetingsTeacher from '../../components/tutor/MeetingsTeacher'
+import useTranslations from '../../lang/useTranslations'
 
 const breadcrumbItems = [{ title: 'Home', link: '/' }, { title: 'Dashboard' }]
 
-const TutorDashboard = () => {
+const TutorDashboard: React.FC = () => {
+  const t = useTranslations('TutorDashboard')
+
   const [courses, setCourses] = useState<ICourse[]>([])
   const [students, setStudents] = useState<User[]>([])
   const [loaded, setLoaded] = useState(false)
@@ -34,13 +36,11 @@ const TutorDashboard = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10)
 
   const user = useSelector((state: StoreType) => state.auth.user)
-  console.log('user', user)
 
   useEffect(() => {
     axios
       .get('/api/courses/created')
       .then((response) => {
-        console.log('Courses', response.data)
         setCourses(response.data)
       })
       .catch((error) => {
@@ -78,7 +78,7 @@ const TutorDashboard = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
   const currentItems = students.slice(indexOfFirstItem, indexOfLastItem)
 
-  const handlePageChange = (page: any) => {
+  const handlePageChange = (page: number) => {
     setCurrentPage(page)
   }
 
@@ -88,7 +88,7 @@ const TutorDashboard = () => {
         <MyBreadcrumb items={breadcrumbItems} />
 
         <Col span={12}>
-          <Card title='My courses' style={{ height: '50vh' }}>
+          <Card title={t('courses')} style={{ height: '50vh' }}>
             {loaded ? (
               <>
                 <ul>
@@ -106,7 +106,7 @@ const TutorDashboard = () => {
                             <GetLikes courseId={item._id} />
                             <Link to={`/mycourses/${item._id}`}>
                               <Button icon={<SearchOutlined />} type='primary'>
-                                View
+                                {t('button_view')}
                               </Button>
                             </Link>
                           </Space>
@@ -137,7 +137,7 @@ const TutorDashboard = () => {
           </Card>
         </Col>
         <Col span={12}>
-          <Card title='My Students' style={{ height: '50vh' }}>
+          <Card title={t('students')} style={{ height: '50vh' }}>
             {loaded ? (
               <List
                 dataSource={currentItems}
@@ -174,7 +174,7 @@ const TutorDashboard = () => {
         </Col>
 
         <Col span={24}>
-          <Card title='Requests from students'>
+          <Card title={t('requests')}>
             <MeetingsTeacher />
           </Card>
         </Col>

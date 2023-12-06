@@ -3,7 +3,7 @@ import React, { useLayoutEffect } from 'react'
 
 import Preloader from '../components/common/Preloader'
 
-import Landing from './Landing'
+import Landing from './landing/Landing'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 import Profile from './user/Profile'

@@ -1,14 +1,9 @@
 import { motion } from 'framer-motion'
 import styles from '../../styles'
-import { staggerContainer, fadeIn, tutorVariants } from '../../utils/motions'
+import { fadeIn, tutorVariants } from '../../utils/motions'
 import imageAbout from '../../assets/Wavy_Edu1.jpg'
 import { TitleText, TypingText } from './Typography'
-
-const startingFeatures = [
-  'Register your account',
-  'Choose a course',
-  'Learn and stay safe',
-]
+import useTranslations from '../../lang/useTranslations'
 
 const StartSteps = ({ number, text }: { number: string; text: string }) => (
   <div className={`${styles.flexCenter} flex-row`}>
@@ -23,42 +18,52 @@ const StartSteps = ({ number, text }: { number: string; text: string }) => (
   </div>
 )
 
-const GetStartedStudent = () => (
-  <section className={`${styles.paddings} relative z-10`}>
-    <motion.div
-      initial='hidden'
-      whileInView='show'
-      viewport={{ once: false, amount: 0.25 }}
-      className={`${styles.innerWidth} mx-auto flex lg:flex-row flex-col gap-8`}
-    >
+const GetStartedStudent = () => {
+  const t = useTranslations('Home.StartStudent')
+
+  const startingFeatures = [
+    t('register_your_account'),
+    t('choose_course'),
+    t('learn_safe'),
+  ]
+
+  return (
+    <section className={`${styles.paddings} relative z-10`}>
       <motion.div
-        variants={tutorVariants('left')}
-        className={`flex-1 ${styles.flexCenter}`}
+        initial='hidden'
+        whileInView='show'
+        viewport={{ once: false, amount: 0.25 }}
+        className={`${styles.innerWidth} mx-auto flex lg:flex-row flex-col gap-8`}
       >
-        <img
-          src={imageAbout}
-          alt='get-started'
-          className='w-[90%] h-[90%] object-contain'
-        />
+        <motion.div
+          variants={tutorVariants('left')}
+          className={`flex-1 ${styles.flexCenter}`}
+        >
+          <img
+            src={imageAbout}
+            alt='get-started'
+            className='w-[90%] h-[90%] object-contain'
+          />
+        </motion.div>
+        <motion.div
+          variants={fadeIn('left', 'tween', 0.2, 1)}
+          className='flex-[0.75] flex justify-center flex-col'
+        >
+          <TypingText title={t('want_to_become_student')} />
+          <TitleText title={t('get_started_with_clicks')} />
+          <div className='mt-[31px] flex flex-col max-w-[370px] gap-[24px]'>
+            {startingFeatures.map((feature, index) => (
+              <StartSteps
+                key={feature}
+                number={`${index < 10 ? '0' : ''} ${index + 1}`}
+                text={feature}
+              />
+            ))}
+          </div>
+        </motion.div>
       </motion.div>
-      <motion.div
-        variants={fadeIn('left', 'tween', 0.2, 1)}
-        className='flex-[0.75] flex justify-center flex-col'
-      >
-        <TypingText title='| Want to become a student?' />
-        <TitleText title={'Get started with just a few clicks'} />
-        <div className='mt-[31px] flex flex-col max-w-[370px] gap-[24px]'>
-          {startingFeatures.map((feature, index) => (
-            <StartSteps
-              key={feature}
-              number={`${index < 10 ? '0' : ''} ${index + 1}`}
-              text={feature}
-            />
-          ))}
-        </div>
-      </motion.div>
-    </motion.div>
-  </section>
-)
+    </section>
+  )
+}
 
 export default GetStartedStudent

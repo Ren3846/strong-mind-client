@@ -66,8 +66,8 @@ const EditCourse: React.FC = () => {
             about: course.about,
             category: course.category,
             difficulty: course.difficulty,
-            tagline: course.tagline, // tagline is an array, so no need to join it
-            thumbnail: course.thumbnail,
+            tagline: course.tagline,
+            // thumbnail: course.thumbnail,
             meetingPrice: course.meetingPrice,
           }}
         >

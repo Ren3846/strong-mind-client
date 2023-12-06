@@ -13,36 +13,28 @@ import {
   Divider,
   Select,
   Tabs,
+  Space,
 } from 'antd'
 import { updateUserDetailsAPI } from '../../api/user'
 import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
 
-import {
-  ArrowRightOutlined,
-  CalendarOutlined,
-  WalletOutlined,
-} from '@ant-design/icons'
+import { CalendarOutlined, WalletOutlined } from '@ant-design/icons'
 import { updateUser } from '../../redux/actions/user'
-import { useNavigate } from 'react-router-dom'
 import UploadAvatar from '../../components/common/UploadAvatar'
 
 import GetAvailableDays from '../../components/tutor/GetAvailableDays'
 import TabPane from 'antd/es/tabs/TabPane'
 import Wallet from './Wallet'
 import { USER_ROLE } from '../../redux/store/types'
+import useTranslations from '../../lang/useTranslations'
 
 const { Item } = Form
 
-const breadcrumbItems = [
-  { title: 'Dashboard', link: '/dashboard' },
-  { title: 'Profile ' },
-]
-
 function Profile() {
+  const t = useTranslations('Profile')
   const user = useSelector((state: any) => state.auth.user)
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   const [loaded, setLoaded] = useState(true)
   const [editedUser, setEditedUser] = useState({ ...user })
@@ -84,12 +76,10 @@ function Profile() {
     })
   }
 
-  console.log(user)
-
   return (
     <Layout>
       <Row align='middle' justify='center'>
-        <Card title='Profile' style={{ width: '80rem' }}>
+        <Card title={t('profile')} style={{ width: '80rem' }}>
           {loaded ? (
             <>
               <Row justify='start'>
@@ -97,40 +87,26 @@ function Profile() {
                   <UploadAvatar />
                 </Col>
                 <Col span={12}>
-                  <ul>
-                    <p>
-                      <ArrowRightOutlined /> {user.fullName}
-                    </p>
-                    <p>
-                      <ArrowRightOutlined /> {user.bio}
-                    </p>
-                    <p>
-                      <ArrowRightOutlined /> {user.email}
-                    </p>
-                    <p>
-                      <ArrowRightOutlined /> {user.phone}
-                    </p>
-                  </ul>
+                  <Space direction='vertical'>
+                    {user.fullName}
+                    {user.bio}
+                    {user.email}
+                    {user.phone}
+                  </Space>
                 </Col>
               </Row>
 
               <Divider />
               <Row gutter={16}>
                 <Col span={12}>
-                  <Statistic title='User Role' value={user.role} />
+                  <Statistic title={t('user_role')} value={user.role} />
                 </Col>
                 <Col span={12}>
                   <Statistic
-                    title='Account Balance ($)'
+                    title={t('account_balance')}
                     value={user.balance}
                     precision={2}
                   />
-                  {/* <Button
-                    icon={<WalletOutlined />}
-                    onClick={() => navigate('/profile/wallet')}
-                  >
-                    Wallet
-                  </Button> */}
                 </Col>
               </Row>
               <Divider />
@@ -140,7 +116,7 @@ function Profile() {
                     tab={
                       <span>
                         <CalendarOutlined />
-                        Calendar
+                        {t('calendar')}
                       </span>
                     }
                     key='1'
@@ -154,7 +130,7 @@ function Profile() {
                   tab={
                     <span>
                       <WalletOutlined />
-                      Wallet
+                      {t('wallet')}
                     </span>
                   }
                   key='2'
@@ -166,7 +142,7 @@ function Profile() {
               <Divider />
 
               <Form layout='vertical'>
-                <Item label='Email'>
+                <Item label={t('email')}>
                   <Input
                     disabled
                     type='text'
@@ -177,7 +153,7 @@ function Profile() {
                 </Item>
                 <Divider />
 
-                <Item label='Full Name'>
+                <Item label={t('full_name')}>
                   <Input
                     type='text'
                     name='fullName'
@@ -185,7 +161,7 @@ function Profile() {
                     onChange={handleFieldChange}
                   />
                 </Item>
-                <Item label='Phone'>
+                <Item label={t('phone')}>
                   <Input
                     type='text'
                     name='phone'
@@ -193,7 +169,7 @@ function Profile() {
                     onChange={handleFieldChange}
                   />
                 </Item>
-                <Item label='Country'>
+                <Item label={t('country')}>
                   <Input
                     type='text'
                     name='country'
@@ -201,7 +177,7 @@ function Profile() {
                     onChange={handleFieldChange}
                   />
                 </Item>
-                <Item label='Bio'>
+                <Item label={t('bio')}>
                   <Input.TextArea
                     rows={4}
                     name='bio'
@@ -210,7 +186,7 @@ function Profile() {
                   />
                 </Item>
 
-                <Item label='Gender'>
+                <Item label={t('gender')}>
                   <Select
                     defaultValue=''
                     style={{ width: 120 }}
@@ -225,7 +201,7 @@ function Profile() {
                   />
                 </Item>
 
-                <Item label='Timezone'>
+                <Item label={t('timezone')}>
                   <Select
                     defaultValue='+1'
                     virtual={false}
@@ -266,7 +242,7 @@ function Profile() {
 
                 <Item>
                   <Button type='primary' onClick={saveProfile}>
-                    Save
+                    {t('save')}
                   </Button>
                 </Item>
               </Form>

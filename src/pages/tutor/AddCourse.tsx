@@ -97,14 +97,6 @@ const CreateCourse: React.FC = () => {
           </Form.Item>
 
           <Form.Item
-            label='Thumbnail Link'
-            name='thumbnail'
-            rules={[{ required: true, message: 'Enter the thumbnail link' }]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
             label='Price per meeting'
             name='meetingPrice'
             rules={[

@@ -60,7 +60,7 @@ export interface ICourse {
   tagline: string
   category: string
   difficulty: string
-  thumbnail: string
+  // thumbnail: string
   cover: string
   price: number
   isVisible: boolean

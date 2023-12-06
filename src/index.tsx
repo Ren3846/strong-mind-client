@@ -9,6 +9,8 @@ import './styles/style.sass'
 import { getSignedInUserAPI } from './api/user'
 import { authLoaded } from './redux/actions/auth'
 
+import './i18n'
+
 export const CDN_BASE = 'https://strongmind.fra1.cdn.digitaloceanspaces.com/'
 
 const ApiInit: React.FC<{}> = () => {

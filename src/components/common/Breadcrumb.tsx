@@ -1,5 +1,6 @@
 import React from 'react'
-import { Breadcrumb, Col, Row } from 'antd'
+import { Breadcrumb, Col } from 'antd'
+import { Link } from 'react-router-dom'
 
 interface BreadcrumbItem {
   title: string
@@ -16,7 +17,7 @@ const MyBreadcrumb: React.FC<MyBreadcrumbProps> = ({ items }) => {
       <Breadcrumb>
         {items.map((item, index) => (
           <Breadcrumb.Item key={index}>
-            {item.link ? <a href={item.link}>{item.title}</a> : item.title}
+            {item.link ? <Link to={item.link}>{item.title}</Link> : item.title}
           </Breadcrumb.Item>
         ))}
       </Breadcrumb>
