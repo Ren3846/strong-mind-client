@@ -4,13 +4,12 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { HeartOutlined, HeartFilled } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
-import { StoreType } from '../../redux/store'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import { ErrorMessage } from '../../components/common/ErrorMessage'
-import { ILesson } from '../../redux/store/types'
+import { ILesson, IUser } from '../../redux/store/types'
 
 const LessonUser: React.FC = () => {
-  const user = useSelector((state: StoreType) => state.auth.user)
+  const user = useSelector((state: IUser) => state.auth.user)
   const { id } = useParams()
   const [lesson, setLesson] = useState<ILesson | null>(null)
   const [error, setError] = useState<string>('')

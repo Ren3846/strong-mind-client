@@ -1,4 +1,13 @@
-import { Card, Row, Statistic, message, Table, Tag, Skeleton } from 'antd'
+import {
+  Card,
+  Row,
+  Statistic,
+  message,
+  Table,
+  Tag,
+  Skeleton,
+  Space,
+} from 'antd'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
@@ -94,9 +103,9 @@ const Wallet = () => {
   ]
 
   return (
-    <Layout>
+    <Space>
       <Row align='middle' justify='center'>
-        <Card title='Balance' style={{ width: '60rem', marginTop: '20px' }}>
+        <Card title='Balance' style={{ width: '60rem', margin: '20px' }}>
           <Statistic
             title='Account Balance ($)'
             value={user.balance}
@@ -104,7 +113,7 @@ const Wallet = () => {
           />
         </Card>
 
-        <Card style={{ width: '60rem', marginTop: '20px' }}>
+        <Card style={{ width: '60rem', margin: '20px' }}>
           {user.role === USER_ROLE.TEACHER ? (
             <WalletWithdrawal />
           ) : (
@@ -112,7 +121,7 @@ const Wallet = () => {
           )}
         </Card>
 
-        <Card title='History' style={{ width: '60rem', marginTop: '20px' }}>
+        <Card title='History' style={{ width: '60rem', margin: '20px' }}>
           <Table
             loading={loading}
             columns={columns}
@@ -120,7 +129,7 @@ const Wallet = () => {
           />
         </Card>
       </Row>
-    </Layout>
+    </Space>
   )
 }
 

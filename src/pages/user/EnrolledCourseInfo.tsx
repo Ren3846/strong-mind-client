@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import {
-  Card,
-  Row,
-  Descriptions,
-  Skeleton,
-  Divider,
-} from 'antd'
+import { Card, Row, Descriptions, Skeleton, Divider } from 'antd'
 import { useParams } from 'react-router-dom'
 import Preloader from '../../components/common/Preloader'
 
-import { ICourse, ITeacher } from '../../redux/store/types'
+import { ICourse, ITeacher, IUser } from '../../redux/store/types'
 import LessonsListUser from '../../components/user/LessonsListUser'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import RequestMeeting from '../../components/user/RequestMeeting'
@@ -19,7 +13,7 @@ import { useSelector } from 'react-redux'
 
 const CourseInfo: React.FC = () => {
   const [courseInfo, setCourseInfo] = useState<ICourse | null>(null)
-  const user = useSelector((state: any) => state.auth.user)
+  const user = useSelector((state: IUser) => state.auth.user)
   console.log('user', user)
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState('')

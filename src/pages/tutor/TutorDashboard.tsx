@@ -16,7 +16,6 @@ import { ICourse, IUser } from '../../redux/store/types'
 import { Link } from 'react-router-dom'
 import GetLikes from '../../components/common/GetLikes'
 import { useSelector } from 'react-redux'
-import { StoreType } from '../../redux/store'
 import { SearchOutlined } from '@ant-design/icons'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import { CDN_BASE } from '../..'
@@ -35,7 +34,7 @@ const TutorDashboard: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(10)
 
-  const user = useSelector((state: StoreType) => state.auth.user)
+  const user = useSelector((state: IUser) => state.auth.user)
 
   useEffect(() => {
     axios

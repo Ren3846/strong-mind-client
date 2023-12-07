@@ -26,14 +26,14 @@ import UploadAvatar from '../../components/common/UploadAvatar'
 import GetAvailableDays from '../../components/tutor/GetAvailableDays'
 import TabPane from 'antd/es/tabs/TabPane'
 import Wallet from './Wallet'
-import { USER_ROLE } from '../../redux/store/types'
+import { IUser, USER_ROLE } from '../../redux/store/types'
 import useTranslations from '../../lang/useTranslations'
 
 const { Item } = Form
 
 function Profile() {
   const t = useTranslations('Profile')
-  const user = useSelector((state: any) => state.auth.user)
+  const user = useSelector((state: IUser) => state.auth.user)
   const dispatch = useDispatch()
 
   const [loaded, setLoaded] = useState(true)

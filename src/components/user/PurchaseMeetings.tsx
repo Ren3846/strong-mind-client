@@ -4,19 +4,20 @@ import { Input, Button, message, Space, List, Divider } from 'antd'
 import { DollarCircleFilled } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateUser } from '../../redux/actions/user'
+import { IUser } from '../../redux/store/types'
 
 const PurchaseMeetings: React.FC<{
   courseId: string
 }> = ({ courseId }) => {
   const [quantity, setQuantity] = useState(1)
-  const user = useSelector((state: any) => state.auth.user)
-  const dispatch = useDispatch();
-  
-  const purchasedForCourse = user.purchasedMeetings.find(
-    (item: any) => item.course === courseId
-  );
+  const user = useSelector((state: IUser) => state.auth.user)
+  const dispatch = useDispatch()
 
-  const purchasedQuantity = purchasedForCourse ? purchasedForCourse.quantity : 0;
+  const purchasedForCourse = user.purchasedMeetings.find(
+    (item: any) => item.course === courseId,
+  )
+
+  const purchasedQuantity = purchasedForCourse ? purchasedForCourse.quantity : 0
 
   const fetchUserData = async () => {
     try {
@@ -70,11 +71,7 @@ const PurchaseMeetings: React.FC<{
         </Button>
       </Space.Compact>
       <Divider />
-      <div>
-        {
-          `${purchasedQuantity} meetings purchased`
-        }
-      </div>
+      <div>{`${purchasedQuantity} meetings purchased`}</div>
     </Space>
   )
 }

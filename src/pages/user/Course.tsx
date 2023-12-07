@@ -2,7 +2,7 @@ import { Card, Row, Space, Button, message, Skeleton, Rate } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { ICourse, ITeacher, USER_ROLE } from '../../redux/store/types'
+import { ICourse, ITeacher, IUser, USER_ROLE } from '../../redux/store/types'
 import { useSelector } from 'react-redux'
 import { StoreType } from '../../redux/store'
 import { CDN_BASE } from '../..'
@@ -26,7 +26,7 @@ const CourseCoverVideo: React.FC<{ cover: string | null | undefined }> = ({
 
 const Course: React.FC<{}> = () => {
   const { id } = useParams()
-  const user = useSelector((state: StoreType) => state.auth.user)
+  const user = useSelector((state: IUser) => state.auth.user)
   const navigate = useNavigate()
   const [course, setCourse] = useState<ICourse | null>(null)
   const [loaded, setLoaded] = useState(false)

@@ -75,7 +75,7 @@ const MeetingPage: FC<{}> = () => {
               </Space>
             }
           >
-            {meeting.status === 'accepted' ? (
+            {meeting.status === 'finished' ? (
               <Card title='Leave feedback about meeting'>
                 <Rate
                   value={rate !== null ? rate : undefined}

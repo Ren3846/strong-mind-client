@@ -8,13 +8,14 @@ import Notifications from './Notifications'
 import SwitchLang from './SwitchLanguage'
 import useTranslations from '../../lang/useTranslations'
 import Preloader from './Preloader'
+import { StoreType } from '../../redux/store'
 
 function Navbar() {
   const t = useTranslations('Navbar')
   const navigate = useNavigate()
 
-  const user = useSelector((state: any) => state.auth.user)
-  const isAuthLoaded = useSelector((state: any) => state.auth.loaded)
+  const user = useSelector((state: StoreType) => state.auth.user)
+  const isAuthLoaded = useSelector((state: StoreType) => state.auth.loaded)
 
   return (
     <div className='header-navbar bg-navbar'>

@@ -13,9 +13,10 @@ import {
 } from 'antd'
 import { CheckCircleOutlined, EditOutlined } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
+import { IUser } from '../../redux/store/types'
 
 const GetAvailableDays: React.FC = () => {
-  const user = useSelector((state: any) => state.auth.user)
+  const user = useSelector((state: IUser) => state.auth.user)
   const [modalVisible, setModalVisible] = useState(false)
   const [form] = Form.useForm()
   const [selectedDayOfWeek, setSelectedDayOfWeek] = useState<string | null>(

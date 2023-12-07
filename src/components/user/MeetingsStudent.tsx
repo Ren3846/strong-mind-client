@@ -10,12 +10,15 @@ import {
 } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { IUser } from '../../redux/store/types'
 
 const MeetingsStudent = () => {
   const [meetings, setMeetings] = useState<any>([])
   const [loaded, setLoaded] = useState(false)
 
-  const userMeetingsIds = useSelector((state: any) => state.auth.user.meetings)
+  const userMeetingsIds = useSelector(
+    (state: IUser) => state.auth.user.meetings,
+  )
 
   useEffect(() => {
     const fetchMeetings = async () => {

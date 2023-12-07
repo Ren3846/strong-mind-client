@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import Preloader from './Preloader'
 
 const Notifications = () => {
-  const user = useSelector((state: any) => state.auth.user)
+  const user = useSelector((state: IUser) => state.auth.user)
   const [receivers, setReceivers] = useState<{ [key: string]: IUser }>({})
   const [loading, setLoading] = useState(true)
 

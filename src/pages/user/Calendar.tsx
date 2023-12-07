@@ -17,7 +17,7 @@ import {
 import MeetingsTeacher from '../../components/tutor/MeetingsTeacher'
 import MeetingsStudent from '../../components/user/MeetingsStudent'
 import { useSelector } from 'react-redux'
-import { IMeeting, USER_ROLE } from '../../redux/store/types'
+import { IMeeting, IUser, USER_ROLE } from '../../redux/store/types'
 import { Link, NavLink } from 'react-router-dom'
 import {
   ArrowRightOutlined,
@@ -34,7 +34,7 @@ const CalendarPage: React.FC = () => {
   const [meetings, setMeetings] = useState<any[]>([])
   const [agenda, setAgenda] = useState<IMeeting[]>([])
 
-  const user = useSelector((state: any) => state.auth.user)
+  const user = useSelector((state: IUser) => state.auth.user)
 
   useEffect(() => {
     fetchMeetingsData()

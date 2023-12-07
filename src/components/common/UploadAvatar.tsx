@@ -4,11 +4,12 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { CDN_BASE } from '../..'
+import { IUser } from '../../redux/store/types'
 
 const UploadAvatar = () => {
   const [form] = Form.useForm()
 
-  const user = useSelector((state: any) => state.auth.user)
+  const user = useSelector((state: IUser) => state.auth.user)
   const [image, setImageUrl] = useState('')
 
   useEffect(() => {
