@@ -6,10 +6,13 @@ import { ICourse, ITeacher } from '../../redux/store/types'
 import { Link } from 'react-router-dom'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import MeetingsStudent from '../../components/user/MeetingsStudent'
+import useTranslations from '../../lang/useTranslations'
 
 const breadcrumbItems = [{ title: 'Home', link: '/' }, { title: 'Dashboard' }]
 
 const Dashboard = () => {
+  const t = useTranslations('UserDashboard')
+
   const [enrolledCourses, setEnrolledCourses] = useState<ICourse[]>([])
   const [topTeachers, setTopTeachers] = useState<ITeacher[]>([])
   const [loadingCourses, setLoadingCourses] = useState(true)
@@ -50,7 +53,7 @@ const Dashboard = () => {
       <Row gutter={[16, 16]}>
         <MyBreadcrumb items={breadcrumbItems} />
         <Col span={12}>
-          <Card title='My Enrolled Courses'>
+          <Card title={t('courses')}>
             {loadingCourses ? (
               <Skeleton active />
             ) : (
@@ -61,7 +64,7 @@ const Dashboard = () => {
                       {course.title}
                       <Link to={`/enrolled/${course._id}/info`}>
                         <Button type='primary' style={{ float: 'right' }}>
-                          View
+                          {t('view_button')}
                         </Button>
                       </Link>
                     </Card>
@@ -72,7 +75,7 @@ const Dashboard = () => {
           </Card>
         </Col>
         <Col span={12}>
-          <Card title='My Tutors'>
+          <Card title={t('tutors')}>
             {/* {loadingTeachers ? (
               <Skeleton active />
             ) : (
@@ -97,7 +100,7 @@ const Dashboard = () => {
         </Col>
 
         <Col span={24}>
-          <Card title='Accepted meetings'>
+          <Card title={t('accepted_meetings')}>
             <MeetingsStudent />
           </Card>
         </Col>

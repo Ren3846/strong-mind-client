@@ -5,6 +5,13 @@
     "requests": "Запросы от студентов",
     "button_view": "Просмотр"
   },
+  "UserDashboard": {
+    "courses": "Мои курсы",
+    "tutors": "Мои репетиторы",
+    "accepted_meetings": "Принятые встречи",
+    "view_button": "Просмотр"
+  },
+
   "Profile": {
     "profile": "Профиль",
     "user_role": "Роль пользователя",

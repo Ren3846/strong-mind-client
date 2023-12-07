@@ -5,6 +5,14 @@
     "requests": "Requests from students",
     "button_view": "View"
   },
+
+  "UserDashboard": {
+    "courses": "My Enrolled Courses",
+    "tutors": "My tutors",
+    "accepted_meetings": "Accepted meetings",
+    "view_button": "View"
+  },
+
   "Profile": {
     "profile": "Profile",
     "user_role": "User Role",

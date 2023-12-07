@@ -76,7 +76,7 @@ function MenuDropDown({ user }: MenuDropDownProps) {
         key='meetings'
         onClick={() => navigate('/meetings')}
       >
-        Meetings
+        Calendar
       </Menu.Item>
 
       <Menu.Item
