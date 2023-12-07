@@ -1,4 +1,3 @@
-// useTranslations.ts
 import { useTranslation } from 'react-i18next'
 
 const useTranslations = (namespace: string) => {

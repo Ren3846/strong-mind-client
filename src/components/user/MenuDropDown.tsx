@@ -16,12 +16,15 @@ import { handleLogOutAPI } from '../../api/user'
 import { StoreType } from '../../redux/store'
 import { USER_ROLE, User } from '../../redux/store/types'
 import { CDN_BASE } from '../..'
+import useTranslations from '../../lang/useTranslations'
 
 interface MenuDropDownProps {
   user: any
 }
 
 function MenuDropDown({ user }: MenuDropDownProps) {
+  const t = useTranslations('Navbar.Dropdown')
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -32,7 +35,6 @@ function MenuDropDown({ user }: MenuDropDownProps) {
   const handleLogOut = () => {
     dispatch(authLogout())
     handleLogOutAPI().then(({ data }) => {
-      console.log('dhdhdhd', data)
       navigate('/signin?logout=true')
     })
   }
@@ -44,7 +46,7 @@ function MenuDropDown({ user }: MenuDropDownProps) {
         key='dashboard'
         onClick={() => navigate('/dashboard')}
       >
-        Dashboard
+        {t('dashboard')}
       </Menu.Item>
 
       {currentUser.role === USER_ROLE.TEACHER ? (
@@ -53,7 +55,7 @@ function MenuDropDown({ user }: MenuDropDownProps) {
           key='mycourses'
           onClick={() => navigate('/mycourses')}
         >
-          My courses
+          {t('my_courses')}
         </Menu.Item>
       ) : (
         <></>
@@ -67,7 +69,7 @@ function MenuDropDown({ user }: MenuDropDownProps) {
           key='enrolled'
           onClick={() => navigate('/enrolled')}
         >
-          Enrolled Courses
+          {t('courses')}
         </Menu.Item>
       )}
 
@@ -76,7 +78,7 @@ function MenuDropDown({ user }: MenuDropDownProps) {
         key='meetings'
         onClick={() => navigate('/meetings')}
       >
-        Calendar
+        {t('calendar')}
       </Menu.Item>
 
       <Menu.Item
@@ -84,7 +86,7 @@ function MenuDropDown({ user }: MenuDropDownProps) {
         key='profile'
         onClick={() => navigate('/profile')}
       >
-        Profile
+        {t('profile')}
       </Menu.Item>
 
       <Menu.Item
@@ -93,7 +95,7 @@ function MenuDropDown({ user }: MenuDropDownProps) {
         onClick={handleLogOut}
         danger
       >
-        Log out
+        {t('exit')}
       </Menu.Item>
     </Menu>
   )

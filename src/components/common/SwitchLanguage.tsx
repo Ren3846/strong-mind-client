@@ -10,11 +10,9 @@ const SwitchLang: React.FC = () => {
     setIsChecked(checked)
     const newLanguage = checked ? 'ru' : 'en'
     i18n.changeLanguage(newLanguage)
-    // Сохраняем выбранный язык в локальное хранилище
     localStorage.setItem('selectedLanguage', newLanguage)
   }
 
-  // Загрузка выбранного языка при первоначальной загрузке компонента
   useEffect(() => {
     const storedLanguage = localStorage.getItem('selectedLanguage')
     if (storedLanguage) {

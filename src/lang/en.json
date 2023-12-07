@@ -39,11 +39,12 @@
     "log_in": "Log in",
     "register": "Register",
     "Dropdown": {
-      "dashboard": "Home",
-      "meetings": "Categories",
-      "calendar": "Sellers",
-      "exit": "Help Center",
-      "": "Contact us"
+      "dashboard": "Dashboard",
+      "courses": "Enrolled Courses",
+      "my_courses": "My courses",
+      "calendar": "Calendar",
+      "exit": "Log out",
+      "profile": "Profile"
     }
   },
   "Home": {

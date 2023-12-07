@@ -81,7 +81,7 @@ const Enrolled: React.FC = () => {
                     <Descriptions>
                       <h3>Teacher:</h3>
                       <Descriptions.Item label=''>
-                        <Link to={`/teacher/${course.teacher}`} >
+                        <Link to={`/teacher/${course.teacher}`}>
                           <GetTeacher userId={course.teacher} />
                         </Link>
                       </Descriptions.Item>
