@@ -1,4 +1,4 @@
-import { User } from '../store/types'
+import { IUser } from '../store/types'
 
 const ActionType = {
   AUTH_LOGIN: 'AUTH_LOGIN',
@@ -6,7 +6,7 @@ const ActionType = {
   AUTH_LOADED: 'AUTH_LOADED',
 } as const
 
-export const authLogin = (user: User) => {
+export const authLogin = (user: IUser) => {
   return {
     type: ActionType.AUTH_LOGIN,
     payload: user,
@@ -19,7 +19,7 @@ export const authLogout = () => {
   }
 }
 
-export const authLoaded = (user: User | null) => {
+export const authLoaded = (user: IUser | null) => {
   return {
     type: ActionType.AUTH_LOADED,
     payload: user,

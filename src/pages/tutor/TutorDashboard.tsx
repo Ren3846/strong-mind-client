@@ -12,7 +12,7 @@ import {
   List,
   Pagination,
 } from 'antd'
-import { ICourse, User } from '../../redux/store/types'
+import { ICourse, IUser } from '../../redux/store/types'
 import { Link } from 'react-router-dom'
 import GetLikes from '../../components/common/GetLikes'
 import { useSelector } from 'react-redux'
@@ -29,7 +29,7 @@ const TutorDashboard: React.FC = () => {
   const t = useTranslations('TutorDashboard')
 
   const [courses, setCourses] = useState<ICourse[]>([])
-  const [students, setStudents] = useState<User[]>([])
+  const [students, setStudents] = useState<IUser[]>([])
   const [loaded, setLoaded] = useState(false)
 
   const [currentPage, setCurrentPage] = useState(1)

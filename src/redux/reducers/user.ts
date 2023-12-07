@@ -1,9 +1,9 @@
 import * as userActions from '../actions/user'
 import type { ExtractActions } from '../actions'
-import { User } from '../store/types'
+import { IUser } from '../store/types'
 import { deleteItem, updateItem } from '../../utils'
 
-const initialState: User[] = []
+const initialState: IUser[] = []
 
 export const userReducer = (
   state = initialState,

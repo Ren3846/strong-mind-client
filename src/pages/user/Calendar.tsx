@@ -1,35 +1,38 @@
 import React, { useState, useEffect } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
-import { Alert, Button, Calendar, Card, Col, List, Row, Space } from 'antd'
+import {
+  Alert,
+  Button,
+  Calendar,
+  Card,
+  Col,
+  Input,
+  List,
+  Row,
+  Space,
+  Tag,
+  Tooltip,
+  message,
+} from 'antd'
 import MeetingsTeacher from '../../components/tutor/MeetingsTeacher'
 import MeetingsStudent from '../../components/user/MeetingsStudent'
 import { useSelector } from 'react-redux'
-import { USER_ROLE } from '../../redux/store/types'
+import { IMeeting, USER_ROLE } from '../../redux/store/types'
 import { Link, NavLink } from 'react-router-dom'
 import {
   ArrowRightOutlined,
   ClockCircleOutlined,
+  CopyOutlined,
   InfoCircleOutlined,
+  PhoneOutlined,
 } from '@ant-design/icons'
 import GetUser from '../../components/common/GetUser'
-
-type Meeting = {
-  course: string
-  teacher: string
-  student: string
-  startDate: string
-  zoomUrl: string
-  status: string
-  meetingId: string
-}
 
 const CalendarPage: React.FC = () => {
   const [value, setValue] = useState(() => dayjs())
   const [selectedValue, setSelectedValue] = useState(() => dayjs())
   const [meetings, setMeetings] = useState<any[]>([])
-  const [agenda, setAgenda] = useState<Meeting[]>([])
-
-  // const [meeting, setMeeting] = useState<any[]>([])
+  const [agenda, setAgenda] = useState<IMeeting[]>([])
 
   const user = useSelector((state: any) => state.auth.user)
 
@@ -63,7 +66,7 @@ const CalendarPage: React.FC = () => {
       dayjs(meeting.start_date).isSame(selectedDate, 'day'),
     )
 
-    const agendaData: Meeting[] = meetingsOnDate.map((meeting) => ({
+    const agendaData: IMeeting[] = meetingsOnDate.map((meeting) => ({
       course: meeting.course,
       teacher: meeting.teacher,
       student: meeting.student,
@@ -71,6 +74,8 @@ const CalendarPage: React.FC = () => {
       zoomUrl: meeting.zoomUrl,
       status: meeting.status,
       meetingId: meeting._id,
+      rate: meeting.rate,
+      report: meeting.report,
     }))
 
     setAgenda(agendaData)
@@ -80,6 +85,11 @@ const CalendarPage: React.FC = () => {
     e.preventDefault()
     window.open(zoomUrl, '_blank')
     return false
+  }
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text)
+    message.success('Copied to clipboard')
   }
 
   return (
@@ -112,28 +122,41 @@ const CalendarPage: React.FC = () => {
               dataSource={agenda}
               renderItem={(item: any, index) => (
                 <List.Item>
-                  {/* <strong>{item.course}</strong>: {item.teacher} -{' '}
-                  {item.student} <br /> */}
                   <Space direction='horizontal'>
                     <GetUser userId={item.student} /> <ArrowRightOutlined />{' '}
                     <GetUser userId={item.teacher} />
-                  </Space>
+                  </Space>{' '}
                   <br />
                   <ClockCircleOutlined /> {item.startDate}
                   <br />
+                  Status: <Tag>{item.status} </Tag>
+                  <br />
                   {item.zoomUrl ? (
-                    `ZoomURL: ${item.zoomUrl}`
+                    <div style={{ margin: 10 }}>
+                      ZoomURL:{' '}
+                      <Input
+                        readOnly
+                        value={item.zoomUrl}
+                        addonAfter={
+                          <Tooltip title='Copy to clipboard'>
+                            <CopyOutlined
+                              onClick={() => copyToClipboard(item.zoomUrl)}
+                              style={{ cursor: 'pointer' }}
+                            />
+                          </Tooltip>
+                        }
+                      />
+                    </div>
                   ) : (
                     <>Zoom link will be here..</>
                   )}
-                  <br />
-                  {/* Status: <Tag>{item.status} </Tag> */}
                   <Space>
                     {item.zoomUrl ? (
                       <NavLink to={item.zoomUrl}>
                         <Button
                           type='primary'
                           onClick={(e) => openZoomInNewTab(e, item.zoomUrl)}
+                          icon={<PhoneOutlined />}
                         >
                           Start zoom
                         </Button>
@@ -141,6 +164,7 @@ const CalendarPage: React.FC = () => {
                     ) : (
                       <></>
                     )}
+
                     <Link to={`/meeting/${item.meetingId}`}>
                       <Button>View</Button>
                     </Link>

@@ -1,9 +1,7 @@
 import API from './index'
 import { USER_ROLE } from '../redux/store/types'
-import { User } from '../redux/store/types'
+import { IUser } from '../redux/store/types'
 import axios from 'axios'
-
-export interface UserData {}
 
 interface SignInBody {
   email: string
@@ -52,10 +50,10 @@ const getCourseDetailsAPI = (id: string, route = '/user/courses/enroll/') =>
 const enrollCourseAPI = (body: any) => API.post('/user/courses/enroll', body)
 
 // Функция для получения данных пользователя
-const getUserDetailsAPI = () => API.get<User>('/user')
+const getUserDetailsAPI = () => API.get<IUser>('/user')
 
 // Функция для обновления данных пользователя
-const updateUserDetailsAPI = (body: User) => API.patch('/users/profile', body)
+const updateUserDetailsAPI = (body: IUser) => API.patch('/users/profile', body)
 
 export function uploadAvatarAPI(formData: any) {
   const uploadURL = '/api/users/avatar'

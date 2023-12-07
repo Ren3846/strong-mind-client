@@ -4,15 +4,14 @@ import axios from 'axios'
 import { Button, Row, Card, Space } from 'antd'
 import Layout from '../../components/common/Layout'
 import Preloader from '../../components/common/Preloader'
-import { User } from '../../redux/store/types'
+import { IUser } from '../../redux/store/types'
 import { WechatOutlined } from '@ant-design/icons'
 
 const StudentProfile: React.FC<{}> = () => {
   const { id } = useParams()
   const [loaded, setLoaded] = useState(false)
-  const [student, setStudent] = useState<User | null>(null)
+  const [student, setStudent] = useState<IUser | null>(null)
 
-  const [data, setData] = useState<any>(null)
   const [error, setError] = useState<string | null>(null)
 
   const navigate = useNavigate()
@@ -38,7 +37,6 @@ const StudentProfile: React.FC<{}> = () => {
         receiver: student?._id,
       })
 
-      setData(response.data)
       setError(null)
 
       if (response.data?._id) {

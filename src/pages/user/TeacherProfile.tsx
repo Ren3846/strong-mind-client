@@ -14,7 +14,6 @@ const TeacherProfile: React.FC<{}> = () => {
   const [loaded, setLoaded] = useState(false)
   const [teacher, setTeacher] = useState<ITeacher | null>(null)
 
-  const [data, setData] = useState<any>(null)
   const [error, setError] = useState<string | null>(null)
 
   const navigate = useNavigate()
@@ -40,7 +39,6 @@ const TeacherProfile: React.FC<{}> = () => {
         receiver: teacher?._id,
       })
 
-      setData(response.data)
       setError(null)
 
       if (response.data?._id) {

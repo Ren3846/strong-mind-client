@@ -12,10 +12,11 @@ import {
 } from 'antd'
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
+import { ICourse } from '../../redux/store/types'
 
 const EditCourse: React.FC = () => {
   const { id } = useParams()
-  const [course, setCourse] = useState<any>(null)
+  const [course, setCourse] = useState<ICourse>()
   const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()

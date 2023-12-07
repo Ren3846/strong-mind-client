@@ -7,15 +7,7 @@ import { useSelector } from 'react-redux'
 import { StoreType } from '../../redux/store'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import { ErrorMessage } from '../../components/common/ErrorMessage'
-
-interface ILesson {
-  _id: string
-  title: string | null
-  description: string | null
-  videoKey: string | null
-  duration: number | null
-  likes: string[]
-}
+import { ILesson } from '../../redux/store/types'
 
 const LessonUser: React.FC = () => {
   const user = useSelector((state: StoreType) => state.auth.user)

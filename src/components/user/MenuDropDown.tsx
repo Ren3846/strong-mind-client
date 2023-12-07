@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom'
 import { authLogout } from '../../redux/actions/auth'
 import { handleLogOutAPI } from '../../api/user'
 import { StoreType } from '../../redux/store'
-import { USER_ROLE, User } from '../../redux/store/types'
+import { USER_ROLE, IUser } from '../../redux/store/types'
 import { CDN_BASE } from '../..'
 import useTranslations from '../../lang/useTranslations'
 
@@ -28,7 +28,7 @@ function MenuDropDown({ user }: MenuDropDownProps) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const currentUser = useSelector<StoreType, User>(
+  const currentUser = useSelector<StoreType, IUser>(
     (state: any) => state.auth.user,
   )
 

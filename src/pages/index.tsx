@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux'
 import { StoreType } from '../redux/store'
 import Navbar from '../components/common/Navbar'
 
-import { USER_ROLE, User } from '../redux/store/types'
+import { USER_ROLE, IUser } from '../redux/store/types'
 import Dashboard from './user/Dashboard'
 import Enrolled from './user/Enrolled'
 import Meetings from './user/Calendar'
@@ -63,7 +63,7 @@ const Router: React.FC<{}> = () => {
     (state: any) => state.auth.loaded,
   )
 
-  const currentUser = useSelector<StoreType, User | null>(
+  const currentUser = useSelector<StoreType, IUser | null>(
     (state: any) => state.auth.user,
   )
 

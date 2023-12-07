@@ -1,5 +1,5 @@
-import { Form, Upload, Button, message, Modal, Avatar } from 'antd'
-import { DeleteOutlined, UploadOutlined, UserOutlined } from '@ant-design/icons'
+import { Form, Upload, Button, message, Avatar } from 'antd'
+import { DeleteOutlined, UserOutlined } from '@ant-design/icons'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
@@ -7,9 +7,7 @@ import { CDN_BASE } from '../..'
 
 const UploadAvatar = () => {
   const [form] = Form.useForm()
-  const [fileId, setFileId] = useState(null)
-  const [previewVisible, setPreviewVisible] = useState(false)
-  const [previewImage, setPreviewImage] = useState('')
+
   const user = useSelector((state: any) => state.auth.user)
   const [image, setImageUrl] = useState('')
 
@@ -35,7 +33,6 @@ const UploadAvatar = () => {
         console.log(response.data)
         const newFileId = response.data._id
 
-        setFileId(newFileId)
         onSuccess(response, file)
         setImageUrl(CDN_BASE + newFileId)
         message.success('Photo uploaded successfully')
@@ -51,7 +48,6 @@ const UploadAvatar = () => {
     axios
       .delete('/api/users/avatar')
       .then(() => {
-        setFileId(null)
         setImageUrl('')
         message.success('Photo deleted successfully')
       })

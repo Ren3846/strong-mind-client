@@ -1,4 +1,15 @@
-import { Button, Card, Col, Descriptions, Row, Skeleton, Space } from 'antd'
+import {
+  Button,
+  Card,
+  Col,
+  Descriptions,
+  Input,
+  Rate,
+  Row,
+  Skeleton,
+  Space,
+  message,
+} from 'antd'
 import axios from 'axios'
 import React, { FC, useEffect, useState } from 'react'
 import Layout from '../components/common/Layout'
@@ -10,6 +21,8 @@ const MeetingPage: FC<{}> = () => {
   const { meetingId } = useParams()
   const [meeting, setMeeting] = useState<any>({})
   const [loaded, setLoaded] = useState(false)
+  const [rate, setRating] = useState<number | null>(null)
+  const [report, setComment] = useState<string>('')
 
   useEffect(() => {
     axios
@@ -33,6 +46,18 @@ const MeetingPage: FC<{}> = () => {
     console.log('Cancel clicked')
   }
 
+  const handleRate = () => {
+    axios
+      .patch(`/api/meetings/comment/${meetingId}`, { rate, report })
+      .then(() => {
+        message.success('Rating and report added successfully')
+      })
+      .catch((error) => {
+        console.error('Error adding rate and report:', error)
+        message.error('Failed to add rate and report')
+      })
+  }
+
   return (
     <Layout>
       <Row align='middle' justify='center'>
@@ -41,15 +66,35 @@ const MeetingPage: FC<{}> = () => {
             title='Details Meeting'
             extra={
               <Space>
-                <Button type='primary' onClick={handleReschedule}>
+                {/* <Button type='primary' onClick={handleReschedule}>
                   Reschedule
                 </Button>
                 <Button danger onClick={handleCancel}>
                   Cancel
-                </Button>
+                </Button> */}
               </Space>
             }
           >
+            {meeting.status === 'accepted' ? (
+              <Card title='Leave feedback about meeting'>
+                <Rate
+                  value={rate !== null ? rate : undefined}
+                  onChange={(value) => setRating(value)}
+                />
+                <Input.TextArea
+                  placeholder='Enter your report'
+                  value={report}
+                  onChange={(e) => setComment(e.target.value)}
+                  style={{ margin: 10 }}
+                />
+                <Button type='primary' onClick={handleRate}>
+                  Rate
+                </Button>
+              </Card>
+            ) : (
+              <></>
+            )}
+
             {loaded ? (
               <Descriptions bordered column={1}>
                 <Descriptions.Item label='Meeting ID'>
@@ -72,7 +117,13 @@ const MeetingPage: FC<{}> = () => {
                 </Descriptions.Item>
                 <Descriptions.Item label='Zoom URL'>
                   {meeting.zoomUrl}
-                </Descriptions.Item>
+                </Descriptions.Item>{' '}
+                <Descriptions.Item label='Rate'>
+                  {meeting.rate}
+                </Descriptions.Item>{' '}
+                <Descriptions.Item label='Report'>
+                  {meeting.report}
+                </Descriptions.Item>{' '}
               </Descriptions>
             ) : (
               <Skeleton active />

@@ -3,13 +3,13 @@ import { BellOutlined, MailOutlined, MessageOutlined } from '@ant-design/icons'
 import { Badge, Button, Dropdown, Empty, Menu } from 'antd'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
-import { User } from '../../redux/store/types'
+import { IUser } from '../../redux/store/types'
 import { Link } from 'react-router-dom'
 import Preloader from './Preloader'
 
 const Notifications = () => {
   const user = useSelector((state: any) => state.auth.user)
-  const [receivers, setReceivers] = useState<{ [key: string]: User }>({})
+  const [receivers, setReceivers] = useState<{ [key: string]: IUser }>({})
   const [loading, setLoading] = useState(true)
 
   console.log(user)

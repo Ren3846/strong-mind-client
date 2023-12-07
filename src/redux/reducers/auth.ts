@@ -1,16 +1,19 @@
 import { authActions } from '../actions/index'
 import type { ExtractActions } from '../actions/index'
-import { User } from '../store/types'
+import { IUser } from '../store/types'
 
 const initialState: {
   loaded: boolean
-  user: User | null
+  user: IUser | null
 } = {
   loaded: false,
   user: null,
 }
 
-export const authReducer = (state = initialState, action: ExtractActions<typeof authActions>) => {
+export const authReducer = (
+  state = initialState,
+  action: ExtractActions<typeof authActions>,
+) => {
   switch (action.type) {
     case 'AUTH_LOADED':
       return {

@@ -2,7 +2,7 @@ import { HeartOutlined, UserOutlined } from '@ant-design/icons'
 import { Avatar, Button, Rate, message } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { User } from '../../redux/store/types'
+import { IUser } from '../../redux/store/types'
 import Preloader from './Preloader'
 import CustomAvatar from './CustomAvatar'
 
@@ -12,7 +12,7 @@ interface GetUserProps {
 }
 
 const GetUser: React.FC<GetUserProps> = ({ userId, avatar }) => {
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<IUser | null>(null)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {

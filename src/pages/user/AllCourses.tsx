@@ -14,14 +14,14 @@ import {
   Select,
   Divider,
 } from 'antd'
-import { ICourse, User } from '../../redux/store/types'
+import { ICourse, IUser } from '../../redux/store/types'
 import GetLikes from '../../components/common/GetLikes'
 import { CDN_BASE } from '../..'
 
 const CourseStudentItem: React.FC<{
   userId: string
 }> = ({ userId }) => {
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<IUser | null>(null)
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
@@ -145,7 +145,6 @@ const Courses = () => {
             <div>
               <Space>
                 <Typography.Text>Filters:</Typography.Text>
-                {/* <SearchBar onSearch={handleSearch} /> */}
                 <Select
                   value={filters.difficulty}
                   onChange={handleDifficultyChange}
@@ -163,7 +162,6 @@ const Courses = () => {
                   onChange={handleCategoryChange}
                   style={{ width: 100 }}
                 >
-                  {/* нужно заменить только Armenian Russian English пока  */}
                   <Select.Option value='all'>All</Select.Option>
                   <Select.Option value='Grammar'>English</Select.Option>
                   <Select.Option value='Literature'>Russian</Select.Option>

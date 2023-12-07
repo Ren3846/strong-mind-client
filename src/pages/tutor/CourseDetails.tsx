@@ -7,6 +7,7 @@ import { GetTutor } from '../../components/tutor/GetTutor'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import ManageCourseCover from '../../components/tutor/ManageCourseCover'
 import GetLikes from '../../components/common/GetLikes'
+import { ICourse, ILesson } from '../../redux/store/types'
 
 const breadcrumbItems = [
   { title: 'Dashboard', link: '/Dashboard' },
@@ -16,8 +17,8 @@ const breadcrumbItems = [
 
 const CourseDetails: React.FC = () => {
   const { id } = useParams()
-  const [course, setCourse] = useState<any>(null)
-  const [lessonsData, setLessonsData] = useState<any[]>([])
+  const [course, setCourse] = useState<ICourse>()
+  const [lessonsData, setLessonsData] = useState<ILesson[]>([])
   const [error, setError] = useState('')
 
   useEffect(() => {

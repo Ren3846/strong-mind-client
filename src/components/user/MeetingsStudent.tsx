@@ -16,7 +16,6 @@ const MeetingsStudent = () => {
   const [loaded, setLoaded] = useState(false)
 
   const userMeetingsIds = useSelector((state: any) => state.auth.user.meetings)
-  console.log('userMeetingsIds', userMeetingsIds)
 
   useEffect(() => {
     const fetchMeetings = async () => {
@@ -99,7 +98,7 @@ const MeetingsStudent = () => {
                       Pending
                     </Tag>
                   )}
-                  {meeting.studentName}
+                  {meeting.teacherName}
                 </Space>
               </div>
               {meeting.status === 'accepted' ? (

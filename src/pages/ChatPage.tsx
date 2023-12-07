@@ -4,11 +4,10 @@ import io, { Socket } from 'socket.io-client'
 import { DefaultEventsMap } from 'socket.io/dist/typed-events'
 import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
-import { UserOutlined } from '@ant-design/icons'
 import CustomAvatar from '../components/common/Avatar'
 import { useSelector } from 'react-redux'
 import { StoreType } from '../redux/store'
-import { User } from '../redux/store/types'
+import { IUser } from '../redux/store/types'
 import MyBreadcrumb from '../components/common/Breadcrumb'
 
 const { TextArea } = Input
@@ -41,9 +40,9 @@ const Chat = () => {
   const [messages, setMessages] = useState<MessageType[]>([])
   const [messageInput, setMessageInput] = useState('')
   const [chat, setChat] = useState<ChatType | null>(null)
-  const [receiver, setReceiver] = useState<User>()
+  const [receiver, setReceiver] = useState<IUser>()
 
-  const currentUser = useSelector<StoreType, User>(
+  const currentUser = useSelector<StoreType, IUser>(
     (state: any) => state.auth.user,
   )
   const messageListRef = useRef<HTMLDivElement>(null)

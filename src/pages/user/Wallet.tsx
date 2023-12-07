@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import axios from 'axios'
 import WalletTopup from '../../components/user/Topup'
 import { StoreType } from '../../redux/store'
-import { USER_ROLE, User } from '../../redux/store/types'
+import { USER_ROLE, IUser } from '../../redux/store/types'
 import WalletWithdrawal from '../../components/tutor/Withdrawal'
 import {
   CheckCircleOutlined,
@@ -14,7 +14,7 @@ import {
 import Layout from '../../components/common/Layout'
 
 const Wallet = () => {
-  const user = useSelector<StoreType, User>((state: any) => state.auth.user)
+  const user = useSelector<StoreType, IUser>((state: any) => state.auth.user)
 
   const [loading, setLoading] = useState(true)
   const [paymentHistory, setPaymentHistory] = useState([])
