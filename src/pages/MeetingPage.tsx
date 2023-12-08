@@ -118,12 +118,18 @@ const MeetingPage: FC<{}> = () => {
                 <Descriptions.Item label='Zoom URL'>
                   {meeting.zoomUrl}
                 </Descriptions.Item>{' '}
-                <Descriptions.Item label='Rate'>
-                  {meeting.rate}
-                </Descriptions.Item>{' '}
-                <Descriptions.Item label='Report'>
-                  {meeting.report}
-                </Descriptions.Item>{' '}
+                {meeting.rate && meeting.report ? (
+                  <>
+                    <Descriptions.Item label='Rate'>
+                      {meeting.rate}
+                    </Descriptions.Item>
+                    <Descriptions.Item label='Report'>
+                      {meeting.report}
+                    </Descriptions.Item>
+                  </>
+                ) : (
+                  <></>
+                )}
               </Descriptions>
             ) : (
               <Skeleton active />

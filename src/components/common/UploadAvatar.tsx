@@ -5,12 +5,19 @@ import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { CDN_BASE } from '../..'
 import { IUser } from '../../redux/store/types'
+import type {
+  RcFile,
+  UploadChangeParam,
+  UploadFile,
+  UploadProps,
+} from 'antd/es/upload/interface'
 
 const UploadAvatar = () => {
   const [form] = Form.useForm()
 
   const user = useSelector((state: IUser) => state.auth.user)
   const [image, setImageUrl] = useState('')
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     setImageUrl(CDN_BASE + user.avatar)
@@ -45,6 +52,12 @@ const UploadAvatar = () => {
       })
   }
 
+  const getBase64 = (img: RcFile, callback: (url: string) => void) => {
+    const reader = new FileReader()
+    reader.addEventListener('load', () => callback(reader.result as string))
+    reader.readAsDataURL(img)
+  }
+
   const handleDelete = () => {
     axios
       .delete('/api/users/avatar')
@@ -56,6 +69,21 @@ const UploadAvatar = () => {
         console.error(error)
         message.error('An error occurred while deleting the photo')
       })
+  }
+
+  const handleChange: UploadProps['onChange'] = (
+    info: UploadChangeParam<UploadFile>,
+  ) => {
+    if (info.file.status === 'uploading') {
+      setLoading(true)
+      return
+    }
+    if (info.file.status === 'done') {
+      getBase64(info.file.originFileObj as RcFile, (url) => {
+        setLoading(false)
+        setImageUrl(url)
+      })
+    }
   }
 
   return (
@@ -74,6 +102,7 @@ const UploadAvatar = () => {
             }
             listType='picture-circle'
             showUploadList={false}
+            onChange={handleChange}
           >
             {image ? (
               <Avatar src={image} style={{ width: '90%', height: '90%' }} />

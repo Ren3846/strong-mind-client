@@ -25,6 +25,7 @@ import {
   CopyOutlined,
   InfoCircleOutlined,
   PhoneOutlined,
+  SearchOutlined,
 } from '@ant-design/icons'
 import GetUser from '../../components/common/GetUser'
 
@@ -132,8 +133,8 @@ const CalendarPage: React.FC = () => {
                   Status: <Tag>{item.status} </Tag>
                   <br />
                   {item.zoomUrl ? (
-                    <div style={{ margin: 10 }}>
-                      ZoomURL:{' '}
+                    <div style={{ marginBottom: '10px' }}>
+                      ZoomURL:
                       <Input
                         readOnly
                         value={item.zoomUrl}
@@ -148,7 +149,7 @@ const CalendarPage: React.FC = () => {
                       />
                     </div>
                   ) : (
-                    <>Zoom link will be here..</>
+                    <Button type='text'>Zoom link will be here soon ...</Button>
                   )}
                   <Space>
                     {item.zoomUrl ? (
@@ -166,7 +167,7 @@ const CalendarPage: React.FC = () => {
                     )}
 
                     <Link to={`/meeting/${item.meetingId}`}>
-                      <Button>View</Button>
+                      <Button icon={<SearchOutlined />}>View</Button>
                     </Link>
                     <Button danger>Reshedule</Button>
                   </Space>
