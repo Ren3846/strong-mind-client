@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+
 import {
   Alert,
   Button,
@@ -15,7 +17,6 @@ import {
   message,
 } from 'antd'
 import MeetingsTeacher from '../../components/tutor/MeetingsTeacher'
-import MeetingsStudent from '../../components/user/MeetingsStudent'
 import { useSelector } from 'react-redux'
 import { IMeeting, IUser, USER_ROLE } from '../../redux/store/types'
 import { Link, NavLink } from 'react-router-dom'
@@ -23,16 +24,18 @@ import {
   ArrowRightOutlined,
   ClockCircleOutlined,
   CopyOutlined,
-  InfoCircleOutlined,
   PhoneOutlined,
   SearchOutlined,
 } from '@ant-design/icons'
 import GetUser from '../../components/common/GetUser'
+import MeetingsStudent from '../../components/user/MeetingsStudent'
+
+dayjs.extend(utc)
 
 const CalendarPage: React.FC = () => {
   const [value, setValue] = useState(() => dayjs())
   const [selectedValue, setSelectedValue] = useState(() => dayjs())
-  const [meetings, setMeetings] = useState<any[]>([])
+  const [meetings, setMeetings] = useState<IMeeting[]>([])
   const [agenda, setAgenda] = useState<IMeeting[]>([])
 
   const user = useSelector((state: IUser) => state.auth.user)
@@ -71,10 +74,10 @@ const CalendarPage: React.FC = () => {
       course: meeting.course,
       teacher: meeting.teacher,
       student: meeting.student,
-      startDate: dayjs(meeting.start_date).format('YYYY-MM-DD HH:mm:ss'),
+      start_date: dayjs(meeting.start_date).format('YYYY-MM-DD HH:mm:ss'),
       zoomUrl: meeting.zoomUrl,
       status: meeting.status,
-      meetingId: meeting._id,
+      meetingId: meeting.meetingId || '',
       rate: meeting.rate,
       report: meeting.report,
     }))
@@ -128,7 +131,7 @@ const CalendarPage: React.FC = () => {
                     <GetUser userId={item.teacher} />
                   </Space>{' '}
                   <br />
-                  <ClockCircleOutlined /> {item.startDate}
+                  <ClockCircleOutlined /> {item.start_date}
                   <br />
                   Status: <Tag>{item.status} </Tag>
                   <br />
@@ -186,19 +189,20 @@ const CalendarPage: React.FC = () => {
                 const meetingsOnDate = meetings.filter((meeting) =>
                   dayjs(meeting.start_date).isSame(date, 'day'),
                 )
-
                 return (
                   <div>
                     {meetingsOnDate.length > 0 && (
                       <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                         {meetingsOnDate.map((meeting) => (
                           <li key={meeting._id}>
-                            {/* <strong>{meeting.course}</strong>: {meeting.student}{' '} */}
-                            <InfoCircleOutlined style={{ color: 'blue' }} />{' '}
-                            {new Date(meeting.start_date).toLocaleTimeString(
-                              [],
-                              { hour: '2-digit', minute: '2-digit' },
-                            )}
+                            <Tag color='purple'>
+                              <ClockCircleOutlined style={{ color: 'blue' }} />{' '}
+                              {dayjs.utc(meeting.start_date).format('HH:mm')}
+                              {/* {new Date(meeting.start_date).toLocaleTimeString(
+                                [],
+                                { hour: '2-digit', minute: '2-digit' },
+                              )} */}
+                            </Tag>
                             <br />
                           </li>
                         ))}

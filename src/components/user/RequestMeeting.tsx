@@ -4,6 +4,9 @@ import { Drawer, DatePicker, TimePicker, Button, message, Space } from 'antd'
 import { Dayjs } from 'dayjs'
 import { PhoneOutlined } from '@ant-design/icons'
 
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+
 interface CallRequestProps {
   teacherId: string
   courseId: string
@@ -55,7 +58,7 @@ const RequestMeeting: React.FC<CallRequestProps> = ({
     setLoading(true)
     try {
       if (date && time) {
-        const formattedDate = date.format('DD.MM.YYYY')
+        const formattedDate = date.utcOffset(0).format('DD.MM.YYYY')
         const formattedHour = time.format('HH')
 
         console.log(formattedDate, formattedHour)

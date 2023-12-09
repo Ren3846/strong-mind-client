@@ -113,10 +113,11 @@ interface Availability {
 }
 
 export interface IMeeting {
+  _id?: string
   course: string
   teacher: string
   student: string
-  startDate: string
+  start_date: string
   zoomUrl: string
   status: string
   meetingId: string

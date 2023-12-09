@@ -3,7 +3,9 @@ import axios from 'axios'
 import { List, Skeleton, Space, Tag, Button } from 'antd'
 
 import {
+  CheckCircleFilled,
   CheckCircleOutlined,
+  ClockCircleOutlined,
   CloseCircleOutlined,
   RightOutlined,
   SyncOutlined,
@@ -11,6 +13,10 @@ import {
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { IUser } from '../../redux/store/types'
+
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+dayjs.extend(utc)
 
 const MeetingsTeacher = () => {
   const [meetings, setMeetings] = useState<any>([])
@@ -106,7 +112,7 @@ const MeetingsTeacher = () => {
             <List.Item key={meeting._id}>
               <div>
                 <Space>
-                  {new Date(meeting.start_date).toLocaleString()}
+                  {dayjs.utc(meeting.start_date).format('YYYY-MM-DD HH:mm')}
                   {meeting.status === 'accepted' ? (
                     <Tag icon={<CheckCircleOutlined />} color='success'>
                       Accepted
@@ -114,6 +120,14 @@ const MeetingsTeacher = () => {
                   ) : meeting.status === 'rejected' ? (
                     <Tag icon={<CloseCircleOutlined />} color='error'>
                       Rejected
+                    </Tag>
+                  ) : meeting.status === 'started' ? (
+                    <Tag icon={<ClockCircleOutlined />} color='warning'>
+                      Started
+                    </Tag>
+                  ) : meeting.status === 'finished' ? (
+                    <Tag icon={<CheckCircleFilled />} color='purple'>
+                      Finished
                     </Tag>
                   ) : (
                     <Tag icon={<SyncOutlined spin />} color='processing'>

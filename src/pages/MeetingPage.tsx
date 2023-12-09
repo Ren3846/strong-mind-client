@@ -16,10 +16,11 @@ import Layout from '../components/common/Layout'
 import GetUser from '../components/common/GetUser'
 import { useParams } from 'react-router-dom'
 import { GetCourse } from '../components/common/GetCourse'
+import { IMeeting } from '../redux/store/types'
 
 const MeetingPage: FC<{}> = () => {
   const { meetingId } = useParams()
-  const [meeting, setMeeting] = useState<any>({})
+  const [meeting, setMeeting] = useState<IMeeting | null>(null)
   const [loaded, setLoaded] = useState(false)
   const [rate, setRating] = useState<number | null>(null)
   const [report, setComment] = useState<string>('')
@@ -75,11 +76,12 @@ const MeetingPage: FC<{}> = () => {
               </Space>
             }
           >
-            {meeting.status === 'finished' ? (
+            {meeting && meeting.status === 'finished' ? (
               <Card title='Leave feedback about meeting'>
                 <Rate
                   value={rate !== null ? rate : undefined}
                   onChange={(value) => setRating(value)}
+                  style={{ color: 'rgb(167 167 255)' }}
                 />
                 <Input.TextArea
                   placeholder='Enter your report'
@@ -95,7 +97,7 @@ const MeetingPage: FC<{}> = () => {
               <></>
             )}
 
-            {loaded ? (
+            {loaded && meeting ? (
               <Descriptions bordered column={1}>
                 <Descriptions.Item label='Meeting ID'>
                   {meeting._id}
