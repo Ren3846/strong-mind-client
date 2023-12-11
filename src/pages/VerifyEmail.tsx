@@ -1,19 +1,19 @@
 import React from 'react'
 import { Result, Button } from 'antd'
-import { CheckCircleOutlined, MailOutlined } from '@ant-design/icons'
+import { MailOutlined } from '@ant-design/icons'
 
 const VerifyEmail: React.FC = () => {
   return (
     <Result
       icon={<MailOutlined />}
-      title='Подтвердите свой email'
-      subTitle='Мы отправили вам письмо с инструкциями по подтверждению email. Пожалуйста, проверьте свою почту.'
+      title='Confirm Your Email'
+      subTitle='We have sent you an email with instructions on how to confirm your email address. Please check your inbox.'
       extra={[
         <Button type='primary' key='back' onClick={() => window.history.back()}>
-          Вернуться назад
+          Done!
         </Button>,
         <Button type='primary' key='home' href='/'>
-          На главную
+          Home
         </Button>,
       ]}
     />

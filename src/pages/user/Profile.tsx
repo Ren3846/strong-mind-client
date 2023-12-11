@@ -94,6 +94,11 @@ function Profile() {
                     </Descriptions.Item>
                     <Descriptions.Item label='Email'>
                       {user.email}
+                      {user.isEmailVerified ? (
+                        <p>verified</p>
+                      ) : (
+                        <p>not verified</p>
+                      )}
                     </Descriptions.Item>
                     <Descriptions.Item label='Phone'>
                       {user.phone}

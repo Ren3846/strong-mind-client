@@ -102,6 +102,7 @@ export interface ICourse {
   overallRating: number
   ratingAverage: number
   ratingQuantity: number
+  isEmailVerified: boolean
 }
 
 interface Availability {
