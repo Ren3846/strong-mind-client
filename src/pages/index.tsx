@@ -1,5 +1,11 @@
-import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
-import React, { useLayoutEffect } from 'react'
+import {
+  Routes,
+  Route,
+  useLocation,
+  Navigate,
+  useNavigate,
+} from 'react-router-dom'
+import React, { useEffect, useLayoutEffect } from 'react'
 
 import Preloader from '../components/common/Preloader'
 
@@ -35,6 +41,7 @@ import StudentProfile from './tutor/StudentProfile'
 import CourseEdit from './tutor/CourseEdit'
 import ChatPage from './ChatPage'
 import MeetingPage from './MeetingPage'
+import VerifyEmail from './VerifyEmail'
 
 interface IProtectedRoute {
   condition: boolean
@@ -68,6 +75,22 @@ const Router: React.FC<{}> = () => {
   )
 
   const isAuthenticated = !!currentUser
+
+  // const isEmailVerified = currentUser?.isEmailVerified //test
+
+  // const navigate = useNavigate()
+  // const location = useLocation()
+
+  // useEffect(() => {
+  //   // Проверка верификации email и перенаправление
+  //   if (
+  //     location.pathname !== '/verify-email' &&
+  //     currentUser &&
+  //     !isEmailVerified
+  //   ) {
+  //     navigate('/verify-email')
+  //   }
+  // }, [currentUser, isEmailVerified, location.pathname, navigate])
 
   return isLoaded ? (
     <ScrollToTop>
@@ -282,6 +305,8 @@ const Router: React.FC<{}> = () => {
               />
             }
           />
+
+          <Route path='/verify-email' element={<VerifyEmail />} />
 
           <Route path='*' element={<NotFound />} />
         </Routes>

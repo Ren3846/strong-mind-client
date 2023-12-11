@@ -16,6 +16,7 @@ import { GetTutor } from '../../components/tutor/GetTutor'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import ManageCourseCover from '../../components/tutor/ManageCourseCover'
 import { ICourse, ILesson } from '../../redux/store/types'
+import GetUser from '../../components/common/GetUser'
 
 const breadcrumbItems = [
   { title: 'Dashboard', link: '/Dashboard' },
@@ -127,7 +128,7 @@ const CourseDetails: React.FC = () => {
           <div>
             <ul>
               {course.students.map((student: any) => (
-                <GetTutor userId={student} key={course._id + student} />
+                <GetUser userId={student} key={course._id + student} />
               ))}
             </ul>
           </div>

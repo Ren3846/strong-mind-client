@@ -33,7 +33,7 @@ export const GetTutor: React.FC<{
         <div
           className='course-user'
           title={user?.email}
-          style={{ margin: '5px' }}
+          // style={{ margin: '5px' }}
         >
           <Space>
             <CustomAvatar avatar={user?.avatar} size={'small'} />
