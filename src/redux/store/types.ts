@@ -99,6 +99,7 @@ export interface ICourse {
   lessons: string[]
   __v: number
   meetingPrice: number
+  ratingAverage: number
 }
 
 interface Availability {

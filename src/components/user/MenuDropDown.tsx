@@ -17,6 +17,7 @@ import { StoreType } from '../../redux/store'
 import { USER_ROLE, IUser } from '../../redux/store/types'
 import { CDN_BASE } from '../..'
 import useTranslations from '../../lang/useTranslations'
+import CustomAvatar from '../common/Avatar'
 
 interface MenuDropDownProps {
   user: any
@@ -104,11 +105,12 @@ function MenuDropDown({ user }: MenuDropDownProps) {
     <Dropdown overlay={menu} trigger={['hover']}>
       <Button size='middle' type='text'>
         <Space direction='horizontal'>
-          <Avatar
+          <CustomAvatar avatar={user.avatar} size='small' />
+          {/* <Avatar
             size='small'
             style={{ backgroundColor: '#6466f1' }}
             src={CDN_BASE + currentUser.avatar}
-          />
+          /> */}
           {user?.email} <DownOutlined />
         </Space>
       </Button>

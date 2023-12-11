@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Card, Divider, Row, Space, Typography, message } from 'antd'
+import {
+  Button,
+  Card,
+  Divider,
+  Rate,
+  Row,
+  Space,
+  Typography,
+  message,
+} from 'antd'
 import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
 import Preloader from '../../components/common/Preloader'
 import { GetTutor } from '../../components/tutor/GetTutor'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import ManageCourseCover from '../../components/tutor/ManageCourseCover'
-import GetLikes from '../../components/common/GetLikes'
 import { ICourse, ILesson } from '../../redux/store/types'
 
 const breadcrumbItems = [
@@ -79,7 +87,12 @@ const CourseDetails: React.FC = () => {
         extra={
           <>
             {/* {courseLikes} <LikeFilled /> */}
-            <GetLikes courseId={''} />
+            <Rate
+              allowHalf
+              disabled
+              defaultValue={course.ratingAverage}
+              style={{ color: 'rgb(167 167 255)' }}
+            />
           </>
         }
         // cover={
@@ -107,14 +120,6 @@ const CourseDetails: React.FC = () => {
           <p>Difficulty: {course.difficulty}</p>
           <p>Price: ${course.meetingPrice}</p>
         </div>
-        {/* <div>
-          {loadingLikes ? (
-            <p>Loading...</p>
-          ) : (
-            <h4>{`Course Likes: ${courseLikes}`}</h4>
-          )}
-          <GetLikes courseId={course.id} />
-        </div> */}
       </Card>
 
       <Card title='Students' style={{ width: '80rem', margin: '20px' }}>

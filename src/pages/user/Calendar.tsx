@@ -29,6 +29,7 @@ import {
 } from '@ant-design/icons'
 import GetUser from '../../components/common/GetUser'
 import MeetingsStudent from '../../components/user/MeetingsStudent'
+import Layout from '../../components/common/Layout'
 
 dayjs.extend(utc)
 
@@ -42,7 +43,17 @@ const CalendarPage: React.FC = () => {
 
   useEffect(() => {
     fetchMeetingsData()
-  }, [])
+  }, [user])
+
+  const fetchMeetingsData = async () => {
+    try {
+      const response = await fetch('/api/meetings/personal')
+      const data = await response.json()
+      setMeetings(data)
+    } catch (error) {
+      console.error('Ошибка при загрузке данных:', error)
+    }
+  }
 
   const onSelect = (newValue: Dayjs) => {
     setValue(newValue)
@@ -53,16 +64,6 @@ const CalendarPage: React.FC = () => {
   const onPanelChange = (newValue: Dayjs) => {
     setValue(newValue)
     updateAgenda(newValue)
-  }
-
-  const fetchMeetingsData = async () => {
-    try {
-      const response = await fetch('/api/meetings/booked')
-      const data = await response.json()
-      setMeetings(data)
-    } catch (error) {
-      console.error('Ошибка при загрузке данных:', error)
-    }
   }
 
   const updateAgenda = (selectedDate: Dayjs) => {
@@ -77,7 +78,7 @@ const CalendarPage: React.FC = () => {
       start_date: dayjs.utc(meeting.start_date).format('YYYY-MM-DD HH:mm'),
       zoomUrl: meeting.zoomUrl,
       status: meeting.status,
-      meetingId: meeting.meetingId || '',
+      meetingId: meeting.meetingId,
       rate: meeting.rate,
       report: meeting.report,
     }))
@@ -97,7 +98,7 @@ const CalendarPage: React.FC = () => {
   }
 
   return (
-    <>
+    <Layout>
       <Row style={{ marginLeft: '30px' }}>
         {/* <MyBreadcrumb items={breadcrumbItems} /> */}
       </Row>
@@ -137,42 +138,38 @@ const CalendarPage: React.FC = () => {
                   <br />
                   {item.zoomUrl ? (
                     <div style={{ marginBottom: '10px' }}>
-                      ZoomURL:
-                      <Input
-                        readOnly
-                        value={item.zoomUrl}
-                        addonAfter={
-                          <Tooltip title='Copy to clipboard'>
-                            <CopyOutlined
-                              onClick={() => copyToClipboard(item.zoomUrl)}
-                              style={{ cursor: 'pointer' }}
-                            />
-                          </Tooltip>
-                        }
-                      />
+                      <Space.Compact>
+                        <NavLink to={item.zoomUrl}>
+                          <Button
+                            type='primary'
+                            onClick={(e) => openZoomInNewTab(e, item.zoomUrl)}
+                            icon={<PhoneOutlined />}
+                          >
+                            Start zoom
+                          </Button>
+                        </NavLink>
+                        <Input
+                          readOnly
+                          value={item.zoomUrl}
+                          addonAfter={
+                            <Tooltip title='Copy to clipboard'>
+                              <CopyOutlined
+                                onClick={() => copyToClipboard(item.zoomUrl)}
+                                style={{ cursor: 'pointer' }}
+                              />
+                            </Tooltip>
+                          }
+                        />
+                      </Space.Compact>
                     </div>
                   ) : (
                     <Button type='text'>Zoom link will be here soon ...</Button>
                   )}
                   <Space>
-                    {item.zoomUrl ? (
-                      <NavLink to={item.zoomUrl}>
-                        <Button
-                          type='primary'
-                          onClick={(e) => openZoomInNewTab(e, item.zoomUrl)}
-                          icon={<PhoneOutlined />}
-                        >
-                          Start zoom
-                        </Button>
-                      </NavLink>
-                    ) : (
-                      <></>
-                    )}
-
-                    <Link to={`/meeting/${item.meetingId}`}>
+                    {/* <Link to={`/meeting/${item.meetingId}`}>
                       <Button icon={<SearchOutlined />}>View</Button>
-                    </Link>
-                    <Button danger>Reshedule</Button>
+                    </Link> */}
+                    {/* <Button danger>Reshedule</Button> */}
                   </Space>
                 </List.Item>
               )}
@@ -196,7 +193,7 @@ const CalendarPage: React.FC = () => {
                         {meetingsOnDate.map((meeting) => (
                           <li key={meeting._id}>
                             <Tag color='purple'>
-                              <ClockCircleOutlined style={{ color: 'blue' }} />{' '}
+                              <ClockCircleOutlined />{' '}
                               {dayjs.utc(meeting.start_date).format('HH:mm')}
                               {/* {new Date(meeting.start_date).toLocaleTimeString(
                                 [],
@@ -215,7 +212,7 @@ const CalendarPage: React.FC = () => {
           </Card>
         </Col>
       </Row>
-    </>
+    </Layout>
   )
 }
 

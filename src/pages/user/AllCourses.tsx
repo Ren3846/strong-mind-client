@@ -9,16 +9,16 @@ import {
   Row,
   Col,
   Space,
-  Avatar,
   Button,
   Select,
   Divider,
+  Rate,
 } from 'antd'
 import { ICourse, IUser } from '../../redux/store/types'
-import GetLikes from '../../components/common/GetLikes'
-import { CDN_BASE } from '../..'
 
-const CourseStudentItem: React.FC<{
+import CustomAvatar from '../../components/common/Avatar'
+
+const CourseTeacher: React.FC<{
   userId: string
 }> = ({ userId }) => {
   const [user, setUser] = useState<IUser | null>(null)
@@ -42,15 +42,15 @@ const CourseStudentItem: React.FC<{
 
   return (
     <>
-      {loaded ? (
+      {loaded && user ? (
         <div
           className='course-user'
           title={user?.email}
           style={{ margin: '5px' }}
         >
           <Space>
-            <Avatar src={CDN_BASE + user?.avatar} />
-            {user?.email}
+            <CustomAvatar avatar={user.avatar} />
+            {user.email}
           </Space>
         </div>
       ) : (
@@ -67,13 +67,18 @@ const CourseItem: React.FC<ICourse> = (course) => {
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <h3>{course.title}</h3>
           <div>
-            <GetLikes courseId={course._id} />
+            <Rate
+              allowHalf
+              disabled
+              defaultValue={course.ratingAverage}
+              style={{ color: 'rgb(167 167 255)' }}
+            />
           </div>
         </div>
 
         <p>{course.about}</p>
         <div className='course-users'>
-          <CourseStudentItem
+          <CourseTeacher
             userId={course.teacher}
             key={course._id + course.teacher}
           />
@@ -96,6 +101,8 @@ const Courses = () => {
     category: 'all',
     difficulty: 'all',
   })
+
+  console.log(courses)
 
   useEffect(() => {
     axios({
@@ -130,13 +137,6 @@ const Courses = () => {
     return difficultyMatch && categoryMatch
   })
 
-  // const handleSearch = (query: string) => {
-  //   const filtered = courses.filter((course) => {
-  //     return course.title.toLowerCase().includes(query.toLowerCase())
-  //   })
-
-  //   setFilteredCourses(filtered)
-  // }
   return (
     <Layout>
       <Row align='middle' justify='center'>

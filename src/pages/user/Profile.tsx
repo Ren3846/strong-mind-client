@@ -14,6 +14,7 @@ import {
   Select,
   Tabs,
   Space,
+  Descriptions,
 } from 'antd'
 import { updateUserDetailsAPI } from '../../api/user'
 import Layout from '../../components/common/Layout'
@@ -85,13 +86,22 @@ function Profile() {
                 <Col span={5}>
                   <UploadAvatar />
                 </Col>
-                <Col span={12}>
-                  <Space direction='vertical'>
-                    {user.fullName}
-                    {user.bio}
-                    {user.email}
-                    {user.phone}
-                  </Space>
+
+                <Col span={19}>
+                  <Descriptions bordered column={3}>
+                    <Descriptions.Item label='Full Name'>
+                      {user.fullName}
+                    </Descriptions.Item>
+                    <Descriptions.Item label='Email'>
+                      {user.email}
+                    </Descriptions.Item>
+                    <Descriptions.Item label='Phone'>
+                      {user.phone}
+                    </Descriptions.Item>
+                    <Descriptions.Item label='Bio'>
+                      {user.bio}
+                    </Descriptions.Item>
+                  </Descriptions>
                 </Col>
               </Row>
 

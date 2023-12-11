@@ -16,7 +16,8 @@ import Layout from '../components/common/Layout'
 import GetUser from '../components/common/GetUser'
 import { useParams } from 'react-router-dom'
 import { GetCourse } from '../components/common/GetCourse'
-import { IMeeting } from '../redux/store/types'
+import { IMeeting, IUser, USER_ROLE } from '../redux/store/types'
+import { useSelector } from 'react-redux'
 
 const MeetingPage: FC<{}> = () => {
   const { meetingId } = useParams()
@@ -24,6 +25,8 @@ const MeetingPage: FC<{}> = () => {
   const [loaded, setLoaded] = useState(false)
   const [rate, setRating] = useState<number | null>(null)
   const [report, setComment] = useState<string>('')
+
+  const user = useSelector((state: IUser) => state.auth.user)
 
   useEffect(() => {
     axios
@@ -76,7 +79,10 @@ const MeetingPage: FC<{}> = () => {
               </Space>
             }
           >
-            {meeting && meeting.status === 'finished' && !meeting.rate ? (
+            {meeting &&
+            meeting.status === 'finished' &&
+            !meeting.rate &&
+            user.role === USER_ROLE.USER ? (
               <Card title='Leave feedback about meeting'>
                 <Rate
                   value={rate !== null ? rate : undefined}
@@ -122,10 +128,10 @@ const MeetingPage: FC<{}> = () => {
                 </Descriptions.Item>{' '}
                 {meeting.rate && meeting.report ? (
                   <>
-                    <Descriptions.Item label='Rate'>
+                    <Descriptions.Item label='Rate by student'>
                       {meeting.rate}
                     </Descriptions.Item>
-                    <Descriptions.Item label='Report'>
+                    <Descriptions.Item label='Report by student'>
                       {meeting.report}
                     </Descriptions.Item>
                   </>

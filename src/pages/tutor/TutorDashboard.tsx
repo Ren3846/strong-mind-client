@@ -11,10 +11,10 @@ import {
   Skeleton,
   List,
   Pagination,
+  Rate,
 } from 'antd'
 import { ICourse, IUser } from '../../redux/store/types'
 import { Link } from 'react-router-dom'
-import GetLikes from '../../components/common/GetLikes'
 import { useSelector } from 'react-redux'
 import { SearchOutlined } from '@ant-design/icons'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
@@ -102,7 +102,12 @@ const TutorDashboard: React.FC = () => {
                         <p key={item._id}>{item.title}</p>
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                           <Space size='large'>
-                            <GetLikes courseId={item._id} />
+                            <Rate
+                              allowHalf
+                              disabled
+                              defaultValue={item.ratingAverage}
+                              style={{ color: 'rgb(167 167 255)' }}
+                            />
                             <Link to={`/mycourses/${item._id}`}>
                               <Button icon={<SearchOutlined />} type='primary'>
                                 {t('button_view')}
