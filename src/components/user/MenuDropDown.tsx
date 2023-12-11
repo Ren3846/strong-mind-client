@@ -8,16 +8,15 @@ import {
   LogoutOutlined,
   UserOutlined,
 } from '@ant-design/icons'
-import { Avatar, Button, Dropdown, Menu, Space } from 'antd'
+import { Button, Dropdown, Menu, Space } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { authLogout } from '../../redux/actions/auth'
 import { handleLogOutAPI } from '../../api/user'
 import { StoreType } from '../../redux/store'
 import { USER_ROLE, IUser } from '../../redux/store/types'
-import { CDN_BASE } from '../..'
 import useTranslations from '../../lang/useTranslations'
-import CustomAvatar from '../common/Avatar'
+import CustomAvatar from '../common/CustomAvatar'
 
 interface MenuDropDownProps {
   user: any
@@ -106,11 +105,6 @@ function MenuDropDown({ user }: MenuDropDownProps) {
       <Button size='middle' type='text'>
         <Space direction='horizontal'>
           <CustomAvatar avatar={user.avatar} size='small' />
-          {/* <Avatar
-            size='small'
-            style={{ backgroundColor: '#6466f1' }}
-            src={CDN_BASE + currentUser.avatar}
-          /> */}
           {user?.email} <DownOutlined />
         </Space>
       </Button>

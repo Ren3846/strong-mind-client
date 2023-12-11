@@ -7,7 +7,6 @@ import {
   Card,
   Button,
   Space,
-  Avatar,
   Skeleton,
   List,
   Pagination,
@@ -18,9 +17,9 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { SearchOutlined } from '@ant-design/icons'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
-import { CDN_BASE } from '../..'
 import MeetingsTeacher from '../../components/tutor/MeetingsTeacher'
 import useTranslations from '../../lang/useTranslations'
+import CustomAvatar from '../../components/common/CustomAvatar'
 
 const breadcrumbItems = [{ title: 'Home', link: '/' }, { title: 'Dashboard' }]
 
@@ -149,7 +148,7 @@ const TutorDashboard: React.FC = () => {
                   <List.Item>
                     <Link to={`/user/${student._id}`}>
                       <List.Item.Meta
-                        avatar={<Avatar src={CDN_BASE + student.avatar} />}
+                        avatar={<CustomAvatar avatar={student.avatar} />}
                         title={student.email}
                       />
                     </Link>

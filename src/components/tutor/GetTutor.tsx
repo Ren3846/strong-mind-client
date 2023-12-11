@@ -1,9 +1,8 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { IUser } from '../../redux/store/types'
-import { Avatar, Skeleton, Space } from 'antd'
+import { Skeleton, Space } from 'antd'
 import { Link } from 'react-router-dom'
-import { CDN_BASE } from '../..'
 import CustomAvatar from '../common/CustomAvatar'
 
 export const GetTutor: React.FC<{
@@ -37,7 +36,7 @@ export const GetTutor: React.FC<{
           style={{ margin: '5px' }}
         >
           <Space>
-            <Avatar src={CDN_BASE + user?.avatar} />
+            <CustomAvatar avatar={user?.avatar} size={'small'} />
             <Link to={`/teacher/${user?._id}`}>{user?.email}</Link>
           </Space>
         </div>

@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Card, Row, Descriptions, Skeleton, Divider } from 'antd'
+import { Card, Row, Descriptions, Skeleton, Divider, Rate } from 'antd'
 import { useParams } from 'react-router-dom'
-import Preloader from '../../components/common/Preloader'
 
-import { ICourse, ITeacher, IUser } from '../../redux/store/types'
+import { ICourse, ITeacher } from '../../redux/store/types'
 import LessonsListUser from '../../components/user/LessonsListUser'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import RequestMeeting from '../../components/user/RequestMeeting'
 import PurchaseMeetings from '../../components/user/PurchaseMeetings'
-import { useSelector } from 'react-redux'
+import { GetTutor } from '../../components/tutor/GetTutor'
 
 const CourseInfo: React.FC = () => {
   const [courseInfo, setCourseInfo] = useState<ICourse | null>(null)
-  const user = useSelector((state: IUser) => state.auth.user)
-  console.log('user', user)
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState('')
   const { id } = useParams()
@@ -44,15 +41,15 @@ const CourseInfo: React.FC = () => {
       })
   }, [id])
 
-  // if (loading) {
-  //   return <Preloader />
-  // }
-
   return (
     <Row align='middle' justify='center'>
       <MyBreadcrumb items={breadcrumbItems} />
 
-      <Card title='Course Details' style={{ width: '80rem', margin: '20px' }}>
+      <Card
+        title='Course Details'
+        style={{ width: '80rem', margin: '20px' }}
+        extra={<Rate disabled defaultValue={courseInfo?.ratingAverage} />}
+      >
         {loaded ? (
           <div>
             {courseInfo ? (
@@ -78,7 +75,7 @@ const CourseInfo: React.FC = () => {
                   </Descriptions.Item>
 
                   <Descriptions.Item label='Teacher'>
-                    <GetTeacher userId={courseInfo.teacher} />
+                    <GetTutor userId={courseInfo.teacher} />
                   </Descriptions.Item>
                 </Descriptions>
                 {id ? (
@@ -109,37 +106,8 @@ const CourseInfo: React.FC = () => {
           {courseInfo ? <LessonsListUser courseId={id} /> : <p>{error}</p>}
         </div>
       </Card>
-
-      <Card title='Course Shedule' style={{ width: '80rem', margin: '20px' }}>
-        {/* <div>{courseInfo ? <Shedule /> : <p>{error}</p>}</div> */}
-      </Card>
     </Row>
   )
-}
-
-const GetTeacher: React.FC<{
-  userId: string
-}> = ({ userId }) => {
-  const [user, setUser] = useState<ITeacher | null>(null)
-  const [loaded, setLoaded] = useState(false)
-
-  useEffect(() => {
-    axios({
-      url: `/api/users/${userId}`,
-      method: 'get',
-    })
-      .then(({ data }) => {
-        setUser(data)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-      .finally(() => {
-        setLoaded(true)
-      })
-  }, [userId])
-
-  return <div>{user?.email}</div>
 }
 
 export default CourseInfo

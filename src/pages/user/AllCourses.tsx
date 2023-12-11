@@ -15,8 +15,7 @@ import {
   Rate,
 } from 'antd'
 import { ICourse, IUser } from '../../redux/store/types'
-
-import CustomAvatar from '../../components/common/Avatar'
+import CustomAvatar from '../../components/common/CustomAvatar'
 
 const CourseTeacher: React.FC<{
   userId: string

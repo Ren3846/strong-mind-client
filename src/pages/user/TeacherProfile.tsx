@@ -7,7 +7,7 @@ import Preloader from '../../components/common/Preloader'
 import { ITeacher } from '../../redux/store/types'
 import { GetCourses } from '../../components/tutor/GetCourses'
 import { WechatOutlined } from '@ant-design/icons'
-import CustomAvatar from '../../components/common/Avatar'
+import CustomAvatar from '../../components/common/CustomAvatar'
 
 const TeacherProfile: React.FC<{}> = () => {
   const { id } = useParams()
@@ -56,13 +56,7 @@ const TeacherProfile: React.FC<{}> = () => {
         <Card
           title={`Teacher Profile`}
           style={{ width: '60rem', margin: '20px' }}
-          extra={
-            <CustomAvatar avatar={teacher?.avatar} />
-            // <Avatar
-            //   style={{ backgroundColor: '#3523a9bf' }}
-            //   icon={<UserOutlined />}
-            // />
-          }
+          extra={<CustomAvatar avatar={teacher?.avatar} />}
         >
           {loaded ? (
             <Space direction='vertical'>
