@@ -74,7 +74,7 @@ const CalendarPage: React.FC = () => {
       course: meeting.course,
       teacher: meeting.teacher,
       student: meeting.student,
-      start_date: dayjs(meeting.start_date).format('YYYY-MM-DD HH:mm:ss'),
+      start_date: dayjs.utc(meeting.start_date).format('YYYY-MM-DD HH:mm'),
       zoomUrl: meeting.zoomUrl,
       status: meeting.status,
       meetingId: meeting.meetingId || '',
