@@ -14,9 +14,7 @@ const Dashboard = () => {
   const t = useTranslations('UserDashboard')
 
   const [enrolledCourses, setEnrolledCourses] = useState<ICourse[]>([])
-  const [topTeachers, setTopTeachers] = useState<ITeacher[]>([])
   const [loadingCourses, setLoadingCourses] = useState(true)
-  const [loadingTeachers, setLoadingTeachers] = useState(true)
 
   useEffect(() => {
     axios
@@ -34,18 +32,6 @@ const Dashboard = () => {
       .finally(() => {
         setLoadingCourses(false)
       })
-
-    axios
-      .get('/api/users/top')
-      .then((response) => {
-        setTopTeachers(response.data)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-      .finally(() => {
-        setLoadingTeachers(false)
-      })
   }, [])
 
   return (
@@ -59,46 +45,19 @@ const Dashboard = () => {
             ) : (
               <ul>
                 {enrolledCourses.map((course) => (
-                  <>
-                    <Card key={course._id} style={{ marginTop: '20px' }}>
-                      {course.title}
-                      <Link to={`/enrolled/${course._id}/info`}>
-                        <Button type='primary' style={{ float: 'right' }}>
-                          {t('view_button')}
-                        </Button>
-                      </Link>
-                    </Card>
-                  </>
-                ))}
-              </ul>
-            )}
-          </Card>
-        </Col>
-        <Col span={12}>
-          <Card title={t('tutors')}>
-            {/* {loadingTeachers ? (
-              <Skeleton active />
-            ) : (
-              <ul>
-                {topTeachers.map((teacher) => (
-                  <Card key={teacher._id} style={{ marginTop: '20px' }}>
-                    <Avatar
-                      src={`${baseImageUrl}/${teacher.image}`}
-                      style={{ marginRight: '10px' }}
-                    />
-                    {teacher.email}
-                    <Link to={`/teacher/${teacher._id}`}>
+                  <Card key={course._id} style={{ marginTop: '20px' }}>
+                    {course.title}
+                    <Link to={`/enrolled/${course._id}/info`}>
                       <Button type='primary' style={{ float: 'right' }}>
-                        View
+                        {t('view_button')}
                       </Button>
                     </Link>
                   </Card>
                 ))}
               </ul>
-            )} */}
+            )}
           </Card>
         </Col>
-
         <Col span={24}>
           <Card title={t('accepted_meetings')}>
             <MeetingsStudent />
