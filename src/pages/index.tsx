@@ -76,21 +76,21 @@ const Router: React.FC<{}> = () => {
 
   const isAuthenticated = !!currentUser
 
-  const isEmailVerified = currentUser?.isEmailVerified
+  // const isEmailVerified = currentUser?.isEmailVerified
 
-  const navigate = useNavigate()
-  const location = useLocation()
+  // const navigate = useNavigate()
+  // const location = useLocation()
 
-  useEffect(() => {
-    // Проверка верификации email и перенаправление
-    if (
-      location.pathname !== '/verify-email' &&
-      currentUser &&
-      !isEmailVerified
-    ) {
-      navigate('/verify-email')
-    }
-  }, [currentUser, isEmailVerified, location.pathname, navigate])
+  // useEffect(() => {
+  //   // Проверка верификации email и перенаправление
+  //   if (
+  //     location.pathname !== '/verify-email' &&
+  //     currentUser &&
+  //     !isEmailVerified
+  //   ) {
+  //     navigate('/verify-email')
+  //   }
+  // }, [currentUser, isEmailVerified, location.pathname, navigate])
 
   return isLoaded ? (
     <ScrollToTop>
@@ -306,11 +306,10 @@ const Router: React.FC<{}> = () => {
             }
           />
 
-          <Route path='/verify-email' element={<VerifyEmail />} />
+          <Route path='/confirm:token' element={<VerifyEmail />} />
 
           <Route path='*' element={<NotFound />} />
         </Routes>
-        {/* <Footer /> */}
       </>
     </ScrollToTop>
   ) : (
