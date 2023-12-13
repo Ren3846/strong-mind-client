@@ -41,7 +41,7 @@ import StudentProfile from './tutor/StudentProfile'
 import CourseEdit from './tutor/CourseEdit'
 import ChatPage from './ChatPage'
 import MeetingPage from './MeetingPage'
-import VerifyEmail from './VerifyEmail'
+import ConfirmEmail from './ConfirmEmail'
 
 interface IProtectedRoute {
   condition: boolean
@@ -82,7 +82,6 @@ const Router: React.FC<{}> = () => {
   // const location = useLocation()
 
   // useEffect(() => {
-  //   // Проверка верификации email и перенаправление
   //   if (
   //     location.pathname !== '/verify-email' &&
   //     currentUser &&
@@ -306,7 +305,7 @@ const Router: React.FC<{}> = () => {
             }
           />
 
-          <Route path='/confirm:token' element={<VerifyEmail />} />
+          <Route path='/confirm/:token' element={<ConfirmEmail />} />
 
           <Route path='*' element={<NotFound />} />
         </Routes>

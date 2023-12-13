@@ -42,6 +42,10 @@ const userSignUpAPI = (body: SignUpBody) => API.post('/auth/register', body)
 // Функция для получения данных залогиненного пользователя
 const getSignedInUserAPI = () => API.get('/auth/profile')
 
+//
+//
+//
+//
 // Функция для получения данных о курсе
 const getCourseDetailsAPI = (id: string, route = '/user/courses/enroll/') =>
   API.get<CourseDetails>(route + id)

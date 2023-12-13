@@ -11,7 +11,7 @@ import PurchaseMeetings from '../../components/user/PurchaseMeetings'
 import { GetTutor } from '../../components/tutor/GetTutor'
 
 const CourseInfo: React.FC = () => {
-  const [courseInfo, setCourseInfo] = useState<ICourse | null>(null)
+  const [courseInfo, setCourseInfo] = useState<any>()
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState('')
   const { id } = useParams()
@@ -48,7 +48,13 @@ const CourseInfo: React.FC = () => {
       <Card
         title='Course Details'
         style={{ width: '80rem', margin: '20px' }}
-        extra={<Rate disabled defaultValue={courseInfo?.ratingAverage} />}
+        extra={
+          <Rate
+            disabled
+            style={{ color: 'rgb(167 167 255)' }}
+            defaultValue={Math.round(courseInfo?.ratingAverage * 2) / 2}
+          />
+        }
       >
         {loaded ? (
           <div>

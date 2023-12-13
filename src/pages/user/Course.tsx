@@ -6,6 +6,7 @@ import { ICourse, ITeacher, IUser, USER_ROLE } from '../../redux/store/types'
 import { useSelector } from 'react-redux'
 import { StoreType } from '../../redux/store'
 import { CDN_BASE } from '../..'
+import Preloader from '../../components/common/Preloader'
 
 const CourseCoverVideo: React.FC<{ cover: string | null | undefined }> = ({
   cover,
@@ -28,7 +29,7 @@ const Course: React.FC<{}> = () => {
   const { id } = useParams()
   const user = useSelector((state: IUser) => state.auth.user)
   const navigate = useNavigate()
-  const [course, setCourse] = useState<ICourse | null>(null)
+  const [course, setCourse] = useState<any>()
   const [loaded, setLoaded] = useState(false)
   const [enrollLoading, setEnrollLoading] = useState(false)
   const [purchased, setPurchased] = useState(() =>
@@ -70,18 +71,19 @@ const Course: React.FC<{}> = () => {
 
   return (
     <Row align='middle' justify='center'>
-      <Card
-        title={`Course details`}
-        style={{ width: '60rem', margin: '20px' }}
-        extra={
-          <Rate
-            disabled
-            defaultValue={4}
-            style={{ color: 'rgb(167 167 255)' }}
-          />
-        }
-      >
-        {loaded ? (
+      {loaded ? (
+        <Card
+          title={`Course details`}
+          style={{ width: '60rem', margin: '20px' }}
+          extra={
+            <Rate
+              disabled
+              allowHalf
+              defaultValue={Math.round(course.ratingAverage * 2) / 2}
+              style={{ color: 'rgb(167 167 255)' }}
+            />
+          }
+        >
           <div>
             {course ? (
               <>
@@ -129,10 +131,11 @@ const Course: React.FC<{}> = () => {
               <p>Course not found or an error occurred.</p>
             )}
           </div>
-        ) : (
-          <Skeleton active />
-        )}
-      </Card>
+        </Card>
+      ) : (
+        <Preloader />
+      )}
+
       <CourseCoverVideo cover={course?.cover} />
     </Row>
   )

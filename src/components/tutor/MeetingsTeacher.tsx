@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { List, Skeleton, Space, Tag, Button } from 'antd'
+import { List, Skeleton, Space, Tag, Button, Modal } from 'antd'
 
 import {
   CheckCircleFilled,
@@ -169,6 +169,28 @@ const MeetingsTeacher = () => {
           )}
         />
       )}
+
+      {/* <Modal
+        title='Meeting Confirmation'
+        visible={modalVisible}
+        onCancel={handleModalCancel}
+        onOk={handleModalConfirm}
+      >
+        <p>Do you want to accept or reject the meeting?</p>
+        <Button
+          type='primary'
+          onClick={() => handleAcceptMeeting(selectedMeetingId)}
+        >
+          Accept
+        </Button>
+        <Button
+          danger
+          type='primary'
+          onClick={() => handleRejectMeeting(selectedMeetingId)}
+        >
+          Reject
+        </Button>
+      </Modal> */}
     </div>
   )
 }

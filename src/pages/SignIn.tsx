@@ -16,6 +16,7 @@ import { userSignInAPI } from '../api/user'
 import { authLogin } from '../redux/actions/auth'
 import Layout from '../components/common/Layout'
 import { ErrorMessage } from '../components/common/ErrorMessage'
+import { IUser } from '../redux/store/types'
 
 function SignIn() {
   const [form] = Form.useForm()
@@ -47,7 +48,7 @@ function SignIn() {
     })
   }
 
-  const handleSignInSuccess = (user: any) => {
+  const handleSignInSuccess = (user: IUser) => {
     showSuccessNotification(`Hey ${user.email}, Welcome back to StrongMind!`)
     dispatch(authLogin(user))
 

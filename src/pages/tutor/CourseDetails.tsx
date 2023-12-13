@@ -91,7 +91,7 @@ const CourseDetails: React.FC = () => {
             <Rate
               allowHalf
               disabled
-              defaultValue={course.ratingAverage}
+              defaultValue={Math.round(course.ratingAverage * 2) / 2}
               style={{ color: 'rgb(167 167 255)' }}
             />
           </>

@@ -20,7 +20,7 @@ dayjs.extend(utc)
 
 const MeetingsStudent = () => {
   const [meetings, setMeetings] = useState<any>([])
-  const [loaded, setLoaded] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   const userMeetingsIds = useSelector(
     (state: IUser) => state.auth.user.meetings,
@@ -54,7 +54,7 @@ const MeetingsStudent = () => {
         )
 
         setMeetings(meetingsData)
-        setLoaded(true)
+        setLoading(false)
       } catch (error) {
         console.error('Error fetching meetings:', error)
       }
@@ -63,30 +63,32 @@ const MeetingsStudent = () => {
     if (userMeetingsIds.length > 0) {
       fetchMeetings()
     } else {
-      setLoaded(false)
+      setLoading(false)
     }
   }, [userMeetingsIds])
 
-  const handleCancelMeeting = async (meetingId: string) => {
-    // try {
-    //   await axios.patch(`/api/meetings/status/${meetingId}`, {
-    //     status: 'rejected',
-    //   })
-    //   setMeetings((prevMeetings: any) =>
-    //     prevMeetings.map((meeting: any) =>
-    //       meeting._id === meetingId
-    //         ? { ...meeting, status: 'rejected' }
-    //         : meeting,
-    //     ),
-    //   )
-    // } catch (error) {
-    //   console.error('Error rejecting meeting:', error)
-    // }
-  }
+  // const handleCancelMeeting = async (meetingId: string) => {
+  //   try {
+  //     await axios.patch(`/api/meetings/status/${meetingId}`, {
+  //       status: 'rejected',
+  //     })
+  //     setMeetings((prevMeetings: any) =>
+  //       prevMeetings.map((meeting: any) =>
+  //         meeting._id === meetingId
+  //           ? { ...meeting, status: 'rejected' }
+  //           : meeting,
+  //       ),
+  //     )
+  //   } catch (error) {
+  //     console.error('Error rejecting meeting:', error)
+  //   }
+  // }
 
   return (
     <div>
-      {loaded ? (
+      {loading ? (
+        <Skeleton active />
+      ) : (
         <List
           dataSource={meetings}
           renderItem={(meeting: any) => (
@@ -119,15 +121,15 @@ const MeetingsStudent = () => {
                   {meeting.teacherName}
                 </Space>
               </div>
-              {meeting.status === 'accepted' ||
-              meeting.status === 'finished' ? (
+              {meeting.status !== 'rejected' ||
+              meeting.status !== 'processing' ? (
                 <>
                   <Space>
                     {/* <Button danger type='primary' onClick={() => {}}>
-                      Cancel
-                    </Button> */}
+                    Cancel
+                  </Button> */}
                     <Link to={`/meeting/${meeting._id}`}>
-                      <Button onClick={() => {}}>
+                      <Button>
                         <RightOutlined />
                       </Button>
                     </Link>
@@ -139,8 +141,6 @@ const MeetingsStudent = () => {
             </List.Item>
           )}
         />
-      ) : (
-        <Skeleton active />
       )}
     </div>
   )

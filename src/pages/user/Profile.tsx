@@ -13,7 +13,6 @@ import {
   Divider,
   Select,
   Tabs,
-  Space,
   Descriptions,
 } from 'antd'
 import { updateUserDetailsAPI } from '../../api/user'

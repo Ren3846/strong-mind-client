@@ -28,13 +28,13 @@ function Navbar() {
           }
           children={t('courses')}
         />
-        <NavLink
+        {/* <NavLink
           to='/teachers'
           className={({ isActive }) =>
             `navbar-link ${isActive ? 'active' : ''}`
           }
           children={t('teachers')}
-        />
+        /> */}
       </nav>
 
       <div

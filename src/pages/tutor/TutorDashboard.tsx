@@ -104,7 +104,9 @@ const TutorDashboard: React.FC = () => {
                             <Rate
                               allowHalf
                               disabled
-                              defaultValue={item.ratingAverage}
+                              defaultValue={
+                                Math.round(item.ratingAverage * 2) / 2
+                              }
                               style={{ color: 'rgb(167 167 255)' }}
                             />
                             <Link to={`/mycourses/${item._id}`}>
