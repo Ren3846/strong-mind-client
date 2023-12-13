@@ -1,0 +1,87 @@
+{
+  "TutorDashboard": {
+    "courses": "My courses",
+    "students": "My students",
+    "requests": "Requests from students",
+    "button_view": "View"
+  },
+
+  "UserDashboard": {
+    "courses": "My Enrolled Courses",
+    "tutors": "My tutors",
+    "accepted_meetings": "Accepted meetings",
+    "view_button": "View"
+  },
+
+  "Profile": {
+    "profile": "Profile",
+    "user_role": "User Role",
+    "account_balance": "Account Balance ($)",
+    "save": "Save",
+    "profile_updated_successfully": "Profile updated successfully",
+    "email": "Email",
+    "full_name": "Full Name",
+    "phone": "Phone",
+    "country": "Country",
+    "bio": "Bio",
+    "gender": "Gender",
+    "timezone": "Timezone",
+    "calendar": "Calendar",
+    "wallet": "Wallet"
+  },
+  "Navbar": {
+    "courses": "Courses",
+    "teachers": "Teachers",
+    "enrolled": "Enrolled",
+    "meetings": "Meetings",
+    "balance": "Balance",
+    "go_to_wallet": "Go to Wallet",
+    "log_in": "Log in",
+    "register": "Register",
+    "Dropdown": {
+      "dashboard": "Dashboard",
+      "courses": "Enrolled Courses",
+      "my_courses": "My courses",
+      "calendar": "Calendar",
+      "exit": "Log out",
+      "profile": "Profile"
+    }
+  },
+  "Home": {
+    "Hero": {
+      "teach_inspire_grow": "Teach, inspire, and grow with StrongMind dynamic learning platform.",
+      "join_as_tutor": "Join As a Tutor",
+      "strongmind_academy": "StrongMind Academy",
+      "embark_on_adventure": "Embark on an adventure of learning, where every discovery enriches the mind and empowers the soul to reach new heights.",
+      "lets_start_as_student": "Let's start as student",
+      "explore_courses": "Explore courses",
+      "card_1": "From 5$ per hour",
+      "card_2": "Free 2 lessons for you",
+      "card_3": "Lessons from 25 to 55 min"
+    },
+    "StartStudent": {
+      "register_your_account": "Register your account",
+      "choose_course": "Choose a course",
+      "learn_safe": "Learn and stay safe",
+      "get_started_with_clicks": "Get started with just a few clicks",
+      "want_to_become_student": "| Want to become a student?"
+    },
+    "StartTutor": {
+      "typing_text": "| Are you a good teacher?",
+      "title": "Join! New about StrongMind",
+      "title_1": "A new functions",
+      "subtitle_1": "We have the latest update with new world for you to try never mind",
+      "title_2": "A new app",
+      "subtitle_2": "In the latest update, your eyes are narrow, making the world more realistic than ever"
+    }
+  },
+  "NotFoundPage": {
+    "title": "Not Found",
+    "message": "Could not find requested resource",
+    "toHome": "Return Home"
+  },
+  "ErrorPage": {
+    "title": "Something went wrong!",
+    "retry": "Try again"
+  }
+}
