@@ -5,8 +5,11 @@ import { List, Skeleton, Space, Tag, Button, Modal } from 'antd'
 import {
   CheckCircleFilled,
   CheckCircleOutlined,
+  CheckOutlined,
   ClockCircleOutlined,
   CloseCircleOutlined,
+  CloseOutlined,
+  MoreOutlined,
   RightOutlined,
   SyncOutlined,
 } from '@ant-design/icons'
@@ -145,25 +148,27 @@ const MeetingsTeacher = () => {
                     <Button
                       type='primary'
                       onClick={() => handleAcceptMeeting(meeting._id)}
-                    >
-                      Accept
-                    </Button>
+                      icon={<CheckOutlined />}
+                    ></Button>
                     <Button
                       danger
                       type='primary'
                       onClick={() => handleRejectMeeting(meeting._id)}
-                    >
-                      Reject
-                    </Button>
+                      icon={<CloseOutlined />}
+                    ></Button>
+                    {/* <Button>
+                      <MoreOutlined />
+                    </Button> */}
                   </>
                 ) : (
-                  <></>
+                  <>
+                    <Link to={`/meeting/${meeting._id}`}>
+                      <Button>
+                        <RightOutlined />
+                      </Button>
+                    </Link>
+                  </>
                 )}
-                <Link to={`/meeting/${meeting._id}`}>
-                  <Button>
-                    <RightOutlined />
-                  </Button>
-                </Link>
               </Space>
             </List.Item>
           )}
