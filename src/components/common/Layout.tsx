@@ -3,7 +3,6 @@ import { Layout as AntLayout } from 'antd'
 import { CommentOutlined, QuestionCircleOutlined } from '@ant-design/icons'
 import { FloatButton } from 'antd'
 import Footer from './Footer'
-import Snowfall from './snowfall/snowfall'
 
 type Props = {
   children: React.ReactNode
@@ -33,7 +32,6 @@ const Layout = ({ children }: Props) => {
           <FloatButton icon={<CommentOutlined />} />
         </FloatButton.Group>
       </>
-      <Snowfall />
       <Footer />
     </div>
   )

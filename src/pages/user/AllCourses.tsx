@@ -176,7 +176,8 @@ const Courses = () => {
             <Divider />
 
             <Typography.Title level={2} style={{ margin: 0 }}>
-              Lessons for Kids/teens A1-A2
+              {/* Lessons for Kids/teens A1-A2 */}
+              All Courses
             </Typography.Title>
 
             {loaded ? (
@@ -194,14 +195,14 @@ const Courses = () => {
             )}
           </div>
           <Divider />
-          <Typography.Title level={2} style={{ margin: 0 }}>
+          {/* <Typography.Title level={2} style={{ margin: 0 }}>
             Conversational English A2-C2
           </Typography.Title>
 
           <Divider />
           <Typography.Title level={2} style={{ margin: 0 }}>
             Test preparation A1-C1
-          </Typography.Title>
+          </Typography.Title> */}
         </Col>
       </Row>
     </Layout>
