@@ -3,9 +3,15 @@ import { Input, Button, message, Space } from 'antd'
 import axios from 'axios'
 import { DollarCircleFilled } from '@ant-design/icons'
 
+export interface InvoiceData {
+  data: string
+  signature: string
+}
+
 const WalletTopup: React.FC = () => {
   const [amount, setAmount] = useState<string>('')
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [invoice, setInvoice] = useState<null | InvoiceData>(null)
 
   const handleTopup = async () => {
     setLoading(true)
@@ -14,9 +20,7 @@ const WalletTopup: React.FC = () => {
       const response = await axios.post('/api/users/wallet/topup', {
         amount: parseFloat(amount),
       })
-
-      message.success('Balance topped up successfully', 8)
-      console.log('Response:', response.data)
+      setInvoice(response.data);
     } catch (error) {
       console.error(error)
       message.error('Error while topping up the balance')
@@ -43,6 +47,18 @@ const WalletTopup: React.FC = () => {
           Pay
         </Button>
       </Space.Compact>
+      {
+        invoice ?
+          (
+            <form method="POST" action="https://www.liqpay.ua/api/3/checkout" acceptCharset="utf-8">
+              <input type="hidden" name="data" value={invoice?.data}/>
+              <input type="hidden" name="signature" value={invoice?.signature} />
+              <input type="image" src="//static.liqpay.ua/buttons/p1ru.radius.png"/>
+            </form>
+          )
+          :
+          null
+      }
     </>
   )
 }
