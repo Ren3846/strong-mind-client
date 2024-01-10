@@ -1,11 +1,5 @@
-import {
-  Routes,
-  Route,
-  useLocation,
-  Navigate,
-  useNavigate,
-} from 'react-router-dom'
-import React, { useEffect, useLayoutEffect } from 'react'
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom'
+import React, { useLayoutEffect } from 'react'
 
 import Preloader from '../components/common/Preloader'
 
@@ -42,6 +36,7 @@ import CourseEdit from './tutor/CourseEdit'
 import ChatPage from './ChatPage'
 import MeetingPage from './MeetingPage'
 import ConfirmEmail from './ConfirmEmail'
+import Oferta from './Oferta'
 
 interface IProtectedRoute {
   condition: boolean
@@ -97,6 +92,7 @@ const Router: React.FC<{}> = () => {
         <Navbar />
         <Routes>
           <Route path='/' element={<Landing />} />
+          <Route path='/oferta' element={<Oferta />} />
           <Route
             path='/signin'
             element={
