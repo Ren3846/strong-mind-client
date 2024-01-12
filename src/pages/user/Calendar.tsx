@@ -19,13 +19,12 @@ import {
 import MeetingsTeacher from '../../components/tutor/MeetingsTeacher'
 import { useSelector } from 'react-redux'
 import { IMeeting, IUser, USER_ROLE } from '../../redux/store/types'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import {
   ArrowRightOutlined,
   ClockCircleOutlined,
   CopyOutlined,
   PhoneOutlined,
-  SearchOutlined,
 } from '@ant-design/icons'
 import GetUser from '../../components/common/GetUser'
 import MeetingsStudent from '../../components/user/MeetingsStudent'
@@ -76,7 +75,9 @@ const CalendarPage: React.FC = () => {
       teacher: meeting.teacher,
       student: meeting.student,
       start_date: dayjs.utc(meeting.start_date).format('YYYY-MM-DD HH:mm'),
-      zoomUrl: meeting.zoomUrl,
+      // zoomUrl: meeting.zoomUrl,
+      zoomJoinUrl: meeting.zoomJoinUrl,
+      zoomStartUrl: meeting.zoomStartUrl,
       status: meeting.status,
       meetingId: meeting.meetingId,
       rate: meeting.rate,
@@ -125,7 +126,7 @@ const CalendarPage: React.FC = () => {
           >
             <List
               dataSource={agenda}
-              renderItem={(item: any, index) => (
+              renderItem={(item: any) => (
                 <List.Item>
                   <Space direction='horizontal'>
                     <GetUser userId={item.student} /> <ArrowRightOutlined />{' '}
@@ -135,26 +136,50 @@ const CalendarPage: React.FC = () => {
                   <ClockCircleOutlined /> {item.start_date}
                   <br />
                   Status: <Tag>{item.status} </Tag>
-                  <br />
-                  {item.zoomUrl ? (
-                    <div style={{ marginBottom: '10px' }}>
+                  {item.zoomJoinUrl && item.zoomStartUrl ? (
+                    <div style={{ marginBottom: '10px', marginTop: '10px' }}>
                       <Space.Compact>
-                        <NavLink to={item.zoomUrl}>
+                        <NavLink
+                          to={
+                            user.role === USER_ROLE.TEACHER
+                              ? item.zoomStartUrl
+                              : item.zoomJoinUrl
+                          }
+                        >
                           <Button
                             type='primary'
-                            onClick={(e) => openZoomInNewTab(e, item.zoomUrl)}
+                            onClick={(e) =>
+                              openZoomInNewTab(
+                                e,
+                                user.role === USER_ROLE.TEACHER
+                                  ? item.zoomStartUrl
+                                  : item.zoomJoinUrl,
+                              )
+                            }
                             icon={<PhoneOutlined />}
                           >
-                            Start zoom
+                            {user.role === USER_ROLE.TEACHER
+                              ? 'Start zoom'
+                              : 'Join zoom'}
                           </Button>
                         </NavLink>
                         <Input
                           readOnly
-                          value={item.zoomUrl}
+                          value={
+                            user.role === USER_ROLE.TEACHER
+                              ? item.zoomStartUrl
+                              : item.zoomJoinUrl
+                          }
                           addonAfter={
                             <Tooltip title='Copy to clipboard'>
                               <CopyOutlined
-                                onClick={() => copyToClipboard(item.zoomUrl)}
+                                onClick={() =>
+                                  copyToClipboard(
+                                    user.role === USER_ROLE.TEACHER
+                                      ? item.zoomStartUrl
+                                      : item.zoomJoinUrl,
+                                  )
+                                }
                                 style={{ cursor: 'pointer' }}
                               />
                             </Tooltip>
@@ -163,14 +188,10 @@ const CalendarPage: React.FC = () => {
                       </Space.Compact>
                     </div>
                   ) : (
-                    <Button type='text'>Zoom link will be here soon ...</Button>
+                    <Button type='text'>
+                      link will appear 15 minutes before the lesson
+                    </Button>
                   )}
-                  <Space>
-                    {/* <Link to={`/meeting/${item.meetingId}`}>
-                      <Button icon={<SearchOutlined />}>View</Button>
-                    </Link> */}
-                    {/* <Button danger>Reshedule</Button> */}
-                  </Space>
                 </List.Item>
               )}
             />
@@ -195,10 +216,6 @@ const CalendarPage: React.FC = () => {
                             <Tag color='purple'>
                               <ClockCircleOutlined />{' '}
                               {dayjs.utc(meeting.start_date).format('HH:mm')}
-                              {/* {new Date(meeting.start_date).toLocaleTimeString(
-                                [],
-                                { hour: '2-digit', minute: '2-digit' },
-                              )} */}
                             </Tag>
                             <br />
                           </li>

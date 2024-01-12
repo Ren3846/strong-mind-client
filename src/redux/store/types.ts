@@ -122,7 +122,9 @@ export interface IMeeting {
   teacher: string
   student: string
   start_date: string
-  zoomUrl: string
+  zoomStartUrl: string
+  zoomJoinUrl: string
+  // zoomUrl?: string
   status: string
   meetingId: string
   rate: number

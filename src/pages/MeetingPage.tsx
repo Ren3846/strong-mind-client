@@ -124,7 +124,7 @@ const MeetingPage: FC<{}> = () => {
                   {meeting.status}
                 </Descriptions.Item>
                 <Descriptions.Item label='Zoom URL'>
-                  {meeting.zoomUrl}
+                  {meeting.zoomJoinUrl || meeting.zoomStartUrl}
                 </Descriptions.Item>{' '}
                 {meeting.rate && meeting.report ? (
                   <>
