@@ -21,9 +21,9 @@ import {
 } from '@ant-design/icons'
 import { userSignUpAPI } from '../api/user'
 import Layout from '../components/common/Layout'
-import { authLogin } from '../redux/actions/auth'
-import { useDispatch } from 'react-redux'
 import { ErrorMessage } from '../components/common/ErrorMessage'
+
+import useTranslations from '../lang/useTranslations'
 
 const { Option } = Select
 
@@ -41,10 +41,11 @@ const tailFormItemLayout = {
 }
 
 function SignUp() {
+  const t = useTranslations('SignUp')
+
   const [form] = Form.useForm()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const dispatch = useDispatch()
 
   const [registrationSuccess, setRegistrationSuccess] = useState(false)
 
@@ -62,7 +63,6 @@ function SignUp() {
     userSignUpAPI(userData)
       .then((res) => {
         setIsLoading(false)
-        // dispatch(authLogin(res.data.user))
         setRegistrationSuccess(true)
       })
       .catch((error) => {
@@ -98,7 +98,7 @@ function SignUp() {
             />
           </Card>
         ) : (
-          <Card title='Sign Up and explore' style={{ width: '35rem' }}>
+          <Card title={t('signUpAndExplore')} style={{ width: '35rem' }}>
             <Form
               form={form}
               name='signUpForm'
@@ -108,7 +108,7 @@ function SignUp() {
             >
               <Form.Item
                 name='fullName'
-                label='Full name'
+                label={t('fullNameLabel')}
                 rules={[
                   {
                     required: true,
@@ -121,7 +121,7 @@ function SignUp() {
 
               <Form.Item
                 name='phone'
-                label='Phone Number'
+                label={t('phoneLabel')}
                 rules={[
                   {
                     required: true,
@@ -134,7 +134,7 @@ function SignUp() {
 
               <Form.Item
                 name='email'
-                label='Email address'
+                label={t('emailLabel')}
                 rules={[
                   {
                     required: true,
@@ -151,7 +151,7 @@ function SignUp() {
 
               <Form.Item
                 name='country'
-                label='Country'
+                label={t('countryLabel')}
                 rules={[
                   {
                     required: true,
@@ -164,7 +164,7 @@ function SignUp() {
 
               <Form.Item
                 name='password'
-                label='Password'
+                label={t('passwordLabel')}
                 rules={[
                   {
                     required: true,
@@ -178,7 +178,7 @@ function SignUp() {
 
               <Form.Item
                 name='confirm'
-                label='Confirm Password'
+                label={t('confirmPasswordLabel')}
                 dependencies={['password']}
                 hasFeedback
                 rules={[
@@ -205,12 +205,12 @@ function SignUp() {
 
               <Form.Item
                 name='role'
-                label='Role'
+                label={t('roleLabel')}
                 rules={[{ required: true, message: 'Please select role!' }]}
               >
-                <Select placeholder='Select your role'>
-                  <Option value={USER_ROLE.TEACHER}>Tutor</Option>
-                  <Option value={USER_ROLE.USER}>Student</Option>
+                <Select placeholder={t('selectRole')}>
+                  <Option value={USER_ROLE.TEACHER}>{t('tutor')}</Option>
+                  <Option value={USER_ROLE.USER}>{t('student')}</Option>
                 </Select>
               </Form.Item>
               <Form.Item
@@ -227,7 +227,8 @@ function SignUp() {
                 {...tailFormItemLayout}
               >
                 <Checkbox>
-                  I have read the <a href='/'>agreement</a>
+                  {t('agreementCheckbox')}
+                  <a href='/oferta'> {t('agreement')}</a>
                 </Checkbox>
               </Form.Item>
 
@@ -240,13 +241,14 @@ function SignUp() {
                   loading={isLoading}
                   block
                 >
-                  Sign Up
+                  {t('signUpButton')}
                 </Button>
               </Form.Item>
             </Form>
             <Space direction='vertical' size='large'>
               <Typography.Text>
-                Already a member? <Link to='/signin'>Sign in</Link>
+                {t('alreadyMemberText')}{' '}
+                <Link to='/signin'>{t('signInButton')}</Link>
               </Typography.Text>
             </Space>
           </Card>

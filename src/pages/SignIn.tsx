@@ -17,8 +17,11 @@ import { authLogin } from '../redux/actions/auth'
 import Layout from '../components/common/Layout'
 import { ErrorMessage } from '../components/common/ErrorMessage'
 import { IUser } from '../redux/store/types'
+import useTranslations from '../lang/useTranslations'
 
 function SignIn() {
+  const t = useTranslations('SignIn')
+
   const [form] = Form.useForm()
   const dispatch = useDispatch()
 
@@ -49,7 +52,7 @@ function SignIn() {
   }
 
   const handleSignInSuccess = (user: IUser) => {
-    showSuccessNotification(`Hey ${user.email}, Welcome back to StrongMind!`)
+    showSuccessNotification(`Hey ${user.email}, ${t('welcome')}`)
     dispatch(authLogin(user))
 
     return navigate('/dashboard')
@@ -65,7 +68,7 @@ function SignIn() {
   return (
     <Layout>
       <Row align='middle' justify='center'>
-        <Card title='Sign in and explore' style={{ width: '35rem' }}>
+        <Card title={t('signInAndExplore')} style={{ width: '35rem' }}>
           <Form
             form={form}
             name='signInForm'
@@ -76,7 +79,7 @@ function SignIn() {
             method='POST'
           >
             <Form.Item
-              label='Email address'
+              label={t('emailLabel')}
               name='email'
               rules={[
                 {
@@ -93,12 +96,12 @@ function SignIn() {
                 prefix={<MailOutlined />}
                 type='email'
                 autoComplete='email'
-                placeholder='Email'
+                placeholder={t('emailPlaceholder')}
               />
             </Form.Item>
 
             <Form.Item
-              label='Password'
+              label={t('passwordLabel')}
               name='password'
               rules={[
                 {
@@ -111,7 +114,7 @@ function SignIn() {
                 prefix={<LockOutlined />}
                 type='password'
                 autoComplete='current-password'
-                placeholder='Password'
+                placeholder={t('passwordPlaceholder')}
               />
             </Form.Item>
 
@@ -121,15 +124,15 @@ function SignIn() {
 
             <Form.Item>
               <Button type='primary' htmlType='submit' className='w-full'>
-                Sign In
+                {t('signInButton')}
               </Button>
             </Form.Item>
           </Form>
 
           <Space direction='vertical' size='large'>
             <Typography.Text>
-              Ready to start exploring new perspectives?{' '}
-              <Link to='/signup'>Create an account!</Link>
+              {t('readyAccountText')}{' '}
+              <Link to='/signup'>{t('createAccountText')}</Link>
             </Typography.Text>
           </Space>
         </Card>

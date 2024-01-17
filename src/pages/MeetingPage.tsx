@@ -42,14 +42,6 @@ const MeetingPage: FC<{}> = () => {
       })
   }, [meetingId])
 
-  const handleReschedule = () => {
-    console.log('Reschedule clicked')
-  }
-
-  const handleCancel = () => {
-    console.log('Cancel clicked')
-  }
-
   const handleRate = () => {
     axios
       .patch(`/api/meetings/comment/${meetingId}`, { rate, report })
@@ -66,19 +58,7 @@ const MeetingPage: FC<{}> = () => {
     <Layout>
       <Row align='middle' justify='center'>
         <Col span={16}>
-          <Card
-            title='Details Meeting'
-            extra={
-              <Space>
-                {/* <Button type='primary' onClick={handleReschedule}>
-                  Reschedule
-                </Button>
-                <Button danger onClick={handleCancel}>
-                  Cancel
-                </Button> */}
-              </Space>
-            }
-          >
+          <Card title='Details Meeting'>
             {meeting &&
             meeting.status === 'finished' &&
             !meeting.rate &&

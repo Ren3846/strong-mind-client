@@ -83,5 +83,34 @@
   "ErrorPage": {
     "title": "Something went wrong!",
     "retry": "Try again"
+  },
+  "SignIn": {
+    "welcome": "Welcome back to StrongMind!",
+    "signInAndExplore": "Sign in and explore",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "Email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Password",
+    "signInButton": "Sign In",
+    "readyAccountText": "Ready to start exploring new perspectives?",
+    "createAccountText": "Create an account!"
+  },
+  "SignUp": {
+    "signUpAndExplore": "Sign Up and explore",
+    "fullNameLabel": "Full name",
+    "phoneLabel": "Phone Number",
+    "emailLabel": "Email address",
+    "countryLabel": "Country",
+    "passwordLabel": "Password",
+    "confirmPasswordLabel": "Confirm Password",
+    "roleLabel": "Role",
+    "agreementCheckbox": "I have read the",
+    "agreement": "agreement",
+    "signUpButton": "Sign Up",
+    "signInButton": "Sign In",
+    "alreadyMemberText": "Already a member?",
+    "tutor": "Tutor",
+    "student": "Student",
+    "selectRole": "Select your role"
   }
 }

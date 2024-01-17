@@ -1,0 +1,120 @@
+{
+  "TutorDashboard": {
+    "courses": "Мої курси",
+    "students": "Мої студенти",
+    "requests": "Запити від студентів",
+    "button_view": "Перегляд"
+  },
+
+  "UserDashboard": {
+    "courses": "Мої курси",
+    "tutors": "Мої репетитори",
+    "accepted_meetings": "Прийняті зустрічі",
+    "view_button": "Перегляд"
+  },
+
+  "Profile": {
+    "profile": "Профіль",
+    "user_role": "Роль користувача",
+    "account_balance": "Баланс рахунку ($)",
+    "save": "Зберегти",
+    "profile_updated_successfully": "Профіль успішно оновлено",
+    "email": "Електронна пошта",
+    "full_name": "Повне ім'я",
+    "phone": "Телефон",
+    "country": "Країна",
+    "bio": "Біографія",
+    "gender": "Стать",
+    "timezone": "Часовий пояс",
+    "calendar": "Календар",
+    "wallet": "Гаманець"
+  },
+
+  "Navbar": {
+    "courses": "Курси",
+    "teachers": "Вчителі",
+    "enrolled": "Записані",
+    "meetings": "Зустрічі",
+    "balance": "Баланс",
+    "go_to_wallet": "Перейти в гаманець",
+    "log_in": "Увійти",
+    "register": "Реєстрація",
+    "Dropdown": {
+      "dashboard": "Дашборд",
+      "courses": "Придбані курси",
+      "my_courses": "Мої курси",
+      "calendar": "Календар",
+      "exit": "Вийти",
+      "profile": "Профіль"
+    }
+  },
+
+  "Home": {
+    "Hero": {
+      "teach_inspire_grow": "Навчайте, надихайте та ростіть разом з динамічною освітньою платформою StrongMind.",
+      "join_as_tutor": "Приєднуйтесь як репетитор",
+      "strongmind_academy": "Академія StrongMind",
+      "embark_on_adventure": "Вирушайте у пригоду навчання, де кожне відкриття збагачує розум і піднімає душу до нових висот.",
+      "lets_start_as_student": "Почнемо як студент",
+      "explore_courses": "Дослідити курси",
+      "card_1": "Від 5$ на годину",
+      "card_2": "Безкоштовно 2 уроки для вас",
+      "card_3": "Уроки від 25 до 55 хвилин"
+    },
+    "StartStudent": {
+      "register_your_account": "Зареєструйте свій аккаунт",
+      "choose_course": "Виберіть курс",
+      "learn_safe": "Навчайтеся і будьте в безпеці",
+      "get_started_with_clicks": "Почніть лише кількома кліками",
+      "want_to_become_student": "Хочете стати студентом?"
+    },
+    "StartTutor": {
+      "typing_text": "| Ви гарний учитель?",
+      "title": "Приєднуйтесь! Новини від StrongMind",
+      "title_1": "Нові функції",
+      "subtitle_1": "У нас є останнє оновлення з новим світом для вас, щоб спробувати, не звертайте уваги",
+      "title_2": "Новий додаток",
+      "subtitle_2": "У останньому оновленні ваші очі стають більш великими, зроблять світ реалістичнішим, ніж коли-небудь"
+    }
+  },
+
+  "NotFoundPage": {
+    "title": "Не знайдено",
+    "message": "Не вдалося знайти запитаний ресурс",
+    "toHome": "Повернутися на головну"
+  },
+
+  "ErrorPage": {
+    "title": "Щось пішло не так!",
+    "retry": "Спробуйте ще раз"
+  },
+  "SignIn": {
+    "welcome": "Ласкаво просимо назад до StrongMind!",
+    "signInAndExplore": "Увійдіть та досліджуйте",
+    "emailLabel": "Електронна адреса",
+    "emailPlaceholder": "Електронна адреса",
+    "passwordLabel": "Пароль",
+    "passwordPlaceholder": "Пароль",
+    "signInButton": "Увійти",
+    "readyAccountText": "Готові розпочати дослідження нових перспектив?",
+    "createAccountText": "Створити акаунт!"
+  },
+  "SignUp": {
+    "signUpAndExplore": "Зареєструйтеся та досліджуйте",
+    "fullNameLabel": "Повне ім'я",
+    "phoneLabel": "Номер телефону",
+    "emailLabel": "Електронна адреса",
+    "countryLabel": "Країна",
+    "passwordLabel": "Пароль",
+    "confirmPasswordLabel": "Підтвердіть пароль",
+    "roleLabel": "Роль",
+    "agreementCheckbox": "Я прочитав",
+    "agreement": "угоду",
+    "signUpButton": "Зареєструватися",
+    "signInButton": "Увійти",
+    "alreadyMemberText": "Вже маєте акаунт?",
+    "tutor": "Репетитор",
+    "student": "Студент",
+    "selectRole": "Виберіть свою роль"
+  }
+}

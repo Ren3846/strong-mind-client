@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next'
 
 const SwitchLang: React.FC = () => {
   const { i18n } = useTranslation()
-  const [isChecked, setIsChecked] = useState(i18n.language === 'ru')
+  const [isChecked, setIsChecked] = useState(i18n.language === 'ua')
 
   const handleSwitchChange = (checked: boolean) => {
     setIsChecked(checked)
-    const newLanguage = checked ? 'ru' : 'en'
+    const newLanguage = checked ? 'ua' : 'en'
     i18n.changeLanguage(newLanguage)
     localStorage.setItem('selectedLanguage', newLanguage)
   }
@@ -16,7 +16,7 @@ const SwitchLang: React.FC = () => {
   useEffect(() => {
     const storedLanguage = localStorage.getItem('selectedLanguage')
     if (storedLanguage) {
-      setIsChecked(storedLanguage === 'ru')
+      setIsChecked(storedLanguage === 'ua')
       i18n.changeLanguage(storedLanguage)
     }
   }, [i18n])
@@ -24,7 +24,7 @@ const SwitchLang: React.FC = () => {
   return (
     <Space direction='vertical'>
       <Switch
-        checkedChildren={'RU'}
+        checkedChildren={'UA'}
         unCheckedChildren={'EN'}
         checked={isChecked}
         onChange={handleSwitchChange}

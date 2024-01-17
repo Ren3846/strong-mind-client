@@ -2,9 +2,9 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import en from './lang/en.json'
-import ru from './lang/ru.json'
+import ua from './lang/ua.json'
+// import ru from './lang/ru.json'
 
-// Загружаем язык из локального хранилища
 const savedLanguage = localStorage.getItem('selectedLanguage') || 'en'
 
 i18n.use(initReactI18next).init({
@@ -12,11 +12,14 @@ i18n.use(initReactI18next).init({
     en: {
       translation: en,
     },
-    ru: {
-      translation: ru,
+    // ru: {
+    //   translation: ru,
+    // },
+    ua: {
+      translation: ua,
     },
   },
-  lng: savedLanguage, // Устанавливаем язык из локального хранилища
+  lng: savedLanguage,
   fallbackLng: 'en',
   interpolation: {
     escapeValue: false,
