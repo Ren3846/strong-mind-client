@@ -87,5 +87,378 @@
   "ErrorPage": {
     "title": "Что-то пошло не так!",
     "retry": "Попробуйте еще раз"
-  }
+  },
+
+  "SignIn": {
+    "welcome": "Добро пожаловать обратно в StrongMind!",
+    "signInAndExplore": "Войдите и исследуйте",
+    "emailLabel": "Адрес электронной почты",
+    "emailPlaceholder": "Электронная почта",
+    "passwordLabel": "Пароль",
+    "passwordPlaceholder": "Пароль",
+    "signInButton": "Войти",
+    "readyAccountText": "Готовы начать исследовать новые перспективы?",
+    "createAccountText": "Создать аккаунт!"
+    },
+    "SignUp": {
+    "signUpAndExplore": "Зарегистрируйтесь и исследуйте",
+    "fullNameLabel": "Полное имя",
+    "phoneLabel": "Номер телефона",
+    "emailLabel": "Адрес электронной почты",
+    "countryLabel": "Страна",
+    "passwordLabel": "Пароль",
+    "confirmPasswordLabel": "Подтвердите пароль",
+    "roleLabel": "Роль",
+    "agreementCheckbox": "Я прочитал(а) ",
+    "agreement": "соглашение",
+    "signUpButton": "Зарегистрироваться",
+    "signInButton": "Войти",
+    "alreadyMemberText": "Уже зарегистрированы?",
+    "tutor": "Преподаватель",
+    "student": "Студент",
+    "selectRole": "Выберите свою роль"
+    },
+    "GetAvailableDays": {
+    "select-available-time": "Выберите доступное время",
+    "changes-successfully-saved": "Изменения успешно сохранены",
+    "error-while-saving-changes": "Ошибка при сохранении изменений",
+    "Monday": "Понедельник",
+    "Tuesday": "Вторник",
+    "Wednesday": "Среда",
+    "Thursday": "Четверг",
+    "Friday": "Пятница",
+    "Saturday": "Суббота",
+    "Sunday": "Воскресенье"
+    },
+    "GetCourses": {
+    "explore": "Исследовать",
+    "no-courses-yet": "Пока нет курсов",
+    "price": "Цена"
+    },
+    "LessonsList": {
+    "lesson-delete-success": "Успешно удалено",
+    "error-while-delete": "Ошибка при удалении",
+    "error-while-data-download": "Ошибка при загрузке данных",
+    "view-lesson": "Посмотреть урок",
+    "delete": "Удалить",
+    "video-key": "Ключ видео:",
+    "duration": "Продолжительность:",
+    "minutes": "минут"
+    },
+    "ManageCourseCover": {
+    "course-cover-deleted-successfully": "Обложка курса успешно удалена",
+    "course-cover-delete-failed": "Не удалось удалить обложку курса",
+    "course-cover-uploaded-successfully": "Обложка курса успешно загружена",
+    "course-cover-upload-failed": "Не удалось загрузить обложку курса",
+    "delete-course-cover-video": "Удалить видео обложки курса",
+    "upload-course-cover-video": "Загрузить видео обложки курса"
+    },
+    "MeetingsTeacher": {
+    "accepted": "Принято",
+    "rejected": "Отклонено",
+    "started": "Начато",
+    "finished": "Завершено",
+    "pending": "В ожидании",
+    "accept-meeting": "Принять встречу",
+    "reject-meeting": "Отклонить встречу",
+    "view-meeting": "Посмотреть встречу"
+    },
+    "WalletWithdrawal": {
+    "enter-amount": "Введите сумму",
+    "withdrawal": "Вывод",
+    "successful": "успешно",
+    "error-withdrawal-balance": "Ошибка при выводе баланса"
+    },
+    "CourseFilter": {
+    "price-filter": "Фильтр по цене",
+    "category-filter": "Фильтр по категории",
+    "difficulty-filter": "Фильтр по уровню сложности",
+    "difficulty": "Сложность",
+    "all": "Все",
+    "free": "Бесплатно",
+    "paid": "Платно",
+    "english": "Английский",
+    "russian": "Русский"
+    },
+    "LessonsListUser": {
+    "lesson-delete-success": "Успешно удалено",
+    "error-while-delete": "Ошибка при удалении",
+    "error-while-data-download": "Ошибка при загрузке данных",
+    "view-lesson": "Посмотреть урок",
+    "delete": "Удалить",
+    "video-key": "Ключ видео:",
+    "duration": "Продолжительность:",
+    "minutes": "минут"
+    },
+    "MeetingsStudent": {
+    "accepted": "Принято",
+    "rejected": "Отклонено",
+    "started": "Начато",
+    "finished": "Завершено",
+    "pending": "В ожидании",
+    "cancel": "Отменить",
+    "meeting-details": "Детали встречи"
+    },
+    "PurchaseMeetings": {
+    "quantity": "Количество",
+    "buy-meetings": "Купить встречи",
+    "purchase-successful": "Покупка успешна",
+    "server-response": "Ответ сервера",
+    "oops-no-money": "Упс.. Вероятно, у вас нет денег",
+    "meetings-purchased": "встречи куплены"
+    },
+    "RequestMeeting": {
+    "choose-date-time": "Выберите дату и время",
+    "request-call": "Запросить звонок",
+    "submit": "Отправить",
+    "cancel": "Отмена",
+    "call-request-sent": "Запрос на звонок успешно отправлен",
+    "error-sending-request": "Ошибка при отправке запроса на звонок"
+    },
+    "WalletTopup": {
+    "enter-amount": "Введите сумму",
+    "pay": "Оплатить",
+    "error-topping-up": "Ошибка при пополнении баланса"
+    },
+    "CreateCourse": {
+    "create-course": "Создать курс",
+    "title": "Заголовок",
+    "enter-title": "Введите заголовок курса",
+    "description": "Описание",
+    "enter-description": "Введите описание курса",
+    "category": "Категория",
+    "select-category": "Выберите категорию",
+    "difficulty": "Сложность",
+    "select-difficulty": "Выберите уровень сложности",
+    "tagline": "Слоган",
+    "enter-tag": "Введите слоган",
+    "price-per-meeting": "Цена за встречу",
+    "enter-price": "Введите цену за встречу",
+    "create-course-button": "Создать курс"
+    },
+    "AddLesson": {
+    "addLessonForm": "Добавить урок",
+    "title": "Заголовок",
+    "enter-title": "Пожалуйста, введите заголовок!",
+    "description": "Описание",
+    "enter-description": "Пожалуйста, введите описание!",
+    "videoKey": "Ключ видео",
+    "enter-video-key": "Пожалуйста, введите ключ видео!",
+    "duration": "Продолжительность",
+    "enter-duration": "Пожалуйста, введите продолжительность!",
+    "add-lesson-button": "Добавить урок"
+    },
+    "CourseDetails": {
+    "Dashboard": "Панель управления",
+    "MyCourses": "Мои курсы",
+    "CourseInfo": "Информация о курсе",
+    "CourseDetailsTitle": "Информация о курсе",
+    "StudentsTitle": "Студенты",
+    "NoStudentsMessage": "Нет студентов :(",
+    "LessonsTitle": "Уроки",
+    "AddLessonButton": "Добавить урок",
+    "LessonTitle": "Просмотр урока",
+    "LessonDelete": "Удалить",
+    "difficulty": "Сложность",
+    "price": "Цена",
+    "category": "Категория",
+    "add-lesson-button": "Добавить урок",
+    "duration": "Продолжительность",
+    "minutes": "Минуты"
+    },
+    "EditCourse": {
+    "Title": "Заголовок",
+    "About": "О курсе",
+    "Category": "Категория",
+    "Difficulty": "Сложность",
+    "Tagline": "Слоган",
+    "Thumbnail": "Обложка",
+    "MeetingPrice": "Цена за встречу",
+    "SaveChanges": "Сохранить изменения",
+    "Loading": "Загрузка...",
+    "ErrorFetchingCourseData": "Ошибка при получении данных курса",
+    "ErrorUpdatingCourse": "Ошибка при обновлении курса",
+    "PleaseEnterCourseTitle": "Введите заголовок курса",
+    "PleaseEnterCourseBio": "Введите описание курса",
+    "PleaseEnterCourseCategory": "Введите категорию курса",
+    "PleaseEnterCourseDifficulty": "Введите уровень сложности курса",
+    "PleaseEnterCourseTagline": "Введите слоган курса",
+    "PleaseEnterCourseThumbnailURL": "Введите URL-адрес обложки курса",
+    "PleaseEnterMeetingPrice": "Введите цену за встречу"
+    },
+    "Lesson": {
+    "title": "Урок",
+    "videoUploadedSuccessfully": "Видео успешно загружено",
+    "errorUploadingVideo": "Ошибка при загрузке видео",
+    "uploadVideo": "Загрузить видео",
+    "duration": "Продолжительность",
+    "minutes": "минут",
+    "errorFetchingLessonData": "Ошибка при получении данных урока"
+    },
+    "MyCourses": {
+    "title": "Мои курсы",
+    "deleteCourseSuccessful": "Курс успешно удален",
+    "errorDeleteCourse": "Ошибка при удалении курса",
+    "addCourse": "Добавить курс"
+    },
+    "Dashboard": {
+    "title": "Панель управления"
+    },
+    "StudentProfile": {
+    "title": "Профиль студента",
+    "fullName": "Полное имя",
+    "email": "Электронная почта",
+    "chatButton": "Чат",
+    "error": "Произошла ошибка при выполнении запроса"
+    },
+    "Courses": {
+    "filters": "Фильтры:",
+    "all": "Все",
+    "price": "Цена",
+    "explore": "Исследовать",
+    "A1": "A1",
+    "A2": "A2",
+    "B1": "B1",
+    "B2": "B2",
+    "Grammar": "Английский",
+    "Literature": "Русский",
+    "Grammar2": "Армянский",
+    "search": "Поиск",
+    "no_courses_match": "Нет курсов, соответствующих выбранной сложности и категории.",
+    "all_courses": "Все курсы"
+    },
+    "CalendarPage": {
+    "Agenda": "Повестка дня",
+    "Meetings": "Встречи",
+    "selected_date": "Вы выбрали дату: {date}",
+    "start_zoom": "Начать Zoom",
+    "join_zoom": "Присоединиться к Zoom",
+    "link_will_appear": "ссылка появится за 15 минут до урока",
+    "copy_to_clipboard": "Скопировать в буфер обмена",
+    "meeting_status": "Статус",
+    "you_selected_date": "Вы выбрали дату:",
+    "calendar": "Календарь",
+    "Status": "Статус"
+    },
+    "Course": {
+      "video_by_teacher": "Видео от учителя",
+      "course_details": "Детали курса",
+      "enrolled": "Зарегистрирован",
+      "enroll": "Записаться",
+      "go_to_course_page": "Перейти на страницу курса",
+      "course_not_found": "Курс не найден или произошла ошибка.",
+      "price": "Цена",
+      "category": "Категория",
+      "difficulty": "Сложность",
+      "tagline": "Слоган",
+      "number_of_lessons": "Количество уроков",
+      "teacher": "Учитель",
+      "course_title": "Название курса",
+      "about": "Описание",
+      "visible": "Видимость",
+      "enroll_success_message": "Вы успешно записались!",
+      "loading_error": "Произошла ошибка во время загрузки.",
+      "enroll_loading_message": "Запись...",
+      "go_to_enrolled_page": "Перейти на страницу записанных"
+      },
+      "Enrolled": {
+      "dashboard": "Панель управления",
+      "enrolled_courses": "Записанные курсы",
+      "my_enrolled_courses": "Мои записанные курсы",
+      "view_course": "Просмотр курса",
+      "about": "Описание",
+      "category": "Категория",
+      "difficulty": "Сложность",
+      "teacher": "Учитель",
+      "you_are_not_registered": "Вы не зарегистрированы на каком-либо курсе"
+      },
+      "CourseInfo": {
+      "dashboard": "Панель управления",
+      "enrolled": "Записан",
+      "course": "Курс",
+      "course_details": "Детали курса",
+      "title": "Название",
+      "about": "Описание",
+      "tagline": "Слоган",
+      "category": "Категория",
+      "difficulty": "Сложность",
+      "price_for_lesson": "Цена за урок",
+      "teacher": "Учитель",
+      "request_meeting": "Запросить встречу",
+      "lessons_in_this_course": "Уроки в этом курсе",
+      "course_not_found": "Курс не найден"
+      },
+      "LessonUser": {
+      "dashboard": "Панель управления",
+      "enrolled": "Записан",
+      "course": "Курс",
+      "lesson": "Урок",
+      "lesson_info": "Информация об уроке",
+      "duration": "Продолжительность",
+      "video": "Видео",
+      "liked": "Понравилось",
+      "like": "Поставить лайк",
+      "error_fetching_lesson_data": "Ошибка при получении данных урока",
+      "error_fetching_lesson_video": "Ошибка при получении видео урока"
+      },
+      "TeacherProfile": {
+      "teacher_profile": "Профиль учителя",
+      "full_name": "Полное имя",
+      "email": "Электронная почта",
+      "teacher_courses": "Курсы учителя",
+      "no_courses": "Нет курсов :(",
+      "chat": "Чат",
+      "error_chat": "Произошла ошибка при выполнении запроса"
+      },
+      "Teachers": {
+      "top_tutors": "Топ-5 преподавателей",
+      "email": "Электронная почта",
+      "students": "Студенты",
+      "view_details": "Посмотреть детали",
+      "no_data": "Нет доступных данных"
+      },
+      "Wallet": {
+      "balance_title": "Баланс",
+      "account_balance": "Баланс аккаунта ($)",
+      "history_title": "История",
+      "id": "ID",
+      "amount": "Сумма",
+      "status": "Статус",
+      "pending": "В ожидании",
+      "accepted": "Принято",
+      "rejected": "Отклонено",
+      "default_status": "По умолчанию",
+      "date": "Дата"
+      },
+      "chat": {
+      "title": "Чат",
+      "send": "Отправить"
+      },
+      "ConfirmEmail": {
+      "confirmEmail": "Подтверждение почты",
+      "welcomeBackMessage": "Добро пожаловать обратно в StrongMind!",
+      "confirmationError": "Ошибка подтверждения почты:"
+      },
+      "MeetingPage": {
+      "DetailsMeeting": "Детали встречи",
+      "LeaveMeeting": "Оставить отзыв о встрече",
+      "EnterReport": "Введите свой отчет",
+      "Rate": "Оценка",
+      "MeetingID": "ID встречи",
+      "Teacher": "Учитель",
+      "Student": "Студент",
+      "Course": "Курс",
+      "StartDate": "Дата начала",
+      "Status": "Статус",
+      "ZoomURL": "Ссылка Zoom",
+      "RateStudent": "Оценка от студента",
+      "ReportStudent": "Отчет от студента",
+      "RatingSuccessfully": "Оценка и отчет успешно добавлены",
+      "FailedReport": "Не удалось добавить оценку и отчет"
+      },
+      "NotFound": {
+      "404": "404",
+      "Sorry": "Извините, страница не найдена.",
+      "back": "Вернуться"
+      }
 }

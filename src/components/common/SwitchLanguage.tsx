@@ -1,36 +1,36 @@
-import React, { useState, useEffect } from 'react'
-import { Switch, Space } from 'antd'
-import { useTranslation } from 'react-i18next'
+import React, { useState, useEffect } from 'react';
+import { Select, Space } from 'antd';
+import { useTranslation } from 'react-i18next';
+
+const { Option } = Select;
 
 const SwitchLang: React.FC = () => {
-  const { i18n } = useTranslation()
-  const [isChecked, setIsChecked] = useState(i18n.language === 'ua')
+  const { i18n } = useTranslation();
+  const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
 
-  const handleSwitchChange = (checked: boolean) => {
-    setIsChecked(checked)
-    const newLanguage = checked ? 'ua' : 'en'
-    i18n.changeLanguage(newLanguage)
-    localStorage.setItem('selectedLanguage', newLanguage)
-  }
+  const handleLanguageChange = (value: string) => {
+    setSelectedLanguage(value);
+    i18n.changeLanguage(value);
+    localStorage.setItem('selectedLanguage', value);
+  };
 
   useEffect(() => {
-    const storedLanguage = localStorage.getItem('selectedLanguage')
+    const storedLanguage = localStorage.getItem('selectedLanguage');
     if (storedLanguage) {
-      setIsChecked(storedLanguage === 'ua')
-      i18n.changeLanguage(storedLanguage)
+      setSelectedLanguage(storedLanguage);
+      i18n.changeLanguage(storedLanguage);
     }
-  }, [i18n])
+  }, [i18n]);
 
   return (
     <Space direction='vertical'>
-      <Switch
-        checkedChildren={'UA'}
-        unCheckedChildren={'EN'}
-        checked={isChecked}
-        onChange={handleSwitchChange}
-      />
+      <Select value={selectedLanguage} onChange={handleLanguageChange}>
+        <Option value='ua'>UA</Option>
+        <Option value='en'>EN</Option>
+        <Option value='ru'>RU</Option>
+      </Select>
     </Space>
-  )
-}
+  );
+};
 
-export default SwitchLang
+export default SwitchLang;
