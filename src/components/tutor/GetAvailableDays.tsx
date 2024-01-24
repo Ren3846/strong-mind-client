@@ -15,7 +15,12 @@ import { CheckCircleOutlined, EditOutlined } from '@ant-design/icons'
 import { useSelector } from 'react-redux'
 import { IUser } from '../../redux/store/types'
 
+import useTranslations from '../../lang/useTranslations'
+
+
 const GetAvailableDays: React.FC = () => {
+  const t = useTranslations('GetAvailableDays')
+
   const user = useSelector((state: IUser) => state.auth.user)
   const [modalVisible, setModalVisible] = useState(false)
   const [form] = Form.useForm()
@@ -78,12 +83,12 @@ const GetAvailableDays: React.FC = () => {
       }
 
       await axios.patch('/api/users/availability/', requestBody)
-      message.success('Changes successfully saved')
+      message.success(t('changes-successfully-saved'))
       setModalVisible(false)
       form.resetFields()
     } catch (error) {
       console.error(error)
-      message.error('Error while saving changes')
+      message.error(t('error-while-saving-changes'))
     }
   }
 
@@ -116,6 +121,19 @@ const GetAvailableDays: React.FC = () => {
     )
   }
 
+  const getDayOfWeek = (dayOfWeek: string) => {
+    const days: { [key: string]: string } = {
+      MON: t('Monday'),
+      TUE: t('Tuesday'),
+      WED: t('Wednesday'),
+      THU: t('Thursday'),
+      FRI: t('Friday'),
+      SAT: t('Saturday'),
+      SUN: t('Sunday'),
+    }
+    return (days as { [key: string]: string })[dayOfWeek] || ''
+  }
+
   return (
     <div>
       <Row gutter={16}>
@@ -136,7 +154,7 @@ const GetAvailableDays: React.FC = () => {
         ))}
       </Row>
       <Modal
-        title='Select Available Time'
+        title={t('select-available-time')}
         open={modalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
@@ -153,17 +171,5 @@ const GetAvailableDays: React.FC = () => {
   )
 }
 
-const getDayOfWeek = (dayOfWeek: string) => {
-  const days: { [key: string]: string } = {
-    MON: 'Monday',
-    TUE: 'Tuesday',
-    WED: 'Wednesday',
-    THU: 'Thursday',
-    FRI: 'Friday',
-    SAT: 'Saturday',
-    SUN: 'Sunday',
-  }
-  return (days as { [key: string]: string })[dayOfWeek] || ''
-}
 
 export default GetAvailableDays

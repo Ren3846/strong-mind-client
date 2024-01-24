@@ -5,8 +5,10 @@ import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { authLogin } from '../redux/actions/auth'
 import { IUser } from '../redux/store/types'
+import useTranslations from '../lang/useTranslations'
 
 const ConfirmEmail: React.FC = () => {
+  const t = useTranslations('ConfirmEmail')
   const { token } = useParams<{ token: string }>()
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState(null)
@@ -24,8 +26,7 @@ const ConfirmEmail: React.FC = () => {
         setUser(response.data.user)
         handleSignInSuccess(response.data.user)
       } catch (error) {
-        console.error('Ошибка при подтверждении электронной почты:', error)
-        message.error('Ошибка при подтверждении электронной почты:')
+        message.error(t('confirmationError'))
       } finally {
         setLoading(false)
       }
@@ -35,7 +36,7 @@ const ConfirmEmail: React.FC = () => {
   }, [token])
 
   const handleSignInSuccess = (user: IUser) => {
-    message.info(`Hey ${user.email}, Welcome back to StrongMind!`)
+    message.info(`Hey ${user.email}, ${t('welcomeBackMessage')}`)
     dispatch(authLogin(user))
 
     return navigate('/dashboard')

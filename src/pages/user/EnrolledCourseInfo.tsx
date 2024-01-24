@@ -3,23 +3,24 @@ import axios from 'axios'
 import { Card, Row, Descriptions, Skeleton, Divider, Rate } from 'antd'
 import { useParams } from 'react-router-dom'
 
-import { ICourse, ITeacher } from '../../redux/store/types'
 import LessonsListUser from '../../components/user/LessonsListUser'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import RequestMeeting from '../../components/user/RequestMeeting'
 import PurchaseMeetings from '../../components/user/PurchaseMeetings'
 import { GetTutor } from '../../components/tutor/GetTutor'
+import useTranslations from '../../lang/useTranslations';
 
 const CourseInfo: React.FC = () => {
   const [courseInfo, setCourseInfo] = useState<any>()
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState('')
   const { id } = useParams()
+  const t = useTranslations('CourseInfo');
 
   const breadcrumbItems = [
-    { title: 'Dashboard', link: '/dashboard' },
-    { title: 'Enrolled ', link: '/enrolled' },
-    { title: 'Course ' },
+    { title: t('dashboard'), link: '/dashboard' },
+    { title: t('enrolled'), link: '/enrolled' },
+    { title: t('course') },
   ]
 
   useEffect(() => {
@@ -31,7 +32,7 @@ const CourseInfo: React.FC = () => {
       })
       .catch((err) => {
         if (err.response && err.response.status === 404) {
-          setError('Course not found')
+          setError(t('course_not_found'));
         } else {
           console.error(err)
         }
@@ -46,7 +47,7 @@ const CourseInfo: React.FC = () => {
       <MyBreadcrumb items={breadcrumbItems} />
 
       <Card
-        title='Course Details'
+        title={t('course_details')}
         style={{ width: '80rem', margin: '20px' }}
         extra={
           <Rate
@@ -61,26 +62,26 @@ const CourseInfo: React.FC = () => {
             {courseInfo ? (
               <>
                 <Descriptions>
-                  <Descriptions.Item label='Title'>
+                  <Descriptions.Item label={t('title')}>
                     {courseInfo.title}
                   </Descriptions.Item>
-                  <Descriptions.Item label='About'>
+                  <Descriptions.Item label={t('about')}>
                     {courseInfo.about}
                   </Descriptions.Item>
-                  <Descriptions.Item label='Tagline'>
+                  <Descriptions.Item label={t('tagline')}>
                     {courseInfo.tagline}
                   </Descriptions.Item>
-                  <Descriptions.Item label='Category'>
+                  <Descriptions.Item label={t('category')}>
                     {courseInfo.category}
                   </Descriptions.Item>
-                  <Descriptions.Item label='Difficulty'>
+                  <Descriptions.Item label={t('difficulty')}>
                     {courseInfo.difficulty}
                   </Descriptions.Item>
-                  <Descriptions.Item label='Price for lesson'>
+                  <Descriptions.Item label={t('price_for_lesson')}>
                     ${courseInfo.meetingPrice}
                   </Descriptions.Item>
 
-                  <Descriptions.Item label='Teacher'>
+                  <Descriptions.Item label={t('teacher')}>
                     <GetTutor userId={courseInfo.teacher} />
                   </Descriptions.Item>
                 </Descriptions>
@@ -105,7 +106,7 @@ const CourseInfo: React.FC = () => {
       </Card>
 
       <Card
-        title='Lessons in this Course'
+        title={t('lessons_in_this_course')}
         style={{ width: '80rem', margin: '20px' }}
       >
         <div>

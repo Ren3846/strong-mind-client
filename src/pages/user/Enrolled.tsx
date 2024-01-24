@@ -6,6 +6,7 @@ import Preloader from '../../components/common/Preloader'
 
 import { ICourse, ITeacher } from '../../redux/store/types'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
+import useTranslations from '../../lang/useTranslations'
 
 const breadcrumbItems = [
   { title: 'Dashboard', link: '/dashboard' },
@@ -17,6 +18,7 @@ const Enrolled: React.FC = () => {
   const [teacher, setTeacher] = useState<ITeacher | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const t = useTranslations('Enrolled');
 
   useEffect(() => {
     axios
@@ -27,7 +29,7 @@ const Enrolled: React.FC = () => {
       })
       .catch((err) => {
         if (err.response && err.response.status === 404) {
-          setError('You are not registered in any course')
+          setError(t('you_are_not_registered'));
         } else {
           console.error(err)
         }
@@ -43,10 +45,13 @@ const Enrolled: React.FC = () => {
 
   return (
     <Row align='middle' justify='center'>
-      <MyBreadcrumb items={breadcrumbItems} />
+      <MyBreadcrumb items={[
+        { title: t('dashboard'), link: '/dashboard' },
+        { title: t('enrolled_courses') }
+      ]} />
 
       <Card
-        title='My Enrolled Courses'
+        title={t('my_enrolled_courses')}
         style={{ width: '80rem', margin: '20px' }}
       >
         <div>
@@ -60,26 +65,26 @@ const Enrolled: React.FC = () => {
                     title={course.title}
                     extra={
                       <Link to={`${course._id}/info`}>
-                        <Button type='primary'>View Course</Button>
+                        <Button type='primary'>{t('view_course')}</Button>
                       </Link>
                     }
                     style={{ margin: '20px' }}
                   >
                     <Descriptions>
-                      <Descriptions.Item label='About'>
+                      <Descriptions.Item label={t('about')}>
                         {course.about}
                       </Descriptions.Item>
-                      <Descriptions.Item label='Category'>
+                      <Descriptions.Item label={t('category')}>
                         {course.category}
                       </Descriptions.Item>
-                      <Descriptions.Item label='Difficulty'>
+                      <Descriptions.Item label={t('difficulty')}>
                         {course.difficulty}
                       </Descriptions.Item>
                     </Descriptions>
                     <Divider />
 
                     <Descriptions>
-                      <h3>Teacher:</h3>
+                      <h3>{t('teacher')}:</h3>
                       <Descriptions.Item label=''>
                         <Link to={`/teacher/${course.teacher}`}>
                           <GetTeacher userId={course.teacher} />
@@ -102,6 +107,7 @@ const GetTeacher: React.FC<{
 }> = ({ userId }) => {
   const [user, setUser] = useState<ITeacher | null>(null)
   const [loaded, setLoaded] = useState(false)
+  const t = useTranslations('Enrolled');
 
   useEffect(() => {
     axios({

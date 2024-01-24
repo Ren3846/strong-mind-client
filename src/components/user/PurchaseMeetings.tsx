@@ -5,10 +5,13 @@ import { DollarCircleFilled } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateUser } from '../../redux/actions/user'
 import { IUser } from '../../redux/store/types'
+import useTranslations from '../../lang/useTranslations'
 
 const PurchaseMeetings: React.FC<{
   courseId: string
 }> = ({ courseId }) => {
+  const t = useTranslations('PurchaseMeetings')
+
   const [quantity, setQuantity] = useState(1)
   const user = useSelector((state: IUser) => state.auth.user)
   const dispatch = useDispatch()
@@ -41,12 +44,11 @@ const PurchaseMeetings: React.FC<{
 
       fetchUserData()
       console.log(response.data)
-      message.success('Purchase successful')
-      // message.info(`Server Response: ${JSON.stringify(response.data)}`)
+      message.success(t('purchase-successful'))
       setQuantity(1)
     } catch (error) {
       console.error(error)
-      message.error('Ooops.. Probably you have no money')
+      message.error(t('oops-no-money'))
     }
   }
   useEffect(() => {
@@ -58,7 +60,7 @@ const PurchaseMeetings: React.FC<{
       <Space.Compact>
         <Input
           type='number'
-          placeholder='Quantity'
+          placeholder={t('quantity')}
           value={quantity}
           onChange={(e) => setQuantity(parseInt(e.target.value))}
         />
@@ -67,11 +69,11 @@ const PurchaseMeetings: React.FC<{
           onClick={handlePurchase}
           icon={<DollarCircleFilled />}
         >
-          Buy meetings
+          {t('buy-meetings')}
         </Button>
       </Space.Compact>
       <Divider />
-      <div>{`${purchasedQuantity} meetings purchased`}</div>
+      <div>{purchasedQuantity} {t('meetings-purchased')} </div>
     </Space>
   )
 }

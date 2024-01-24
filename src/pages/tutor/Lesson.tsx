@@ -3,6 +3,7 @@ import { Card, Button, Divider, Space, Row, Upload, message } from 'antd'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { UploadOutlined } from '@ant-design/icons'
+import useTranslations from '../../lang/useTranslations'
 
 interface ILesson {
   _id: string
@@ -13,26 +14,28 @@ interface ILesson {
 }
 
 const Lesson: React.FC = () => {
-  const { id } = useParams()
-  const [lesson, setLesson] = useState<ILesson | null>(null)
-  const [error, setError] = useState<string>('')
-  const [videoUrl, setVideoUrl] = useState('')
+  const { id } = useParams();
+  const t = useTranslations('Lesson');
+
+  const [lesson, setLesson] = useState<ILesson | null>(null);
+  const [error, setError] = useState<string>('');
+  const [videoUrl, setVideoUrl] = useState('');
 
   useEffect(() => {
     axios
       .get(`/api/lessons/${id}`)
       .then((response) => {
-        setLesson(response.data)
+        setLesson(response.data);
       })
       .catch((error) => {
-        console.error(error)
-        setError('Error while fetching lesson data')
-      })
-  }, [id])
+        console.error(error);
+        setError(t('errorFetchingLessonData'));
+      });
+  }, [id]);
 
   const customRequest = ({ file, onSuccess, onError }: any) => {
-    const formData = new FormData()
-    formData.append('video', file)
+    const formData = new FormData();
+    formData.append('video', file);
 
     axios
       .post(`/api/lessons/video/${id}`, formData, {
@@ -41,19 +44,19 @@ const Lesson: React.FC = () => {
         },
       })
       .then((response) => {
-        onSuccess(response, file)
-        message.success('Video uploaded successfully')
+        onSuccess(response, file);
+        message.success(t('videoUploadedSuccessfully'));
       })
       .catch((error) => {
-        onError('Error uploading video', error, file)
-        message.error('Error uploading video')
-      })
-  }
+        onError(t('errorUploadingVideo'), error, file);
+        message.error(t('errorUploadingVideo'));
+      });
+  };
 
   return (
     <div>
       <Row align='middle' justify='center'>
-        <Card title={`Lesson`} style={{ width: '60rem', margin: '20px' }}>
+        <Card title={t('title')} style={{ width: '60rem', margin: '20px' }}>
           <Space>
             {lesson && (
               <div style={{ width: '15rem', margin: '5px' }}>
@@ -70,12 +73,14 @@ const Lesson: React.FC = () => {
                   </video>
                 ) : (
                   <Upload customRequest={customRequest} showUploadList={false}>
-                    <Button icon={<UploadOutlined />}>Upload Video</Button>
+                    <Button icon={<UploadOutlined />}>{t('uploadVideo')}</Button>
                   </Upload>
                 )}
                 <Divider />
 
-                <p>Duration: {lesson.duration} minutes</p>
+                <p>
+                  {t('duration')}: {lesson.duration} {t('minutes')}
+                </p>
               </div>
             )}
           </Space>
@@ -84,7 +89,7 @@ const Lesson: React.FC = () => {
 
       {error && <p>{error}</p>}
     </div>
-  )
-}
+  );
+};
 
-export default Lesson
+export default Lesson;

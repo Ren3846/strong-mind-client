@@ -6,17 +6,16 @@ import {
   Rate,
   Row,
   Space,
-  Typography,
   message,
 } from 'antd'
 import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
 import Preloader from '../../components/common/Preloader'
-import { GetTutor } from '../../components/tutor/GetTutor'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import ManageCourseCover from '../../components/tutor/ManageCourseCover'
 import { ICourse, ILesson } from '../../redux/store/types'
 import GetUser from '../../components/common/GetUser'
+import useTranslations from '../../lang/useTranslations'
 
 const breadcrumbItems = [
   { title: 'Dashboard', link: '/Dashboard' },
@@ -25,6 +24,7 @@ const breadcrumbItems = [
 ]
 
 const CourseDetails: React.FC = () => {
+  const t = useTranslations('CourseDetails')
   const { id } = useParams()
   const [course, setCourse] = useState<ICourse>()
   const [lessonsData, setLessonsData] = useState<ILesson[]>([])
@@ -39,7 +39,7 @@ const CourseDetails: React.FC = () => {
         fetchLessonData(response.data.lessons)
       })
       .catch((error) => {
-        setError('Error while dawnload data')
+        setError('Error')
       })
   }, [id])
 
@@ -83,11 +83,10 @@ const CourseDetails: React.FC = () => {
       <MyBreadcrumb items={breadcrumbItems} />
 
       <Card
-        title='Course Details'
+        title={t('CourseDetailsTitle')}
         style={{ width: '80rem', margin: '20px' }}
         extra={
           <>
-            {/* {courseLikes} <LikeFilled /> */}
             <Rate
               allowHalf
               disabled
@@ -96,13 +95,6 @@ const CourseDetails: React.FC = () => {
             />
           </>
         }
-        // cover={
-        //   <img
-        //     alt='example'
-        //     src={`${baseImageUrl}${course.cover}`}
-        //     style={{ maxHeight: '450px' }}
-        //   />
-        // }
       >
         <ManageCourseCover
           courseId={course._id}
@@ -117,9 +109,9 @@ const CourseDetails: React.FC = () => {
         <div>
           <h1>{course.title}</h1>
           <p>{course.about}</p>
-          <p>Category: {course.category}</p>
-          <p>Difficulty: {course.difficulty}</p>
-          <p>Price: ${course.meetingPrice}</p>
+          <p>{t('category')} {course.category}</p>
+          <p>{t('difficulty')} {course.difficulty}</p>
+          <p>{t('price')} ${course.meetingPrice}</p>
         </div>
       </Card>
 
@@ -133,11 +125,11 @@ const CourseDetails: React.FC = () => {
             </ul>
           </div>
         ) : (
-          <p>Nobody :(</p>
+          <p>{t('NoStudentsMessage')}</p>
         )}
       </Card>
 
-      <Card title='Lessons' style={{ width: '80rem', margin: '20px' }}>
+      <Card title={t('LessonsTitle')} style={{ width: '80rem', margin: '20px' }}>
         <div>
           <ul>
             {lessonsData.map((lesson: any) => (
@@ -148,18 +140,17 @@ const CourseDetails: React.FC = () => {
                 >
                   <h2>{lesson.title}</h2>
                   <p>{lesson.description}</p>
-                  {/* <p>Video Key: {lesson.videoKey}</p> */}
-                  <p>Duration: {lesson.duration} minutes</p>
+                  <p>{t('duration')} {lesson.duration} {t('minutes')}</p>
                   <Divider />
                   <Space>
                     <Link to={`/lessons/${lesson._id}`}>
-                      <Button type='primary'>View Lesson</Button>
+                      <Button type='primary'>{t('LessonTitle')}</Button>
                     </Link>
                     <Button
                       danger
                       onClick={() => handleDeleteLesson(lesson._id)}
                     >
-                      Delete
+                      {t('LessonDelete')}
                     </Button>
                   </Space>
                 </Card>
@@ -168,7 +159,7 @@ const CourseDetails: React.FC = () => {
           </ul>
         </div>
         <Link to={`/lessons/create/${course._id}`}>
-          <Button style={{ margin: '20px' }}>Add Lesson</Button>
+          <Button style={{ margin: '20px' }}>{t('add-lesson-button')}</Button>
         </Link>
       </Card>
     </Row>

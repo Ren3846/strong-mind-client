@@ -33,6 +33,7 @@ const { Item } = Form
 
 function Profile() {
   const t = useTranslations('Profile')
+
   const user = useSelector((state: IUser) => state.auth.user)
   const dispatch = useDispatch()
 

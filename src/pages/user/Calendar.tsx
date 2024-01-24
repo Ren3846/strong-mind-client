@@ -29,10 +29,12 @@ import {
 import GetUser from '../../components/common/GetUser'
 import MeetingsStudent from '../../components/user/MeetingsStudent'
 import Layout from '../../components/common/Layout'
+import useTranslations from '../../lang/useTranslations'
 
 dayjs.extend(utc)
 
 const CalendarPage: React.FC = () => {
+  const t = useTranslations('CalendarPage')
   const [value, setValue] = useState(() => dayjs())
   const [selectedValue, setSelectedValue] = useState(() => dayjs())
   const [meetings, setMeetings] = useState<IMeeting[]>([])
@@ -95,7 +97,7 @@ const CalendarPage: React.FC = () => {
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
-    message.success('Copied to clipboard')
+    message.success(t('copy_to_clipboard'))
   }
 
   return (
@@ -105,7 +107,7 @@ const CalendarPage: React.FC = () => {
       </Row>
       <Row gutter={[16, 16]}>
         <Col span={7}>
-          <Card title='Agenda' style={{ margin: '20px 0px 0px 20px' }}>
+          <Card title={t('Agenda')} style={{ margin: '20px 0px 0px 20px' }}>
             {user.role === USER_ROLE.TEACHER ? (
               <MeetingsTeacher />
             ) : (
@@ -114,7 +116,7 @@ const CalendarPage: React.FC = () => {
           </Card>
 
           <Card
-            title='Meetings'
+            title={t('Meetings')}
             style={{ margin: '20px 0px 0px 20px' }}
             extra={
               <Alert
@@ -135,7 +137,7 @@ const CalendarPage: React.FC = () => {
                   <br />
                   <ClockCircleOutlined /> {item.start_date}
                   <br />
-                  Status: <Tag>{item.status} </Tag>
+                  {t('Status')} <Tag>{item.status} </Tag>
                   {item.zoomJoinUrl && item.zoomStartUrl ? (
                     <div style={{ marginBottom: '10px', marginTop: '10px' }}>
                       <Space.Compact>
@@ -159,8 +161,8 @@ const CalendarPage: React.FC = () => {
                             icon={<PhoneOutlined />}
                           >
                             {user.role === USER_ROLE.TEACHER
-                              ? 'Start zoom'
-                              : 'Join zoom'}
+                              ? t('start_zoom')
+                              : t('join_zoom')}
                           </Button>
                         </NavLink>
                         <Input
@@ -171,7 +173,7 @@ const CalendarPage: React.FC = () => {
                               : item.zoomJoinUrl
                           }
                           addonAfter={
-                            <Tooltip title='Copy to clipboard'>
+                            <Tooltip title={t('copy_to_clipboard')}>
                               <CopyOutlined
                                 onClick={() =>
                                   copyToClipboard(
@@ -189,7 +191,7 @@ const CalendarPage: React.FC = () => {
                     </div>
                   ) : (
                     <Button type='text'>
-                      link will appear 15 minutes before the lesson
+                      {t('link_will_appear')}
                     </Button>
                   )}
                 </List.Item>
@@ -198,7 +200,7 @@ const CalendarPage: React.FC = () => {
           </Card>
         </Col>
         <Col span={17}>
-          <Card title='Calendar' style={{ margin: '20px 20px 20px 0px' }}>
+          <Card title={t('calendar')} style={{ margin: '20px 20px 20px 0px' }}>
             <Calendar
               value={value}
               onSelect={onSelect}

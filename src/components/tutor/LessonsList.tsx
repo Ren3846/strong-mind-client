@@ -3,6 +3,7 @@ import Card from 'antd/lib/card'
 import axios from 'axios'
 import { Button, Divider, Space, message } from 'antd'
 import { Link } from 'react-router-dom'
+import useTranslations from '../../lang/useTranslations'
 
 interface Lesson {
   _id: string
@@ -13,6 +14,8 @@ interface Lesson {
 }
 
 function LessonsList() {
+  const t = useTranslations('LessonsList')
+
   const [lessons, setLessons] = useState<Lesson[]>([])
   const [error, setError] = useState<string>('')
 
@@ -20,11 +23,11 @@ function LessonsList() {
     axios
       .delete(`/api/lessons/${lessonId}`)
       .then(() => {
-        message.success('Lesson delete success')
+        message.success(t('lesson-delete-success'))
         setLessons((data) => data.filter((lesson) => lesson._id !== lessonId))
       })
       .catch((error) => {
-        message.error('Error while delete')
+        message.error(t('error-while-delete'))
         console.error(error)
       })
   }
@@ -38,7 +41,7 @@ function LessonsList() {
       })
       .catch((error) => {
         console.error(error)
-        setError('Error while data download')
+        setError(t('error-while-data-download'))
       })
   }, [])
 
@@ -49,15 +52,15 @@ function LessonsList() {
           <Card key={lesson._id} style={{ width: '15rem', margin: '5px' }}>
             <h2>{lesson.title}</h2>
             <p>{lesson.description}</p>
-            <p>Video Key: {lesson.videoKey}</p>
-            <p>Duration: {lesson.duration} minutes</p>
+            <p>{t('video-key')} {lesson.videoKey}</p>
+            <p>{t('duration')} {lesson.duration} {t('minutes')}</p>
             <Divider />
             <Space>
               <Link to={`/lessons/${lesson._id}`}>
-                <Button type='primary'>View Lesson</Button>
+                <Button type='primary'>{t('view-lesson')}</Button>
               </Link>
               <Button danger onClick={() => handleDeleteLesson(lesson._id)}>
-                Delete
+              {t('delete')}
               </Button>
             </Space>
           </Card>

@@ -13,8 +13,11 @@ import {
 import axios from 'axios'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ICourse } from '../../redux/store/types'
+import useTranslations from '../../lang/useTranslations'
 
 const EditCourse: React.FC = () => {
+  const t = useTranslations('EditCourse')
+
   const { id } = useParams()
   const [course, setCourse] = useState<ICourse>()
   const [loading, setLoading] = useState(false)
@@ -38,12 +41,12 @@ const EditCourse: React.FC = () => {
     setLoading(true)
     try {
       await axios.patch(`/api/courses/${id}`, values)
-      message.success('Course updated successfully')
+      message.success(t('CourseUpdatedSuccessfully'))
       navigate('/mycourses/')
       fetchData()
     } catch (error) {
       console.error('Error updating course:', error)
-      message.error('Error updating course')
+      message.error(t('ErrorUpdatingCourse'))
     } finally {
       setLoading(false)
     }
@@ -56,7 +59,7 @@ const EditCourse: React.FC = () => {
   return (
     <Row align='middle' justify='center'>
       <Card
-        title={`Edit Course: ${course.title}`}
+        title={`${t('EditCourse')}: ${course.title}`}
         style={{ width: '80rem', margin: '20px' }}
       >
         <Form
@@ -68,67 +71,64 @@ const EditCourse: React.FC = () => {
             category: course.category,
             difficulty: course.difficulty,
             tagline: course.tagline,
-            // thumbnail: course.thumbnail,
             meetingPrice: course.meetingPrice,
           }}
         >
           <Form.Item
-            label='Title'
+            label={t('Title')}
             name='title'
             rules={[
-              { required: true, message: 'Please enter the course title' },
+              { required: true, message: t('PleaseEnterCourseTitle') },
             ]}
           >
             <Input />
           </Form.Item>
 
           <Form.Item
-            label='About'
+            label={t('About')}
             name='about'
-            rules={[{ required: true, message: 'Please enter the course bio' }]}
+            rules={[{ required: true, message: t('PleaseEnterCourseBio') }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            label='Category'
+            label={t('Category')}
             name='category'
             rules={[
-              { required: true, message: 'Please enter the course category' },
+              { required: true, message: t('PleaseEnterCourseCategory') },
             ]}
           >
             <Input />
           </Form.Item>
 
           <Form.Item
-            label='Difficulty'
+            label={t('Difficulty')}
             name='difficulty'
             rules={[
-              { required: true, message: 'Please enter the course difficulty' },
+              { required: true, message: t('PleaseEnterCourseDifficulty') },
             ]}
           >
             <Input />
           </Form.Item>
 
           <Form.Item
-            label='Tagline'
+            label={t('Tagline')}
             name='tagline'
             rules={[
-              { required: true, message: 'Please enter the course tagline' },
+              { required: true, message: t('PleaseEnterCourseTagline') },
             ]}
           >
-            {/* Use Select with mode="tags" for multiple tagline values */}
-            <Select mode='tags' placeholder='Enter tags'>
-              {/* Add options here if you have predefined tags */}
+            <Select mode='tags' placeholder={t('EnterTags')}>
             </Select>
           </Form.Item>
 
           <Form.Item
-            label='Thumbnail'
+            label={t('Thumbnail')}
             name='thumbnail'
             rules={[
               {
                 required: true,
-                message: 'Please enter the course thumbnail URL',
+                message: t('PleaseEnterCourseThumbnailURL'),
               },
             ]}
           >
@@ -136,17 +136,17 @@ const EditCourse: React.FC = () => {
           </Form.Item>
 
           <Form.Item
-            label='Meeting Price'
+            label={t('MeetingPrice')}
             name='meetingPrice'
             rules={[
-              { required: true, message: 'Please enter the meeting price' },
+              { required: true, message: t('PleaseEnterMeetingPrice') },
             ]}
           >
             <InputNumber />
           </Form.Item>
           <Form.Item>
             <Button type='primary' htmlType='submit' loading={loading}>
-              Save Changes
+              {t('SaveChanges')}
             </Button>
           </Form.Item>
         </Form>

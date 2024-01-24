@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Layout from '../../components/common/Layout'
 import { Row, Card, Space, Skeleton } from 'antd'
-import Preloader from '../../components/common/Preloader'
 import { Link } from 'react-router-dom'
 
 import { ITeacher } from '../../redux/store/types'
+import useTranslations from '../../lang/useTranslations'
 
 const Teachers: React.FC = () => {
   const [topTeachers, setTopTeachers] = useState<ITeacher[]>([])
   const [loaded, setLoaded] = useState(false)
+  const t = useTranslations('Teachers');
 
   useEffect(() => {
     axios
@@ -30,7 +31,7 @@ const Teachers: React.FC = () => {
     <Layout>
       <Row align='middle' justify='center'>
         <Card
-          title={`Top 5 tutors`}
+          title={t('top_tutors')}
           style={{ width: '80rem', padding: '20px' }}
         >
           {loaded ? (
@@ -39,14 +40,14 @@ const Teachers: React.FC = () => {
                 topTeachers.map((teacher, index) =>
                   teacher ? (
                     <Card key={teacher._id} title={teacher.fullName}>
-                      <p>Email: {teacher.email}</p>
-                      <p>Students: {teacher.students.length}</p>
-                      <Link to={`/teacher/${teacher._id}`}>View Details</Link>
+                      <p>{`${t('email')}: ${teacher.email}`}</p>
+                      <p>{`${t('students')}: ${teacher.students.length}`}</p>
+                      <Link to={`/teacher/${teacher._id}`}>{t('view_details')}</Link>
                     </Card>
                   ) : null,
                 )
               ) : (
-                <p>No data available</p>
+                <p>{t('no_data')}</p>
               )}
             </Space>
           ) : (

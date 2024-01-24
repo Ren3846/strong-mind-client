@@ -11,6 +11,7 @@ import {
 } from '@ant-design/icons'
 import { ICourse } from '../../redux/store/types'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
+import useTranslations from '../../lang/useTranslations'
 
 const breadcrumbItems = [
   { title: 'Dashboard', link: '/Dashboard' },
@@ -18,42 +19,50 @@ const breadcrumbItems = [
 ]
 
 const MyCourses: React.FC = () => {
-  const [data, setData] = useState<ICourse[]>([])
-  const [loaded, setLoaded] = useState(false)
+  const t = useTranslations('MyCourses');
+  const tDashboard = useTranslations('Dashboard');
+
+  const [data, setData] = useState<ICourse[]>([]);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     axios
       .get('/api/courses/created')
       .then((response) => {
-        console.log(response.data)
-        setData(response.data)
+        console.log(response.data);
+        setData(response.data);
       })
       .catch((error) => {
-        console.error(error)
+        console.error(error);
       })
       .finally(() => {
-        setLoaded(true)
-      })
-  }, [])
+        setLoaded(true);
+      });
+  }, []);
 
   const handleDeleteCourse = (courseId: string) => {
     axios
       .delete(`/api/courses/${courseId}`)
       .then(() => {
-        message.success('Delete course successful')
-        setData((data) => data.filter((course) => course._id !== courseId))
+        message.success(t('deleteCourseSuccessful'));
+        setData((data) => data.filter((course) => course._id !== courseId));
       })
       .catch((error) => {
-        message.error('Error delete course')
-        console.error(error)
-      })
-  }
+        message.error(t('errorDeleteCourse'));
+        console.error(error);
+      });
+  };
 
   return (
     <Row align='middle' justify='center'>
-      <MyBreadcrumb items={breadcrumbItems} />
+      <MyBreadcrumb
+        items={[
+          { title: tDashboard('title'), link: '/Dashboard' },
+          { title: t('title') },
+        ]}
+      />
 
-      <Card title='My courses' style={{ width: '80rem', margin: '20px' }}>
+      <Card title={t('title')} style={{ width: '80rem', margin: '20px' }}>
         {loaded ? (
           <ul>
             {data.map((item) => (
@@ -98,12 +107,12 @@ const MyCourses: React.FC = () => {
         <Divider />
         <Link to='/mycourses/addcourse'>
           <Button type='primary' icon={<PlusOutlined />}>
-            Add course
+            {t('addCourse')}
           </Button>
         </Link>
       </Card>
     </Row>
-  )
-}
+  );
+};
 
-export default MyCourses
+export default MyCourses;

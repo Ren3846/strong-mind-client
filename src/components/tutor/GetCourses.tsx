@@ -3,12 +3,14 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { ICourse } from '../../redux/store/types'
 import { Link } from 'react-router-dom'
+import useTranslations from '../../lang/useTranslations'
 
 export const GetCourses: React.FC<{
   courseId: string
 }> = ({ courseId }) => {
+  const t = useTranslations('GetCourses')
   const [course, setCourse] = useState<ICourse | null>(null)
-  const [loaded, setLoaded] = useState(false)
+  // const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     axios({
@@ -22,9 +24,9 @@ export const GetCourses: React.FC<{
       .catch((error) => {
         console.error(error)
       })
-      .finally(() => {
-        setLoaded(true)
-      })
+      // .finally(() => {
+      //   setLoaded(true)
+      // })
   }, [courseId])
 
   return (
@@ -40,13 +42,13 @@ export const GetCourses: React.FC<{
               <h3>{course.title}</h3>
               <p>{course.about}</p>
 
-              <span>Price: {course.meetingPrice} $</span>
+              <span>{t('price')} {course.meetingPrice} $</span>
               <Button type='primary' key={course._id}>
-                <Link to={`/courses/${course._id}`}>Explore</Link>
+                <Link to={`/courses/${course._id}`}>{t('explore')}</Link>
               </Button>
             </Space>
           ) : (
-            <p>No courses yet</p>
+            <p>{t('no-courses-yet')}</p>
           )}
         </Card>
       </Space>

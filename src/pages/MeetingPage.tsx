@@ -7,7 +7,6 @@ import {
   Rate,
   Row,
   Skeleton,
-  Space,
   message,
 } from 'antd'
 import axios from 'axios'
@@ -18,8 +17,10 @@ import { useParams } from 'react-router-dom'
 import { GetCourse } from '../components/common/GetCourse'
 import { IMeeting, IUser, USER_ROLE } from '../redux/store/types'
 import { useSelector } from 'react-redux'
+import useTranslations from '../lang/useTranslations'
 
 const MeetingPage: FC<{}> = () => {
+  const t = useTranslations('MeetingPage')
   const { meetingId } = useParams()
   const [meeting, setMeeting] = useState<IMeeting | null>(null)
   const [loaded, setLoaded] = useState(false)
@@ -58,19 +59,19 @@ const MeetingPage: FC<{}> = () => {
     <Layout>
       <Row align='middle' justify='center'>
         <Col span={16}>
-          <Card title='Details Meeting'>
+          <Card title={t('confirmationError')}>
             {meeting &&
             meeting.status === 'finished' &&
             !meeting.rate &&
             user.role === USER_ROLE.USER ? (
-              <Card title='Leave feedback about meeting'>
+              <Card title={t('LeaveMeeting')}>
                 <Rate
                   value={rate !== null ? rate : undefined}
                   onChange={(value) => setRating(value)}
                   style={{ color: 'rgb(167 167 255)' }}
                 />
                 <Input.TextArea
-                  placeholder='Enter your report'
+                  placeholder={t('EnterReport')}
                   value={report}
                   onChange={(e) => setComment(e.target.value)}
                   style={{ margin: 10 }}
@@ -88,32 +89,32 @@ const MeetingPage: FC<{}> = () => {
                 <Descriptions.Item label='Meeting ID'>
                   {meeting._id}
                 </Descriptions.Item>
-                <Descriptions.Item label='Teacher'>
+                <Descriptions.Item label={t('Teacher')}>
                   <GetUser userId={meeting.teacher} />
                 </Descriptions.Item>
-                <Descriptions.Item label='Student'>
+                <Descriptions.Item label={t('Student')}>
                   <GetUser userId={meeting.student} />
                 </Descriptions.Item>
-                <Descriptions.Item label='Course'>
+                <Descriptions.Item label={t('Course')}>
                   <GetCourse courseId={meeting.course} />
                 </Descriptions.Item>
-                <Descriptions.Item label='Start Date'>
+                <Descriptions.Item label={t('StartDate')}>
                   {meeting.start_date}
                 </Descriptions.Item>
-                <Descriptions.Item label='Status'>
+                <Descriptions.Item label={t('Status')}>
                   {meeting.status}
                 </Descriptions.Item>
-                <Descriptions.Item label='Zoom URL'>
+                <Descriptions.Item label={t('ZoomURL')}>
                   {user.role === USER_ROLE.TEACHER
                     ? meeting.zoomStartUrl
                     : meeting.zoomJoinUrl}
                 </Descriptions.Item>{' '}
                 {meeting.rate && meeting.report ? (
                   <>
-                    <Descriptions.Item label='Rate by student'>
+                    <Descriptions.Item label={t('RateStudent')}>
                       {meeting.rate}
                     </Descriptions.Item>
-                    <Descriptions.Item label='Report by student'>
+                    <Descriptions.Item label={t('ReportStudent')}>
                       {meeting.report}
                     </Descriptions.Item>
                   </>

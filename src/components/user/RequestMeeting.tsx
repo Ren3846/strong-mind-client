@@ -3,9 +3,7 @@ import axios from 'axios'
 import { Drawer, DatePicker, TimePicker, Button, message, Space } from 'antd'
 import { Dayjs } from 'dayjs'
 import { PhoneOutlined } from '@ant-design/icons'
-
-import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
+import useTranslations from '../../lang/useTranslations'
 
 interface CallRequestProps {
   teacherId: string
@@ -16,6 +14,9 @@ const RequestMeeting: React.FC<CallRequestProps> = ({
   teacherId,
   courseId,
 }) => {
+   
+  const t = useTranslations('RequestMeeting')
+
   const [drawerVisible, setDrawerVisible] = useState(false)
   const [date, setDate] = useState<Dayjs | null>(null)
   const [time, setTime] = useState<Dayjs | null>(null)
@@ -68,12 +69,12 @@ const RequestMeeting: React.FC<CallRequestProps> = ({
           hour: formattedHour,
         })
 
-        message.success('Call request sent successfully')
+        message.success(t('call-request-sent'))
         console.log(formattedDate, formattedHour)
       }
     } catch (error) {
       console.error(error)
-      message.error('Error while sending call request')
+      message.error(t('error-sending-request'))
     } finally {
       setLoading(false)
     }
@@ -111,10 +112,10 @@ const RequestMeeting: React.FC<CallRequestProps> = ({
     <div>
       <Button type='primary' onClick={showDrawer} loading={loading}>
         <PhoneOutlined />
-        Request a Call
+        {t('request-call')}
       </Button>
       <Drawer
-        title='Choose Date and Time'
+        title={t('choose-date-time')}
         placement='right'
         visible={drawerVisible}
         onClose={handleCancel}
@@ -126,10 +127,10 @@ const RequestMeeting: React.FC<CallRequestProps> = ({
             }}
           >
             <Button onClick={handleCancel} style={{ marginRight: 8 }}>
-              Cancel
+            {t('cancel')}
             </Button>
             <Button onClick={handleOk} type='primary'>
-              Submit
+            {t('submit')}
             </Button>
           </div>
         }

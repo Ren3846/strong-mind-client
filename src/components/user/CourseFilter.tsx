@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Select, Space, Collapse } from 'antd'
+import useTranslations from '../../lang/useTranslations'
 
 const { Option } = Select
 const { Panel } = Collapse
@@ -7,6 +8,8 @@ const { Panel } = Collapse
 const CourseFilter: React.FC<{
   onFilterChange: (filters: Record<string, string>) => void
 }> = ({ onFilterChange }) => {
+  const t = useTranslations('CourseFilter')
+
   const [filters, setFilters] = useState<Record<string, string>>({
     price: 'all',
     category: 'all',
@@ -32,9 +35,9 @@ const CourseFilter: React.FC<{
               value={filters.price}
               onChange={(value) => handleFilterChange('price', value)}
             >
-              <Option value='all'>All</Option>
-              <Option value='free'>Free</Option>
-              <Option value='paid'>Paid</Option>
+              <Option value='all'>{t('all')}</Option>
+              <Option value='free'>{t('free')}</Option>
+              <Option value='paid'>{t('paid')}</Option>
             </Select>
           </Panel>
         </Collapse>
@@ -46,16 +49,16 @@ const CourseFilter: React.FC<{
               value={filters.category}
               onChange={(value) => handleFilterChange('category', value)}
             >
-              <Option value='all'>All</Option>
-              <Option value='english'>English</Option>
-              <Option value='russian'>Russian</Option>
+              <Option value='all'>{t('all')}</Option>
+              <Option value='english'>{t('english')}</Option>
+              <Option value='russian'>{t('russian')}</Option>
             </Select>
           </Panel>
         </Collapse>
         <Collapse ghost>
           <Panel header='Difficulty Filter' key='3'>
             <Select
-              placeholder='Difficulty'
+              placeholder={t('difficulty')}
               value={filters.difficulty}
               onChange={(value) => handleFilterChange('difficulty', value)}
             >

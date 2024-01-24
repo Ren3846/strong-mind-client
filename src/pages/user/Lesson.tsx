@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 import MyBreadcrumb from '../../components/common/Breadcrumb'
 import { ErrorMessage } from '../../components/common/ErrorMessage'
 import { ILesson, IUser } from '../../redux/store/types'
+import useTranslations from '../../lang/useTranslations';
 
 const LessonUser: React.FC = () => {
   const user = useSelector((state: IUser) => state.auth.user)
@@ -16,12 +17,13 @@ const LessonUser: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false)
 
   const [video, setVideo] = useState<string | null>(null)
+  const t = useTranslations('LessonUser');
 
   const breadcrumbItems = [
-    { title: 'Dashboard', link: '/dashboard' },
-    { title: 'Enrolled ', link: '/enrolled' },
-    { title: 'Course ', link: '/enrolled' },
-    { title: 'Lesson ' },
+    { title: t('dashboard'), link: '/dashboard' },
+    { title: t('enrolled'), link: '/enrolled' },
+    { title: t('course'), link: '/enrolled' },
+    { title: t('lesson') },
   ]
 
   useEffect(() => {
@@ -33,7 +35,7 @@ const LessonUser: React.FC = () => {
       })
       .catch((error) => {
         console.error(error)
-        setError('Error while fetching lesson data')
+        setError(t('error_fetching_lesson_data'));
       })
 
     axios
@@ -44,7 +46,7 @@ const LessonUser: React.FC = () => {
       })
       .catch((error) => {
         console.error(error)
-        setError('Error while fetching lesson video')
+        setError(t('error_fetching_lesson_video'));
       })
   }, [id])
 
@@ -63,7 +65,7 @@ const LessonUser: React.FC = () => {
       setLesson(data)
     } catch (error) {
       console.error(error)
-      message.error('Error while liking the lesson')
+      message.error(t('error_liking_lesson'));
     } finally {
       setLoading(false)
     }
@@ -77,7 +79,7 @@ const LessonUser: React.FC = () => {
         <MyBreadcrumb items={breadcrumbItems} />
 
         <Card
-          title={`Lesson Info`}
+          title={t('lesson_info')}
           style={{ width: '80rem', margin: '20px' }}
           className='lesson-card'
         >
@@ -86,8 +88,7 @@ const LessonUser: React.FC = () => {
               <div style={{ width: '15rem', margin: '5px' }}>
                 <h2>{lesson.title}</h2>
                 <p>{lesson.description}</p>
-                {/* <p>Video Key: {lesson.videoKey}</p> */}
-                <p>Duration: {lesson.duration} minutes</p>
+                <p>{t('duration')}: {lesson.duration} minutes</p>
                 <Divider />
                 <Button
                   type='primary'
@@ -95,14 +96,14 @@ const LessonUser: React.FC = () => {
                   onClick={handleLikeClick}
                   loading={loading}
                 >
-                  {lessonLiked ? 'Liked' : 'Like'}
+                  {lessonLiked ? t('liked') : t('like')}
                 </Button>
               </div>
             )}
           </Space>
         </Card>
         <Card
-          title={`Video`}
+          title={t('video')}
           style={{ width: '80rem', margin: '20px' }}
           className='lesson-card'
         >

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Input, Button, message, Space } from 'antd'
 import axios from 'axios'
 import { DollarCircleFilled } from '@ant-design/icons'
+import useTranslations from '../../lang/useTranslations'
 
 export interface InvoiceData {
   data: string
@@ -9,6 +10,8 @@ export interface InvoiceData {
 }
 
 const WalletTopup: React.FC = () => {
+  const t = useTranslations('WalletTopup')
+
   const [amount, setAmount] = useState<string>('')
   const [loading, setLoading] = useState(false);
   const [invoice, setInvoice] = useState<null | InvoiceData>(null)
@@ -23,7 +26,7 @@ const WalletTopup: React.FC = () => {
       setInvoice(response.data);
     } catch (error) {
       console.error(error)
-      message.error('Error while topping up the balance')
+      message.error(t('error-topping-up'))
     } finally {
       setLoading(false)
     }
@@ -33,7 +36,7 @@ const WalletTopup: React.FC = () => {
     <>
       <Space.Compact>
         <Input
-          placeholder='Enter the amount'
+          placeholder={t('enter-amount')}
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           style={{ marginBottom: '10px' }}
@@ -44,7 +47,7 @@ const WalletTopup: React.FC = () => {
           loading={loading}
           icon={<DollarCircleFilled />}
         >
-          Pay
+          {t('pay')}
         </Button>
       </Space.Compact>
       {

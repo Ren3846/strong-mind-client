@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Card from 'antd/lib/card'
 import axios from 'axios'
-import { Button, Skeleton, Space, message } from 'antd'
+import { Button, Skeleton, Space } from 'antd'
 import { Link } from 'react-router-dom'
 import { ILesson } from '../../redux/store/types'
+import useTranslations from '../../lang/useTranslations'
 
 function CourseDetailsUser({ courseId }: any) {
+  const t = useTranslations('LessonsListUser')
   const [course, setCourse] = useState<any | null>(null)
   const [error, setError] = useState<string>('')
 
@@ -53,10 +55,10 @@ function CourseDetailsUser({ courseId }: any) {
                   <h4>{lesson.title}</h4>
                   <p>{lesson.description}</p>
                   {/* <p>Video Key: {lesson.videoKey}</p> */}
-                  <p>Duration: {lesson.duration} minutes</p>
+                  <p>{t('duration')} {lesson.duration} {t('minutes')}</p>
                   <Space>
                     <Link to={`/lessonsuser/${lesson._id}`}>
-                      <Button type='primary'>View Lesson</Button>
+                      <Button type='primary'>{t('view-lesson')}</Button>
                     </Link>
                   </Space>
                 </Space>

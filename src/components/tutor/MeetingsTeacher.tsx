@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { List, Skeleton, Space, Tag, Button, Modal } from 'antd'
+import { List, Skeleton, Space, Tag, Button } from 'antd'
 
 import {
   CheckCircleFilled,
@@ -9,7 +9,6 @@ import {
   ClockCircleOutlined,
   CloseCircleOutlined,
   CloseOutlined,
-  MoreOutlined,
   RightOutlined,
   SyncOutlined,
 } from '@ant-design/icons'
@@ -19,9 +18,12 @@ import { IUser } from '../../redux/store/types'
 
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
+import useTranslations from '../../lang/useTranslations'
 dayjs.extend(utc)
 
 const MeetingsTeacher = () => {
+  const t = useTranslations('MeetingsTeacher')
+
   const [meetings, setMeetings] = useState<any>([])
   const [loading, setLoading] = useState(true)
 
@@ -118,23 +120,23 @@ const MeetingsTeacher = () => {
                   {dayjs.utc(meeting.start_date).format('YYYY-MM-DD HH:mm')}
                   {meeting.status === 'accepted' ? (
                     <Tag icon={<CheckCircleOutlined />} color='success'>
-                      Accepted
+                      {t('accepted')}
                     </Tag>
                   ) : meeting.status === 'rejected' ? (
                     <Tag icon={<CloseCircleOutlined />} color='error'>
-                      Rejected
+                      {t('rejected')}
                     </Tag>
                   ) : meeting.status === 'started' ? (
                     <Tag icon={<ClockCircleOutlined />} color='warning'>
-                      Started
+                      {t('started')}
                     </Tag>
                   ) : meeting.status === 'finished' ? (
                     <Tag icon={<CheckCircleFilled />} color='purple'>
-                      Finished
+                      {t('finished')}
                     </Tag>
                   ) : (
                     <Tag icon={<SyncOutlined spin />} color='processing'>
-                      Pending
+                      {t('pending')}
                     </Tag>
                   )}
                   {meeting.studentName}
@@ -155,10 +157,7 @@ const MeetingsTeacher = () => {
                       type='primary'
                       onClick={() => handleRejectMeeting(meeting._id)}
                       icon={<CloseOutlined />}
-                    ></Button>
-                    {/* <Button>
-                      <MoreOutlined />
-                    </Button> */}
+                    ></Button>               
                   </>
                 ) : (
                   <>
@@ -174,28 +173,6 @@ const MeetingsTeacher = () => {
           )}
         />
       )}
-
-      {/* <Modal
-        title='Meeting Confirmation'
-        visible={modalVisible}
-        onCancel={handleModalCancel}
-        onOk={handleModalConfirm}
-      >
-        <p>Do you want to accept or reject the meeting?</p>
-        <Button
-          type='primary'
-          onClick={() => handleAcceptMeeting(selectedMeetingId)}
-        >
-          Accept
-        </Button>
-        <Button
-          danger
-          type='primary'
-          onClick={() => handleRejectMeeting(selectedMeetingId)}
-        >
-          Reject
-        </Button>
-      </Modal> */}
     </div>
   )
 }

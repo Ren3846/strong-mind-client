@@ -16,9 +16,11 @@ import { IUser } from '../../redux/store/types'
 
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
+import useTranslations from '../../lang/useTranslations'
 dayjs.extend(utc)
 
 const MeetingsStudent = () => {
+  const t = useTranslations('MeetingsStudent')
   const [meetings, setMeetings] = useState<any>([])
   const [loading, setLoading] = useState(true)
 
@@ -67,23 +69,6 @@ const MeetingsStudent = () => {
     }
   }, [userMeetingsIds])
 
-  // const handleCancelMeeting = async (meetingId: string) => {
-  //   try {
-  //     await axios.patch(`/api/meetings/status/${meetingId}`, {
-  //       status: 'rejected',
-  //     })
-  //     setMeetings((prevMeetings: any) =>
-  //       prevMeetings.map((meeting: any) =>
-  //         meeting._id === meetingId
-  //           ? { ...meeting, status: 'rejected' }
-  //           : meeting,
-  //       ),
-  //     )
-  //   } catch (error) {
-  //     console.error('Error rejecting meeting:', error)
-  //   }
-  // }
-
   return (
     <div>
       {loading ? (
@@ -99,23 +84,23 @@ const MeetingsStudent = () => {
 
                   {meeting.status === 'accepted' ? (
                     <Tag icon={<CheckCircleOutlined />} color='success'>
-                      Accepted
+                      {t('accepted')}
                     </Tag>
                   ) : meeting.status === 'rejected' ? (
                     <Tag icon={<CloseCircleOutlined />} color='error'>
-                      Rejected
+                      {t('rejected')}
                     </Tag>
                   ) : meeting.status === 'started' ? (
                     <Tag icon={<ClockCircleOutlined />} color='warning'>
-                      Started
+                      {t('started')}
                     </Tag>
                   ) : meeting.status === 'finished' ? (
                     <Tag icon={<CheckCircleFilled />} color='purple'>
-                      Finished
+                      {t('finished')}
                     </Tag>
                   ) : (
                     <Tag icon={<SyncOutlined spin />} color='processing'>
-                      Pending
+                      {t('pending')}
                     </Tag>
                   )}
                   {meeting.teacherName}
@@ -125,9 +110,6 @@ const MeetingsStudent = () => {
               meeting.status !== 'processing' ? (
                 <>
                   <Space>
-                    {/* <Button danger type='primary' onClick={() => {}}>
-                    Cancel
-                  </Button> */}
                     <Link to={`/meeting/${meeting._id}`}>
                       <Button>
                         <RightOutlined />

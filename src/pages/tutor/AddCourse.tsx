@@ -11,13 +11,14 @@ import {
 } from 'antd'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import useTranslations from '../../lang/useTranslations'
 
 const { Option } = Select
 
 const CreateCourse: React.FC = () => {
+  const t = useTranslations('CreateCourse')
   const [form] = Form.useForm()
   const [loading, setLoading] = useState(false)
-
   const navigate = useNavigate()
 
   const handleCreate = (values: any) => {
@@ -27,7 +28,6 @@ const CreateCourse: React.FC = () => {
       .post('/api/courses', values)
       .then((response) => {
         message.success('Course created successfully')
-        // form.resetFields()
         console.log(response.data)
 
         const courseId = response.data._id
@@ -44,28 +44,28 @@ const CreateCourse: React.FC = () => {
 
   return (
     <Row align='middle' justify='center'>
-      <Card title='Create Course' style={{ width: '60rem' }}>
+      <Card title={t('create-course')} style={{ width: '60rem' }}>
         <Form form={form} name='create-course' onFinish={handleCreate}>
           <Form.Item
-            label='Title'
+            label={t('title')}
             name='title'
-            rules={[{ required: true, message: 'Enter the course title' }]}
+            rules={[{ required: true, message: t('enter-title') }]}
           >
             <Input />
           </Form.Item>
           <Form.Item
-            label='Description'
+            label={t('description')}
             name='about'
             rules={[
-              { required: true, message: 'Enter the course description' },
+              { required: true, message: t('enter-description') },
             ]}
           >
             <Input.TextArea />
           </Form.Item>
           <Form.Item
-            label='Category'
+            label={t('category')}
             name='category'
-            rules={[{ required: true, message: 'Select a category' }]}
+            rules={[{ required: true, message: t('select-category') }]}
           >
             <Select>
               <Option value='English'>English</Option>
@@ -74,9 +74,9 @@ const CreateCourse: React.FC = () => {
             </Select>
           </Form.Item>
           <Form.Item
-            label='Difficulty'
+            label={t('difficulty')}
             name='difficulty'
-            rules={[{ required: true, message: 'Select a difficulty level' }]}
+            rules={[{ required: true, message: t('select-difficulty') }]}
           >
             <Select>
               <Option value='A1'>A1</Option>
@@ -89,25 +89,25 @@ const CreateCourse: React.FC = () => {
           </Form.Item>
 
           <Form.Item
-            label='Tagline'
+            label={t('tagline')}
             name='tagline'
-            rules={[{ required: true, message: 'Enter a tag' }]}
+            rules={[{ required: true, message: t('enter-tag') }]}
           >
-            <Select mode='tags' placeholder='Enter tags'></Select>
+            <Select mode='tags' placeholder={t('enter-tag')}></Select>
           </Form.Item>
 
           <Form.Item
-            label='Price per meeting'
+            label={t('price-per-meeting')}
             name='meetingPrice'
             rules={[
-              { required: true, message: 'Enter the price for meetings' },
+              { required: true, message: t('enter-price') },
             ]}
           >
             <InputNumber />
           </Form.Item>
           <Form.Item>
             <Button type='primary' htmlType='submit' loading={loading}>
-              Create Course
+            {t('create-course-button')}
             </Button>
           </Form.Item>
         </Form>

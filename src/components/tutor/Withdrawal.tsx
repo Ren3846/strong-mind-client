@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import { Input, Button, message, Space } from 'antd'
 import axios from 'axios'
 import { DollarCircleFilled } from '@ant-design/icons'
+import useTranslations from '../../lang/useTranslations'
 
 const WalletWithdrawal: React.FC = () => {
+  const t = useTranslations('WalletWithdrawal')
+
   const [amount, setAmount] = useState<string>('')
   const [loading, setLoading] = useState(false)
 
@@ -29,7 +32,7 @@ const WalletWithdrawal: React.FC = () => {
     <>
       <Space.Compact>
         <Input
-          placeholder='Enter the amount'
+          placeholder={t('enter-amount')}
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
           style={{ marginBottom: '10px' }}
@@ -40,7 +43,7 @@ const WalletWithdrawal: React.FC = () => {
           loading={loading}
           icon={<DollarCircleFilled />}
         >
-          Withdrawal
+          {t('withdrawal')}
         </Button>
       </Space.Compact>
     </>

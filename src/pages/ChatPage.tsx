@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 import { StoreType } from '../redux/store'
 import { IUser } from '../redux/store/types'
 import MyBreadcrumb from '../components/common/Breadcrumb'
+import useTranslations from '../lang/useTranslations'
 
 const { TextArea } = Input
 
@@ -34,6 +35,7 @@ interface ChatType {
 }
 
 const Chat = () => {
+  const t = useTranslations('')
   const { chatId } = useParams()
   const [connected, setConnected] = useState(false)
   const [loaded, setLoaded] = useState(false)
@@ -159,7 +161,7 @@ const Chat = () => {
           <MyBreadcrumb items={breadcrumbItems} />
 
           <Card
-            title='Chat'
+            title={t('title')}
             style={{ marginTop: '20px' }}
             extra={
               <>
@@ -205,7 +207,7 @@ const Chat = () => {
                   onClick={() => sendMessage(chatId || '', messageInput)}
                   style={{ marginTop: '8px' }}
                 >
-                  Send
+                  {t('send')}
                 </Button>
               </Space>
             </Card>

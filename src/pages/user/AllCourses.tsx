@@ -16,10 +16,13 @@ import {
 } from 'antd'
 import { ICourse, IUser } from '../../redux/store/types'
 import CustomAvatar from '../../components/common/CustomAvatar'
+import useTranslations from '../../lang/useTranslations'
 
 const CourseTeacher: React.FC<{
   userId: string
 }> = ({ userId }) => {
+  
+
   const [user, setUser] = useState<IUser | null>(null)
   const [loaded, setLoaded] = useState(false)
 
@@ -60,6 +63,7 @@ const CourseTeacher: React.FC<{
 }
 
 const CourseItem: React.FC<ICourse> = (course) => {
+  const t = useTranslations('Courses');
   return (
     <div className='course-item course-card'>
       <Space direction='vertical' size='middle' style={{ display: 'flex' }}>
@@ -82,10 +86,10 @@ const CourseItem: React.FC<ICourse> = (course) => {
             key={course._id + course.teacher}
           />
         </div>
-        <span>Price: {course.meetingPrice} $</span>
+        <span>{t('price')} {course.meetingPrice} $</span>
 
         <Button type='primary' key={course._id}>
-          <Link to={course._id}>Explore</Link>
+          <Link to={course._id}>{t('explore')}</Link>
         </Button>
       </Space>
     </div>
@@ -93,6 +97,8 @@ const CourseItem: React.FC<ICourse> = (course) => {
 }
 
 const Courses = () => {
+  const t = useTranslations('Courses');
+
   const [courses, setCourses] = useState<ICourse[]>([])
   const [loaded, setLoaded] = useState(false)
   const [filters, setFilters] = useState<Record<string, string>>({
@@ -143,12 +149,12 @@ const Courses = () => {
           <div>
             <div>
               <Space>
-                <Typography.Text>Filters:</Typography.Text>
+                <Typography.Text>{t('filters')}</Typography.Text>
                 <Select
                   value={filters.difficulty}
                   onChange={handleDifficultyChange}
                 >
-                  <Select.Option value='all'>All</Select.Option>
+                  <Select.Option value='all'>{t('all')}</Select.Option>
                   <Select.Option value='C1'>C1</Select.Option>
                   <Select.Option value='C2'>C2</Select.Option>
                   <Select.Option value='A1'>A1</Select.Option>
@@ -161,15 +167,15 @@ const Courses = () => {
                   onChange={handleCategoryChange}
                   style={{ width: 100 }}
                 >
-                  <Select.Option value='all'>All</Select.Option>
-                  <Select.Option value='Grammar'>English</Select.Option>
-                  <Select.Option value='Literature'>Russian</Select.Option>
-                  <Select.Option value='Grammar2'>Armenian</Select.Option>
+                  <Select.Option value='all'>{t('all')}</Select.Option>
+                  <Select.Option value='Grammar'>{t('Grammar')}</Select.Option>
+                  <Select.Option value='Literature'>{t('Literature')}</Select.Option>
+                  <Select.Option value='Grammar2'>{t('Grammar2')}</Select.Option>
                 </Select>
-                <Button
+                {/* <Button
                   icon={<SearchOutlined />}
                   href='https://www.google.com'
-                />
+                /> */}
               </Space>
             </div>
 
@@ -177,7 +183,7 @@ const Courses = () => {
 
             <Typography.Title level={2} style={{ margin: 0 }}>
               {/* Lessons for Kids/teens A1-A2 */}
-              All Courses
+              {t('all_courses')}
             </Typography.Title>
 
             {loaded ? (
@@ -187,7 +193,7 @@ const Courses = () => {
                     <CourseItem {...course} key={course._id} />
                   ))
                 ) : (
-                  <p>No courses match the selected difficulty and category.</p>
+                  <p>{t('no_courses_match')}</p>
                 )}
               </div>
             ) : (
@@ -195,14 +201,6 @@ const Courses = () => {
             )}
           </div>
           <Divider />
-          {/* <Typography.Title level={2} style={{ margin: 0 }}>
-            Conversational English A2-C2
-          </Typography.Title>
-
-          <Divider />
-          <Typography.Title level={2} style={{ margin: 0 }}>
-            Test preparation A1-C1
-          </Typography.Title> */}
         </Col>
       </Row>
     </Layout>

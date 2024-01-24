@@ -2,19 +2,21 @@ import { Card, Row, Space, Button, message, Skeleton, Rate } from 'antd'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { ICourse, ITeacher, IUser, USER_ROLE } from '../../redux/store/types'
+import { ITeacher, IUser, USER_ROLE } from '../../redux/store/types'
 import { useSelector } from 'react-redux'
-import { StoreType } from '../../redux/store'
 import { CDN_BASE } from '../..'
 import Preloader from '../../components/common/Preloader'
+import useTranslations from '../../lang/useTranslations'
 
 const CourseCoverVideo: React.FC<{ cover: string | null | undefined }> = ({
   cover,
 }) => {
+  const t = useTranslations('Course');
+
   if (!cover) return null
   return (
     <Card
-      title={`Video by Teacher`}
+      title={t('video_by_teacher')}
       style={{ width: '60rem', margin: '20px' }}
       className='lesson-card'
     >
@@ -35,6 +37,7 @@ const Course: React.FC<{}> = () => {
   const [purchased, setPurchased] = useState(() =>
     user?.courses.includes(id || ''),
   )
+  const t = useTranslations('Course');
 
   useEffect(() => {
     axios
@@ -54,7 +57,7 @@ const Course: React.FC<{}> = () => {
     axios
       .post('/api/users/enroll', { courseId: id })
       .then((response) => {
-        message.success('You successfully enrolled!')
+        message.success(t('enroll_success_message'));
         setPurchased(true)
       })
       .catch((error) => {
@@ -73,7 +76,7 @@ const Course: React.FC<{}> = () => {
     <Row align='middle' justify='center'>
       {loaded ? (
         <Card
-          title={`Course details`}
+          title={t('course_details')}
           style={{ width: '60rem', margin: '20px' }}
           extra={
             <Rate
@@ -90,12 +93,12 @@ const Course: React.FC<{}> = () => {
                 <Space direction='vertical'>
                   <h2>{course.title}</h2>
                   <p>{course.about}</p>
-                  <p>Price: {course.meetingPrice} $</p>
-                  <p>Category: {course.category}</p>
-                  <p>Difficulty: {course.difficulty}</p>
-                  <p>Tagline: {course.tagline}</p>
-                  <p>Number of Lessons: {course.lessons.length}</p>
-                  {/* <p>Visible: {course.isVisible ? 'Yes' : 'No'}</p> */}
+                  <p>{t('price')}: {course.meetingPrice} $</p>
+                  <p>{t('category')}: {course.category}</p>
+                  <p>{t('difficulty')}: {course.difficulty}</p>
+                  <p>{t('tagline')}: {course.tagline}</p>
+                  <p>{t('number_of_lessons')}: {course.lessons.length}</p>
+                  {/* <p>{t('visible')}: {course.isVisible ? 'Yes' : 'No'}</p> */}
                   {/* <img
                     src={course.thumbnail}
                     alt={course.title}
@@ -110,7 +113,7 @@ const Course: React.FC<{}> = () => {
                         loading={enrollLoading}
                         type={purchased ? 'default' : 'primary'}
                         onClick={enrollUser}
-                        children={purchased ? 'Enrolled' : 'Enroll'}
+                        children={purchased ? t('enrolled') : t('enroll')}
                       />
                       {purchased ? (
                         <Button
@@ -118,7 +121,7 @@ const Course: React.FC<{}> = () => {
                           onClick={() =>
                             navigate(`/enrolled/${course._id}/info`)
                           }
-                          children='Go to course page'
+                          children={t('go_to_course_page')}
                         />
                       ) : null}
                     </Space>
@@ -128,7 +131,7 @@ const Course: React.FC<{}> = () => {
                 </Space>
               </>
             ) : (
-              <p>Course not found or an error occurred.</p>
+              <p>{t('course_not_found')}</p>
             )}
           </div>
         </Card>
@@ -142,6 +145,7 @@ const Course: React.FC<{}> = () => {
 }
 
 const GetTeacherInfo: React.FC<{ userId: string }> = ({ userId }) => {
+  const t = useTranslations('Course');
   const [teacher, setTeacher] = useState<ITeacher | null>(null)
 
   useEffect(() => {
@@ -157,7 +161,7 @@ const GetTeacherInfo: React.FC<{ userId: string }> = ({ userId }) => {
 
   return (
     <Link to={`/teacher/${userId}`}>
-      <Button>Teacher: {teacher?.email}</Button>
+      <Button>{t('teacher')}: {teacher?.email}</Button>
     </Link>
   )
 }

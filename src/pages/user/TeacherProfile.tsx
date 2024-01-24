@@ -8,6 +8,7 @@ import { ITeacher } from '../../redux/store/types'
 import { GetCourses } from '../../components/tutor/GetCourses'
 import { WechatOutlined } from '@ant-design/icons'
 import CustomAvatar from '../../components/common/CustomAvatar'
+import useTranslations from '../../lang/useTranslations'
 
 const TeacherProfile: React.FC<{}> = () => {
   const { id } = useParams()
@@ -17,6 +18,7 @@ const TeacherProfile: React.FC<{}> = () => {
   const [error, setError] = useState<string | null>(null)
 
   const navigate = useNavigate()
+  const t = useTranslations('TeacherProfile');
 
   useEffect(() => {
     axios
@@ -45,8 +47,8 @@ const TeacherProfile: React.FC<{}> = () => {
         navigate(`/chat/${response.data._id}`)
       }
     } catch (error) {
-      setError('Произошла ошибка при выполнении запроса')
-      console.error('Ошибка Axios:', error)
+      setError(t('error_chat'));
+      console.error('Axios Error:', error)
     }
   }
 
@@ -54,17 +56,17 @@ const TeacherProfile: React.FC<{}> = () => {
     <Layout>
       <Row align='middle' justify='center'>
         <Card
-          title={`Teacher Profile`}
+          title={t('teacher_profile')}
           style={{ width: '60rem', margin: '20px' }}
           extra={<CustomAvatar avatar={teacher?.avatar} />}
         >
           {loaded ? (
             <Space direction='vertical'>
-              {`FullName: ${teacher?.fullName}`}
-              {`Email: ${teacher?.email}`}
+              {`${t('full_name')}: ${teacher?.fullName}`}
+              {`${t('email')}: ${teacher?.email}`}
               <Button onClick={handleChat}>
                 <WechatOutlined />
-                Chat
+                {t('chat')}
               </Button>
             </Space>
           ) : (
@@ -72,7 +74,7 @@ const TeacherProfile: React.FC<{}> = () => {
           )}
         </Card>
         <Card
-          title='Teacher`s courses'
+          title={t('teacher_courses')}
           style={{ width: '60rem', margin: '20px' }}
         >
           {loaded ? (
@@ -84,7 +86,7 @@ const TeacherProfile: React.FC<{}> = () => {
                   </Space>
                 ))
               ) : (
-                <p>No courses :(</p>
+                <p>{t('no_courses')}</p>
               )}
             </div>
           ) : (

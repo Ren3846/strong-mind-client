@@ -112,5 +112,352 @@
     "tutor": "Tutor",
     "student": "Student",
     "selectRole": "Select your role"
-  }
+  },
+
+
+  
+  "GetAvailableDays": {
+    "select-available-time": "Select available time",
+    "changes-successfully-saved": "Changes successfully saved",
+    "error-while-saving-changes": "Error while saving changes",
+    "Monday": "Monday",
+    "Tuesday": "Tuesday",
+    "Wednesday": "Wednesday",
+    "Thursday": "Thursday",
+    "Friday": "Friday",
+    "Saturday": "Saturday",
+    "Sunday": "Sunday"
+  },
+  "GetCourses": {
+    "explore": "Explore",
+    "no-courses-yet": "No courses yet",
+    "price": "Price"
+  },
+  "LessonsList": {
+    "lesson-delete-success": "Lesson delete success",
+    "error-while-delete": "Error while delete",
+    "error-while-data-download": "Error while data download",
+    "view-lesson": "View Lesson",
+    "delete": "Delete",
+    "video-key": "Video Key:",
+    "duration": "Duration:",
+    "minutes": "minutes"
+  },
+  "ManageCourseCover": {
+    "course-cover-deleted-successfully": "Course cover deleted successfully",
+    "course-cover-delete-failed": "Course cover delete failed",
+    "course-cover-uploaded-successfully": "Course cover uploaded successfully",
+    "course-cover-upload-failed": "Course cover upload failed",
+    "delete-course-cover-video": "Delete course cover video",
+    "upload-course-cover-video": "Upload course cover video"
+  },
+  "MeetingsTeacher": {
+    "accepted": "Accepted",
+    "rejected": "Rejected",
+    "started": "Started",
+    "finished": "Finished",
+    "pending": "Pending",
+    "accept-meeting": "Accept Meeting",
+    "reject-meeting": "Reject Meeting",
+    "view-meeting": "View Meeting"
+  },
+  "WalletWithdrawal": {
+    "enter-amount": "Enter the amount",
+    "withdrawal": "Withdrawal",
+    "successful": "successfully",
+    "error-withdrawal-balance": "Error while withdrawal balance"
+  },
+  "CourseFilter": {
+    "price-filter": "Price Filter",
+    "category-filter": "Category Filter",
+    "difficulty-filter": "Difficulty Filter",
+    "difficulty": "Difficulty",
+    "all": "All",
+    "free": "Free",
+    "paid": "Paid",
+    "english": "English",
+    "russian": "Russian"
+  },
+  "LessonsListUser": {
+    "lesson-delete-success": "Lesson delete success",
+    "error-while-delete": "Error while delete",
+    "error-while-data-download": "Error while data download",
+    "view-lesson": "View Lesson",
+    "delete": "Delete",
+    "video-key": "Video Key:",
+    "duration": "Duration:",
+    "minutes": "minutes"
+  },
+  "MeetingsStudent": {
+    "accepted": "Accepted",
+    "rejected": "Rejected",
+    "started": "Started",
+    "finished": "Finished",
+    "pending": "Pending",
+    "cancel": "Cancel",
+    "meeting-details": "Meeting Details"
+  },
+  "PurchaseMeetings": {
+    "quantity": "Quantity",
+    "buy-meetings": "Buy meetings",
+    "purchase-successful": "Purchase successful",
+    "server-response": "Server Response",
+    "oops-no-money": "Ooops.. Probably you have no money",
+    "meetings-purchased": "meetings purchased"
+  }, 
+  "RequestMeeting": {
+    "choose-date-time": "Choose Date and Time",
+    "request-call": "Request a Call",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "call-request-sent": "Call request sent successfully",
+    "error-sending-request": "Error while sending call request"
+  },
+  "WalletTopup": {
+    "enter-amount": "Enter the amount",
+    "pay": "Pay",
+    "error-topping-up": "Error while topping up the balance"
+  },
+  "CreateCourse": {
+    "create-course": "Create Course",
+    "title": "Title",
+    "enter-title": "Enter the course title",
+    "description": "Description",
+    "enter-description": "Enter the course description",
+    "category": "Category",
+    "select-category": "Select a category",
+    "difficulty": "Difficulty",
+    "select-difficulty": "Select a difficulty level",
+    "tagline": "Tagline",
+    "enter-tag": "Enter a tag",
+    "price-per-meeting": "Price per meeting",
+    "enter-price": "Enter the price for meetings",
+    "create-course-button": "Create Course"
+  },
+  "AddLesson": {
+    "addLessonForm": "Add Lesson",
+    "title": "Title",
+    "enter-title": "Please enter the title!",
+    "description": "Description",
+    "enter-description": "Please enter the description!",
+    "videoKey": "Video Key",
+    "enter-video-key": "Please enter the video key!",
+    "duration": "Duration",
+    "enter-duration": "Please enter the duration!",
+    "add-lesson-button": "Add Lesson"
+  },
+    "CourseDetails": {
+      "Dashboard": "Dashboard",
+      "MyCourses": "My courses",
+      "CourseInfo": "Course Info",
+      "CourseDetailsTitle": "Course Details",
+      "StudentsTitle": "Students",
+      "NoStudentsMessage": "Nobody :(",
+      "LessonsTitle": "Lessons",
+      "AddLessonButton": "Add Lesson",
+      "LessonTitle": "View Lesson",
+      "LessonDelete": "Delete",
+      "difficulty": "Difficulty",
+      "price": "Price",
+      "category": "Category",
+      "add-lesson-button": "Add Lesson",
+      "duration": "Duration",
+      "minutes": "Minutes"
+    },
+    "EditCourse": {
+      "Title": "Title",
+      "About": "About",
+      "Category": "Category",
+      "Difficulty": "Difficulty",
+      "Tagline": "Tagline",
+      "Thumbnail": "Thumbnail",
+      "MeetingPrice": "Meeting Price",
+      "SaveChanges": "Save Changes",
+      "Loading": "Loading...",
+      "ErrorFetchingCourseData": "Error fetching course data",
+      "ErrorUpdatingCourse": "Error updating course",
+      "PleaseEnterCourseTitle": "Please enter the course title",
+      "PleaseEnterCourseBio": "Please enter the course bio",
+      "PleaseEnterCourseCategory": "Please enter the course category",
+      "PleaseEnterCourseDifficulty": "Please enter the course difficulty",
+      "PleaseEnterCourseTagline": "Please enter the course tagline",
+      "PleaseEnterCourseThumbnailURL": "Please enter the course thumbnail URL",
+      "PleaseEnterMeetingPrice": "Please enter the meeting price"
+    },
+    "Lesson": {
+      "title": "Lesson",
+      "videoUploadedSuccessfully": "Video uploaded successfully",
+      "errorUploadingVideo": "Error uploading video",
+      "uploadVideo": "Upload Video",
+      "duration": "Duration",
+      "minutes": "minutes",
+      "errorFetchingLessonData": "Error while fetching lesson data"
+    },
+    "MyCourses": {
+      "title": "My courses",
+      "deleteCourseSuccessful": "Delete course successful",
+      "errorDeleteCourse": "Error delete course",
+      "addCourse": "Add course"
+    },
+    "Dashboard": {
+      "title": "Dashboard"
+    },
+    "StudentProfile": {
+      "title": "Student's profile",
+      "fullName": "Full Name",
+      "email": "Email",
+      "chatButton": "Chat",
+      "error": "Произошла ошибка при выполнении запроса"
+    },
+    "Courses": {
+      "filters": "Filters:",
+      "all": "All",
+      "price": "Price",
+      "explore": "Explore",
+      "A1": "A1",
+      "A2": "A2",
+      "B1": "B1",
+      "B2": "B2",
+      "Grammar": "English",
+      "Literature": "Russian",
+      "Grammar2": "Armenian",
+      "search": "Search",
+      "no_courses_match": "No courses match the selected difficulty and category.",
+      "all_courses": "All Courses"
+    },
+    "CalendarPage": {
+      "Agenda": "Agenda",
+      "Meetings": "Meetings",
+      "selected_date": "You selected date: {date}",
+      "start_zoom": "Start zoom",
+      "join_zoom": "Join zoom",
+      "link_will_appear": "link will appear 15 minutes before the lesson",
+      "copy_to_clipboard": "Copy to clipboard",
+      "meeting_status": "Status",
+      "you_selected_date": "You selected date:",
+      "calendar": "Calendar",
+      "Status": "Status"
+    },
+    "Course": {
+      "video_by_teacher": "Video by Teacher",
+      "course_details": "Course details",
+      "enrolled": "Enrolled",
+      "enroll": "Enroll",
+      "go_to_course_page": "Go to course page",
+      "course_not_found": "Course not found or an error occurred.",
+      "price": "Price",
+      "category": "Category",
+      "difficulty": "Difficulty",
+      "tagline": "Tagline",
+      "number_of_lessons": "Number of Lessons",
+      "teacher": "Teacher",
+      "course_title": "Course title",
+      "about": "About",
+      "visible": "Visible",
+      "enroll_success_message": "You successfully enrolled!",
+      "loading_error": "An error occurred during loading.",
+      "enroll_loading_message": "Enrolling...",
+      "go_to_enrolled_page": "Go to enrolled page"
+    },
+    "Enrolled": {
+      "dashboard": "Dashboard",
+      "enrolled_courses": "Enrolled courses",
+      "my_enrolled_courses": "My Enrolled Courses",
+      "view_course": "View Course",
+      "about": "About",
+      "category": "Category",
+      "difficulty": "Difficulty",
+      "teacher": "Teacher",
+      "you_are_not_registered": "You are not registered in any course"
+    },
+    "CourseInfo": {
+      "dashboard": "Dashboard",
+      "enrolled": "Enrolled",
+      "course": "Course",
+      "course_details": "Course Details",
+      "title": "Title",
+      "about": "About",
+      "tagline": "Tagline",
+      "category": "Category",
+      "difficulty": "Difficulty",
+      "price_for_lesson": "Price for lesson",
+      "teacher": "Teacher",
+      "request_meeting": "Request Meeting",
+      "lessons_in_this_course": "Lessons in this Course",
+      "course_not_found": "Course not found"
+    },
+    "LessonUser": {
+      "dashboard": "Dashboard",
+      "enrolled": "Enrolled",
+      "course": "Course",
+      "lesson": "Lesson",
+      "lesson_info": "Lesson Info",
+      "duration": "Duration",
+      "video": "Video",
+      "liked": "Liked",
+      "like": "Like",
+      "error_fetching_lesson_data": "Error while fetching lesson data",
+      "error_fetching_lesson_video": "Error while fetching lesson video"
+    },
+    "TeacherProfile": {
+      "teacher_profile": "Teacher Profile",
+      "full_name": "Full Name",
+      "email": "Email",
+      "teacher_courses": "Teacher's Courses",
+      "no_courses": "No courses :(",
+      "chat": "Chat",
+      "error_chat": "An error occurred while executing the request"
+    },
+    "Teachers": {
+      "top_tutors": "Top 5 Tutors",
+      "email": "Email",
+      "students": "Students",
+      "view_details": "View Details",
+      "no_data": "No data available"
+    },
+    "Wallet": {
+      "balance_title": "Balance",
+      "account_balance": "Account Balance ($)",
+      "history_title": "History",
+      "id": "ID",
+      "amount": "Amount",
+      "status": "Status",
+      "pending": "Pending",
+      "accepted": "Accepted",
+      "rejected": "Rejected",
+      "default_status": "Default",
+      "date": "Date"
+    },
+    "chat": {
+      "title": "Chat",
+      "send": "Send"
+    },
+    "ConfirmEmail": {
+      "confirmEmail": "Confirm Email",
+      "welcomeBackMessage": "Welcome back to StrongMind!",
+      "confirmationError": "Error confirming email:"
+    },
+    "MeetingPage": {
+      "DetailsMeeting": "Details Meeting",
+      "LeaveMeeting": "Leave feedback about meeting",
+      "EnterReport": "Enter your report",
+      "Rate": "Rate",
+      "MeetingID": "Meeting ID",
+      "Teacher": "Teacher",
+      "Student": "Student",
+      "Course": "Course",
+      "StartDate": "Start Date",
+      "Status": "Status",
+      "ZoomURL": "Zoom URL",
+      "RateStudent": "Rate by student",
+      "ReportStudent": "Report by student",
+      "RatingSuccessfully": "Rating and report added successfully",
+      "FailedReport": "Failed to add rate and report"
+    },
+    "NotFound": {
+      "404": "404",
+      "Sorry": "Sorry, page not found.",
+      "back": "Go back"
+    }
+
 }

@@ -71,21 +71,6 @@ const Router: React.FC<{}> = () => {
 
   const isAuthenticated = !!currentUser
 
-  //
-
-  // const isEmailVerified = currentUser?.isEmailVerified
-
-  // const navigate = useNavigate()
-  // const location = useLocation()
-
-  // useEffect(() => {
-  //   if (location.pathname !== '/signup' && currentUser && !isEmailVerified) {
-  //     navigate('/signup')
-  //   }
-  // }, [currentUser, isEmailVerified, location.pathname, navigate])
-
-  //
-
   return isLoaded ? (
     <ScrollToTop>
       <>

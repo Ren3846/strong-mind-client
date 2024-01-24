@@ -5,7 +5,6 @@ import {
   message,
   Table,
   Tag,
-  Skeleton,
   Space,
 } from 'antd'
 import { useEffect, useState } from 'react'
@@ -20,10 +19,11 @@ import {
   CloseCircleOutlined,
   SyncOutlined,
 } from '@ant-design/icons'
-import Layout from '../../components/common/Layout'
+import useTranslations from '../../lang/useTranslations'
 
 const Wallet = () => {
   const user = useSelector<StoreType, IUser>((state: any) => state.auth.user)
+  const t = useTranslations('Wallet');
 
   const [loading, setLoading] = useState(true)
   const [paymentHistory, setPaymentHistory] = useState([])
@@ -42,7 +42,7 @@ const Wallet = () => {
         setPaymentHistory(response.data)
       } catch (error) {
         console.error('Error while fetching history:', error)
-        message.error('Error while fetching history')
+        message.error(t('Error while fetching history'));
       } finally {
         setLoading(false)
       }
@@ -53,17 +53,17 @@ const Wallet = () => {
 
   const columns = [
     {
-      title: 'ID',
+      title: t('id'),
       dataIndex: '_id',
       key: '_id',
     },
     {
-      title: 'Amount',
+      title: t('amount'),
       dataIndex: 'amount',
       key: 'amount',
     },
     {
-      title: 'Status',
+      title: t('status'),
       dataIndex: 'status',
       key: 'status',
       render: (status: string) => {
@@ -71,28 +71,28 @@ const Wallet = () => {
           case 'pending':
             return (
               <Tag icon={<SyncOutlined spin />} color='processing'>
-                {status}
+                {t(status)}
               </Tag>
             )
           case 'accepted':
             return (
               <Tag icon={<CheckCircleOutlined />} color='success'>
-                {status}
+                {t(status)}
               </Tag>
             )
           case 'rejected':
             return (
               <Tag icon={<CloseCircleOutlined />} color='error'>
-                {status}
+                {t(status)}
               </Tag>
             )
           default:
-            return <Tag color='default'>{status}</Tag>
+            return <Tag color='default'>{t('default_status')}</Tag>
         }
       },
     },
     {
-      title: 'Date',
+      title: t('date'),
       dataIndex: 'createdAt',
       key: 'createdAt',
       render: (date: string) => {
@@ -105,9 +105,9 @@ const Wallet = () => {
   return (
     <Space>
       <Row align='middle' justify='center'>
-        <Card title='Balance' style={{ width: '60rem', margin: '20px' }}>
+        <Card title={t('balance_title')} style={{ width: '60rem', margin: '20px' }}>
           <Statistic
-            title='Account Balance ($)'
+            title={t('account_balance')}
             value={user.balance}
             precision={2}
           />
@@ -121,7 +121,7 @@ const Wallet = () => {
           )}
         </Card>
 
-        <Card title='History' style={{ width: '60rem', margin: '20px' }}>
+        <Card title={t('history_title')} style={{ width: '60rem', margin: '20px' }}>
           <Table
             loading={loading}
             columns={columns}

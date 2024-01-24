@@ -116,5 +116,349 @@
     "tutor": "Репетитор",
     "student": "Студент",
     "selectRole": "Виберіть свою роль"
+  },
+
+  "GetAvailableDays": {
+    "select-available-time": "Виберіть доступний час",
+    "changes-successfully-saved": "Зміни успішно збережено",
+    "error-while-saving-changes": "Помилка при збереженні змін",
+    "Monday": "Понеділок",
+    "Tuesday": "Вівторок",
+    "Wednesday": "Середа",
+    "Thursday": "Четвер",
+    "Friday": "П'ятниця",
+    "Saturday": "Субота",
+    "Sunday": "Неділя"
+  },
+  "GetCourses": {
+    "explore": "Досліджуйте",
+    "no-courses-yet": "Поки що немає курсів",
+    "price": "Ціна"
+  },
+  "LessonsList": {
+    "lesson-delete-success": "Урок успішно видалено",
+    "error-while-delete": "Помилка під час видалення",
+    "error-while-data-download": "Помилка завантаження даних",
+    "view-lesson": "Переглянути урок",
+    "delete": "Видалити",
+    "video-key": "Відео ключ:",
+    "duration": "Тривалість:",
+    "minutes": "хвилини"
+  },
+  "ManageCourseCover": {
+    "course-cover-deleted-successfully": "Обкладинку курсу успішно видалено",
+    "course-cover-delete-failed": "Помилка видалення обкладинки курсу",
+    "course-cover-uploaded-successfully": "Обкладинку курсу успішно завантажено",
+    "course-cover-upload-failed": "Помилка завантаження обкладинки курсу",
+    "delete-course-cover-video": "Видалити відео обкладинки курсу",
+    "upload-course-cover-video": "Завантажити відео обкладинки курсу"
+  },
+  "MeetingsTeacher": {
+    "accepted": "Прийнято",
+    "rejected": "Відхилено",
+    "started": "Почато",
+    "finished": "Завершено",
+    "pending": "В очікуванні",
+    "accept-meeting": "Прийняти зустріч",
+    "reject-meeting": "Відхилити зустріч",
+    "view-meeting": "Переглянути зустріч"
+  },
+  "WalletWithdrawal": {
+    "enter-amount": "Введіть суму",
+    "withdrawal": "Виведення",
+    "successful": "успішно",
+    "error-withdrawal-balance": "Помилка при виведенні балансу"
+  },
+  "CourseFilter": {
+    "price-filter": "Фільтр за ціною",
+    "category-filter": "Фільтр за категорією",
+    "difficulty-filter": "Фільтр за складністю",
+    "difficulty": "Складність",
+    "all": "Всі",
+    "free": "Безкоштовно",
+    "paid": "Платно",
+    "english": "Англійська",
+    "russian": "Російська"
+  },
+  "LessonsListUser": {
+    "lesson-delete-success": "Урок успішно видалено",
+    "error-while-delete": "Помилка під час видалення",
+    "error-while-data-download": "Помилка завантаження даних",
+    "view-lesson": "Переглянути урок",
+    "delete": "Видалити",
+    "video-key": "Відео ключ:",
+    "duration": "Тривалість:",
+    "minutes": "хвилини"
+  },
+  "MeetingsStudent": {
+    "accepted": "Прийнято",
+    "rejected": "Відхилено",
+    "started": "Почато",
+    "finished": "Завершено",
+    "pending": "В очікуванні",
+    "cancel": "Скасувати",
+    "meeting-details": "Деталі зустрічі"
+  },
+  "PurchaseMeetings": {
+    "quantity": "Кількість",
+    "buy-meetings": "Купити зустрічі",
+    "purchase-successful": "Покупка успішна",
+    "server-response": "Відповідь сервера",
+    "oops-no-money": "Упс.. Мабуть, у вас немає грошей",
+    "meetings-purchased": "закуплені зустрічі"
+  },
+  "RequestMeeting": {
+    "choose-date-time": "Виберіть дату та час",
+    "request-call": "Запит на дзвінок",
+    "submit": "Відправити",
+    "cancel": "Скасувати",
+    "call-request-sent": "Запит на дзвінок успішно відправлено",
+    "error-sending-request": "Помилка відправлення запиту на дзвінок"
+  },
+  "WalletTopup": {
+    "enter-amount": "Введіть суму",
+    "pay": "Сплатити",
+    "error-topping-up": "Помилка при поповненні балансу"
+  },
+  "CreateCourse": {
+    "create-course": "Створити курс",
+    "title": "Заголовок",
+    "enter-title": "Введіть назву курсу",
+    "description": "Опис",
+    "enter-description": "Введіть опис курсу",
+    "category": "Категорія",
+    "select-category": "Виберіть категорію",
+    "difficulty": "Складність",
+    "select-difficulty": "Виберіть рівень складності",
+    "tagline": "Слоган",
+    "enter-tag": "Введіть тег",
+    "price-per-meeting": "Ціна за зустріч",
+    "enter-price": "Введіть ціну за зустріч",
+    "create-course-button": "Створити курс"
+  },
+  "AddLesson": {
+    "addLessonForm": "Додати урок",
+    "title": "Заголовок",
+    "enter-title": "Будь ласка, введіть назву!",
+    "description": "Опис",
+    "enter-description": "Будь ласка, введіть опис!",
+    "videoKey": "Відео ключ",
+    "enter-video-key": "Будь ласка, введіть відео ключ!",
+    "duration": "Тривалість",
+    "enter-duration": "Будь ласка, введіть тривалість!",
+    "add-lesson-button": "Додати урок"
+  },
+  "CourseDetails": {
+    "Dashboard": "Панель приладів",
+    "MyCourses": "Мої курси",
+    "CourseInfo": "Інформація про курс",
+    "CourseDetailsTitle": "Деталі курсу",
+    "StudentsTitle": "Студенти",
+    "NoStudentsMessage": "Ніхто :(",
+    "LessonsTitle": "Уроки",
+    "AddLessonButton": "Додати урок",
+    "LessonTitle": "Переглянути урок",
+    "LessonDelete": "Видалити",
+    "difficulty": "Складність",
+    "price": "Ціна",
+    "category": "Категорія",
+    "add-lesson-button": "Додати урок",
+    "duration": "Тривалість",
+    "minutes": "Хвилини"
+  },
+  "EditCourse": {
+    "Title": "Заголовок",
+    "About": "Про",
+    "Category": "Категорія",
+    "Difficulty": "Складність",
+    "Tagline": "Слоган",
+    "Thumbnail": "Мініатюра",
+    "MeetingPrice": "Ціна за зустріч",
+    "SaveChanges": "Зберегти зміни",
+    "Loading": "Завантаження...",
+    "ErrorFetchingCourseData": "Помилка отримання даних курсу",
+    "ErrorUpdatingCourse": "Помилка оновлення курсу",
+    "PleaseEnterCourseTitle": "Будь ласка, введіть назву курсу",
+    "PleaseEnterCourseBio": "Будь ласка, введіть опис курсу",
+    "PleaseEnterCourseCategory": "Будь ласка, введіть категорію курсу",
+    "PleaseEnterCourseDifficulty": "Будь ласка, введіть рівень складності курсу",
+    "PleaseEnterCourseTagline": "Будь ласка, введіть слоган курсу",
+    "PleaseEnterCourseThumbnailURL": "Будь ласка, введіть URL мініатюри курсу",
+    "PleaseEnterMeetingPrice": "Будь ласка, введіть ціну за зустріч"
+  },
+  "Lesson": {
+    "title": "Урок",
+    "videoUploadedSuccessfully": "Відео успішно завантажено",
+    "errorUploadingVideo": "Помилка завантаження відео",
+    "uploadVideo": "Завантажити відео",
+    "duration": "Тривалість",
+    "minutes": "хвилини",
+    "errorFetchingLessonData": "Помилка отримання даних уроку"
+  },
+  "MyCourses": {
+    "title": "Мої курси",
+    "deleteCourseSuccessful": "Видалення курсу успішне",
+    "errorDeleteCourse": "Помилка видалення курсу",
+    "addCourse": "Додати курс"
+  },
+  "Dashboard": {
+    "title": "Панель приладів"
+  },
+  "StudentProfile": {
+    "title": "Профіль студента",
+    "fullName": "Повне ім'я",
+    "email": "Електронна пошта",
+    "chatButton": "Чат",
+    "error": "Помилка при виконанні запиту"
+  },
+  "Courses": {
+    "filters": "Фільтри:",
+    "all": "Всі",
+    "price": "Ціна",
+    "explore": "Досліджуйте",
+    "A1": "A1",
+    "A2": "A2",
+    "B1": "B1",
+    "B2": "B2",
+    "Grammar": "Англійська",
+    "Literature": "Російська",
+    "Grammar2": "Вірменська",
+    "search": "Пошук",
+    "no_courses_match": "Немає курсів, які відповідають вибраній складності та категорії.",
+    "all_courses": "Усі курси"
+  },
+  "CalendarPage": {
+    "Agenda": "Повідомлення",
+    "Meetings": "Зустрічі",
+    "selected_date": "Ви вибрали дату: {date}",
+    "start_zoom": "Почати zoom",
+    "join_zoom": "Приєднатися до zoom",
+    "link_will_appear": "посилання з'явиться за 15 хвилин до уроку",
+    "copy_to_clipboard": "Скопіювати в буфер обміну",
+    "meeting_status": "Статус",
+    "you_selected_date": "Ви вибрали дату:",
+    "calendar": "Календар",
+    "Status": "Статус"
+  },
+  "Course": {
+    "video_by_teacher": "Відео від вчителя",
+    "course_details": "Деталі курсу",
+    "enrolled": "Зареєстровано",
+    "enroll": "Зареєструватися",
+    "go_to_course_page": "Перейти на сторінку курсу",
+    "course_not_found": "Курс не знайдено або сталася помилка.",
+    "price": "Ціна",
+    "category": "Категорія",
+    "difficulty": "Складність",
+    "tagline": "Слоган",
+    "number_of_lessons": "Кількість уроків",
+    "teacher": "Вчитель",
+    "course_title": "Назва курсу",
+    "about": "Про",
+    "visible": "Видимий",
+    "enroll_success_message": "Ви успішно зареєструвалися!",
+    "loading_error": "Виникла помилка під час завантаження.",
+    "enroll_loading_message": "Реєстрація...",
+    "go_to_enrolled_page": "Перейти на сторінку зареєстрованих курсів"
+  },
+  "Enrolled": {
+    "dashboard": "Панель приладів",
+    "enrolled_courses": "Зареєстровані курси",
+    "my_enrolled_courses": "Мої зареєстровані курси",
+    "view_course": "Переглянути курс",
+    "about": "Про",
+    "category": "Категорія",
+    "difficulty": "Складність",
+    "teacher": "Вчитель",
+    "you_are_not_registered": "Ви не зареєстровані на жоден курс"
+  },
+  "CourseInfo": {
+    "dashboard": "Панель приладів",
+    "enrolled": "Зареєстровано",
+    "course": "Курс",
+    "course_details": "Деталі курсу",
+    "title": "Назва",
+    "about": "Про",
+    "tagline": "Слоган",
+    "category": "Категорія",
+    "difficulty": "Складність",
+    "price_for_lesson": "Ціна за урок",
+    "teacher": "Вчитель",
+    "request_meeting": "Запросити на зустріч",
+    "lessons_in_this_course": "Уроки в цьому курсі",
+    "course_not_found": "Курс не знайдено"
+  },
+  "LessonUser": {
+    "dashboard": "Панель приладів",
+    "enrolled": "Зареєстровано",
+    "course": "Курс",
+    "lesson": "Урок",
+    "lesson_info": "Інформація про урок",
+    "duration": "Тривалість",
+    "video": "Відео",
+    "liked": "Сподобалося",
+    "like": "Сподобатися",
+    "error_fetching_lesson_data": "Помилка отримання даних уроку",
+    "error_fetching_lesson_video": "Помилка отримання відео уроку"
+  },
+  "TeacherProfile": {
+    "teacher_profile": "Профіль вчителя",
+    "full_name": "Повне ім'я",
+    "email": "Електронна пошта",
+    "teacher_courses": "Курси вчителя",
+    "no_courses": "Немає курсів :(",
+    "chat": "Чат",
+    "error_chat": "Виникла помилка при виконанні запиту"
+  },
+  "Teachers": {
+    "top_tutors": "Топ-5 вчителів",
+    "email": "Електронна пошта",
+    "students": "Студенти",
+    "view_details": "Переглянути деталі",
+    "no_data": "Немає доступних даних"
+  },
+  "Wallet": {
+    "balance_title": "Баланс",
+    "account_balance": "Баланс рахунку ($)",
+    "history_title": "Історія",
+    "id": "ID",
+    "amount": "Сума",
+    "status": "Статус",
+    "pending": "Очікується",
+    "accepted": "Прийнято",
+    "rejected": "Відхилено",
+    "default_status": "Стандартний",
+    "date": "Дата"
+  },
+  "chat": {
+    "title": "Чат",
+    "send": "Надіслати"
+  },
+  "ConfirmEmail": {
+    "confirmEmail": "Підтвердіть електронну пошту",
+    "welcomeBackMessage": "Ласкаво просимо назад до StrongMind!",
+    "confirmationError": "Помилка підтвердження електронної пошти:"
+  },
+  "MeetingPage": {
+    "DetailsMeeting": "Деталі зустрічі",
+    "LeaveMeeting": "Залишити відгук про зустріч",
+    "EnterReport": "Введіть ваш звіт",
+    "Rate": "Оцінка",
+    "MeetingID": "ID зустрічі",
+    "Teacher": "Вчитель",
+    "Student": "Студент",
+    "Course": "Курс",
+    "StartDate": "Дата початку",
+    "Status": "Статус",
+    "ZoomURL": "URL Zoom",
+    "RateStudent": "Оцінка від студента",
+    "ReportStudent": "Звіт студента",
+    "RatingSuccessfully": "Оцінка та звіт успішно додані",
+    "FailedReport": "Не вдалося додати оцінку та звіт"
+  },
+  "NotFound": {
+    "404": "404",
+    "Sorry": "Вибачте, сторінку не знайдено.",
+    "back": "Повернутися"
   }
 }
