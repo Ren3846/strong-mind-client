@@ -13,17 +13,17 @@ const WalletTopup: React.FC = () => {
   const t = useTranslations('WalletTopup')
 
   const [amount, setAmount] = useState<string>('')
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
   const [invoice, setInvoice] = useState<null | InvoiceData>(null)
 
   const handleTopup = async () => {
     setLoading(true)
 
     try {
-      const response = await axios.post('/api/users/wallet/topup', {
+      const response = await axios.post('/api/orders/topup', {
         amount: parseFloat(amount),
       })
-      setInvoice(response.data);
+      setInvoice(response.data)
     } catch (error) {
       console.error(error)
       message.error(t('error-topping-up'))
@@ -50,18 +50,20 @@ const WalletTopup: React.FC = () => {
           {t('pay')}
         </Button>
       </Space.Compact>
-      {
-        invoice ?
-          (
-            <form method="POST" action="https://www.liqpay.ua/api/3/checkout" acceptCharset="utf-8">
-              <input type="hidden" name="data" value={invoice?.data}/>
-              <input type="hidden" name="signature" value={invoice?.signature} />
-              <input type="image" src="//static.liqpay.ua/buttons/p1ru.radius.png"/>
-            </form>
-          )
-          :
-          null
-      }
+      {invoice ? (
+        <form
+          method='POST'
+          action='https://www.liqpay.ua/api/3/checkout'
+          acceptCharset='utf-8'
+        >
+          <input type='hidden' name='data' value={invoice?.data} />
+          <input type='hidden' name='signature' value={invoice?.signature} />
+          <input
+            type='image'
+            src='//static.liqpay.ua/buttons/p1ru.radius.png'
+          />
+        </form>
+      ) : null}
     </>
   )
 }
