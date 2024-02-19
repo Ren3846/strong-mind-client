@@ -129,7 +129,11 @@ function SignUp() {
                   },
                 ]}
               >
-                <Input prefix={<PhoneOutlined />} type='tel' />
+                <Input
+                  prefix={<PhoneOutlined />}
+                  type='tel'
+                  placeholder={t('required')}
+                />
               </Form.Item>
 
               <Form.Item
@@ -165,10 +169,12 @@ function SignUp() {
               <Form.Item
                 name='password'
                 label={t('passwordLabel')}
+                tooltip={t('password_contain')}
                 rules={[
                   {
                     required: true,
                     message: 'Please input your password!',
+                    whitespace: true,
                   },
                 ]}
                 hasFeedback

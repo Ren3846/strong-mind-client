@@ -37,6 +37,7 @@ import ChatPage from './ChatPage'
 import MeetingPage from './MeetingPage'
 import ConfirmEmail from './ConfirmEmail'
 import Oferta from './Oferta'
+import Cookie from './Cookie'
 
 interface IProtectedRoute {
   condition: boolean
@@ -78,6 +79,7 @@ const Router: React.FC<{}> = () => {
         <Routes>
           <Route path='/' element={<Landing />} />
           <Route path='/oferta' element={<Oferta />} />
+          <Route path='/cookies' element={<Cookie />} />
           <Route
             path='/signin'
             element={
