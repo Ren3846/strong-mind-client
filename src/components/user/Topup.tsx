@@ -20,7 +20,7 @@ const WalletTopup: React.FC = () => {
     setLoading(true)
 
     try {
-      const response = await axios.post('/api/orders/topup', {
+      const response = await axios.post('/api/orders/topup/wallet/topup', {
         amount: parseFloat(amount),
       })
       setInvoice(response.data)
