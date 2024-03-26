@@ -14,16 +14,15 @@ const WalletTopup: React.FC = () => {
 
   const [amount, setAmount] = useState<string>('')
   const [loading, setLoading] = useState(false)
-  const [invoice, setInvoice] = useState<null | InvoiceData>(null)
 
   const handleTopup = async () => {
     setLoading(true)
 
     try {
-      const response = await axios.post('/api/orders/topup/wallet/topup', {
+      const { data } = await axios.post('/api/orders/topup/wallet/topup', {
         amount: parseFloat(amount),
       })
-      setInvoice(response.data)
+      window.location.assign(data.invoiceUrl);
     } catch (error) {
       console.error(error)
       message.error(t('error-topping-up'))
@@ -50,20 +49,6 @@ const WalletTopup: React.FC = () => {
           {t('pay')}
         </Button>
       </Space.Compact>
-      {invoice ? (
-        <form
-          method='POST'
-          action='https://www.liqpay.ua/api/3/checkout'
-          acceptCharset='utf-8'
-        >
-          <input type='hidden' name='data' value={invoice?.data} />
-          <input type='hidden' name='signature' value={invoice?.signature} />
-          <input
-            type='image'
-            src='//static.liqpay.ua/buttons/p1ru.radius.png'
-          />
-        </form>
-      ) : null}
     </>
   )
 }
