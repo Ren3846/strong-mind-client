@@ -77,9 +77,9 @@ const CourseInfo: React.FC = () => {
                   <Descriptions.Item label={t('difficulty')}>
                     {courseInfo.difficulty}
                   </Descriptions.Item>
-                  <Descriptions.Item label={t('price_for_lesson')}>
+                  {/* <Descriptions.Item label={t('price_for_lesson')}>
                     ${courseInfo.meetingPrice}
-                  </Descriptions.Item>
+                  </Descriptions.Item> */}
 
                   <Descriptions.Item label={t('teacher')}>
                     <GetTutor userId={courseInfo.teacher} />

@@ -93,7 +93,7 @@ const Course: React.FC<{}> = () => {
                 <Space direction='vertical'>
                   <h2>{course.title}</h2>
                   <p>{course.about}</p>
-                  <p>{t('price')}: {course.meetingPrice} $</p>
+                  {/* <p>{t('price')}: {course.meetingPrice} $</p> */}
                   <p>{t('category')}: {course.category}</p>
                   <p>{t('difficulty')}: {course.difficulty}</p>
                   <p>{t('tagline')}: {course.tagline}</p>
