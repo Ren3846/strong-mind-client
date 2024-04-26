@@ -53,7 +53,7 @@ function Navbar() {
                 <Divider type='vertical' />
                 <div>
                   <span>
-                    {t('balance')} {user.balance} $
+                    {t('balance')} {user.balance.toFixed(2)} $
                   </span>
                   <Tooltip title={t('go_to_wallet')}>
                     <Button
