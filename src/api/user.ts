@@ -33,11 +33,26 @@ interface PaymentData {
   amount: number
 }
 
+interface ResetPasswordRequestBody {
+  email: string
+}
+
+interface ResetPasswordConfirmBody {
+  token: string
+  password: string
+}
+
 // Функция для входа пользователя
 const userSignInAPI = (body: SignInBody) => API.post('/auth/login', body)
 
 // Функция для регистрации пользователя
 const userSignUpAPI = (body: SignUpBody) => API.post('/auth/register', body)
+
+// Запрос сброса пароля
+const userResetPasswordRequestAPI = (body: ResetPasswordRequestBody) => API.post('/auth/password-reset-request', body);
+
+// Подтверждение сброса пароля
+const userResetPasswordConfirmAPI = (body: ResetPasswordConfirmBody) => API.post('/auth/password-reset-confirm', body);
 
 // Функция для получения данных залогиненного пользователя
 const getSignedInUserAPI = () => API.get('/auth/profile')
@@ -108,4 +123,6 @@ export {
   userSignInAPI,
   userSignUpAPI,
   getSignedInUserAPI,
+  userResetPasswordRequestAPI,
+  userResetPasswordConfirmAPI
 }

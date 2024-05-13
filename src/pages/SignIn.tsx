@@ -52,7 +52,7 @@ function SignIn() {
   }
 
   const handleSignInSuccess = (user: IUser) => {
-    showSuccessNotification(`Hey ${user.email}, ${t('welcome')}`)
+    showSuccessNotification(`${user.email}, ${t('welcome')}`)
     dispatch(authLogin(user))
 
     return navigate('/dashboard')
@@ -117,11 +117,19 @@ function SignIn() {
                 placeholder={t('passwordPlaceholder')}
               />
             </Form.Item>
-
-            <Form.Item shouldUpdate className='flex justify-center'>
-              <ErrorMessage message={error || ''} />
-            </Form.Item>
-
+              {
+                error ?
+                  <Form.Item shouldUpdate className='flex justify-center'>
+                    <ErrorMessage message={error || ''} />
+                  </Form.Item>
+                  :
+                  null
+              }
+            
+            <p className='forgot-password'>
+              <span className='label'>{t("forgotPassword")}</span>
+              <Link to="/reset-password">{t("forgotPasswordLink")}</Link>
+            </p>
             <Form.Item>
               <Button type='primary' htmlType='submit' className='w-full'>
                 {t('signInButton')}

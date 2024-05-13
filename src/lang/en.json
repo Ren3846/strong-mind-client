@@ -91,9 +91,16 @@
     "emailPlaceholder": "Email",
     "passwordLabel": "Password",
     "passwordPlaceholder": "Password",
+    "confirmPasswordLabel": "Confirm Password",
     "signInButton": "Sign In",
     "readyAccountText": "Ready to start exploring new perspectives?",
-    "createAccountText": "Create an account!"
+    "createAccountText": "Create an account!",
+    "forgotPassword": "Forgot your password?",
+    "forgotPasswordLink": "Reset password",
+    "setPassword": "Set new password",
+    "passwordResetTitle": "Password reset",
+    "passwordResetInfo": "If the email address you entered is registered, you will soon receive a link to reset your password and set a new one.",
+    "passwordResetConfirmInfo": "Choose a new password for your account. It should be hard to guess!"
   },
   "SignUp": {
     "signUpAndExplore": "Sign Up and explore",

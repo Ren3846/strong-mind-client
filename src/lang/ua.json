@@ -95,9 +95,16 @@
     "emailPlaceholder": "Електронна адреса",
     "passwordLabel": "Пароль",
     "passwordPlaceholder": "Пароль",
+    "confirmPasswordLabel": "Підтвердіть пароль",
     "signInButton": "Увійти",
     "readyAccountText": "Готові розпочати дослідження нових перспектив?",
-    "createAccountText": "Створити акаунт!"
+    "createAccountText": "Створити акаунт!",
+    "forgotPassword": "Забули свій пароль?",
+    "forgotPasswordLink": "Відновити пароль",
+    "setPassword": "Встановити пароль",
+    "passwordResetTitle": "Відновлення паролю",
+    "passwordResetInfo": "Якщо введена Email-адреса зареєстрована, незабаром ви отримаєте на неї посилання для скидання пароля та встановлення нового.",
+    "passwordResetConfirmInfo": "Оберіть новий пароль для свого облікового запису. Його має бути важко вгадати!"
   },
   "SignUp": {
     "signUpAndExplore": "Зареєструйтеся та досліджуйте",

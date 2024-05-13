@@ -96,9 +96,16 @@
     "emailPlaceholder": "Электронная почта",
     "passwordLabel": "Пароль",
     "passwordPlaceholder": "Пароль",
+    "confirmPasswordLabel": "Подтвердите пароль",
     "signInButton": "Войти",
     "readyAccountText": "Готовы начать исследовать новые перспективы?",
-    "createAccountText": "Создать аккаунт!"
+    "createAccountText": "Создать аккаунт!",
+    "forgotPassword": "Забыли свой пароль?",
+    "forgotPasswordLink": "Восстановить пароль",
+    "setPassword": "Установить пароль",
+    "passwordResetTitle": "Восстановление пароля",
+    "passwordResetInfo": "Если введённый Email-адрес зарегистрирован, то вскоре вы получите на него ссылку для сброса пароля и установки нового.",
+    "passwordResetConfirmInfo": "Выберите новый пароль для своей учетной записи. Его должно быть трудно угадать!"
   },
   "SignUp": {
     "signUpAndExplore": "Зарегистрируйтесь и исследуйте",

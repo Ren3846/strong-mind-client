@@ -38,6 +38,8 @@ import MeetingPage from './MeetingPage'
 import ConfirmEmail from './ConfirmEmail'
 import Oferta from './Oferta'
 import Cookie from './Cookie'
+import ResetPasswordRequest from './ResetPasswordRequest'
+import ResetPasswordConfirm from './ResetPasswordConfirm'
 
 interface IProtectedRoute {
   condition: boolean
@@ -80,6 +82,8 @@ const Router: React.FC<{}> = () => {
           <Route path='/' element={<Landing />} />
           <Route path='/oferta' element={<Oferta />} />
           <Route path='/cookies' element={<Cookie />} />
+          <Route path='/reset-password' element={ <ResetPasswordRequest /> } />
+          <Route path="/reset-password-confirm/:token" element={ <ResetPasswordConfirm /> } />
           <Route
             path='/signin'
             element={

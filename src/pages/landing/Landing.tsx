@@ -10,7 +10,7 @@ export default function Landing() {
   return (
     <div className='relative isolate px-6 lg:px-8'>
       <Hero />
-      <Snowfall />
+      {/* <Snowfall /> */}
       <GetStartedStudent />
       <GetStartedTutor />
       <Footer />
